@@ -20,12 +20,24 @@
                 @csrf
                 <div class="form-group mt-5">
                     <h3>Modificar Proveedor</h3>
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        name="nombre" 
-                        value="{{$proveedor->nombre}}"
-                    />
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="nombre" 
+                            value="{{$proveedor->nombre}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Telefono</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="telefono" 
+                            value="{{$proveedor->telefono}}"
+                        />
+                    </div>
                 </div>
                 @if (session('mensaje'))
                     <div class="alert alert-success alert-dismissible fade show">

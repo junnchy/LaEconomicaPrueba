@@ -16,12 +16,33 @@
                 @csrf
                 <div class="form-group mt-5">
                     <h3>Ingreso de Nuevo Proveedor</h3>
-                    <input 
-                        type="text" 
-                        class="form-control" 
-                        name="nombre" 
-                        placeholder="Nombre"
-                    />
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="nombre" 
+                            placeholder="Nombre"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Cuit</label>
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            name="cuit" 
+                            placeholder="CUIT"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Telefono</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="telefono" 
+                            placeholder="Telefono"
+                        />
+                    </div>
                 </div>
                 @if (session('mensaje'))
                     <div class="alert alert-success alert-dismissible fade show">
@@ -41,7 +62,8 @@
                           <tr>
                             <th scope="col">#Id</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Last</th>
+                            <th scope="col">Cuit</th>
+                            <th scope="col">Telefono</th>
                             <th scope="col">Handle</th>
                           </tr>
                         </thead>
@@ -49,8 +71,9 @@
                             @foreach ($proveedores as $proveedor)
                                 <tr>
                                     <th scope="row">{{$proveedor->id}}</th>
-                                    <td>{{$proveedor->nombre}}</td>
-                                    <td></td>
+                                    <td class="mt-2">{{$proveedor->nombre}}</td>
+                                    <td class="mt-2">{{$proveedor->cuit}}</td>
+                                    <td class="mt-2">{{$proveedor->telefono}}</td>
                                     <td>
                                         <a href="/proveedores/{{$proveedor->id}}" class="btn btn-warning btn-sm">Editar</a>
                                     </td>

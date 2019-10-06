@@ -4,11 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App;
-
-use App\Proveedor;
-
-class ProveedorControler extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +13,7 @@ class ProveedorControler extends Controller
      */
     public function index()
     {
-        $proveedores = Proveedor::all();
-        return view('proveedores.home', compact('proveedores'));
+        return view('productos.home');
     }
 
     /**
@@ -28,7 +23,7 @@ class ProveedorControler extends Controller
      */
     public function create()
     {
-        return view('proveedores.home');
+        //
     }
 
     /**
@@ -39,13 +34,7 @@ class ProveedorControler extends Controller
      */
     public function store(Request $request)
     {
-        $proveedor = new Proveedor();
-        $proveedor->nombre = $request->nombre;
-        $proveedor->cuit = $request->cuit;
-        $proveedor->telefono = $request->telefono;
-        $proveedor->save();
-
-        return back()->with('mensaje', 'Proveedor Agregado');
+        //
     }
 
     /**
@@ -56,8 +45,7 @@ class ProveedorControler extends Controller
      */
     public function show($id)
     {
-        $proveedor = App\Proveedor::findOrFail($id);
-        return view('proveedores.editar', compact('proveedor'));
+        //
     }
 
     /**
@@ -67,8 +55,8 @@ class ProveedorControler extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
-        
+    {
+        //
     }
 
     /**
@@ -80,13 +68,7 @@ class ProveedorControler extends Controller
      */
     public function update(Request $request, $id)
     {
-        $proveedor = App\Proveedor::findOrFail($id);
-
-        $proveedor->nombre = $request->nombre;
-        $proveedor->telefono = $request->telefono;
-        $proveedor->save();
-
-        return back()->with('mensaje', 'Proveedor Actualizado');
+        //
     }
 
     /**
