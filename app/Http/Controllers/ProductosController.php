@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Categoria;
 
-class CategoriaController extends Controller
+class ProductosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = Categoria::all();
-        return view('productos.categoria', compact('categorias'));
+        return view('productos.home');
     }
 
     /**
@@ -26,7 +24,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('productos.categoria');
+        
     }
 
     /**
@@ -37,16 +35,7 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        $categoria = new Categoria();
-
-        $categoria->nombre = $request->nombre;
-        if ($request->categoria_id != null){
-            $categoria->categoria_id = $request->categoria_id;
-        }
-
-        $categoria->save();
-        return back()->with('mensaje', 'Categoria Agregada');
-
+       
     }
 
     /**
