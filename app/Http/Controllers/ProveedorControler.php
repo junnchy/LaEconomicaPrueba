@@ -8,6 +8,8 @@ use App;
 
 use App\Proveedor;
 
+use App\Categoria;
+
 class ProveedorControler extends Controller
 {
     /**
@@ -57,7 +59,10 @@ class ProveedorControler extends Controller
     public function show($id)
     {
         $proveedor = App\Proveedor::findOrFail($id);
-        return view('proveedores.editar', compact('proveedor'));
+        $categorias = App\Categoria::all();
+
+        return view('proveedores.editar', compact('proveedor', 'categorias'));
+
     }
 
     /**
@@ -85,6 +90,10 @@ class ProveedorControler extends Controller
         $proveedor->nombre = $request->nombre;
         $proveedor->telefono = $request->telefono;
         $proveedor->save();
+
+        $categoria = Categoria::findOrFail($request->id_cat);
+
+        $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
 
         return back()->with('mensaje', 'Proveedor Actualizado');
     }

@@ -19,7 +19,7 @@
                 @method("PUT")
                 @csrf
                 <div class="form-group mt-5">
-                    <h3>Modificar Proveedor</h3>
+                    <h3>Modificar Datos</h3>
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input 
@@ -38,6 +38,22 @@
                             value="{{$proveedor->telefono}}"
                         />
                     </div>
+                    <div class="form-group">
+                        <label for="id_cat">Categoria</label>
+                        <select class="form-control" name="id_cat" type="number">
+                            @foreach ($categorias as $item)
+                                <option>{{$item->id}} - {{$item->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                            <label for="descuento">Descuento</label>
+                            <input 
+                                type="number" 
+                                class="form-control" 
+                                name="descuento" 
+                            />
+                        </div>
                 </div>
                 @if (session('mensaje'))
                     <div class="alert alert-success alert-dismissible fade show">
@@ -49,6 +65,18 @@
                 @endif
                 <button type="submit" class="btn btn-warning btn-block">Modificar</button>
             </form>
+        </div>
+        <div class="container mt-5">
+            <h3>Categoria de productos que nos vende</h3>
+            <ul class="list-group">
+                    @foreach ($proveedor->categorias as $item)
+                        <li class="list-group-item">
+                            <strong>{{$item->id}}</strong> -
+                            {{$item->nombre}} 
+                            -- Con descuento del: 
+                            {{$item->pivot['descuento']}}%</li>
+                    @endforeach
+            </ul>
         </div>
     </div>
 @endsection

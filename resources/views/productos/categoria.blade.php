@@ -49,20 +49,40 @@
         </div>
 
         <div class="container mt-5">
-            <div class="card-columns">
-                @foreach ($categorias as $categoria)
-                        <div class="card">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{$categoria->nombre}}</h5>
-                                <p class="card-text">{{$categoria->id}}</p>
-                                <p class="card-text">Categoria Padre: <strong>{{ $categoria->padre['nombre']}}</strong></p> 
-                                <a href="#" class="btn btn-primary">Ver Detalles</a>
-                            </div>
-                        </div>
-                @endforeach
-            </div>
-        </div>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                    <th scope="col">ID Categoria</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Categoria Padre</th>
+                    <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($categorias as $categoria)
+                        @if ($categoria->categoria_id == null)
+                            <tr>
+                                <th scope="row">{{$categoria->id}}</th>
+                                <td><strong>{{$categoria->nombre}}</strong></td>
+                                <td>{{ $categoria->padre['nombre']}}</td>
+                                <td>
+                                    <a href="/categoria/{{$categoria->id}}" class="btn btn-primary">Ver Detalles</a>
+                                </td>
+                            </tr>
+                            @foreach ($categoria->children as $item)
+                                <tr>
+                                    <th scope="row">{{$item->id}}</th>
+                                    <td>{{$item->nombre}}</td>
+                                    <td>{{ $item->padre['nombre']}}</td>
+                                    <td>
+                                        <a href="/categoria/{{$item->id}}" class="btn btn-primary">Ver Detalles</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
     </div>
     
 @endsection

@@ -57,7 +57,8 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        //
+        $categoria = Categoria::findOrFail($id);
+        return view('productos.detalleCategoria', compact('categoria'));
     }
 
     /**
