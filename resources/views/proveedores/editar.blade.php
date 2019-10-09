@@ -39,8 +39,9 @@
                         />
                     </div>
                     <div class="form-group">
-                        <label for="id_cat">Categoria</label>
+                        <label for="id_cat">Agregar Categoria</label>
                         <select class="form-control" name="id_cat" type="number">
+                            <option>{{null}}</option>
                             @foreach ($categorias as $item)
                                 <option>{{$item->id}} - {{$item->nombre}}</option>
                             @endforeach
@@ -63,6 +64,15 @@
                         </button>
                     </div>
                 @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif  
                 <button type="submit" class="btn btn-warning btn-block">Modificar</button>
             </form>
         </div>

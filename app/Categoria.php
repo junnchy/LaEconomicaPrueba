@@ -18,7 +18,8 @@ class Categoria extends Model
         return $this->hasMany(Categoria::class, 'categoria_id');
     }
 
-    public function proveedores(){
+    public function proveedores()
+    {
         return $this->belongsToMany(Proveedor::class)->withPivot('descuento'); // Muchos a muchos
     }
 }

@@ -41,6 +41,11 @@ class ProveedorControler extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'nombre' => 'required',
+            'cuit' => 'required',
+        ]);
+
         $proveedor = new Proveedor();
         $proveedor->nombre = $request->nombre;
         $proveedor->cuit = $request->cuit;
@@ -85,15 +90,22 @@ class ProveedorControler extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'nombre' => 'required',
+        ]);
+
         $proveedor = App\Proveedor::findOrFail($id);
 
         $proveedor->nombre = $request->nombre;
         $proveedor->telefono = $request->telefono;
         $proveedor->save();
 
-        $categoria = Categoria::findOrFail($request->id_cat);
-
-        $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
+        if ($request->id_cat != null) {
+            
+            $categoria = Categoria::findOrFail($request->id_cat);
+            $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
+        }
+        
 
         return back()->with('mensaje', 'Proveedor Actualizado');
     }

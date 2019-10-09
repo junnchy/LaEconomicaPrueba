@@ -27,13 +27,14 @@
                         />
                     </div>
                     <div class="form-group">
-                        <label>Id de Categoria Padre</label>
-                        <input 
-                            type="number" 
-                            class="form-control" 
-                            name="categoria_id" 
-                            placeholder="Id Padre"
-                        />
+                        <label for="id_cat">Categoria</label>
+                        <select class="form-control" name="categoria_id" type="number">
+                            <option>{{null}}</option>
+                            @foreach ($categorias as $item)
+                                <option>{{$item->id}} <p>- {{$item->nombre}}</p></option>
+                                
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 @if (session('mensaje'))
@@ -58,6 +59,7 @@
                     <th scope="col">Handle</th>
                     </tr>
                 </thead>
+                <!--Esto en lenguaje front debe ser recursivo y mas lindo <Juanchi>-->
                 <tbody>
                     @foreach ($categorias as $categoria)
                         @if ($categoria->categoria_id == null)
@@ -72,12 +74,24 @@
                             @foreach ($categoria->children as $item)
                                 <tr>
                                     <th scope="row">{{$item->id}}</th>
-                                    <td>{{$item->nombre}}</td>
+                                    <td>--{{$item->nombre}}</td>
                                     <td>{{ $item->padre['nombre']}}</td>
                                     <td>
                                         <a href="/categoria/{{$item->id}}" class="btn btn-primary">Ver Detalles</a>
                                     </td>
                                 </tr>
+                                @if ($item->children != null)
+                                    @foreach ($item->children as $item2)
+                                        <tr>
+                                            <th scope="row">{{$item2->id}}</th>
+                                            <td>----{{$item2->nombre}}</td>
+                                            <td>{{ $item2->padre['nombre']}}</td>
+                                            <td>
+                                                <a href="/categoria/{{$item2->id}}" class="btn btn-primary">Ver Detalles</a>
+                                            </td>
+                                        </tr> 
+                                    @endforeach
+                                @endif
                             @endforeach
                         @endif
                     @endforeach

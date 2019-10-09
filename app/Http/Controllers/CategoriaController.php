@@ -41,7 +41,9 @@ class CategoriaController extends Controller
 
         $categoria->nombre = $request->nombre;
         if ($request->categoria_id != null){
-            $categoria->categoria_id = $request->categoria_id;
+            //queria hacer una funcion busca categoria... no la pude hacer andar 
+            $padre = Categoria::findOrFail($request->categoria_id);
+            $categoria->categoria_id = $padre->id;
         }
 
         $categoria->save();
