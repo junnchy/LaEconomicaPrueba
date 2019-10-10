@@ -8,12 +8,12 @@
                     <h1>Categorias</h1>
             </div>
             <div class="col-4">
-                    <a href="/productos" class="btn btn-danger"> Volver</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-danger"> Volver</a>
             </div>
         </div>
         
         <div class="container">
-            <form method="POST" action="/categoria">
+            <form method="POST" action="{{route('categoria.store')}}">
                 @csrf
                 <div class="form-group mt-5">
                     <h3>Ingreso de Nueva Categoria</h3>
@@ -68,7 +68,7 @@
                                 <td><strong>{{$categoria->nombre}}</strong></td>
                                 <td>{{ $categoria->padre['nombre']}}</td>
                                 <td>
-                                    <a href="/categoria/{{$categoria->id}}" class="btn btn-primary">Ver Detalles</a>
+                                    <a href="{{route('categoria.show', $categoria)}}" class="btn btn-primary">Ver Detalles</a>
                                 </td>
                             </tr>
                             @foreach ($categoria->children as $item)
@@ -77,7 +77,7 @@
                                     <td>--{{$item->nombre}}</td>
                                     <td>{{ $item->padre['nombre']}}</td>
                                     <td>
-                                        <a href="/categoria/{{$item->id}}" class="btn btn-primary">Ver Detalles</a>
+                                        <a href="{{route('categoria.show', $categoria)}}" class="btn btn-primary">Ver Detalles</a>
                                     </td>
                                 </tr>
                                 @if ($item->children != null)
@@ -87,7 +87,7 @@
                                             <td>----{{$item2->nombre}}</td>
                                             <td>{{ $item2->padre['nombre']}}</td>
                                             <td>
-                                                <a href="/categoria/{{$item2->id}}" class="btn btn-primary">Ver Detalles</a>
+                                                <a href="{{route('categoria.show', $categoria)}}" class="btn btn-primary">Ver Detalles</a>
                                             </td>
                                         </tr> 
                                     @endforeach

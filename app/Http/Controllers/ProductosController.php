@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Descuento;
+use App\Producto;
+
 
 class ProductosController extends Controller
 {
@@ -14,7 +17,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
-        return view('productos.home');
+        return view('productos.productos');
     }
 
     /**
@@ -24,7 +27,8 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        
+        $descuentos = Descuento::all();;
+        return view('productos.agregarProducto', compact('descuentos'));
     }
 
     /**
@@ -35,7 +39,16 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-       
+       $producto = new Producto();
+       if ($request->id != null) {
+            $producto->id = $request->id;
+       }
+
+       $producto->nombre = $request->nombre;
+       $producto->precioBase = $request->precioBase;
+       $producto->descuentoProducto = $request->descuentoProducto;
+       $producto->descuentoId = $request->descuentoId;
+       $producto->save();
     }
 
     /**

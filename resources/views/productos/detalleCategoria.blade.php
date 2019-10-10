@@ -8,7 +8,7 @@
             </div>
             <div class="col-md-3"></div>
             <div class="col-md-3">
-                <a href="/categoria" class="btn btn-danger">Volver</a>
+                <a href="{{ url()->previous() }}" class="btn btn-danger">Volver</a>
             </div>
         </div>
         <ul class="list-group">
@@ -16,14 +16,14 @@
             <li class="list-group-item">Padre: {{$categoria->padre['nombre']}}</li>
             <li class="list-group-item">Hijos: 
                 @foreach ($categoria->children as $item)
-                        <a href="/categoria/{{$item['id']}}">{{$item['nombre']}},</a>
+                        <a href="{{route('categoria.show', $item)}}">{{$item['nombre']}},</a>
                 @endforeach
             </li>
         </ul>
     </div>
     <div class="container mt-5">
         <div class="container">
-            <h1>Proveedores</h1>
+            <h1>Proveedores de {{$categoria->nombre}}</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>

@@ -11,7 +11,7 @@
                         <a href="/proveedores" class="btn btn-primary btn-block">Proveedores</a>
                     </div>
                     <div class="col-md-3">
-                        <a href="/productos" class="btn btn-primary btn-block" >Modulo Productos</a>
+                        <a href="{{route('homeProductos')}}" class="btn btn-primary btn-block" >Modulo Productos</a>
                     </div>
                     <div class="col-md-3">
                         <a href="#" class="btn btn-primary btn-block" >BTN</a>
