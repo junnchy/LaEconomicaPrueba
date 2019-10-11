@@ -13,6 +13,7 @@ class ProveedorTableSeeder extends Seeder
      */
     public function run()
     {
+
         $proveedor = new Proveedor();
         $proveedor->nombre = 'Holcim';
         $proveedor->cuit = 22342242;

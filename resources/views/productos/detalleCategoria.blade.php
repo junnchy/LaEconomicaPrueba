@@ -48,4 +48,22 @@
             </table>
         </div>
     </div>
+    <div class="container mt-5">
+            <div class="container">
+                <h1>Productos</h1>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                        <th scope="col">Codigo Articulo</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Precio Base</th>
+                        <th scope="col">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
 @endsection

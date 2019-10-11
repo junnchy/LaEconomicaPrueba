@@ -8,42 +8,49 @@
                     <h1 class="text-light">Productos</h1>
             </div>
         </div>
-        <div class="container">
-
+        <div class="container mt-3">
+          <div class="row">
+              <div class="col-md-3">
+                  <a class="btn btn-outline-success" href="{{route('productos.create')}}">Agregar nuevo</a>
+              </div>  
+          </div>
+          <!--Buscador sacado de https://bootsnipp.com/snippets/35V6b-->
+          <div class="container"><br/>
+            <div class="row justify-content-center">
+              <div class="col-12 col-md-10 col-lg-8">
+                <form class="card card-sm">
+                  <div class="card-body row no-gutters align-items-center">
+                    <div class="col-auto">
+                      <i class="fas fa-search h4 text-body"></i>
+                    </div>
+                    <!--end of col-->
+                    <div class="col">
+                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Producto a buscar">
+                    </div>
+                    <!--end of col-->
+                    <div class="col-auto">
+                      <button class="btn btn-lg btn-primary" type="submit">Buscar</button>
+                    </div>
+                    <!--end of col-->
+                  </div>
+                </form>
+              </div>
+              <!--end of col-->
+              </div>
+            </div>  
         </div>
-        <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <a class="navbar-brand" href="#">Productos</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="navbar-toggler-icon"></span>
-                        </button>
-                      
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                          <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                              <a class="btn btn-outline-primary" href="{{route('productos.create')}}">Agregar nuevo</a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Dropdown
-                              </a>
-                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                              </div>
-                            </li>
-                          </ul>
-                          <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                          </form>
-                        </div>
-                      </nav>
+        <div class="container mt-5">
+            @foreach ($productos as $producto)
+              <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{$producto->id}}</h5>
+                  <h5 class="card-subtitle">{{$producto->nombre}}</h5>
+                  <p class="card-text">${{$producto->precioBase}}</p>
+                  <a href="#" class="btn btn-primary">Ver mas</a>
+                </div>
+              </div>
+            @endforeach
         </div>
     </div>
     

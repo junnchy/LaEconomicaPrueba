@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 use App\Categoria;
+use App\Proveedor;
+use App\Producto;
 
 class CategoriasSeeder extends Seeder
 {
@@ -12,7 +15,19 @@ class CategoriasSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
+        Schema::disableForeignKeyConstraints();
+       
+        DB::table('categoria_proveedor')->truncate();
+        DB::table('productos')->truncate();
+        Categoria::truncate();
+        Proveedor::truncate();
+        Producto::truncate();
+
+        Schema::enableForeignKeyConstraints();
+        
+
+        
 
         $categoria = new Categoria();
         $categoria->nombre = 'Aberturas';

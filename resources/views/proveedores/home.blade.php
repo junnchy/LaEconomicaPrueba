@@ -90,7 +90,7 @@
                                     <td class="mt-2">{{$proveedor->cuit}}</td>
                                     <td class="mt-2">{{$proveedor->telefono}}</td>
                                     <td>
-                                        <a href="{{route('proveedores.show', $proveedor)}}" class="btn btn-warning btn-sm">Editar</a>
+                                        <a href="{{route('proveedores.show', $proveedor)}}" class="btn btn-warning btn-sm">Ver Mas</a>
                                     </td>
                                 </tr>
                             @endforeach

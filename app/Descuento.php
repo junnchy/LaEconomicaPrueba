@@ -12,10 +12,10 @@ class Descuento extends Model
     protected $table = 'categoria_proveedor';
 
     public function categoria(){
-        return $this->hasOne(Categoria::class, 'id');
+        return $this->hasOne(Categoria::class, 'id', 'categoria_id',);
     }
 
     public function proveedor(){
-        return $this->hasOne(Proveedor::class, 'id');
+        return $this->hasOne(Proveedor::class,'id', 'proveedor_id');
     }
 }

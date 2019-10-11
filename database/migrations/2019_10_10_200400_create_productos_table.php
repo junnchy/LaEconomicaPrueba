@@ -17,9 +17,11 @@ class CreateProductosTable extends Migration
             $table->bigIncrements('id');
             $table->float('precioBase');
             $table->string('nombre');
+            $table->unsignedBigInteger('proveedor_id');
+            $table->foreign('proveedor_id')->references('id')->on('proveedors');
+            $table->unsignedBigInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->float('descuentoProducto');
-            $table->unsignedBigInteger('descuento_id');
-            $table->foreign('descuento_id')->references('id')->on('categoria_proveedor');
             $table->timestamps();
         });
     }

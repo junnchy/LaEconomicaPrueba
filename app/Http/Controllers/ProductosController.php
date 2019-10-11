@@ -16,8 +16,9 @@ class ProductosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('productos.productos');
+    {   
+        $productos = Producto::all();
+        return view('productos.productos', compact('productos'));
     }
 
     /**
@@ -27,7 +28,7 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        $descuentos = Descuento::all();;
+        $descuentos = Descuento::all();
         return view('productos.agregarProducto', compact('descuentos'));
     }
 
@@ -47,8 +48,9 @@ class ProductosController extends Controller
        $producto->nombre = $request->nombre;
        $producto->precioBase = $request->precioBase;
        $producto->descuentoProducto = $request->descuentoProducto;
-       $producto->descuentoId = $request->descuentoId;
        $producto->save();
+
+       return back()->with('mensaje', 'Producto Agregado');
     }
 
     /**
