@@ -26,10 +26,20 @@
                 <input type="number" class="form-control" id="descP" name="descuentoProducto">
             </div>
             <div class="form-group">
-                <label for="exampleFormControlSelect2">Descuento</label>
-                <select multiple class="form-control" id="exampleFormControlSelect2" name="descuentoId">
-                    @foreach ($descuentos as $item)
-                        <option value="{{$item->id}}">{{$item->id}} - {{$item->descuento}}% --{{$item->categoria->nombre}} -- {{$item->proveedor->nombre}}</option>
+                <label for="exampleFormControlSelect1">Proveedor</label>
+                <select class="form-control" name="proveedor_id">
+                    @foreach ($proveedores as $proveedor)
+                        <option>{{null}}</option>
+                        <option value="{{$proveedor->id}}">{{$proveedor->id}} - {{$proveedor->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Categoria</label>
+                <select class="form-control" name="categoria_id">
+                    @foreach ($categorias as $categoria)
+                        <option>{{null}}</option>
+                        <option value="{{$categoria->id}}">{{$categoria->id}} - {{$categoria->nombre}}</option>
                     @endforeach
                 </select>
             </div>
