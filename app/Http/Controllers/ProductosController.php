@@ -52,6 +52,8 @@ class ProductosController extends Controller
        $producto->descuentoProducto = $request->descuentoProducto;
        $producto->proveedor_id = $request->proveedor_id;
        $producto->categoria_id = $request->categoria_id;
+       // Se debe validad que exista una relacion entre la categoia y el proveedor, ver si en la vista solo mostrar aquellos proveedores y categorias que tengan un descuento 
+       // o bien poder crear uno en el momento
        $producto->save();
 
        return back()->with('mensaje', 'Producto Agregado');
