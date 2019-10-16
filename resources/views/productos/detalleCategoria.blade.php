@@ -34,13 +34,28 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!--Hasta dos anidaciones de proveedores, se podria agregar una mas-->
+                    @if ($categoria->children != null)
+                        @foreach ($categoria->children as $item)
+                            @foreach ($item->proveedores as $item2)
+                                <tr>
+                                    <th scope="row">{{$item2->id}}</th>
+                                    <td>{{$item2->nombre}}</td>
+                                    <td>{{$item2->pivot['descuento']}} %</td>
+                                    <td>
+                                        <a href="{{route('proveedores.show', $item2)}}" class="btn btn-warning btn-sm">Ver</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endforeach  
+                    @endif
                     @foreach ($categoria->proveedores as $item)
                         <tr>
                             <th scope="row">{{$item->id}}</th>
                             <td>{{$item->nombre}}</td>
                             <td>{{$item->pivot['descuento']}} %</td>
                             <td>
-                                <a href="/proveedores/{{$item->id}}" class="btn btn-warning btn-sm">Ver</a>
+                                <a href="{{route('proveedores.show', $item)}}" class="btn btn-warning btn-sm">Ver</a>
                             </td>
                         </tr>
                     @endforeach
@@ -61,7 +76,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach ($categoria->productos as $item)
+                        @foreach ($categoria->productos as $item)
                             <tr>
                                 <th scope="row">{{$item->id}}</th>
                                 <td>{{$item->nombre}}</td>

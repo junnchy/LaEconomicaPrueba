@@ -27,7 +27,7 @@
                         />
                     </div>
                     <div class="form-group">
-                        <label for="id_cat">Categoria</label>
+                        <label for="id_cat">Categoria padre</label>
                         <select class="form-control" name="categoria_id" type="number">
                             <option>{{null}}</option>
                             @foreach ($categorias as $item)
@@ -35,6 +35,24 @@
                                 
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                            <label for="id_prov">Proveedor</label>
+                            <select class="form-control" name="proveedor_id" type="number">
+                                <option>{{null}}</option>
+                                @foreach ($proveedores as $item)
+                                    <option>{{$item->id}} <p>- {{$item->nombre}}</p></option>
+                                    
+                                @endforeach
+                            </select>
+                        </div>
+                    <div class="form-group">
+                        <label>Descuento</label>
+                        <input 
+                            type="number" 
+                            class="form-control" 
+                            name="descuento"
+                        />
                     </div>
                 </div>
                 @if (session('mensaje'))

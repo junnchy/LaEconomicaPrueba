@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Categoria;
+use App\Proveedor;
 
 class CategoriaController extends Controller
 {
@@ -16,7 +17,8 @@ class CategoriaController extends Controller
     public function index()
     {
         $categorias = Categoria::all();
-        return view('productos.categoria', compact('categorias'));
+        $proveedores = Proveedor::all();
+        return view('productos.categoria', compact('categorias', 'proveedores'));
     }
 
     /**
@@ -47,6 +49,15 @@ class CategoriaController extends Controller
         }
 
         $categoria->save();
+        
+        $idCat = $categoria->id;
+
+        if ($request->proveedor_id != null) {
+            
+            $proveedor = Proveedor::findOrFail($request->proveedor_id);
+            $proveedor->categorias()->attach($idCat, ['descuento'=> $request->descuento]);
+        }
+
         return back()->with('mensaje', 'Categoria Agregada');
 
     }
