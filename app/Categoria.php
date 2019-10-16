@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Proveedor;
+use App\Producto;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,5 +22,10 @@ class Categoria extends Model
     public function proveedores()
     {
         return $this->belongsToMany(Proveedor::class)->withPivot('descuento'); // Muchos a muchos
+    }
+
+    public function productos()
+    {
+        return $this->hasMany(Producto::class, 'categoria_id');
     }
 }

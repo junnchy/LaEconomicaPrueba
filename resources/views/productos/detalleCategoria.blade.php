@@ -61,7 +61,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                            @foreach ($categoria->productos as $item)
+                            <tr>
+                                <th scope="row">{{$item->id}}</th>
+                                <td>{{$item->nombre}}</td>
+                                <td>{{$item->precioBase}}</td>
+                                <td></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

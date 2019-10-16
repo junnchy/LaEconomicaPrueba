@@ -77,7 +77,7 @@
                                     <td>--{{$item->nombre}}</td>
                                     <td>{{ $item->padre['nombre']}}</td>
                                     <td>
-                                        <a href="{{route('categoria.show', $categoria)}}" class="btn btn-primary">Ver Detalles</a>
+                                        <a href="{{route('categoria.show', $item)}}" class="btn btn-primary">Ver Detalles</a>
                                     </td>
                                 </tr>
                                 @if ($item->children != null)
@@ -87,7 +87,7 @@
                                             <td>----{{$item2->nombre}}</td>
                                             <td>{{ $item2->padre['nombre']}}</td>
                                             <td>
-                                                <a href="{{route('categoria.show', $categoria)}}" class="btn btn-primary">Ver Detalles</a>
+                                                <a href="{{route('categoria.show', $item2)}}" class="btn btn-primary">Ver Detalles</a>
                                             </td>
                                         </tr> 
                                     @endforeach
