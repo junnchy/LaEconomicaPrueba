@@ -14,7 +14,7 @@
                         <a href="/productos" class="btn btn-primary btn-block" >Modulo Productos</a>
                     </div>
                     <div class="col-md-3">
-                        <a href="#" class="btn btn-primary btn-block" >BTN</a>
+                        <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-block">Clientes</a>
                     </div>
                     <div class="col-md-3">
                         <a href="#" class="btn btn-primary btn-block" >BTN</a>
