@@ -28,8 +28,8 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Proveedor</label>
                 <select class="form-control" name="proveedor_id">
+                    <option>{{null}}</option>
                     @foreach ($proveedores as $proveedor)
-                        <option>{{null}}</option>
                         <option value="{{$proveedor->id}}">{{$proveedor->id}} - {{$proveedor->nombre}}</option>
                     @endforeach
                 </select>
@@ -37,8 +37,8 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Categoria</label>
                 <select class="form-control" name="categoria_id">
+                    <option>{{null}}</option>
                     @foreach ($categorias as $categoria)
-                        <option>{{null}}</option>
                         <option value="{{$categoria->id}}">{{$categoria->id}} - {{$categoria->nombre}}</option>
                     @endforeach
                 </select>
