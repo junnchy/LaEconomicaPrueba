@@ -40,17 +40,15 @@
             </div>  
         </div>
         <div class="container mt-5">
-          <div class="row">
+          <div class="card-columns mt-5">
               @foreach ($productos as $producto)
-                <div class="col-md-4">
-                  <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{$producto->id}}</h5>
-                      <h5 class="card-subtitle">{{$producto->nombre}}</h5>
-                      <p class="card-text">${{$producto->precioBase}}</p>
-                      <a href="{{route('productos.show', $producto)}}" class="btn btn-primary">Ver mas</a>
-                    </div>
+                <div class="card" style="width: 18rem;">
+                  <img src="..." class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{$producto->id}}</h5>
+                    <h5 class="card-subtitle">{{$producto->nombre}}</h5>
+                    <p class="card-text">${{$producto->precioBase}}</p>
+                    <a href="{{route('productos.show', $producto)}}" class="btn btn-primary">Ver mas</a>
                   </div>
                 </div>
               @endforeach
