@@ -7,7 +7,7 @@
                     <h1>Seccion Proveedores</h1>
             </div>
             <div class="col-4">
-                    <a href="/" class="btn btn-danger"> Volver</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-danger"> Volver</a>
             </div>
         </div>
         
@@ -90,7 +90,7 @@
                                     <td class="mt-2">{{$proveedor->cuit}}</td>
                                     <td class="mt-2">{{$proveedor->telefono}}</td>
                                     <td>
-                                        <a href="/proveedores/{{$proveedor->id}}" class="btn btn-warning btn-sm">Editar</a>
+                                        <a href="{{route('proveedores.show', $proveedor)}}" class="btn btn-warning btn-sm">Ver Mas</a>
                                     </td>
                                 </tr>
                             @endforeach
