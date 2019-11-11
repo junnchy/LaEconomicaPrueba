@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App;
 use App\Cliente;
+use App\CategoriaClientes;
+use App\CondicionIva;
+use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -16,7 +19,9 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::all();
-        return view('clientes.home', compact('clientes'));
+        $categorias = CategoriaClientes::all();
+        $condicionesIva = CondicionIva::all();
+        return view('clientes.home', compact('clientes','categorias','condicionesIva'));
     }
 
     /**
@@ -47,6 +52,8 @@ class ClienteController extends Controller
         $cliente->telefono = $request->telefono;
         $cliente->celular = $request->celular;
         $cliente->email = $request->email;
+        $cliente->cat_clientes_id = $request->categoria_id;
+        $cliente->condicion_iva_id = $request->condicion_iva_id;
         $cliente->save();
 
         return back()->with('mensaje', 'Cliente Agregado');
@@ -60,9 +67,10 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $cliente = App\Cliente::findOrFail($id);
-       
-        return view('clientes.editar', compact('cliente'));
+        $cliente = Cliente::findOrFail($id);
+        $categorias = CategoriaClientes::all();
+        $condicionesIva = CondicionIva::all();
+        return view('clientes.editar', compact('cliente', 'categorias', 'condicionesIva'));
     }
 
     /**
@@ -97,6 +105,8 @@ class ClienteController extends Controller
         $cliente->telefono = $request->telefono;
         $cliente->celular = $request->celular;
         $cliente->email = $request->email;
+        $cliente->cat_clientes_id = $request->categoria_id;
+        $cliente->condicion_iva_id = $request->condicion_iva_id;
         $cliente->save();
 
         return back()->with('mensaje', 'Cliente Actualizado');
