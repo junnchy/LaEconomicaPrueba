@@ -20,6 +20,16 @@
                 @csrf
                 <div class="form-group mt-5">
                     <h3>Modificar Datos</h3>
+
+                    @if (session('mensaje'))
+                    <div class="alert alert-success alert-dismissible fade show">
+                        {{session('mensaje')}} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input 
@@ -68,17 +78,32 @@
                             placeholder="Email"
                             value="{{$cliente->email}}"
                         />
-                    </div>                                   
+                    </div>
+                    <div class="form-group">
+                        <label>Categoría Cliente</label>
+                        <select class="form-control" 
+                            name="categoria_id" 
+                            type="number">
+                            <option>{{null}}</option>                       
+                            @foreach ($categorias as $cat)
+                                <option value="{{ $cat->id }}" @if($cliente->cat_clientes_id == $cat->id) selected="selected" @endif>{{$cat->denominacion}}</option>                                 
+                            @endforeach
+                        </select>
+                    </div>   
+                    <div class="form-group">
+                        <label>Condición de IVA</label>
+                        <select class="form-control" 
+                            name="condicion_iva_id"
+                            type="number">
+                            <option>{{null}}</option>
+                            @foreach ($condicionesIva as $con)
+                                <option value="{{ $con->id }}" @if($cliente->condicion_iva_id == $con->id) selected="selected" @endif>{{$con->denominacion}}</option>
+                            @endforeach
+                        </select>
+                    </div>                                
                 </div>
                 
-                @if (session('mensaje'))
-                    <div class="alert alert-success alert-dismissible fade show">
-                        {{session('mensaje')}} 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
+                
                 
                 @if ($errors->any())
                     <div class="alert alert-danger">

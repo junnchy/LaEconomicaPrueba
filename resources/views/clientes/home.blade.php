@@ -16,6 +16,16 @@
                 @csrf
                 <div class="form-group mt-5">
                     <h3>Ingreso de Nuevo Cliente</h3>
+
+                    @if (session('mensaje'))
+                    <div class="alert alert-success alert-dismissible fade show">
+                        {{session('mensaje')}} 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @endif
+
                     <div class="form-group">
                         <label>Nombre y Apellido/Razón Social</label>
                         <input 
@@ -66,22 +76,36 @@
                             value="{{old('email')}}"
                         />
                     </div>
-
-                </div>
-                @if (session('mensaje'))
-                    <div class="alert alert-success alert-dismissible fade show">
-                        {{session('mensaje')}} 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="form-group">
+                        <label>Categoría Cliente</label>
+                        <select class="form-control" 
+                            name="categoria_id" 
+                            type="number">
+                            <option>{{null}}</option>
+                            @foreach ($categorias as $cat)
+                                <option value="{{ $cat->id }}">{{$cat->denominacion}}</option>
+                            @endforeach
+                        </select>
                     </div>
-                @endif
+                    <div class="form-group">
+                        <label>Condición de IVA</label>
+                        <select class="form-control" 
+                            name="condicion_iva_id"
+                            type="number">
+                            <option>{{null}}</option>
+                            @foreach ($condicionesIva as $con)
+                                <option value="{{ $con->id }}">{{$con->denominacion}}</option>
+                            @endforeach
+                        </select>
+                    </div> 
+                </div>
+                
                 
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                <p>{{ $error }}</p>
                             @endforeach
                         </ul>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -99,10 +123,10 @@
                           <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Nombre y Apellido/Razón Social</th>
-                            <th scope="col">CUIT/CUIL</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Celular</th>
-                            <th scope="col">Email</th>                            
+                            <th scope="col">CUIT/CUIL</th>    
+                            <th scope="col">Categoría Cliente</th>
+                            <th scope="col">Condición de IVA</th>
+                            <th scope="col">Opciones</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -111,9 +135,18 @@
                                     <th scope="row">{{$cliente->id}}</th>
                                     <td class="mt-2">{{$cliente->nombre}}</td>
                                     <td class="mt-2">{{$cliente->cuit}}</td>
-                                    <td class="mt-2">{{$cliente->telefono}}</td>
-                                    <td class="mt-2">{{$cliente->celular}}</td>
-                                    <td class="mt-2">{{$cliente->email}}</td>
+                                    <td class="mt-2">
+                                        @foreach ($categorias as $cat)
+                                            @if ($cliente->cat_clientes_id == $cat->id)
+                                                {{$cat->denominacion}}
+                                            @endif
+                                        @endforeach</td>
+                                    <td class="mt-2">
+                                        @foreach ($condicionesIva as $con)
+                                            @if ($cliente->condicion_iva_id == $con->id)
+                                                {{$con->denominacion}}                                                
+                                            @endif                                            
+                                        @endforeach</td>
                                     <td>
                                         <a href="{{route('clientes.show', $cliente)}}" class="btn btn-warning btn-sm">Ver Más</a>
                                     </td>
