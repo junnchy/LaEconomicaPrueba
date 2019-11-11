@@ -7,6 +7,7 @@ use App;
 use App\Cliente;
 use App\CategoriaClientes;
 use App\CondicionIva;
+use App\Localidad;
 use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
@@ -21,7 +22,8 @@ class ClienteController extends Controller
         $clientes = Cliente::all();
         $categorias = CategoriaClientes::all();
         $condicionesIva = CondicionIva::all();
-        return view('clientes.home', compact('clientes','categorias','condicionesIva'));
+        $localidades = Localidad::all();
+        return view('clientes.home', compact('clientes','categorias','condicionesIva','localidades'));
     }
 
     /**
@@ -52,6 +54,8 @@ class ClienteController extends Controller
         $cliente->telefono = $request->telefono;
         $cliente->celular = $request->celular;
         $cliente->email = $request->email;
+        $cliente->direccion = $request->direccion;
+        $cliente->localidad_id = $request->localidad_id;
         $cliente->cat_clientes_id = $request->categoria_id;
         $cliente->condicion_iva_id = $request->condicion_iva_id;
         $cliente->save();
@@ -70,7 +74,8 @@ class ClienteController extends Controller
         $cliente = Cliente::findOrFail($id);
         $categorias = CategoriaClientes::all();
         $condicionesIva = CondicionIva::all();
-        return view('clientes.editar', compact('cliente', 'categorias', 'condicionesIva'));
+        $localidades = Localidad::all();
+        return view('clientes.editar', compact('cliente', 'categorias', 'condicionesIva', 'localidades'));
     }
 
     /**
@@ -105,6 +110,8 @@ class ClienteController extends Controller
         $cliente->telefono = $request->telefono;
         $cliente->celular = $request->celular;
         $cliente->email = $request->email;
+        $cliente->direccion = $request->direccion;
+        $cliente->localidad_id = $request->localidad_id;
         $cliente->cat_clientes_id = $request->categoria_id;
         $cliente->condicion_iva_id = $request->condicion_iva_id;
         $cliente->save();
