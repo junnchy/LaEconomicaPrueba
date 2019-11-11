@@ -15,4 +15,9 @@ class Cliente extends Model
     {
         return $this->belongsTo(CondicionIva::class);
     }
+
+    public function localidad()
+    {
+        return $this->belongsTo(Localid::class);
+    }
 }

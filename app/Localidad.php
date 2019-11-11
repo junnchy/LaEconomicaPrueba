@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CondicionIva extends Model
-{
-    protected $table = 'condicion_iva';
+class Localidad extends Model
 
+{
+    protected $table = 'localidades';
+    
     public function clientes()
     {
         return $this->belongsToMany(Cliente::class);
