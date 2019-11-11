@@ -80,6 +80,27 @@
                         />
                     </div>
                     <div class="form-group">
+                        <label>Dirección</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="direccion" 
+                            placeholder="Dirección"
+                            value="{{$cliente->direccion}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Localidad</label>
+                        <select class="form-control" 
+                            name="localidad_id" 
+                            type="number">
+                            <option>{{null}}</option>
+                            @foreach ($localidades as $loc)
+                                <option value="{{ $loc->id }}" @if($cliente->localidad_id == $loc->id) selected="selected" @endif>{{$loc->cod_postal}} - {{$loc->localidad}}, {{$loc->provincia}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Categoría Cliente</label>
                         <select class="form-control" 
                             name="categoria_id" 
