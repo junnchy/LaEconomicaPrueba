@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriaClientes extends Migration
+class CreateLocalidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateCategoriaClientes extends Migration
      */
     public function up()
     {
-        Schema::create('categoria_clientes', function (Blueprint $table) {
+        Schema::create('localidades', function (Blueprint $table) 
+        {
             $table->bigIncrements('id');
-            $table->string('denominacion');
+            $table->integer('cod_postal');
+            $table->string('localidad');
+            $table->string('provincia');
             $table->timestamps();
         });
     }
@@ -27,8 +30,6 @@ class CreateCategoriaClientes extends Migration
      */
     public function down()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Schema::dropIfExists('categoria_clientes');
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        Schema::dropIfExists('localidades');
     }
 }

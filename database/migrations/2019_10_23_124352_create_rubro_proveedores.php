@@ -27,6 +27,6 @@ class CreateRubroProveedores extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('rubro_proveedores');
     }
 }
