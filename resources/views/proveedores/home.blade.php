@@ -72,30 +72,33 @@
         </div>
 
         <div class="container mt-5">
-                <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">#Id</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Cuit</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Handle</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($proveedores as $proveedor)
-                                <tr>
-                                    <th scope="row">{{$proveedor->id}}</th>
-                                    <td class="mt-2">{{$proveedor->nombre}}</td>
-                                    <td class="mt-2">{{$proveedor->cuit}}</td>
-                                    <td class="mt-2">{{$proveedor->telefono}}</td>
-                                    <td>
-                                        <a href="{{route('proveedores.show', $proveedor)}}" class="btn btn-warning btn-sm">Ver Mas</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                      </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Cuit</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($proveedores as $proveedor)
+                        <tr>
+                            <th scope="row">{{$proveedor->id}}</th>
+                            <td class="mt-2">{{$proveedor->nombre}}</td>
+                            <td class="mt-2">{{$proveedor->cuit}}</td>
+                            <td class="mt-2">{{$proveedor->telefono}}</td>
+                            <td>
+                                <a href="{{route('proveedores.show', $proveedor)}}" class="btn btn-warning btn-sm">Ver Mas</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="container my-4">
+            <componente-prueba v-bind:proveedores="{{$proveedores}}"></componente-prueba>
         </div>
     </div>
 @endsection
