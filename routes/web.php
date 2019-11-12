@@ -26,3 +26,7 @@ Route::resource('/proveedores', 'ProveedorControler')->middleware('auth');
 Route::resource('/productos', 'ProductosController')->middleware('auth');
 
 Route::resource('/categoria', 'CategoriaController')->middleware('auth');
+
+Route::resource('/clientes', 'ClienteController')->middleware('auth');
+
+Route::get('/home', 'HomeController@index')->name('home');

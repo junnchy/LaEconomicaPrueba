@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App;
@@ -19,4 +20,5 @@ class Proveedor extends Model
     
     
 }
+
 
