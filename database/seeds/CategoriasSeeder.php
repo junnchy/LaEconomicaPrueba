@@ -25,9 +25,6 @@ class CategoriasSeeder extends Seeder
         Producto::truncate();
 
         Schema::enableForeignKeyConstraints();
-        
-
-        
 
         $categoria = new Categoria();
         $categoria->nombre = 'Aberturas';
