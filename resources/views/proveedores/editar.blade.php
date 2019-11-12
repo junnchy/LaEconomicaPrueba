@@ -8,14 +8,14 @@
                     <h1>Seccion Proveedores</h1>
             </div>
             <div class="col-4">
-                    <a href="/" class="btn btn-danger"> Volver</a>
+                    <a href="{{url()->previous()}}" class="btn btn-danger"> Volver</a>
             </div>
         </div>
         <div class="container mt-5">
                 <h3>Nombre del Proveedor: <strong>{{$proveedor->nombre}}</strong></h3>
         </div>
         <div class="container">
-            <form method="POST" action="/proveedores/{{$proveedor->id}}">
+            <form method="POST" action="{{route('proveedores.update', $proveedor)}}">
                 @method("PUT")
                 @csrf
                 <div class="form-group mt-5">
@@ -78,15 +78,28 @@
         </div>
         <div class="container mt-5">
             <h3>Categoria de productos que nos vende</h3>
-            <ul class="list-group">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                    <th scope="col">Codigo Categoria</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descuento</th>
+                    <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
                     @foreach ($proveedor->categorias as $item)
-                        <li class="list-group-item">
-                            <strong>{{$item->id}}</strong> -
-                            {{$item->nombre}} 
-                            -- Con descuento del: 
-                            {{$item->pivot['descuento']}}%</li>
+                        <tr>
+                            <th scope="row">{{$item->id}}</th>
+                            <td>{{$item->nombre}} </td>
+                            <td>{{$item->pivot['descuento']}}%</td>
+                            <td>
+                                <a href="{{route('categoria.show', $item)}}" class="btn btn-warning btn-sm">Detalles</a>
+                            </td>
+                        </tr>
                     @endforeach
-            </ul>
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

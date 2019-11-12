@@ -8,10 +8,10 @@
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="/categoria" class="btn btn-warning btn-block">Categorias</a>
+                        <a href="{{route('categoria.index')}}" class='btn btn-warning btn-block'>Categorias</a>
                     </div>
                     <div class="col-md-3">
-                        <a href="#" class="btn btn-warning btn-block" >Productos</a>
+                        <a href="{{route('productos.index')}}" class="btn btn-warning btn-block" >Productos</a>
                     </div>
                     <div class="col-md-3">
                         <a href="#" class="btn btn-primary btn-block" >BTN</a>

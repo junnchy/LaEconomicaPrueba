@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Proveedor;
+use App\Categoria;
+use App\Producto;
+
 
 class ProductosController extends Controller
 {
@@ -13,8 +17,9 @@ class ProductosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('productos.home');
+    {   
+        $productos = Producto::all();
+        return view('productos.productos', compact('productos'));
     }
 
     /**
@@ -24,7 +29,9 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        
+        $categorias = Categoria::all();
+        $proveedores = Proveedor::all();
+        return view('productos.agregarProducto', compact('proveedores', 'categorias'));
     }
 
     /**
@@ -35,7 +42,21 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-       
+       $producto = new Producto();
+       if ($request->id != null) {
+            $producto->id = $request->id;
+       }
+
+       $producto->nombre = $request->nombre;
+       $producto->precioBase = $request->precioBase;
+       $producto->descuentoProducto = $request->descuentoProducto;
+       $producto->proveedor_id = $request->proveedor_id;
+       $producto->categoria_id = $request->categoria_id;
+       // Se debe validad que exista una relacion entre la categoia y el proveedor, ver si en la vista solo mostrar aquellos proveedores y categorias que tengan un descuento 
+       // o bien poder crear uno en el momento
+       $producto->save();
+
+       return back()->with('mensaje', 'Producto Agregado');
     }
 
     /**
@@ -46,7 +67,8 @@ class ProductosController extends Controller
      */
     public function show($id)
     {
-        //
+        $producto = Producto::findOrFail($id);
+        return view('productos.detalleProducto', compact('producto'));
     }
 
     /**
@@ -83,3 +105,4 @@ class ProductosController extends Controller
         //
     }
 }
+
