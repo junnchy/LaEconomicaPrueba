@@ -12,7 +12,7 @@ class LocalidadesTableSeeder extends Seeder
      */
     public function run()
     {
-        $tabla = DB::table('localidades');
+        Localidad::truncate();
         Localidad::insert(
             ['cod_postal' => 2000,
             'localidad' => 'Rosario',

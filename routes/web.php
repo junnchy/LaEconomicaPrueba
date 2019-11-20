@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/productos/home', 'HomeProductosController@index')->name('homeProductos');
 
+Route::get('/usuarios/home', 'HomeUsersController@index')->name('homeUsers');
+
 Route::resource('/proveedores', 'ProveedorControler')->middleware('auth');
 
 Route::resource('/productos', 'ProductosController')->middleware('auth');
@@ -28,5 +30,9 @@ Route::resource('/productos', 'ProductosController')->middleware('auth');
 Route::resource('/categoria', 'CategoriaController')->middleware('auth');
 
 Route::resource('/clientes', 'ClienteController')->middleware('auth');
+
+Route::resource('/usuarios', 'UsersController')->middleware('auth');
+
+Route::resource('/vendedores', 'VendedoresController')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');

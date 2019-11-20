@@ -153,7 +153,7 @@
                         <tbody>
                             @foreach ($clientes as $cliente)
                                 <tr>
-                                    <th scope="row">{{$cliente->id}}</th>
+                                    <th scope="mt-2">{{$cliente->id}}</th>
                                     <td class="mt-2">{{$cliente->nombre}}</td>
                                     <td class="mt-2">{{$cliente->cuit}}</td>
                                     <td class="mt-2">
@@ -174,7 +174,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                      </table>
+                </table>
         </div>
     </div>
 @endsection
