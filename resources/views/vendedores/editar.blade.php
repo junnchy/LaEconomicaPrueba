@@ -1,21 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
         <div class="row">
             <div class="col-8">
                     <h1>Sección Vendedores</h1>
             </div>
             <div class="col-4">
-                    <a href="{{ url()->previous() }}" class="btn btn-danger"> Volver</a>
+                    <a href="{{ route('vendedores.index') }}" class="btn btn-danger"> Volver</a>
             </div>
         </div>
-        
+        <div class="container mt-5">
+                <h3>Nombre del Vendedor: <strong>{{$vendedor->nombre}}</strong></h3>
+        </div>
         <div class="container">
-            <form method="POST" action="{{route('vendedores.store')}}">
+            <form method="POST" action="{{route('vendedores.update', $vendedor)}}">
+                @method("PUT")
                 @csrf
                 <div class="form-group mt-5">
-                    <h3>Ingreso de Nuevo Vendedor</h3>
+                    <h3>Modificar Datos</h3>
 
                     @if (session('mensaje'))
                     <div class="alert alert-success alert-dismissible fade show">
@@ -33,7 +37,7 @@
                             class="form-control" 
                             name="nombre" 
                             placeholder="Nombre"
-                            value="{{old('nombre')}}"
+                            value="{{$vendedor->nombre}}"
                         />
                     </div>
                     <div class="form-group">
@@ -43,7 +47,7 @@
                             class="form-control"
                             name="dni"
                             placeholder="DNI"
-                            value="{{old('dni')}}"
+                            value="{{$vendedor->dni}}"
                         />
                     </div>
                     <div class="form-group">
@@ -53,7 +57,7 @@
                             class="form-control" 
                             name="cuil" 
                             placeholder="CUIL"
-                            value="{{old('cuil')}}"
+                            value="{{$vendedor->cuil}}"
                         />
                     </div>
                     <div class="form-group">
@@ -63,7 +67,7 @@
                             class="form-control" 
                             name="telefono" 
                             placeholder="Teléfono"
-                            value="{{old('telefono')}}"
+                            value="{{$vendedor->telefono}}"
                         />
                     </div>
                     <div class="form-group">
@@ -73,7 +77,7 @@
                             class="form-control" 
                             name="celular" 
                             placeholder="Celular"
-                            value="{{old('celular')}}"
+                            value="{{$vendedor->celular}}"
                         />
                     </div>
                     <div class="form-group">
@@ -83,7 +87,7 @@
                             class="form-control" 
                             name="email" 
                             placeholder="Email"
-                            value="{{old('email')}}"
+                            value="{{$vendedor->email}}"
                         />
                     </div>
                     <div class="form-group">
@@ -93,7 +97,7 @@
                             class="form-control" 
                             name="direccion" 
                             placeholder="Dirección"
-                            value="{{old('direccion')}}"
+                            value="{{$vendedor->direccion}}"
                         />
                     </div>
                     <div class="form-group">
@@ -103,7 +107,7 @@
                             type="number">
                             <option>{{null}}</option>
                             @foreach ($localidades as $loc)
-                                <option value="{{ $loc->id }}">{{$loc->cod_postal}} - {{$loc->localidad}}, {{$loc->provincia}}</option>
+                                <option value="{{ $loc->id }}" @if($vendedor->localidad_id == $loc->id) selected="selected" @endif>{{$loc->cod_postal}} - {{$loc->localidad}}, {{$loc->provincia}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -125,49 +129,22 @@
                             placeholder="Password Confirmation"
                         />
                     </div>
-                
+                            
                 </div>
                 
                 
                 @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show">
+                    <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
+                                <li>{{ $error }}</li>
                             @endforeach
                         </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
-                @endif 
-                <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+                @endif  
+                <button type="submit" class="btn btn-warning btn-block">Actualizar</button>
             </form>
         </div>
-
-        <div class="container mt-5">
-                <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Nro. Puesto</th>
-                            <th scope="col">Nombre y Apellido</th>
-                            <th scope="col">CUIL</th>
-                            <th scope="col">Opciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($vendedores as $vendedor)
-                                <tr>
-                                    <th scope="mt-2">{{$vendedor->nro_puesto}}</th>
-                                    <td class="mt-2">{{$vendedor->nombre}}</td>
-                                    <td class="mt-2">{{$vendedor->cuil}}</td>
-                                    <td>
-                                        <a href="{{route('vendedores.show', $vendedor)}}" class="btn btn-warning btn-sm">Ver Más</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                </table>
-        </div>
+        
     </div>
 @endsection

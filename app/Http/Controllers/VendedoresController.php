@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateVendedorRequest;
 use App\Vendedor;
 use App\Localidad;
 use App\User;
 use App\Rol;
-use App\Http\Requests\CreateUserRequest;
+
 
 
 class VendedoresController extends Controller
@@ -37,10 +39,10 @@ class VendedoresController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\CreateUserRequest  $request
+     * @param  \Illuminate\Http\CreateVendedorRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateVendedorRequest $request)
     {
         $user = new User();
         $user->name = $request->nombre;
@@ -75,7 +77,7 @@ class VendedoresController extends Controller
     {
         $vendedor = Vendedor::findOrFail($nro_puesto);
         $localidades = Localidad::all();
-        return view('vendedor.editar', compact('cliente', 'localidades'));
+        return view('vendedores.editar', compact('vendedor', 'localidades'));
     }
 
     /**
@@ -92,13 +94,28 @@ class VendedoresController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UpdateVendedorRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateVendedorRequest $request, $nro_puesto)
     {
-        //
+        $vendedor = Vendedor::findOrFail($nro_puesto);
+        $vendedor->nombre = $request->nombre;
+        $vendedor->cuil = $request->cuil;
+        $vendedor->dni = $request->dni;
+        $vendedor->telefono = $request->telefono;
+        $vendedor->celular = $request->celular;
+        $vendedor->email = $request->email;
+        $vendedor->direccion = $request->direccion;
+        $vendedor->localidad_id = $request->localidad_id;
+        $vendedor->save();
+
+        $user = User::findOrFail($vendedor->user_id);
+        $user->nombre = $request->nombre;
+        $user->email = $request->email;
+        $user->save(); 
+
     }
 
     /**
