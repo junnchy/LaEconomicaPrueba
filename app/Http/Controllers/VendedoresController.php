@@ -94,7 +94,7 @@ class VendedoresController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdateVendedorRequest  $request
+     * @param  \Illuminate\Http\UpdateVendedorRequest $request
      * @param  int  $nro_puesto
      * @return \Illuminate\Http\Response
      */
