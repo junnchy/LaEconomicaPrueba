@@ -46,6 +46,7 @@ class ClienteController extends Controller
      */
     public function store(CreateClienteRequest $request)
     {
+        $validated = $request->validated();
         $cliente = new Cliente();
         $cliente->nombre = $request->nombre;
         $cliente->cuit = $request->cuit;
@@ -96,6 +97,7 @@ class ClienteController extends Controller
      */
     public function update(UpdateClienteRequest $request, $id)
     {
+        $validated = $request->validated();
         $cliente = Cliente::findOrFail($id);
         $cliente->nombre = $request->nombre;
         $cliente->cuit = $request->cuit;

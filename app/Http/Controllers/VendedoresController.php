@@ -44,13 +44,13 @@ class VendedoresController extends Controller
      */
     public function store(CreateVendedorRequest $request)
     {
+        $validated = $request->validated();
         $user = new User();
         $user->name = $request->nombre;
         $user->email = $request->email;
         $user->password = $request->password;
         $user->rol_id = Rol::where("nombre_rol","=","Vendedor")->get()->first()->id;
         $user->save();
-                
         $vendedor = new Vendedor();
         $vendedor->user_id = $user->id;
         $vendedor->nombre = $request->nombre;
@@ -70,7 +70,7 @@ class VendedoresController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $nro_puesto
      * @return \Illuminate\Http\Response
      */
     public function show($nro_puesto)
@@ -95,11 +95,12 @@ class VendedoresController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\UpdateVendedorRequest  $request
-     * @param  int  $id
+     * @param  int  $nro_puesto
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateVendedorRequest $request, $nro_puesto)
     {
+        $validated = $request->validated();
         $vendedor = Vendedor::findOrFail($nro_puesto);
         $vendedor->nombre = $request->nombre;
         $vendedor->cuil = $request->cuil;
@@ -110,7 +111,6 @@ class VendedoresController extends Controller
         $vendedor->direccion = $request->direccion;
         $vendedor->localidad_id = $request->localidad_id;
         $vendedor->save();
-
         $user = User::findOrFail($vendedor->user_id);
         $user->nombre = $request->nombre;
         $user->email = $request->email;

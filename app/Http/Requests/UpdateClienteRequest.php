@@ -26,7 +26,7 @@ class UpdateClienteRequest extends FormRequest
         return [
             'nombre' => 'required',
             'cuit' => 'required|unique:clientes,cuit,'.$this->route('cliente'),
-            'email' => 'unique:clientes,email,'.$this->route('cliente')            
+            'email' => 'nullable|email|unique:clientes,email,'.$this->route('cliente')            
         ];
     }
 }
