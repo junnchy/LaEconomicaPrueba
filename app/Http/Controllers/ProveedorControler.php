@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateProveedorRequest;
+use App\Http\Requests\UpdateProveedorRequest;
 
 use App;
 
@@ -36,16 +38,12 @@ class ProveedorControler extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CreateProveedorRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProveedorRequest $request)
     {
-        $validatedData = $request->validate([
-            'nombre' => 'required',
-            'cuit' => 'required',
-        ]);
-
+        $validated = $request->validated();
         $proveedor = new Proveedor();
         $proveedor->nombre = $request->nombre;
         $proveedor->cuit = $request->cuit;
@@ -84,18 +82,14 @@ class ProveedorControler extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UpdateProveedorRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProveedorRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'nombre' => 'required',
-        ]);
-
+        $validated = $request->validated();
         $proveedor = App\Proveedor::findOrFail($id);
-
         $proveedor->nombre = $request->nombre;
         $proveedor->telefono = $request->telefono;
         $proveedor->save();
