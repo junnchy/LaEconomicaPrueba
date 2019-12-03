@@ -18,12 +18,23 @@
                     <h3>Ingreso de Nuevo Vendedor</h3>
 
                     @if (session('mensaje'))
-                    <div class="alert alert-success alert-dismissible fade show">
-                        {{session('mensaje')}} 
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                        <div class="alert alert-success alert-dismissible fade show">
+                            {{session('mensaje')}} 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                {{ $error }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endforeach
                     @endif
 
                     <div class="form-group">
@@ -127,19 +138,6 @@
                     </div>                
                 </div>
                 
-                
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <p>{{ $error }}</p>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif 
                 <button type="submit" class="btn btn-primary btn-block">Agregar</button>
             </form>
         </div>

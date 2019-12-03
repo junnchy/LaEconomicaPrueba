@@ -31,6 +31,17 @@
                     </div>
                     @endif
 
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                {{ $error }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endforeach
+                    @endif
+
                     <div class="form-group">
                         <label>Nombre y Apellido</label>
                         <input 
@@ -129,20 +140,9 @@
                             name="password_confirmation"
                             placeholder="Password Confirmation"
                         />
-                    </div>
-                            
+                    </div> 
                 </div>
                 
-                
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif  
                 <button type="submit" class="btn btn-warning btn-block">Actualizar</button>
             </form>
         </div>
