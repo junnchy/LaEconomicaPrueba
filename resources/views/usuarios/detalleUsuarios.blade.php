@@ -12,11 +12,9 @@
             </div>
         </div>
     </div>
-
     <div class="container">
         <a class="btn btn-primary btn-sm" href="{{ route('usuarios.create') }}">Crear Nuevo Usuario</a>
     </div>
-
     <div class="container mt-5">
         <table class="table">
                 <thead>

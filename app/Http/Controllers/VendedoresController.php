@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\CreateVendedorRequest;
 use App\Http\Requests\UpdateVendedorRequest;
 use App\Vendedor;
 use App\Localidad;
@@ -70,12 +70,13 @@ class VendedoresController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $nro_puesto
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($nro_puesto)
+    public function show($id)
     {
-        $vendedor = Vendedor::findOrFail($nro_puesto);
+        //$vendedor = Vendedor::findOrFail($nro_puesto);
+        $vendedor = Vendedor::findOrFail($id);
         $localidades = Localidad::all();
         return view('vendedores.editar', compact('vendedor', 'localidades'));
     }
@@ -98,10 +99,11 @@ class VendedoresController extends Controller
      * @param  int  $nro_puesto
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateVendedorRequest $request, $nro_puesto)
+    public function update(UpdateVendedorRequest $request, $id)
     {
         $validated = $request->validated();
-        $vendedor = Vendedor::findOrFail($nro_puesto);
+        //$vendedor = Vendedor::findOrFail($nro_puesto);
+        $vendedor = Vendedor::findOrFail($id);
         $vendedor->nombre = $request->nombre;
         $vendedor->cuil = $request->cuil;
         $vendedor->dni = $request->dni;
@@ -112,9 +114,12 @@ class VendedoresController extends Controller
         $vendedor->localidad_id = $request->localidad_id;
         $vendedor->save();
         $user = User::findOrFail($vendedor->user_id);
-        $user->nombre = $request->nombre;
+        $user->name = $request->nombre;
         $user->email = $request->email;
+        $user->password = $request->password;
         $user->save(); 
+
+        return back()->with('mensaje', 'Vendedor Actualizado');
 
     }
 

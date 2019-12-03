@@ -12,7 +12,8 @@
             </div>
         </div>
         <div class="container mt-5">
-                <h3>Nombre del Vendedor: <strong>{{$vendedor->nombre}}</strong></h3>
+            <h3>Nombre del Vendedor: <strong>{{$vendedor->nombre}}</strong></h3>
+            <h3>Puesto de Venta: <strong>{{$vendedor->id}}</strong></h3>
         </div>
         <div class="container">
             <form method="POST" action="{{route('vendedores.update', $vendedor)}}">
@@ -43,7 +44,7 @@
                     <div class="form-group">
                         <label>DNI</label>
                         <input 
-                            type="number"
+                            type="text"
                             class="form-control"
                             name="dni"
                             placeholder="DNI"

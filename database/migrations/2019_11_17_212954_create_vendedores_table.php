@@ -15,7 +15,7 @@ class CreateVendedoresTable extends Migration
     {
         Schema::create('vendedores', function (Blueprint $table) 
         {
-            $table->bigIncrements('nro_puesto');
+            $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('dni');
             $table->string('cuil')->unique();

@@ -124,8 +124,7 @@
                             name="password_confirmation"
                             placeholder="Password Confirmation"
                         />
-                    </div>
-                
+                    </div>                
                 </div>
                 
                 
@@ -146,28 +145,28 @@
         </div>
 
         <div class="container mt-5">
-                <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Nro. Puesto</th>
-                            <th scope="col">Nombre y Apellido</th>
-                            <th scope="col">CUIL</th>
-                            <th scope="col">Opciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($vendedores as $vendedor)
-                                <tr>
-                                    <th scope="mt-2">{{$vendedor->nro_puesto}}</th>
-                                    <td class="mt-2">{{$vendedor->nombre}}</td>
-                                    <td class="mt-2">{{$vendedor->cuil}}</td>
-                                    <td>
-                                        <a href="{{route('vendedores.show', $vendedor)}}" class="btn btn-warning btn-sm">Ver Más</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nro. Puesto</th>
+                        <th scope="col">Nombre y Apellido</th>
+                        <th scope="col">CUIL</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($vendedores as $vendedor)
+                        <tr>
+                            <th scope="mt-2">{{$vendedor->id}}</th>
+                            <td class="mt-2">{{$vendedor->nombre}}</td>
+                            <td class="mt-2">{{$vendedor->cuil}}</td>
+                            <td>
+                                <a href="{{route('vendedores.show', $vendedor)}}" class="btn btn-warning btn-sm">Ver Más</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection

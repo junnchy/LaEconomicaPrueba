@@ -24,8 +24,9 @@ class UpdateVendedorRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'email|required|unique:vendedores,email,'.$this->route('vendedore')
+            'nombre' => 'required',
+            'email' => 'email|required|unique:vendedores,email,'.$this->route('vendedore'),
+            'password' => 'nullable|confirmed'
         ];
     }
 }
