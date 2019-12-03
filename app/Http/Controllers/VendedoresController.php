@@ -75,7 +75,6 @@ class VendedoresController extends Controller
      */
     public function show($id)
     {
-        //$vendedor = Vendedor::findOrFail($nro_puesto);
         $vendedor = Vendedor::findOrFail($id);
         $localidades = Localidad::all();
         return view('vendedores.editar', compact('vendedor', 'localidades'));
@@ -96,13 +95,12 @@ class VendedoresController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\UpdateVendedorRequest $request
-     * @param  int  $nro_puesto
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateVendedorRequest $request, $id)
     {
         $validated = $request->validated();
-        //$vendedor = Vendedor::findOrFail($nro_puesto);
         $vendedor = Vendedor::findOrFail($id);
         $vendedor->nombre = $request->nombre;
         $vendedor->cuil = $request->cuil;

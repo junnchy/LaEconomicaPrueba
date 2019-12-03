@@ -25,6 +25,8 @@ class CreateVendedorRequest extends FormRequest
     {
         return [
             'nombre' => 'required',
+            'dni' => 'required|unique:vendedores,dni',
+            'cuil' => 'required|unique:vendedores,cuil',
             'email' => 'email|required|unique:users,email',
             'password' => 'required|confirmed',
         ];

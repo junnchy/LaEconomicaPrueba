@@ -25,6 +25,8 @@ class UpdateVendedorRequest extends FormRequest
     {
         return [
             'nombre' => 'required',
+            'dni' => 'required|unique:vendedores,dni,'.$this->route('vendedore'),
+            'cuil' => 'required|unique:vendedores,cuil,'.$this->route('vendedore'),
             'email' => 'email|required|unique:vendedores,email,'.$this->route('vendedore'),
             'password' => 'nullable|confirmed'
         ];
