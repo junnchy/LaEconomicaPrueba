@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Db;
+use Illuminate\Support\Facades\DB;
 
 class RubroProveedoresTableSeeder extends Seeder
 {

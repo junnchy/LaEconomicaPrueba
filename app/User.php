@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     public function rol()
     {
-        return $this->belongsToOne(Role::class);
+        return $this->belongsToOne(Rol::class);
     }
 
     public function setPasswordAttribute($password)
