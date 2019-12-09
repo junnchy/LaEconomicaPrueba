@@ -23,6 +23,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Email</th>
                     <th scope="col">Rol</th>
+                    <th scope="col">Acción</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,9 @@
                                 <td class="mt-2">{{ $rol->nombre_rol }}</td>
                             @endif                           
                         @endforeach
+                        <td>
+                            <a href="{{route('usuarios.edit', $user)}}" class="btn btn-warning btn-sm">Editar</a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

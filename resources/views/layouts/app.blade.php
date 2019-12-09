@@ -41,6 +41,7 @@
                             <a href="{{ route('proveedores.index') }}" class="">Proveedores</a>
                             <a href="{{ route('productos.index') }}" class="">Productos</a>
                             <a href="{{ route('clientes.index') }}" class="">Clientes</a>
+                            <a href="{{ route('homeUsers') }}" class="">Perfiles</a>
                         </li> <!--Sacar es solo prueba-->
                     </ul>
 
