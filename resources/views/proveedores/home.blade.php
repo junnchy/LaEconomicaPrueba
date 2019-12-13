@@ -58,7 +58,7 @@
                 @if ($errors->any())
                     <div class="alert alert-danger alert-dismissible fade show">
                         <ul>
-                            @foreach ($errors->all() as $error)
+                            @foreach ($proveedores->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
                         </ul>
@@ -71,7 +71,7 @@
             </form>
         </div>
 
-        <div class="container mt-5">
+        <!--<div class="container mt-5">
             <table class="table">
                 <thead>
                     <tr>
@@ -97,6 +97,7 @@
                 </tbody>
             </table>
         </div>
+        -->
         <div class="container my-4">
             <componente-prueba v-bind:proveedores="{{$proveedores}}"></componente-prueba>
         </div>

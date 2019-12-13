@@ -17,10 +17,16 @@ class ProveedorControler extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $proveedores = Proveedor::all();
-        return view('proveedores.home', compact('proveedores'));
+        if($request->ajax()){
+            $proveedores = Proveedor::all();
+            return response()->json($proveedores);
+        } else {
+            $proveedores = Proveedor::all();
+            return view('proveedores.home', compact('proveedores'));
+        }
+        
     }
 
     /**
@@ -63,10 +69,19 @@ class ProveedorControler extends Controller
      */
     public function show($id)
     {
+
         $proveedor = App\Proveedor::findOrFail($id);
         $categorias = App\Categoria::all();
 
-        return view('proveedores.editar', compact('proveedor', 'categorias'));
+        if($request->ajax()){
+            return response()->json($proveedor);
+        }
+        else {
+            return view('proveedores.editar', compact('proveedor', 'categorias'));
+        }
+
+
+        
 
     }
 

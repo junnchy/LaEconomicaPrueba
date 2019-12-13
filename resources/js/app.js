@@ -1,3 +1,7 @@
+import Vue from 'vue'
+import router from './router/index.js'
+import store from './store'
+
 
 
 require('./bootstrap');
@@ -10,5 +14,8 @@ Vue.component('componente-prueba', require('./components/ComponentePrueba.vue').
 
 
 const app = new Vue({
-    el: '#app',
+    router,
+    store,
+    el: '#app'
 });
+
