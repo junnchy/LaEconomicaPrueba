@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Rol;
+use App\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,11 +14,14 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::truncate();
-        User::insert([
-            'name' => 'Administrador',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('123456789'),
-            'rol_id' => Rol::where("nombre_rol","=","Administrador")->get()->first()->id]);
+             
+        $role_admin = Role::where('nombre', 'admin')->first();
+        $user = new User();
+        $user->name = 'Admin';
+        $user->email = 'admin@gmail.com';
+        $user->password = bcrypt('secret');
+        $user->save();
+        $user->roles()->attach($role_admin);
 
     }
 }

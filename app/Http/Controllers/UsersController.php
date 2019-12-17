@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
-use App\Rol;
+use App\Role;
 
 class UsersController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        $roles = Rol::all();
+        $roles = Role::all();
         return view('usuarios.detalleUsuarios', compact('users', 'roles'));
     }
 
@@ -29,7 +34,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Rol::all();
+        $roles = Role::pluck('descripcion', 'id');
         return view('usuarios.crear', compact('roles'))->with('mensaje', 'Usuario Agregado');
     }
 
@@ -46,8 +51,8 @@ class UsersController extends Controller
         $user->name = $request->nombre;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->rol_id = $request->rol_id;
         $user->save();
+        $user->roles()->attach($request->roles);      
 
         return back()->with('mensaje', 'Usuario Agregado');
     }
@@ -71,9 +76,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $usuario = User::findOrFail($id);
-        $roles = Rol::all();
-        return view('usuarios.editar', compact('usuario', 'roles'));
+        $user = User::findOrFail($id);
+        $roles = Role::pluck('descripcion', 'id');
+        return view('usuarios.editar', compact('user', 'roles'));
     }
 
     /**
@@ -90,6 +95,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
+        $user->roles()->sync($request->roles);        
 
         return back()->with('mensaje', 'Usuario Actualizado');
     }

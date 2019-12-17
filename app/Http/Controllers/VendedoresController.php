@@ -8,7 +8,7 @@ use App\Http\Requests\UpdateVendedorRequest;
 use App\Vendedor;
 use App\Localidad;
 use App\User;
-use App\Rol;
+use App\Role;
 
 
 
@@ -49,8 +49,8 @@ class VendedoresController extends Controller
         $user->name = $request->nombre;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->rol_id = Rol::where("nombre_rol","=","Vendedor")->get()->first()->id;
         $user->save();
+        $user->roles()->attach(Role::where('descripcion','Vendedor')->first());
         $vendedor = new Vendedor();
         $vendedor->user_id = $user->id;
         $vendedor->nombre = $request->nombre;

@@ -58,16 +58,6 @@
                         />
                     </div>
                     <div class="form-group">
-                        <label>Rol</label>
-                        <select class="form-control" 
-                            name="rol_id" 
-                            type="number">
-                            @foreach ($roles as $rol)
-                                <option value="{{ $rol->id }}">{{$rol->nombre_rol}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="password">Password</label>
                         <input 
                             class="form-control" 
@@ -84,6 +74,18 @@
                             name="password_confirmation"
                             placeholder="Password Confirmation"
                         />
+                    </div>
+                    <div class="checkbox">
+                        <label for="checkbox">Roles</label><br>
+                        @foreach ($roles as $id => $descripcion)
+                            <label for="roles">
+                                    <input type="checkbox" 
+                                        name="roles[]"
+                                        value="{{ $id }}"
+                                    />
+                                {{ $descripcion }}
+                            </label>                                                            
+                        @endforeach
                     </div>                
                 </div>
                 

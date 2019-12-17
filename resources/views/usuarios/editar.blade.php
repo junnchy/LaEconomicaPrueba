@@ -12,11 +12,11 @@
         </div>
 
         <div class="container mt-5">
-            <h3>Nombre del Usuario: <strong>{{$usuario->name}}</strong></h3>
+            <h3>Nombre del Usuario: <strong>{{$user->name}}</strong></h3>
         </div>
         
         <div class="container">
-            <form method="POST" action="{{route('usuarios.update', $usuario)}}">
+            <form method="POST" action="{{route('usuarios.update', $user->id)}}">
                 @method("PUT")
                 @csrf
                 <div class="form-group mt-5">
@@ -49,7 +49,7 @@
                             class="form-control" 
                             name="nombre" 
                             placeholder="Nombre"
-                            value="{{$usuario->name}}"
+                            value="{{$user->name}}"
                         />
                     </div>
                     <div class="form-group">
@@ -59,18 +59,8 @@
                             class="form-control" 
                             name="email" 
                             placeholder="Email"
-                            value="{{$usuario->email}}"
+                            value="{{$user->email}}"
                         />
-                    </div>
-                    <div class="form-group">
-                        <label>Rol</label>
-                        <select class="form-control" 
-                            name="rol_id" 
-                            type="number">
-                            @foreach ($roles as $rol)
-                                <option value="{{ $rol->id }}" @if($usuario->rol_id == $rol->id) selected="selected" @endif>{{$rol->nombre_rol}}</option>
-                            @endforeach
-                        </select>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -89,6 +79,18 @@
                             name="password_confirmation"
                             placeholder="Password Confirmation"
                         />
+                    </div>
+                    <div class="checkbox">
+                        <label for="checkbox">Roles</label><br>
+                        @foreach ($roles as $id => $descripcion)
+                            <label for="roles">
+                                    <input type="checkbox" 
+                                        name="roles[]"
+                                        value="{{ $id }}"
+                                    />
+                                {{ $descripcion }}
+                            </label>                                                            
+                        @endforeach
                     </div>                
                 </div>
                 

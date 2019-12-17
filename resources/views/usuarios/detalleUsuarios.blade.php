@@ -22,7 +22,7 @@
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Rol</th>
+                    <th scope="col">Roles</th>
                     <th scope="col">Acción</th>
                   </tr>
                 </thead>
@@ -32,11 +32,9 @@
                         <td scope="mt-2">{{ $user->id }}</td>
                         <td class="mt-2">{{ $user->name }}</td>
                         <td class="mt-2">{{ $user->email }}</td>
-                        @foreach ($roles as $rol)
-                            @if ($user->rol_id == $rol->id)
-                                <td class="mt-2">{{ $rol->nombre_rol }}</td>
-                            @endif                           
-                        @endforeach
+                        <td>
+                            {{ $user->roles()->pluck('descripcion')->implode(' - ') }}
+                        </td>
                         <td>
                             <a href="{{route('usuarios.edit', $user)}}" class="btn btn-warning btn-sm">Editar</a>
                         </td>

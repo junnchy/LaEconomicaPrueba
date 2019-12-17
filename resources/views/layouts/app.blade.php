@@ -42,6 +42,7 @@
                             <a href="{{ route('productos.index') }}" class="">Productos</a>
                             <a href="{{ route('clientes.index') }}" class="">Clientes</a>
                             <a href="{{ route('homeUsers') }}" class="">Perfiles</a>
+                            
                         </li> <!--Sacar es solo prueba-->
                     </ul>
 
