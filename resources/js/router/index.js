@@ -13,7 +13,17 @@ const routes = [
         path: '/detalleProv/:id',
         name: 'detalleProv',
         component: () => import(/* webpackChunkName: "about" */ '../views/DetalleProv.vue')
-    }
+    },
+    {
+      path: '/agregarProv',
+      name: 'agregarProv',
+      component: () => import(/* webpackChunkName: "about" */ '../views/AgregarProv.vue')
+    },
+    {
+      path: '/editarProveedor/:id',
+      name: 'editarProveedor',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EditarProveedor.vue')
+    },
 ]
 
 const router = new VueRouter({
