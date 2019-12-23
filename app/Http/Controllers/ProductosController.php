@@ -16,10 +16,15 @@ class ProductosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
-        $productos = Producto::all();
-        return view('productos.productos', compact('productos'));
+    public function index(Request $request)
+    {    
+        if($request->ajax()){
+            $productos = Producto::all();
+            return response()->json($productos);
+        } else {
+            $productos = Producto::all();
+            return view('productos.productos', compact('productos'));
+        }
     }
 
     /**

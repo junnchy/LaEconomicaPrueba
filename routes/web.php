@@ -27,4 +27,6 @@ Route::resource('/productos', 'ProductosController')->middleware('auth');
 
 Route::resource('/categoria', 'CategoriaController')->middleware('auth');
 
-Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');
+
+Route::get('/productos/{any}', 'SpaController@productos')->where('any', '.*')->middleware('auth');

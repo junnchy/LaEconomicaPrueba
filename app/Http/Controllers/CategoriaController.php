@@ -14,11 +14,18 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = Categoria::all();
-        $proveedores = Proveedor::all();
-        return view('productos.categoria', compact('categorias', 'proveedores'));
+        if($request->ajax()){
+            $categorias = Categoria::with('children.padre', 'padre.children')->get();
+            return response()->json($categorias);
+        } else {
+            $categorias = Categoria::all();
+            $proveedores = Proveedor::all();
+            return view('productos.categoria', compact('categorias', 'proveedores'));
+        }
+
+        
     }
 
     /**
@@ -68,10 +75,15 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $categoria = Categoria::findOrFail($id);
-        return view('productos.detalleCategoria', compact('categoria'));
+        if($request->ajax()){
+            $categoria = Categoria::with('children.padre', 'padre.children')->findOrFail($id);
+            return response()->json($categoria);
+        } else {
+            $categoria = Categoria::findOrFail($id);
+            return view('productos.detalleCategoria', compact('categoria'));
+        }
     }
 
     /**

@@ -5,14 +5,14 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-    path: '/proveedores',
+    path: '/proveedores/',
     name: 'listadoProveedores',
     component: () => import(/* webpackChunkName: "about" */ '../views/ListadoProveedores.vue')
     },
     {
-        path: '/detalleProv/:id',
-        name: 'detalleProv',
-        component: () => import(/* webpackChunkName: "about" */ '../views/DetalleProv.vue')
+      path: '/detalleProv/:id',
+      name: 'detalleProv',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DetalleProv.vue')
     },
     {
       path: '/agregarProv',
@@ -24,6 +24,22 @@ const routes = [
       name: 'editarProveedor',
       component: () => import(/* webpackChunkName: "about" */ '../views/EditarProveedor.vue')
     },
+    {
+      path: '/productos/home',
+      name: 'MenuProductos',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuProductos.vue')
+    },
+    {
+      path: '/listaCategorias',
+      name: 'listadoCategorias',
+      component: () => import(/* webpackChunkName: "about" */ '../views/ListadoCategorias.vue')
+    },
+    {
+      path: '/editarCategoria/:id',
+      name: 'verEditarCategoria',
+      component: () => import(/* webpackChunkName: "about" */ '../views/VerEditarCategoria.vue')
+    },
+
 ]
 
 const router = new VueRouter({

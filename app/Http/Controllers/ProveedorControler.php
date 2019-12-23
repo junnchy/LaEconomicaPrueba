@@ -20,7 +20,7 @@ class ProveedorControler extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $proveedores = Proveedor::all();
+            $proveedores = Proveedor::with('categorias.proveedores')->get();
             return response()->json($proveedores);
         } else {
             $proveedores = Proveedor::all();
@@ -85,8 +85,7 @@ class ProveedorControler extends Controller
     public function show($id, Request $request)
     {
 
-        $proveedor = App\Proveedor::findOrFail($id);
-        $categorias = App\Categoria::all();
+        $proveedor = App\Proveedor::with('categorias.proveedores')->findOrFail($id);
 
         if($request->ajax()){
             return response()->json($proveedor);
@@ -124,6 +123,12 @@ class ProveedorControler extends Controller
             $proveedor->cuit = $request->cuit;
             $proveedor->telefono = $request->telefono;
             $proveedor->save();
+
+            if ($request->id_cat != null) {
+                
+                $categoria = Categoria::findOrFail($request->id_cat);
+                $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
+            }
 
             return response()->json([
                 'proveedor' => $proveedor,

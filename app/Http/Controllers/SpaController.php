@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 
 class SpaController extends Controller
 {
-    public function index()
+    public function proveedores()
     {
         return view('proveedores.home');
+    }
+
+    public function productos()
+    {
+        return view('productos.home');
     }
 }
