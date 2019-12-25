@@ -43,7 +43,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form @submit.prevent="agregarCategoria([categoria, proveedor, descuento])">
+                                    <form @submit.prevent="agregarCategoriaProveedor([categoria, proveedor, descuento])">
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Categoria:</label>
                                         <select class="custom-select" v-model="categoria">

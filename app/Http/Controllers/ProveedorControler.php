@@ -122,13 +122,12 @@ class ProveedorControler extends Controller
             $proveedor->nombre = $request->nombre;
             $proveedor->cuit = $request->cuit;
             $proveedor->telefono = $request->telefono;
-            $proveedor->save();
-
             if ($request->id_cat != null) {
                 
                 $categoria = Categoria::findOrFail($request->id_cat);
                 $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
             }
+            $proveedor->save();
 
             return response()->json([
                 'proveedor' => $proveedor,

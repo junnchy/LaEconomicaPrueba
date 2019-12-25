@@ -1,6 +1,6 @@
 <template>
     <div>
-         <form>
+         <form @submit.prevent="editarCategoria(categoria)">
             <div class="form-group mt-5">
                 <div class="row">
                     <div class="col-8">
@@ -17,11 +17,23 @@
                 <div class="form-group">
                     <label>Nombre Categoria</label>
                     <input type="text" v-model="categoria.nombre" class="form-control" >
-                </div>                   
+                </div>    
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Categoria Padre</label> 
+                        <select class="custom-select" v-model="categoria.categoria_id">
+                            <option selected="selected" v-if="categoria.padre != null" :value="categoria.categoria_id">{{categoria.padre.id}} - {{categoria.padre.nombre}}</option>
+                            <option selected="selected" v-if="categoria.categoria_id === null" :value="categoria.categoria_id">0 - Vacio</option>
+                            <option v-for="(cate, index) in categorias" :key="index">{{cate.id}} - {{cate.nombre}}</option>
+                        </select>
+                    </div>
+                </div>               
             </div>
-            <button type="submit" class="btn btn-success btn-block">Guardar</button>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success btn-block">Guardar Cambios</button>
+            </div>
         </form>
-        <h3 class="mt-5">SubCategorias</h3>
+        <h3 class="mt-5" v-if="categoria.cant_hijos > 0">SubCategorias</h3>
         <div class="list-group mt-3">
             <button type="button" class="list-group-item list-group-item-action" 
             v-for="(cat, index) in categoria.children" :key="index">{{cat.id}}-{{cat.nombre}}</button>
@@ -40,13 +52,14 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getCategoria'])
+        ...mapActions(['getCategoria','getCategorias', 'editarCategoria'])
     },
     created() {
         this.getCategoria(this.id)
+        this.getCategorias()
     },
     computed: {
-        ...mapState(['categoria'])
+        ...mapState(['categoria', 'categorias'])
     }
 }
 </script>

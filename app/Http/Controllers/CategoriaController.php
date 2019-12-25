@@ -104,9 +104,24 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        if($request->ajax()){
+            
+            $categoria = Categoria::findOrFail($id);
+            $categoria->nombre = $request->nombre;
+            if ($request->categoria_id != null){
+                //queria hacer una funcion busca categoria... no la pude hacer andar 
+                $padre = Categoria::findOrFail($request->categoria_id);
+                $categoria->categoria_id = $padre->id;
+            }
+            $categoria->save();
+
+            return response()->json([
+                'categoria' => $categoria,
+                'message' => 'Actualizado'
+            ], 200);
+        }        
     }
 
     /**

@@ -54800,7 +54800,6 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
               case 5:
                 categorias = _context2.sent;
                 categorias.data.forEach(function (element) {
-                  console.log(element);
                   cat.push(element);
                 });
                 _context2.next = 12;
@@ -54830,7 +54829,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 
       return getCategorias;
     }(),
-    agregarCategoria: function agregarCategoria(_ref6, _ref7) {
+    agregarCategoriaProveedor: function agregarCategoriaProveedor(_ref6, _ref7) {
       var commit = _ref6.commit,
           dispatch = _ref6.dispatch;
 
@@ -54848,9 +54847,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
         id_cat: cat,
         descuento: descuento
       };
-      console.log(prov);
       axios.put("http://127.0.0.1:8000/proveedores/".concat(id), prov).then(function (response) {
-        console.log(response);
         dispatch('getProveedor', id);
       })["catch"](function (error) {
         console.log(error);
@@ -54935,8 +54932,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
                 commit = _ref10.commit;
                 _context4.next = 3;
                 return axios.get("http://127.0.0.1:8000/categoria/".concat(id)).then(function (response) {
-                  console.log(response.data);
                   cat = response.data;
+                  cat.cant_hijos = cat.children.length;
+                  console.log(cat);
                   commit('setCategoria', cat);
                 });
 
@@ -54956,7 +54954,33 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       }
 
       return getCategoria;
-    }()
+    }(),
+    editarCategoria: function editarCategoria(_ref11, categoria) {
+      var commit = _ref11.commit;
+      var id = categoria.id;
+
+      if (categoria.categoria_id != null) {
+        var catid = parseInt(categoria.categoria_id);
+        var cat = {
+          id: categoria.id,
+          nombre: categoria.nombre,
+          categoria_id: catid
+        };
+      } else {
+        var cat = {
+          id: categoria.id,
+          nombre: categoria.nombre,
+          categoria_id: null
+        };
+      }
+
+      console.log(cat);
+      axios.put("http://127.0.0.1:8000/categoria/".concat(id), cat).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 }));
 

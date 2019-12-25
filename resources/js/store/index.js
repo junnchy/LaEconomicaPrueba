@@ -82,7 +82,6 @@ export default new Vuex.Store({
       try {
         let categorias = await axios.get('http://127.0.0.1:8000/categoria')
         categorias.data.forEach(element => {
-          console.log(element)
           cat.push(element)
         });
       } catch (error) {
@@ -92,13 +91,11 @@ export default new Vuex.Store({
         commit('setCategorias', cat)
       }
     },
-    agregarCategoria({commit, dispatch},[categoria, proveedor, descuento]){
+    agregarCategoriaProveedor({commit, dispatch},[categoria, proveedor, descuento]){
       let id = proveedor.id
       let  cat = parseInt(categoria)
       let prov = {nombre: proveedor.nombre, telefono: proveedor.telefono, cuit: proveedor.cuit, id_cat: cat, descuento: descuento}
-      console.log(prov)
       axios.put(`http://127.0.0.1:8000/proveedores/${id}`, prov).then(function (response) {
-        console.log(response)
         dispatch('getProveedor', id)
       })
       .catch(function (error) {
@@ -139,12 +136,29 @@ export default new Vuex.Store({
       }
     },
     async getCategoria({commit}, id){
-      let cat
+      var cat
       let categoria = await axios.get(`http://127.0.0.1:8000/categoria/${id}`).then(response => {
-        console.log(response.data)
         cat = response.data
+        cat.cant_hijos = cat.children.length
+        console.log(cat)
         commit('setCategoria', cat)
       })
+    },
+    editarCategoria({commit},categoria){
+      var id = categoria.id
+      if (categoria.categoria_id != null) {
+        let catid = parseInt(categoria.categoria_id)
+        var cat = {id: categoria.id, nombre: categoria.nombre, categoria_id: catid}
+      }else{
+        var cat = {id: categoria.id, nombre: categoria.nombre, categoria_id: null}
+      }
+      console.log(cat)
+      axios.put(`http://127.0.0.1:8000/categoria/${id}`, cat).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 })

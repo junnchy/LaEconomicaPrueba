@@ -292,10 +292,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      busca: ''
+    };
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getCategoriasO'])),
   created: function created() {
@@ -475,6 +493,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'verEditarCategoria',
@@ -483,11 +513,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: this.$route.params.id
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getCategoria'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getCategoria', 'getCategorias', 'editarCategoria'])),
   created: function created() {
     this.getCategoria(this.id);
+    this.getCategorias();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categoria']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categoria', 'categorias']))
 });
 
 /***/ }),
@@ -768,7 +799,7 @@ var render = function() {
                             on: {
                               submit: function($event) {
                                 $event.preventDefault()
-                                return _vm.agregarCategoria([
+                                return _vm.agregarCategoriaProveedor([
                                   _vm.categoria,
                                   _vm.proveedor,
                                   _vm.descuento
@@ -1117,65 +1148,129 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Categorias")]),
-    _vm._v(" "),
     _c("div", { staticClass: "container" }, [
-      _c("button", { staticClass: "btn btn-success btn-block my-5" }, [
-        _vm._v("\n            Agregar Categoria\n        ")
-      ]),
-      _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
+      _c("div", { staticClass: "row" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
-          "tbody",
-          _vm._l(_vm.categorias, function(categoria, index) {
-            return _c("tr", { key: index }, [
-              _c("th", [_vm._v(_vm._s(categoria.id))]),
-              _vm._v(" "),
-              categoria.nro === 2
-                ? _c("td", [_vm._v(" ----" + _vm._s(categoria.nombre))])
-                : _vm._e(),
-              _vm._v(" "),
-              categoria.nro === 1
-                ? _c("td", [_vm._v(" --" + _vm._s(categoria.nombre))])
-                : _vm._e(),
-              _vm._v(" "),
-              categoria.nro === 0
-                ? _c("td", [_c("strong", [_vm._v(_vm._s(categoria.nombre))])])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      attrs: {
-                        to: {
-                          name: "verEditarCategoria",
-                          params: { id: categoria.id }
-                        }
-                      }
-                    },
-                    [
-                      _c("button", { staticClass: "btn btn-warning btn-sm" }, [
-                        _vm._v("Ver / Editar")
-                      ])
-                    ]
-                  )
-                ],
-                1
-              )
+          "div",
+          { staticClass: "col-4" },
+          [
+            _c("router-link", { attrs: { to: { name: "MenuProductos" } } }, [
+              _c("button", { staticClass: "btn btn-danger" }, [
+                _vm._v("Volver")
+              ])
             ])
-          }),
-          0
+          ],
+          1
         )
+      ]),
+      _vm._v(" "),
+      _c("form", { staticClass: "form-inline my-4" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.busca,
+              expression: "busca"
+            }
+          ],
+          staticClass: "form-control mr-sm-2",
+          attrs: {
+            type: "search",
+            placeholder: "Search",
+            "aria-label": "Search"
+          },
+          domProps: { value: _vm.busca },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.busca = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-success my-2 my-sm-0",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("buscar")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("button", { staticClass: "btn btn-success btn-block my-5" }, [
+          _vm._v("\n                Agregar Categoria\n            ")
+        ]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table table-striped" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.categorias, function(categoria, index) {
+              return _c("tr", { key: index }, [
+                _c("th", [_vm._v(_vm._s(categoria.id))]),
+                _vm._v(" "),
+                categoria.nro === 2
+                  ? _c("td", [_vm._v(" ----" + _vm._s(categoria.nombre))])
+                  : _vm._e(),
+                _vm._v(" "),
+                categoria.nro === 1
+                  ? _c("td", [_vm._v(" --" + _vm._s(categoria.nombre))])
+                  : _vm._e(),
+                _vm._v(" "),
+                categoria.nro === 0
+                  ? _c("td", [_c("strong", [_vm._v(_vm._s(categoria.nombre))])])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: {
+                            name: "verEditarCategoria",
+                            params: { id: categoria.id }
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "button",
+                          { staticClass: "btn btn-warning btn-sm" },
+                          [_vm._v("Ver / Editar")]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ])
+            }),
+            0
+          )
+        ])
       ])
     ])
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c("h1", [_vm._v("Categorias")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -1495,66 +1590,151 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("form", [
-      _c("div", { staticClass: "form-group mt-5" }, [
-        _c("div", { staticClass: "row" }, [
-          _vm._m(0),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.editarCategoria(_vm.categoria)
+          }
+        }
+      },
+      [
+        _c("div", { staticClass: "form-group mt-5" }, [
+          _c("div", { staticClass: "row" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-4" },
+              [
+                _c(
+                  "router-link",
+                  { attrs: { to: { name: "listadoCategorias" } } },
+                  [
+                    _c("button", { staticClass: "btn btn-danger" }, [
+                      _vm._v(
+                        "\n                            Volver\n                        "
+                      )
+                    ])
+                  ]
+                )
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-4" },
-            [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Nombre Categoria")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.categoria.nombre,
+                  expression: "categoria.nombre"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text" },
+              domProps: { value: _vm.categoria.nombre },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.categoria, "nombre", $event.target.value)
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [_vm._v("Categoria Padre")]),
+              _vm._v(" "),
               _c(
-                "router-link",
-                { attrs: { to: { name: "listadoCategorias" } } },
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.categoria.categoria_id,
+                      expression: "categoria.categoria_id"
+                    }
+                  ],
+                  staticClass: "custom-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.categoria,
+                        "categoria_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
                 [
-                  _c("button", { staticClass: "btn btn-danger" }, [
-                    _vm._v(
-                      "\n                            Volver\n                        "
-                    )
-                  ])
-                ]
+                  _vm.categoria.padre != null
+                    ? _c(
+                        "option",
+                        {
+                          attrs: { selected: "selected" },
+                          domProps: { value: _vm.categoria.categoria_id }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.categoria.padre.id) +
+                              " - " +
+                              _vm._s(_vm.categoria.padre.nombre)
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.categoria.categoria_id === null
+                    ? _c(
+                        "option",
+                        {
+                          attrs: { selected: "selected" },
+                          domProps: { value: _vm.categoria.categoria_id }
+                        },
+                        [_vm._v("0 - Vacio")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.categorias, function(cate, index) {
+                    return _c("option", { key: index }, [
+                      _vm._v(_vm._s(cate.id) + " - " + _vm._s(cate.nombre))
+                    ])
+                  })
+                ],
+                2
               )
-            ],
-            1
-          )
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Nombre Categoria")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.categoria.nombre,
-                expression: "categoria.nombre"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.categoria.nombre },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.categoria, "nombre", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
-        [_vm._v("Guardar")]
-      )
-    ]),
+        _vm._m(1)
+      ]
+    ),
     _vm._v(" "),
-    _c("h3", { staticClass: "mt-5" }, [_vm._v("SubCategorias")]),
+    _vm.categoria.cant_hijos > 0
+      ? _c("h3", { staticClass: "mt-5" }, [_vm._v("SubCategorias")])
+      : _vm._e(),
     _vm._v(" "),
     _c(
       "div",
@@ -1581,6 +1761,18 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
       _c("h3", [_vm._v("Editar Categoria")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
+        [_vm._v("Guardar Cambios")]
+      )
     ])
   }
 ]
