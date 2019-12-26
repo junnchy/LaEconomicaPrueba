@@ -54661,7 +54661,10 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       cuit: '',
       telefono: ''
     },
-    categoria: {}
+    categoria: {},
+    filter: {
+      query: ''
+    }
   },
   mutations: {
     setProveedores: function setProveedores(state, proveedores) {
@@ -54675,6 +54678,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     },
     setCategoria: function setCategoria(state, categoria) {
       state.categoria = categoria;
+    },
+    SET_QUERY: function SET_QUERY(state, query) {
+      state.filter.query = query;
     }
   },
   actions: {
@@ -54980,6 +54986,17 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       })["catch"](function (error) {
         console.log(error);
       });
+    }
+  },
+  getters: {
+    filtered_categorias: function filtered_categorias(state) {
+      if (state.filter.query.length > 2) {
+        return state.categorias.filter(function (categoria) {
+          return categoria.nombre.toLowerCase().includes(state.filter.query);
+        });
+      } else {
+        return state.categorias;
+      }
     }
   }
 }));

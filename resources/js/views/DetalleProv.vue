@@ -84,7 +84,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getProveedor', 'getCategorias', 'agregarCategoria'])
+        ...mapActions(['getProveedor', 'getCategorias', 'agregarCategoriaProveedor'])
     },
     created() {
         this.getProveedor(this.id)

@@ -11,7 +11,10 @@ export default new Vuex.Store({
     proveedores: [],
     categorias: [],
     proveedor:{id:'', nombre:'', cuit:'', telefono:''},
-    categoria: {}
+    categoria: {},
+    filter: {
+      query: ''
+    }
   },
   mutations: {
     setProveedores(state, proveedores){
@@ -25,6 +28,9 @@ export default new Vuex.Store({
     },
     setCategoria(state, categoria){
       state.categoria = categoria
+    },
+    SET_QUERY(state, query){
+      state.filter.query = query;
     }
   },
   actions: {
@@ -160,5 +166,14 @@ export default new Vuex.Store({
         console.log(error);
       });
     }
+  },
+  getters:{
+    filtered_categorias(state){
+      if(state.filter.query.length > 2){
+        return state.categorias.filter(categoria => categoria.nombre.toLowerCase().includes(state.filter.query))
+      }else{
+        return state.categorias
+      }
+    }
   }
-})
+})    

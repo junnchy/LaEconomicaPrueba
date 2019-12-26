@@ -2,19 +2,24 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-8">
+                <div class="col-10">
                     <h1>Categorias</h1>
                 </div>
-                <div class="col-4">
+                <div class="col-2">
                     <router-link :to="{name:'MenuProductos'}">
                         <button class="btn btn-danger">Volver</button>
                     </router-link>
                 </div>
             </div>
-            <form class="form-inline my-4">
-
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" v-model="busca">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">buscar</button>
+            <form class="my-4">
+                <div class="row">
+                    <div class="col-10">
+                        <input class="form-control mr-sm-2 form-block" type="search" placeholder="Search" aria-label="Search" v-model="search">
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </div>
+                </div>
             </form>
             <div class="container">
                 <button class="btn btn-success btn-block my-5">
@@ -29,7 +34,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(categoria, index) in categorias" :key="index" >
+                        <tr v-for="categoria in filtered_categorias" :key="categoria.id" >
                             <th>{{categoria.id}}</th>
                             <td v-if="categoria.nro === 2"> ----{{categoria.nombre}}</td>
                             <td v-if="categoria.nro === 1"> --{{categoria.nombre}}</td>
@@ -47,12 +52,11 @@
     </div>
 </template>
 <script>
-    import {mapActions, mapState} from 'vuex'
+    import {mapActions, mapState, mapGetters, mapMutations} from 'vuex'
 
     export default {
         data() {
             return {
-                busca: ''
             }
         },
         methods: {
@@ -62,7 +66,20 @@
             this.getCategoriasO()
         },
         computed: {
-            ...mapState(['categorias'])
+            ...mapState(['categorias']),
+            ...mapGetters(['filtered_categorias']),
+            search:{
+                get(){
+                    return this.$store.state.filter.query;
+                },
+                set(val){
+                    this.$store.commit('SET_QUERY', val);
+                }
+            }
         },
+        
+        mutations:{
+            ...mapMutations(['SET_QUERY'])
+        }
     }
 </script>

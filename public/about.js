@@ -167,7 +167,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       descuento: 0
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProveedor', 'getCategorias', 'agregarCategoria'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProveedor', 'getCategorias', 'agregarCategoriaProveedor'])),
   created: function created() {
     this.getProveedor(this.id);
     this.getCategorias();
@@ -308,18 +308,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      busca: ''
-    };
+    return {};
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getCategoriasO'])),
   created: function created() {
     this.getCategoriasO();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categorias']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['filtered_categorias']), {
+    search: {
+      get: function get() {
+        return this.$store.state.filter.query;
+      },
+      set: function set(val) {
+        this.$store.commit('SET_QUERY', val);
+      }
+    }
+  }),
+  mutations: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['SET_QUERY']))
 });
 
 /***/ }),
@@ -1154,7 +1167,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "col-4" },
+          { staticClass: "col-2" },
           [
             _c("router-link", { attrs: { to: { name: "MenuProductos" } } }, [
               _c("button", { staticClass: "btn btn-danger" }, [
@@ -1166,41 +1179,38 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("form", { staticClass: "form-inline my-4" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.busca,
-              expression: "busca"
-            }
-          ],
-          staticClass: "form-control mr-sm-2",
-          attrs: {
-            type: "search",
-            placeholder: "Search",
-            "aria-label": "Search"
-          },
-          domProps: { value: _vm.busca },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _c("form", { staticClass: "my-4" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-10" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.search,
+                  expression: "search"
+                }
+              ],
+              staticClass: "form-control mr-sm-2 form-block",
+              attrs: {
+                type: "search",
+                placeholder: "Search",
+                "aria-label": "Search"
+              },
+              domProps: { value: _vm.search },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.search = $event.target.value
+                }
               }
-              _vm.busca = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-success my-2 my-sm-0",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("buscar")]
-        )
+            })
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "container" }, [
@@ -1209,12 +1219,12 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("table", { staticClass: "table table-striped" }, [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.categorias, function(categoria, index) {
-              return _c("tr", { key: index }, [
+            _vm._l(_vm.filtered_categorias, function(categoria) {
+              return _c("tr", { key: categoria.id }, [
                 _c("th", [_vm._v(_vm._s(categoria.id))]),
                 _vm._v(" "),
                 categoria.nro === 2
@@ -1267,8 +1277,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
+    return _c("div", { staticClass: "col-10" }, [
       _c("h1", [_vm._v("Categorias")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-success my-2 my-sm-0",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Buscar")]
+      )
     ])
   },
   function() {
@@ -1308,6 +1333,19 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c(
+      "div",
+      { staticClass: "container my-4" },
+      [
+        _c("router-link", { attrs: { to: { name: "agregarProv" } } }, [
+          _c("button", { staticClass: "btn btn-success btn-block" }, [
+            _vm._v("\n                Agregar Proveedor\n            ")
+          ])
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
     _c("table", { staticClass: "table" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -1348,20 +1386,7 @@ var render = function() {
         }),
         0
       )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "container my-4" },
-      [
-        _c("router-link", { attrs: { to: { name: "agregarProv" } } }, [
-          _c("button", { staticClass: "btn btn-primary btn-block" }, [
-            _vm._v("\n                Agregar Proveedor\n            ")
-          ])
-        ])
-      ],
-      1
-    )
+    ])
   ])
 }
 var staticRenderFns = [

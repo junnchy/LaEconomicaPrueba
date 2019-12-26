@@ -1,5 +1,12 @@
 <template>
     <div>
+        <div class="container my-4">
+            <router-link :to="{name: 'agregarProv'}">
+                <button class="btn btn-success btn-block">
+                    Agregar Proveedor
+                </button>
+            </router-link>
+        </div>
         <table class="table">
             <thead class="thead">
                 <tr>
@@ -24,13 +31,6 @@
                 </tr>
             </tbody>
         </table>
-        <div class="container my-4">
-            <router-link :to="{name: 'agregarProv'}">
-                <button class="btn btn-primary btn-block">
-                    Agregar Proveedor
-                </button>
-            </router-link>
-        </div>
     </div>
 </template>
 
