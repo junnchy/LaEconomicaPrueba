@@ -40,9 +40,12 @@
                         <li>
                             <a href="{{ route('proveedores.index') }}" class="">Proveedores</a>
                             <a href="{{ route('productos.index') }}" class="">Productos</a>
-                            <a href="{{ route('clientes.index') }}" class="">Clientes</a>
-                            <a href="{{ route('homeUsers') }}" class="">Perfiles</a>
-                            
+                            <a href="{{ route('clientes.index') }}" class="">Clientes</a> 
+                            @auth
+                                @if (auth()->user()->isAdmin())
+                                <a href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
+                                @endif
+                            @endauth
                         </li> <!--Sacar es solo prueba-->
                     </ul>
 

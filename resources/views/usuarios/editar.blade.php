@@ -87,7 +87,8 @@
                                     <input type="checkbox" 
                                         name="roles[]"
                                         value="{{ $id }}"
-                                    />
+                                	    {{ $user->roles()->pluck('descripcion')->contains($descripcion) ? "checked" : "" }}
+                                    >
                                 {{ $descripcion }}
                             </label>                                                            
                         @endforeach

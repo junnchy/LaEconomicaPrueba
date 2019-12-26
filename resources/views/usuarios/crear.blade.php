@@ -82,7 +82,7 @@
                                     <input type="checkbox" 
                                         name="roles[]"
                                         value="{{ $id }}"
-                                    />
+                                    >
                                 {{ $descripcion }}
                             </label>                                                            
                         @endforeach
