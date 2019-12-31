@@ -32,37 +32,7 @@
                         </ul>
                     </div>
                     <div class="col-md-4">
-                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form @submit.prevent="agregarCategoriaProveedor([categoria, proveedor, descuento])">
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Categoria:</label>
-                                        <select class="custom-select" v-model="categoria">
-                                            <option v-for="(categoria, index) in categorias" :key="index">{{categoria.id}} - {{categoria.nombre}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-form-label">Descuento:</label>
-                                        <input type="number" v-model="descuento" class="form-control">
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-success btn-block">Agregar</button>
-                                    </div>
-                                    </form>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
+                        <componente-facp :proveedor="proveedor"></componente-facp>
                     </div>
                 </div>
             </li>

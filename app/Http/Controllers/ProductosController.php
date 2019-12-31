@@ -19,7 +19,7 @@ class ProductosController extends Controller
     public function index(Request $request)
     {    
         if($request->ajax()){
-            $productos = Producto::all();
+            $productos = Producto::with(['proveedor.productos','categoria.productos'])->get();
             return response()->json($productos);
         } else {
             $productos = Producto::all();
@@ -47,21 +47,48 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-       $producto = new Producto();
-       if ($request->id != null) {
-            $producto->id = $request->id;
-       }
+        if($request->ajax()){
+            $producto = new Producto();
 
-       $producto->nombre = $request->nombre;
-       $producto->precioBase = $request->precioBase;
-       $producto->descuentoProducto = $request->descuentoProducto;
-       $producto->proveedor_id = $request->proveedor_id;
-       $producto->categoria_id = $request->categoria_id;
-       // Se debe validad que exista una relacion entre la categoia y el proveedor, ver si en la vista solo mostrar aquellos proveedores y categorias que tengan un descuento 
-       // o bien poder crear uno en el momento
-       $producto->save();
+            if ($request->id != null) {
+                $producto->id = $request->id;
+            }
+            $producto->nombre = $request->nombre;
+            $producto->precioBase = $request->precioBase;
+            $producto->descuentoProducto_1 = $request->descuentoProducto_1;
+            $producto->descuentoProducto_2 = $request->descuentoProducto_2;
+            $producto->descuentoProducto_3 = $request->descuentoProducto_3;
+            $producto->descuentoProducto_4 = $request->descuentoProducto_4;
+            $producto->descuentoProducto_5 = $request->descuentoProducto_5;
+            $producto->iva = $request->iva;
+            $producto->flete = $request->flete;
+            $producto->precioCosto = $request->precioCosto;
+            $producto->proveedor_id = $request->proveedor_id;
+            $producto->categoria_id = $request->categoria_id;
 
-       return back()->with('mensaje', 'Producto Agregado');
+            $producto->save();
+
+            return response()->json([
+                'producto' => $producto,
+                'message' => 'Producto Agregado'
+            ], 200);
+
+        }else {
+            if ($request->id != null) {
+                    $producto->id = $request->id;
+            }
+
+            $producto->nombre = $request->nombre;
+            $producto->precioBase = $request->precioBase;
+            $producto->descuentoProducto = $request->descuentoProducto;
+            $producto->proveedor_id = $request->proveedor_id;
+            $producto->categoria_id = $request->categoria_id;
+            // Se debe validad que exista una relacion entre la categoia y el proveedor, ver si en la vista solo mostrar aquellos proveedores y categorias que tengan un descuento 
+            // o bien poder crear uno en el momento
+            $producto->save();
+
+            return back()->with('mensaje', 'Producto Agregado');
+        }
     }
 
     /**
@@ -70,10 +97,16 @@ class ProductosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $producto = Producto::findOrFail($id);
-        return view('productos.detalleProducto', compact('producto'));
+        if($request->ajax()){
+            $producto = Producto::with(['proveedor.productos','categoria.productos'])->findOrFail($id);
+            return response()->json($producto);
+        }
+        else {
+            $producto = App\Producto::findOrFail($id);
+            return view('productos.detalleProducto', compact('producto'));
+        }
     }
 
     /**
@@ -96,7 +129,29 @@ class ProductosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $producto = Producto::findOrFail($id);
+            $producto->nombre = $request->nombre;
+            $producto->precioBase = $request->precioBase;
+            $producto->descuentoProducto_1 = $request->descuentoProducto_1;
+            $producto->descuentoProducto_2 = $request->descuentoProducto_2;
+            $producto->descuentoProducto_3 = $request->descuentoProducto_3;
+            $producto->descuentoProducto_4 = $request->descuentoProducto_4;
+            $producto->descuentoProducto_5 = $request->descuentoProducto_5;
+            $producto->iva = $request->iva;
+            $producto->flete = $request->flete;
+            $producto->precioCosto = $request->precioCosto;
+            $producto->proveedor_id = $request->proveedor_id;
+            $producto->categoria_id = $request->categoria_id;
+
+            $producto->save();
+
+            return response()->json([
+                'producto' => $producto,
+                'message' => 'Producto Actualizado'
+            ], 200);
+
+        }
     }
 
     /**

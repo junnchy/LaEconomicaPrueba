@@ -24,6 +24,7 @@
                         <select class="custom-select" v-model="categoria.categoria_id">
                             <option selected="selected" v-if="categoria.padre != null" :value="categoria.categoria_id">{{categoria.padre.id}} - {{categoria.padre.nombre}}</option>
                             <option selected="selected" v-if="categoria.categoria_id === null" :value="categoria.categoria_id">0 - Vacio</option>
+                            <option selected="selected" v-if="categoria.padre != null" :value='null'>0 - Vacio</option>
                             <option v-for="(cate, index) in categorias" :key="index">{{cate.id}} - {{cate.nombre}}</option>
                         </select>
                     </div>
@@ -35,8 +36,10 @@
         </form>
         <h3 class="mt-5" v-if="categoria.cant_hijos > 0">SubCategorias</h3>
         <div class="list-group mt-3">
-            <button type="button" class="list-group-item list-group-item-action" 
-            v-for="(cat, index) in categoria.children" :key="index">{{cat.id}}-{{cat.nombre}}</button>
+            <button type="button"  @click="getCategoria(cat.id)" class="list-group-item list-group-item-action" 
+            v-for="(cat, index) in categoria.children" :key="index">
+                {{cat.id}}-{{cat.nombre}}
+            </button>
         </div>
 
     </div>
@@ -52,11 +55,11 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getCategoria','getCategorias', 'editarCategoria'])
+        ...mapActions(['getCategoria','getCategoriasO', 'editarCategoria'])
     },
     created() {
         this.getCategoria(this.id)
-        this.getCategorias()
+        this.getCategoriasO()
     },
     computed: {
         ...mapState(['categoria', 'categorias'])

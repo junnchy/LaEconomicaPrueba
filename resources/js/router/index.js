@@ -39,8 +39,24 @@ const routes = [
       name: 'verEditarCategoria',
       component: () => import(/* webpackChunkName: "about" */ '../views/VerEditarCategoria.vue')
     },
+    {
+      path: '/agregarProducto',
+      name: 'agregarProducto',
+      component: () => import(/* webpackChunkName: "about" */ '../views/AgregarProducto.vue')
+    },
+    {
+      path: '/detalleProducto/:id',
+      name: 'detalleProducto',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DetalleProducto.vue')
+    },
+    {
+      path: '/editarProducto/:id',
+      name: 'editarProducto',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EditarProducto.vue')
+    },
 
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

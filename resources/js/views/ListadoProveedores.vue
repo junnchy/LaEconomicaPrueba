@@ -1,5 +1,15 @@
 <template>
     <div>
+        <form class="my-4">
+            <div class="row">
+                <div class="col-10">
+                    <input class="form-control mr-sm-2 form-block" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
+                </div>
+                <div class="col-2">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
         <div class="container my-4">
             <router-link :to="{name: 'agregarProv'}">
                 <button class="btn btn-success btn-block">
@@ -18,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(proveedor, index) in proveedores" :key="index">
+                <tr v-for="(proveedor, index) in filtered_proveedores" :key="index">
                     <th scope="row">{{proveedor.id}}</th>
                     <td>{{proveedor.nombre}}</td>
                     <td>{{proveedor.cuit}}</td>
@@ -35,9 +45,13 @@
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapState, mapGetters} from 'vuex'
 export default {
     name: 'ListadoProveedores', 
+    data() {
+        return {
+        }
+    },
     methods: {
         ...mapActions(['getProveedores'])
     },
@@ -45,7 +59,16 @@ export default {
         this.getProveedores()
     },
     computed: {
-        ...mapState(['proveedores'])
+        ...mapState(['proveedores']),
+        ...mapGetters(['filtered_proveedores']),
+        search:{
+                get(){
+                    return this.$store.state.filter.query;
+                },
+                set(val){
+                    this.$store.commit('SET_QUERY', val);
+                }
+            },
     },
 }
 </script>

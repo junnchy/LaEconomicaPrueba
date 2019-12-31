@@ -22,9 +22,38 @@
                 </div>
             </form>
             <div class="container">
-                <button class="btn btn-success btn-block my-5">
-                    Agregar Categoria
-                </button>
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form @submit.prevent="agregarCategoria(ncat)">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Nombre de la Nueva Categoria:</label>
+                                        <input type="text" v-model="ncat.nombre" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Categoria Padre:</label>
+                                        <select class="custom-select" v-model="ncat.categoria_id">
+                                            <option selected="selected" :value='null'>0 - Vacio</option>
+                                            <option v-for="(categoria, index) in categorias" :key="index">{{categoria.id}} - {{categoria.nombre}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-success btn-block">Agregar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -57,10 +86,11 @@
     export default {
         data() {
             return {
+                ncat: {nombre:'', categoria_id: ''}
             }
         },
         methods: {
-            ...mapActions(['getCategoriasO'])
+            ...mapActions(['getCategoriasO','agregarCategoria'])
         },
         created() {
             this.getCategoriasO()

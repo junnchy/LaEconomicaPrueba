@@ -12,6 +12,8 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('componente-prueba', require('./components/ComponentePrueba.vue').default);
 Vue.component('componente-productos', require('./components/ComponenteProductos.vue').default);
+Vue.component('componente-facp', require('./components/FormularioAgregarCategoriaProveedor.vue').default);
+
 
 
 const app = new Vue({
