@@ -42,6 +42,13 @@ export default new Vuex.Store({
       state.respuesta = respuesta
     },
     setProducto(state, producto){
+      producto.descuentoProducto= [
+        producto.descuentoProducto_1,
+        producto.descuentoProducto_2,
+        producto.descuentoProducto_3,
+        producto.descuentoProducto_4,
+        producto.descuentoProducto_5,
+      ]
       state.producto = producto
     }
   },
@@ -233,13 +240,13 @@ export default new Vuex.Store({
       })
     },
     editarProducto({commit},producto){
-      var id = producto[0].id
-      producto[0].descuentoProducto_1 = parseFloat(producto[1][0])
-      producto[0].descuentoProducto_2 = parseFloat(producto[1][1])
-      producto[0].descuentoProducto_3 = parseFloat(producto[1][2])
-      producto[0].descuentoProducto_4 = parseFloat(producto[1][3])
-      producto[0].descuentoProducto_5 = parseFloat(producto[1][4])
-      axios.put(`http://127.0.0.1:8000/productos/${id}`, producto[0]).then(function (response) {
+      var id = producto.id
+      producto.descuentoProducto_1= producto.descuentoProducto[0],
+      producto.descuentoProducto_2= producto.descuentoProducto[1],
+      producto.descuentoProducto_3= producto.descuentoProducto[2],
+      producto.descuentoProducto_4= producto.descuentoProducto[3],
+      producto.descuentoProducto_5= producto.descuentoProducto[4],
+      axios.put(`http://127.0.0.1:8000/productos/${id}`, producto).then(function (response) {
         console.log(response);
         commit('setRespuesta', response.data.message)
       })

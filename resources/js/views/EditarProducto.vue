@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="editarProducto([producto,descuentosProducto])">
+        <form @submit.prevent="editarProducto(producto)">
             <div class="form-group mt-5">
                 <div class="row">
                     <div class="col-8">
@@ -29,62 +29,7 @@
                     <label>Nombre Producto</label>
                     <input type="text" v-model="producto.nombre" class="form-control" >
                 </div> 
-                 <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">     
-                            <label>Precio Base</label>
-                            <input type="number" step=0.01 v-model="producto.precioBase" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <label>Precio Costo</label>
-                        <h3>{{setDre[1]}}</h3> 
-                    </div>
-                </div>
-                <label class="text-center">Descuentos</label> 
-                <div class="row form-group">
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto_1" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto_2" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto_3" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto_4" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto_5" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <p>Dto Total</p>
-                        <P>{{setDre[0] *100}}%</P>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>IVA</label> 
-                            <select class="custom-select" v-model="producto.iva">
-                                <option :value=21>21%</option>
-                                <option :value=10.5>10.5%</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Flete</label> 
-                            <input type="number" step=0.01 v-model="producto.flete" class="form-control">
-                        </div>
-                    </div>
-                </div>
+                <componente-fcosto v-bind:producto="producto"></componente-fcosto>
                 <div class="form-group">
                     <label>Proveedor:</label> 
                     <select class="custom-select" v-model="producto.proveedor_id">
@@ -113,7 +58,6 @@ export default {
         return {
             id: this.$route.params.id,
             dre: 0,
-            descuentosProducto: []
         }
     },
     methods: {
@@ -127,22 +71,11 @@ export default {
     },
     computed: {
         ...mapState(['producto','categorias','proveedores', 'respuesta', 'descuentosProducto', 'proveedor', 'categoria']),
-        setDescuentos(){
-            this.descuentosProducto = [
-                parseFloat(this.$store.state.producto.descuentoProducto_1),
-                parseFloat(this.$store.state.producto.descuentoProducto_2),
-                parseFloat(this.$store.state.producto.descuentoProducto_3),
-                parseFloat(this.$store.state.producto.descuentoProducto_4),
-                parseFloat(this.$store.state.producto.descuentoProducto_5)
-            ]
-
-            return this.descuentosProducto
-        },
         setDre(){
             var p = 0
             var i = 0
             this.$store.state.producto.precioBase = parseFloat(this.$store.state.producto.precioBase)
-            this.setDescuentos.forEach(element => {
+            this.$store.state.producto.descuentoProducto.forEach(element => {
                 if (element > 0) {                   
                     p = (1-(element/100))
                     if(i>0){

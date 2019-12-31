@@ -2119,6 +2119,141 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioCostoProducto.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioCostoProducto.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    producto: {
+      type: Object,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      descuento: 0
+    };
+  },
+  computed: {
+    setDre: function setDre() {
+      var p = 0;
+      var i = 0;
+      this.producto.precioBase = parseFloat(this.producto.precioBase);
+      this.producto.descuentoProducto.forEach(function (element) {
+        if (element > 0) {
+          p = 1 - element / 100;
+
+          if (i > 0) {
+            i = i * p;
+          } else {
+            i = p;
+          }
+        }
+      });
+      this.producto.dre = 1 - i;
+
+      if (this.producto.dre != 1) {
+        this.producto.precioCosto = this.producto.precioBase - this.producto.precioBase * this.producto.dre;
+
+        if (this.producto.iva != 0) {
+          this.producto.precioCosto = this.producto.precioCosto + this.producto.precioCosto * (this.producto.iva / 100);
+        }
+
+        if (this.producto.flete != 0) {
+          this.producto.flete = parseFloat(this.producto.flete);
+          this.producto.precioCosto = this.producto.precioCosto + this.producto.flete;
+        }
+
+        return [this.producto.dre, this.producto.precioCosto];
+      } else {
+        this.producto.precioCosto = this.producto.precioBase;
+
+        if (this.producto.iva != 0) {
+          this.producto.precioCosto = this.producto.precioCosto + this.producto.precioCosto * (this.producto.iva / 100);
+        }
+
+        if (this.producto.flete != 0) {
+          this.producto.flete = parseFloat(this.producto.flete);
+          this.producto.precioCosto = this.producto.precioCosto + this.producto.flete;
+        }
+
+        return [this.producto.dre, this.producto.precioCosto];
+      }
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -38448,6 +38583,286 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioCostoProducto.vue?vue&type=template&id=2b76d855&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioCostoProducto.vue?vue&type=template&id=2b76d855& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Precio Base")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.producto.precioBase,
+                expression: "producto.precioBase"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "number", step: "0.01" },
+            domProps: { value: _vm.producto.precioBase },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.producto, "precioBase", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c("label", [_vm._v("Precio Costo")]),
+        _vm._v(" "),
+        _c("h3", [_vm._v(_vm._s(_vm.setDre[1]))])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("label", { staticClass: "text-center" }, [_vm._v("Descuentos")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row form-group" }, [
+      _c("div", { staticClass: "col-2" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.producto.descuentoProducto[0],
+              expression: "producto.descuentoProducto[0]"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", step: "0.01" },
+          domProps: { value: _vm.producto.descuentoProducto[0] },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.producto.descuentoProducto, 0, $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.producto.descuentoProducto[1],
+              expression: "producto.descuentoProducto[1]"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", step: "0.01" },
+          domProps: { value: _vm.producto.descuentoProducto[1] },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.producto.descuentoProducto, 1, $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.producto.descuentoProducto[2],
+              expression: "producto.descuentoProducto[2]"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", step: "0.01" },
+          domProps: { value: _vm.producto.descuentoProducto[2] },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.producto.descuentoProducto, 2, $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.producto.descuentoProducto[3],
+              expression: "producto.descuentoProducto[3]"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", step: "0.01" },
+          domProps: { value: _vm.producto.descuentoProducto[3] },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.producto.descuentoProducto, 3, $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [
+        _c("hr"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.producto.descuentoProducto[4],
+              expression: "producto.descuentoProducto[4]"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", step: "0.01" },
+          domProps: { value: _vm.producto.descuentoProducto[4] },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.producto.descuentoProducto, 4, $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-2" },
+        [
+          _c("p", [_vm._v("Dto Total")]),
+          _vm._v(" "),
+          _vm.producto.dre != 1
+            ? _c("P", [_vm._v(_vm._s(_vm.setDre[0] * 100) + "%")])
+            : _vm._e()
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("IVA")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.iva,
+                  expression: "producto.iva"
+                }
+              ],
+              staticClass: "custom-select",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.producto,
+                    "iva",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _c("option", { domProps: { value: 21 } }, [_vm._v("21%")]),
+              _vm._v(" "),
+              _c("option", { domProps: { value: 10.5 } }, [_vm._v("10.5%")])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Flete")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.producto.flete,
+                expression: "producto.flete"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "number", step: "0.01" },
+            domProps: { value: _vm.producto.flete },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.producto, "flete", $event.target.value)
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -54573,6 +54988,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-prueba', __webpack_require__(/*! ./components/ComponentePrueba.vue */ "./resources/js/components/ComponentePrueba.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-productos', __webpack_require__(/*! ./components/ComponenteProductos.vue */ "./resources/js/components/ComponenteProductos.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-facp', __webpack_require__(/*! ./components/FormularioAgregarCategoriaProveedor.vue */ "./resources/js/components/FormularioAgregarCategoriaProveedor.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-fcosto', __webpack_require__(/*! ./components/FormularioCostoProducto.vue */ "./resources/js/components/FormularioCostoProducto.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _router_index_js__WEBPACK_IMPORTED_MODULE_1__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -54915,6 +55331,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/FormularioCostoProducto.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/FormularioCostoProducto.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormularioCostoProducto.vue?vue&type=template&id=2b76d855& */ "./resources/js/components/FormularioCostoProducto.vue?vue&type=template&id=2b76d855&");
+/* harmony import */ var _FormularioCostoProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormularioCostoProducto.vue?vue&type=script&lang=js& */ "./resources/js/components/FormularioCostoProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FormularioCostoProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FormularioCostoProducto.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioCostoProducto.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/FormularioCostoProducto.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioCostoProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioCostoProducto.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioCostoProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioCostoProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioCostoProducto.vue?vue&type=template&id=2b76d855&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/FormularioCostoProducto.vue?vue&type=template&id=2b76d855& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioCostoProducto.vue?vue&type=template&id=2b76d855& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioCostoProducto.vue?vue&type=template&id=2b76d855&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/router/index.js":
 /*!**************************************!*\
   !*** ./resources/js/router/index.js ***!
@@ -55075,6 +55560,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       state.respuesta = respuesta;
     },
     setProducto: function setProducto(state, producto) {
+      producto.descuentoProducto = [producto.descuentoProducto_1, producto.descuentoProducto_2, producto.descuentoProducto_3, producto.descuentoProducto_4, producto.descuentoProducto_5];
       state.producto = producto;
     }
   },
@@ -55531,13 +56017,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     }(),
     editarProducto: function editarProducto(_ref16, producto) {
       var commit = _ref16.commit;
-      var id = producto[0].id;
-      producto[0].descuentoProducto_1 = parseFloat(producto[1][0]);
-      producto[0].descuentoProducto_2 = parseFloat(producto[1][1]);
-      producto[0].descuentoProducto_3 = parseFloat(producto[1][2]);
-      producto[0].descuentoProducto_4 = parseFloat(producto[1][3]);
-      producto[0].descuentoProducto_5 = parseFloat(producto[1][4]);
-      axios.put("http://127.0.0.1:8000/productos/".concat(id), producto[0]).then(function (response) {
+      var id = producto.id;
+      producto.descuentoProducto_1 = producto.descuentoProducto[0], producto.descuentoProducto_2 = producto.descuentoProducto[1], producto.descuentoProducto_3 = producto.descuentoProducto[2], producto.descuentoProducto_4 = producto.descuentoProducto[3], producto.descuentoProducto_5 = producto.descuentoProducto[4], axios.put("http://127.0.0.1:8000/productos/".concat(id), producto).then(function (response) {
         console.log(response);
         commit('setRespuesta', response.data.message);
       })["catch"](function (error) {

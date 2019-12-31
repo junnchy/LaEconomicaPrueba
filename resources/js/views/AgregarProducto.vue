@@ -29,63 +29,7 @@
                     <label>Nombre Producto</label>
                     <input type="text" v-model="producto.nombre" class="form-control" >
                 </div> 
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">     
-                            <label>Precio Base</label>
-                            <input type="number" step=0.01 v-model="producto.precioBase" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <label>Precio Costo</label>
-                        <h3>{{setDre[1]}}</h3> 
-                    </div>
-                </div>
-                <label class="text-center">Descuentos</label> 
-                <div class="row form-group">
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto[0]" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto[1]" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto[2]" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto[3]" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <hr/>
-                        <input type="number" step=0.01 v-model="producto.descuentoProducto[4]" class="form-control">
-                    </div>
-                    <div class="col-2">
-                        <p>Dto Total</p>
-                        <P v-if="this.producto.dre != 1">{{setDre[0] *100}}%</P>
-                    </div>
-                    
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>IVA</label> 
-                            <select class="custom-select" v-model="producto.iva">
-                                <option :value=21>21%</option>
-                                <option :value=10.5>10.5%</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Flete</label> 
-                            <input type="number" step=0.01 v-model="producto.flete" class="form-control">
-                        </div>
-                    </div>
-                </div>
+                <componente-fcosto v-bind:producto="producto"></componente-fcosto>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-10">

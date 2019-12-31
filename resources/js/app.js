@@ -13,8 +13,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('componente-prueba', require('./components/ComponentePrueba.vue').default);
 Vue.component('componente-productos', require('./components/ComponenteProductos.vue').default);
 Vue.component('componente-facp', require('./components/FormularioAgregarCategoriaProveedor.vue').default);
-
-
+Vue.component('componente-fcosto', require('./components/FormularioCostoProducto.vue').default);
 
 const app = new Vue({
     router,
