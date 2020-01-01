@@ -8,18 +8,18 @@
                     </div>
                     <div class="col-4">
                         <router-link :to="{name:'MenuProductos'}">
-                            <button class="btn btn-warning" v-if="respuesta != ''" @click="$store.state.respuesta = ''">
+                            <button class="btn btn-warning" v-if="respuesta != null" @click="$store.state.respuesta = null">
                                 Finalizar
                             </button>
                         </router-link>
-                        <router-link :to="{name:'MenuProductos'}" v-if="respuesta === ''">
+                        <router-link :to="{name:'MenuProductos'}" v-if="respuesta === null">
                             <button class="btn btn-danger">
                                 Cancelar
                             </button>
                         </router-link>
                     </div>
                 </div>
-                <div class="alert alert-success alert-dismissible fade show mt-4" v-if="respuesta != ''">
+                <div class="alert alert-success alert-dismissible fade show mt-4" v-if="respuesta != null">
                     {{respuesta}} 
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === ''">Agregar</button>
+            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null">Agregar</button>
         </form>
     </div>
 </template>
@@ -77,44 +77,6 @@ export default {
     },
     computed: {
         ...mapState(['categorias','proveedores', 'respuesta']),
-        setDre(){
-            var p = 0
-            var i = 0
-            this.producto.precioBase = parseFloat(this.producto.precioBase)
-            this.producto.descuentoProducto.forEach(element => {
-                if (element > 0) {                   
-                    p = (1-(element/100))
-                    if(i>0){
-                        i = i * p
-                    }else{
-                        i = p
-                    }
-
-                }
-            })
-            this.producto.dre = (1 - i)
-            if (this.producto.dre != 1) {
-                this.producto.precioCosto = this.producto.precioBase - (this.producto.precioBase * this.producto.dre)
-                if(this.producto.iva != 0){
-                    this.producto.precioCosto = this.producto.precioCosto + (this.producto.precioCosto * (this.producto.iva/100))
-                }
-                if(this.producto.flete != 0){
-                    this.producto.flete = parseFloat(this.producto.flete)
-                    this.producto.precioCosto = this.producto.precioCosto + this.producto.flete
-                }
-                return [this.producto.dre, this.producto.precioCosto]
-            }else{
-                this.producto.precioCosto = this.producto.precioBase
-                if(this.producto.iva != 0){
-                    this.producto.precioCosto = this.producto.precioCosto + (this.producto.precioCosto * (this.producto.iva/100))
-                }
-                if(this.producto.flete != 0){
-                    this.producto.flete = parseFloat(this.producto.flete)
-                    this.producto.precioCosto = this.producto.precioCosto + this.producto.flete
-                }
-                return [this.producto.dre, this.producto.precioCosto]
-            }    
-        }
-    },
+    }
 }
 </script>

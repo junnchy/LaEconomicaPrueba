@@ -6,9 +6,7 @@
                     <h1>Categorias</h1>
                 </div>
                 <div class="col-2">
-                    <router-link :to="{name:'MenuProductos'}">
-                        <button class="btn btn-danger">Volver</button>
-                    </router-link>
+                    <button class="btn btn-danger" @click="$router.go(-1)">Volver</button>
                 </div>
             </div>
             <form class="my-4">

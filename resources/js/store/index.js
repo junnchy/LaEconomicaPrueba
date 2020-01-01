@@ -9,14 +9,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     producto: {},
-    respuesta: '',
+    respuesta: null,
     productos: [],
     proveedores: [],
     categorias: [],
     proveedor:{id:'', nombre:'', cuit:'', telefono:''},
     categoria: {},
     filter: {
-      query: ''
+      query: '',
+      categoria: 0,
+      proveedor: 0
     }
   },
   mutations: {
@@ -37,6 +39,12 @@ export default new Vuex.Store({
     },
     SET_QUERY(state, query){
       state.filter.query = query;
+    },
+    SET_CATEGORIA(state, categoria){
+      state.filter.categoria = categoria;
+    },
+    SET_PROVEEDOR(state, proveedor){
+      state.filter.proveedor = proveedor;
     },
     setRespuesta(state, respuesta){
       state.respuesta = respuesta
@@ -246,6 +254,8 @@ export default new Vuex.Store({
       producto.descuentoProducto_3= producto.descuentoProducto[2],
       producto.descuentoProducto_4= producto.descuentoProducto[3],
       producto.descuentoProducto_5= producto.descuentoProducto[4],
+      producto.proveedor_id= producto.proveedor.id, 
+      producto.categoria_id= producto.categoria.id
       axios.put(`http://127.0.0.1:8000/productos/${id}`, producto).then(function (response) {
         console.log(response);
         commit('setRespuesta', response.data.message)
@@ -271,11 +281,18 @@ export default new Vuex.Store({
       }
     },
     filtered_productos(state){
-      if(state.filter.query.length >= 1){
-        return state.productos.filter(producto => producto.nombre.toLowerCase().includes(state.filter.query))
-      }else{
-        return state.productos
+      let pfil = state.productos
+      if(state.filter.categoria > 0){
+        pfil = pfil.filter(producto => producto.categoria_id === state.filter.categoria)
       }
+      if (state.filter.proveedor > 0){
+        pfil = pfil.filter(producto => producto.proveedor_id === state.filter.proveedor)
+      }
+      if(state.filter.query.length >= 1){
+        return pfil.filter(producto => producto.nombre.toLowerCase().includes(state.filter.query))
+      }else{
+        return pfil
+      }   
     },
 
   }

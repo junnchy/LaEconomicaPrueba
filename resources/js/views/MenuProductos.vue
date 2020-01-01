@@ -3,27 +3,34 @@
         <div class="container">
             <h1 class="text-center mt-5">Productos</h1>
         </div>
-        <div class="container">
+        <div class="container"> 
+            <div class="row">
+                <div class="col-9">
+                        <input class="form-control my-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
+                </div>
+                <div class="col-3">
+                    <router-link :to="{name:'agregarProducto'}">
+                        <button class="btn btn-success btn-block my-3"> Agregar Producto</button>
+                    </router-link>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-3">
-                    <div class="list-group">
-                        <button type="button" class="list-group-item list-group-item-action" v-for="categoria in categorias" :key="categoria.id">
-                            {{categoria.nombre}}
-                        </button>
-                    </div>
+                    <br>
+                    <hr/>
+                    <label>Categoria</label> 
+                    <select class="custom-select" v-model="fcat">
+                        <option selected :value=0>Todos</option>
+                        <option v-for="(categoria, index) in categorias" :key="index" :value='categoria.id'>{{categoria.id}} - {{categoria.nombre}}</option>
+                    </select>
+                    <hr/>
+                    <label>Proveedor</label> 
+                    <select class="custom-select" v-model="fpro">
+                        <option selected :value=0>Todos</option>
+                        <option v-for="(proveedor, index) in proveedores" :key="index" :value='proveedor.id'>{{proveedor.id}} - {{proveedor.nombre}}</option>
+                    </select>
                 </div>
                 <div class="col-9">
-                    <div class="row">
-                        <div class="col-6">
-                                <input class="form-control my-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
-                        </div>
-                        <div class="col-6">
-                            <router-link :to="{name:'agregarProducto'}">
-                                <button class="btn btn-success btn-block my-3"> Agregar Producto</button>
-                            </router-link>
-                        </div>
-                    </div>
-                    
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -61,23 +68,40 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getProductos', 'getCategoriasO'])
+        ...mapActions(['getProveedores','getProductos', 'getCategoriasO'])
     },
     created() {
         this.getProductos()
+        this.getProveedores()
         this.getCategoriasO()
     },
     computed: {
-        ...mapState(['productos', 'categorias']),
+        ...mapState(['productos', 'categorias', 'proveedores']),
         ...mapGetters(['filtered_productos']),
         search:{
-                get(){
-                    return this.$store.state.filter.query;
-                },
-                set(val){
-                    this.$store.commit('SET_QUERY', val);
-                }
+            get(){
+                return this.$store.state.filter.query;
             },
+            set(val){
+                this.$store.commit('SET_QUERY', val);
+            }
+        },
+        fcat:{
+            get(){
+                return this.$store.state.filter.categoria;
+            },
+            set(val){
+                this.$store.commit('SET_CATEGORIA', val);
+            }
+        },
+        fpro:{
+            get(){
+                return this.$store.state.filter.proveedor;
+            },
+            set(val){
+                this.$store.commit('SET_PROVEEDOR', val);
+            }
+        }
     },
 }
 </script>

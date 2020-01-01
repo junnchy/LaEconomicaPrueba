@@ -7,11 +7,9 @@
                         <h3>Editar Categoria</h3>
                     </div>
                     <div class="col-4">
-                        <router-link :to="{name: 'listadoCategorias'}" >
-                            <button class="btn btn-danger">
-                                Volver
-                            </button>
-                        </router-link>
+                        <button class="btn btn-danger" @click="$router.go(-1)">
+                            Volver
+                        </button>
                     </div>
                 </div> 
                 <div class="form-group">

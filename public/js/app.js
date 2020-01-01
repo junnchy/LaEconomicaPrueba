@@ -55522,7 +55522,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
   state: {
     producto: {},
-    respuesta: '',
+    respuesta: null,
     productos: [],
     proveedores: [],
     categorias: [],
@@ -55534,7 +55534,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     },
     categoria: {},
     filter: {
-      query: ''
+      query: '',
+      categoria: 0,
+      proveedor: 0
     }
   },
   mutations: {
@@ -55555,6 +55557,12 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     },
     SET_QUERY: function SET_QUERY(state, query) {
       state.filter.query = query;
+    },
+    SET_CATEGORIA: function SET_CATEGORIA(state, categoria) {
+      state.filter.categoria = categoria;
+    },
+    SET_PROVEEDOR: function SET_PROVEEDOR(state, proveedor) {
+      state.filter.proveedor = proveedor;
     },
     setRespuesta: function setRespuesta(state, respuesta) {
       state.respuesta = respuesta;
@@ -56018,7 +56026,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     editarProducto: function editarProducto(_ref16, producto) {
       var commit = _ref16.commit;
       var id = producto.id;
-      producto.descuentoProducto_1 = producto.descuentoProducto[0], producto.descuentoProducto_2 = producto.descuentoProducto[1], producto.descuentoProducto_3 = producto.descuentoProducto[2], producto.descuentoProducto_4 = producto.descuentoProducto[3], producto.descuentoProducto_5 = producto.descuentoProducto[4], axios.put("http://127.0.0.1:8000/productos/".concat(id), producto).then(function (response) {
+      producto.descuentoProducto_1 = producto.descuentoProducto[0], producto.descuentoProducto_2 = producto.descuentoProducto[1], producto.descuentoProducto_3 = producto.descuentoProducto[2], producto.descuentoProducto_4 = producto.descuentoProducto[3], producto.descuentoProducto_5 = producto.descuentoProducto[4], producto.proveedor_id = producto.proveedor.id, producto.categoria_id = producto.categoria.id;
+      axios.put("http://127.0.0.1:8000/productos/".concat(id), producto).then(function (response) {
         console.log(response);
         commit('setRespuesta', response.data.message);
       })["catch"](function (error) {
@@ -56046,12 +56055,26 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       }
     },
     filtered_productos: function filtered_productos(state) {
+      var pfil = state.productos;
+
+      if (state.filter.categoria > 0) {
+        pfil = pfil.filter(function (producto) {
+          return producto.categoria_id === state.filter.categoria;
+        });
+      }
+
+      if (state.filter.proveedor > 0) {
+        pfil = pfil.filter(function (producto) {
+          return producto.proveedor_id === state.filter.proveedor;
+        });
+      }
+
       if (state.filter.query.length >= 1) {
-        return state.productos.filter(function (producto) {
+        return pfil.filter(function (producto) {
           return producto.nombre.toLowerCase().includes(state.filter.query);
         });
       } else {
-        return state.productos;
+        return pfil;
       }
     }
   }
