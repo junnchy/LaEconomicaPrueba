@@ -2190,6 +2190,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2247,6 +2249,111 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         return [this.producto.dre, this.producto.precioCosto];
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioDatosProducto.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioDatosProducto.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    producto: {
+      type: Object,
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    producto: {
+      type: Object,
+      required: true
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  computed: {
+    setPrecioDeVenta: function setPrecioDeVenta() {
+      if (this.producto.precioCosto > 0) {
+        this.producto.precioVenta = this.producto.precioCosto + this.producto.precioCosto * (this.producto.rentabilidad / 100);
+        return this.producto.precioVenta;
+      } else {
+        this.producto.precioVenta = this.producto.precioCosto;
+        return this.producto.precioVenta;
       }
     }
   }
@@ -38600,7 +38707,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-6" }, [
+      _c("div", { staticClass: "col-8" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Precio Base")]),
           _vm._v(" "),
@@ -38628,10 +38735,20 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-6" }, [
-        _c("label", [_vm._v("Precio Costo")]),
-        _vm._v(" "),
-        _c("h3", [_vm._v(_vm._s(_vm.setDre[1]))])
+      _c("div", { staticClass: "col-4" }, [
+        _c(
+          "div",
+          { staticClass: "alert alert-dark", attrs: { role: "alert" } },
+          [
+            _c("h6", { staticClass: "text-center" }, [
+              _vm._v("Precio de Costo")
+            ]),
+            _vm._v(" "),
+            _c("h3", { staticClass: "text-center" }, [
+              _vm._v("$" + _vm._s(_vm.setDre[1]))
+            ])
+          ]
+        )
       ])
     ]),
     _vm._v(" "),
@@ -38852,6 +38969,254 @@ var render = function() {
             }
           })
         ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioDatosProducto.vue?vue&type=template&id=5e8daf64&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioDatosProducto.vue?vue&type=template&id=5e8daf64& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-group" }, [
+      _c("label", [_vm._v("Nombre Producto")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.producto.nombre,
+            expression: "producto.nombre"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text" },
+        domProps: { value: _vm.producto.nombre },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.producto, "nombre", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-10" }, [
+          _c("label", [_vm._v("Proveedor:")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.proveedor,
+                  expression: "producto.proveedor"
+                }
+              ],
+              staticClass: "custom-select",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.producto,
+                    "proveedor",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            _vm._l(this.$store.state.proveedores, function(proveedor) {
+              return _c(
+                "option",
+                { key: proveedor.id, domProps: { value: proveedor } },
+                [
+                  _vm._v(
+                    _vm._s(proveedor.id) + " - " + _vm._s(proveedor.nombre)
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ]),
+        _vm._v(" "),
+        _vm.producto.proveedor.nombre != ""
+          ? _c(
+              "div",
+              { staticClass: "col-2" },
+              [
+                _c("hr"),
+                _vm._v(" "),
+                _c("componente-facp", {
+                  attrs: { proveedor: _vm.producto.proveedor }
+                })
+              ],
+              1
+            )
+          : _vm._e()
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group my-4" }, [
+      _c("label", [_vm._v("Categoria:")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.producto.categoria,
+              expression: "producto.categoria"
+            }
+          ],
+          staticClass: "custom-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.$set(
+                _vm.producto,
+                "categoria",
+                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+              )
+            }
+          }
+        },
+        [
+          _vm.producto.proveedor_id === _vm.producto.proveedor.id
+            ? _c(
+                "option",
+                {
+                  attrs: { selected: "" },
+                  domProps: { value: _vm.producto.categoria }
+                },
+                [
+                  _vm._v(
+                    _vm._s(_vm.producto.categoria.id) +
+                      "-" +
+                      _vm._s(_vm.producto.categoria.nombre)
+                  )
+                ]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._l(_vm.producto.proveedor.categorias, function(cate, index) {
+            return _c("option", { key: index, domProps: { value: cate } }, [
+              _vm._v(_vm._s(cate.id) + " - " + _vm._s(cate.nombre))
+            ])
+          })
+        ],
+        2
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-8" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Rentabilidad")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.producto.rentabilidad,
+                expression: "producto.rentabilidad"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "number", step: "0.01" },
+            domProps: { value: _vm.producto.rentabilidad },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.producto, "rentabilidad", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }, [
+        _c(
+          "div",
+          { staticClass: "alert alert-dark", attrs: { role: "alert" } },
+          [
+            _c("h6", { staticClass: "text-center" }, [
+              _vm._v("Precio de Venta")
+            ]),
+            _vm._v(" "),
+            _c("h3", { staticClass: "text-center" }, [
+              _vm._v("$" + _vm._s(_vm.setPrecioDeVenta))
+            ])
+          ]
+        )
       ])
     ])
   ])
@@ -54989,6 +55354,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-prueba', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-productos', __webpack_require__(/*! ./components/ComponenteProductos.vue */ "./resources/js/components/ComponenteProductos.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-facp', __webpack_require__(/*! ./components/FormularioAgregarCategoriaProveedor.vue */ "./resources/js/components/FormularioAgregarCategoriaProveedor.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-fcosto', __webpack_require__(/*! ./components/FormularioCostoProducto.vue */ "./resources/js/components/FormularioCostoProducto.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-frentabilidad', __webpack_require__(/*! ./components/FormularioRentabilidadProducto.vue */ "./resources/js/components/FormularioRentabilidadProducto.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-fdatosprod', __webpack_require__(/*! ./components/FormularioDatosProducto.vue */ "./resources/js/components/FormularioDatosProducto.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _router_index_js__WEBPACK_IMPORTED_MODULE_1__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -55395,6 +55762,144 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioCostoProducto_vue_vue_type_template_id_2b76d855___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioDatosProducto.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/FormularioDatosProducto.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FormularioDatosProducto_vue_vue_type_template_id_5e8daf64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormularioDatosProducto.vue?vue&type=template&id=5e8daf64& */ "./resources/js/components/FormularioDatosProducto.vue?vue&type=template&id=5e8daf64&");
+/* harmony import */ var _FormularioDatosProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormularioDatosProducto.vue?vue&type=script&lang=js& */ "./resources/js/components/FormularioDatosProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FormularioDatosProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FormularioDatosProducto_vue_vue_type_template_id_5e8daf64___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FormularioDatosProducto_vue_vue_type_template_id_5e8daf64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FormularioDatosProducto.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioDatosProducto.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/FormularioDatosProducto.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioDatosProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioDatosProducto.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioDatosProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioDatosProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioDatosProducto.vue?vue&type=template&id=5e8daf64&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/FormularioDatosProducto.vue?vue&type=template&id=5e8daf64& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioDatosProducto_vue_vue_type_template_id_5e8daf64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioDatosProducto.vue?vue&type=template&id=5e8daf64& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioDatosProducto.vue?vue&type=template&id=5e8daf64&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioDatosProducto_vue_vue_type_template_id_5e8daf64___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioDatosProducto_vue_vue_type_template_id_5e8daf64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioRentabilidadProducto.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/FormularioRentabilidadProducto.vue ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FormularioRentabilidadProducto_vue_vue_type_template_id_684271f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8& */ "./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8&");
+/* harmony import */ var _FormularioRentabilidadProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormularioRentabilidadProducto.vue?vue&type=script&lang=js& */ "./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FormularioRentabilidadProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FormularioRentabilidadProducto_vue_vue_type_template_id_684271f8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FormularioRentabilidadProducto_vue_vue_type_template_id_684271f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FormularioRentabilidadProducto.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioRentabilidadProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioRentabilidadProducto.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioRentabilidadProducto_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioRentabilidadProducto_vue_vue_type_template_id_684271f8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioRentabilidadProducto.vue?vue&type=template&id=684271f8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioRentabilidadProducto_vue_vue_type_template_id_684271f8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioRentabilidadProducto_vue_vue_type_template_id_684271f8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -55972,6 +56477,8 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
         descuentoProducto_3: producto.descuentoProducto[2],
         descuentoProducto_4: producto.descuentoProducto[3],
         descuentoProducto_5: producto.descuentoProducto[4],
+        rentabilidad: producto.rentabilidad,
+        precioVenta: producto.precioVenta,
         dtoReal: producto.dre,
         iva: producto.iva,
         flete: producto.flete,

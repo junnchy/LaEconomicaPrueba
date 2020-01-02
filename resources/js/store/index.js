@@ -225,6 +225,8 @@ export default new Vuex.Store({
         descuentoProducto_3: producto.descuentoProducto[2],
         descuentoProducto_4: producto.descuentoProducto[3],
         descuentoProducto_5: producto.descuentoProducto[4],
+        rentabilidad: producto.rentabilidad,
+        precioVenta: producto.precioVenta,
         dtoReal: producto.dre, iva: producto.iva, flete: producto.flete,
         precioCosto: producto.precioCosto,
         proveedor_id: producto.proveedor.id, categoria_id: producto.categoria.id}

@@ -63,6 +63,8 @@ class ProductosController extends Controller
             $producto->iva = $request->iva;
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
+            $producto->precioVenta = $request->precioVenta;
+            $producto->rentabilidad = $request->rentabilidad;
             $producto->proveedor_id = $request->proveedor_id;
             $producto->categoria_id = $request->categoria_id;
 
@@ -141,6 +143,8 @@ class ProductosController extends Controller
             $producto->iva = $request->iva;
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
+            $producto->precioVenta = $request->precioVenta;
+            $producto->rentabilidad = $request->rentabilidad;
             $producto->proveedor_id = $request->proveedor_id;
             $producto->categoria_id = $request->categoria_id;
 

@@ -1,35 +1,43 @@
 <template>
     <div>
-        <form @submit.prevent="agregarProducto(producto)">
-            <div class="form-group mt-5">
-                <div class="row">
-                    <div class="col-8">
-                        <h3>Ingreso de Nuevo Producto</h3>
-                    </div>
-                    <div class="col-4">
-                        <router-link :to="{name:'MenuProductos'}">
-                            <button class="btn btn-warning" v-if="respuesta != null" @click="$store.state.respuesta = null">
-                                Finalizar
-                            </button>
-                        </router-link>
-                        <router-link :to="{name:'MenuProductos'}" v-if="respuesta === null">
-                            <button class="btn btn-danger">
-                                Cancelar
-                            </button>
-                        </router-link>
-                    </div>
-                </div>
-                <div class="alert alert-success alert-dismissible fade show mt-4" v-if="respuesta != null">
-                    {{respuesta}} 
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+        <div class="row">
+            <div class="col-8">
+                <h3>Ingreso de Nuevo Producto</h3>
+            </div>
+            <div class="col-4">
+                <router-link :to="{name:'MenuProductos'}">
+                    <button class="btn btn-warning" v-if="respuesta != null" @click="$store.state.respuesta = null">
+                        Finalizar
                     </button>
-                </div>
+                </router-link>
+                <router-link :to="{name:'MenuProductos'}" v-if="respuesta === null">
+                    <button class="btn btn-danger">
+                        Cancelar
+                    </button>
+                </router-link>
+            </div>
+        </div>
+        <div class="alert alert-success alert-dismissible fade show mt-4" v-if="respuesta != null">
+            {{respuesta}} 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <ul class="nav nav-tabs mt-4">
+            <li class="nav-item">
+                <a :class=this.ctab0 @click="setTab(0)">Datos Generales</a>
+            </li>
+            <li class="nav-item">
+                <a :class=this.ctab1 @click="setTab(1)">Precios</a>
+            </li>
+        </ul>
+        <form @submit.prevent="agregarProducto(producto)">
+             <componente-fdatosprod v-bind:producto="producto" v-if="tab === 0"></componente-fdatosprod>
+            <!-- <div class="form-group mt-4" v-if="tab === 0">
                 <div class="form-group">
                     <label>Nombre Producto</label>
                     <input type="text" v-model="producto.nombre" class="form-control" >
                 </div> 
-                <componente-fcosto v-bind:producto="producto"></componente-fcosto>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-10">
@@ -47,10 +55,16 @@
                     <div class="form-group my-4">
                         <label>Categoria:</label> 
                         <select class="custom-select" v-model="producto.categoria">
+                            <option selected :value="producto.categoria" v-if="producto.proveedor_id === producto.proveedor.id">{{producto.categoria.id}}-{{producto.categoria.nombre}}</option>
                             <option v-for="(cate, index) in producto.proveedor.categorias" :key="index" :value='cate'>{{cate.id}} - {{cate.nombre}}</option>
                         </select>
                     </div>
                 </div>
+            </div> -->
+            <!-- Borrar y hacer compatible con el formulario de edicion -->
+            <div class="form-group my-4">
+                <componente-fcosto v-bind:producto="producto" v-if="tab === 1"></componente-fcosto>
+                <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>
             </div>
             <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null">Agregar</button>
         </form>
@@ -65,11 +79,27 @@ export default {
         return {
             descuento: 0,
             cate: {},
-            producto: {nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0},
+            producto: {nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, 
+            categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0,
+            precioVenta: 0, rentabilidad: 0},
+            tab: 0,
+            ctab0: 'nav-link active',
+            ctab1: 'nav-link'
         }
     },
     methods: {
-        ...mapActions(['agregarProducto', 'getCategoriasO', 'getProveedores','agregarCategoriaProveedor'])
+        ...mapActions(['agregarProducto', 'getCategoriasO', 'getProveedores','agregarCategoriaProveedor']),
+        setTab(nro){
+            this.tab = nro
+            if (this.tab===0) {
+                this.ctab0 ='nav-link active'
+                this.ctab1 ='nav-link'
+            }
+            if (this.tab===1) {
+                this.ctab1 ='nav-link active'
+                this.ctab0 ='nav-link'
+            }
+        }
     },
     created() {
         this.getCategoriasO()

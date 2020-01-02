@@ -27,6 +27,8 @@ class CreateProductosTable extends Migration
             $table->float('descuentoProducto_3');
             $table->float('descuentoProducto_4');
             $table->float('descuentoProducto_5');
+            $table->float('rentabilidad');
+            $table->float('precioVenta');
             $table->float('iva');
             $table->float('flete');
             $table->timestamps();

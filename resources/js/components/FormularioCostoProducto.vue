@@ -1,15 +1,17 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
                 <div class="form-group">     
                     <label>Precio Base</label>
                     <input type="number" step=0.01 v-model="producto.precioBase" class="form-control">
                 </div>
             </div>
-            <div class="col-6">
-                <label>Precio Costo</label>
-                <h3>{{setDre[1]}}</h3> 
+            <div class="col-4">
+                <div class="alert alert-dark" role="alert">
+                    <h6 class="text-center">Precio de Costo</h6>
+                    <h3 class="text-center">${{setDre[1]}}</h3> 
+                </div>
             </div>
         </div>
         <label class="text-center">Descuentos</label> 

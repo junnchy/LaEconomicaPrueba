@@ -20,8 +20,8 @@
         <ul class="list-group mt-3">
             <li class="list-group-item"><strong><h3>{{producto.nombre}}</h3></strong></li>
             <li class="list-group-item"><strong>Codigo: </strong> {{producto.id}}</li>
-            <li class="list-group-item"><strong>Precio Costo: </strong> 
-                <h5>${{producto.precioCosto}}</h5>
+            <li class="list-group-item"><strong>Precio de Venta: </strong> 
+                <h5>${{producto.precioVenta}}</h5>
             </li>
             <li class="list-group-item"><strong>Proveedor: </strong> 
                 <router-link :to="{name: 'detalleProv', params:{id: proveedor.id}}">

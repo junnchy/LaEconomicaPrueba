@@ -36,7 +36,7 @@
                             <tr>
                                 <th scope="col">#ID</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Costo</th>
+                                <th scope="col">Precio</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
@@ -44,7 +44,7 @@
                             <tr v-for="producto in filtered_productos" :key="producto.id">
                                 <th scope="row">{{producto.id}}</th>
                                 <td>{{producto.nombre}}</td>
-                                <td>{{producto.precioCosto}}</td>
+                                <td>{{producto.precioVenta}}</td>
                                 <td>
                                     <router-link :to="{name:'detalleProducto',params:{id: producto.id}}">
                                         <button class="btn btn-warning btn-sm">Ver</button>
