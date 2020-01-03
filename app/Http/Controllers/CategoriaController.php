@@ -14,11 +14,18 @@ class CategoriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = Categoria::all();
-        $proveedores = Proveedor::all();
-        return view('productos.categoria', compact('categorias', 'proveedores'));
+        if($request->ajax()){
+            $categorias = Categoria::with('children.padre', 'padre.children')->get();
+            return response()->json($categorias);
+        } else {
+            $categorias = Categoria::all();
+            $proveedores = Proveedor::all();
+            return view('productos.categoria', compact('categorias', 'proveedores'));
+        }
+
+        
     }
 
     /**
@@ -41,24 +48,42 @@ class CategoriaController extends Controller
     {
         $categoria = new Categoria();
 
-        $categoria->nombre = $request->nombre;
-        if ($request->categoria_id != null){
-            //queria hacer una funcion busca categoria... no la pude hacer andar 
-            $padre = Categoria::findOrFail($request->categoria_id);
-            $categoria->categoria_id = $padre->id;
-        }
+        if($request->ajax()){
 
-        $categoria->save();
-        
-        $idCat = $categoria->id;
+            $categoria->nombre = $request->nombre;
+            if ($request->categoria_id != null){
+                //queria hacer una funcion busca categoria... no la pude hacer andar 
+                $padre = Categoria::findOrFail($request->categoria_id);
+                $categoria->categoria_id = $padre->id;
+            }
+            $categoria->save();
 
-        if ($request->proveedor_id != null) {
+            return response()->json([
+                'categoria' => $categoria,
+                'message' => 'Categoria Agregada'
+            ], 200);
+
+        }else {
+            $categoria->nombre = $request->nombre;
+            if ($request->categoria_id != null){
+                //queria hacer una funcion busca categoria... no la pude hacer andar 
+                $padre = Categoria::findOrFail($request->categoria_id);
+                $categoria->categoria_id = $padre->id;
+            }
+
+            $categoria->save();
             
-            $proveedor = Proveedor::findOrFail($request->proveedor_id);
-            $proveedor->categorias()->attach($idCat, ['descuento'=> $request->descuento]);
+            $idCat = $categoria->id;
+
+            if ($request->proveedor_id != null) {
+                $proveedor = Proveedor::findOrFail($request->proveedor_id);
+                $proveedor->categorias()->attach($idCat, ['descuento'=> $request->descuento]);
+            }
+
+            return back()->with('mensaje', 'Categoria Agregada');
         }
 
-        return back()->with('mensaje', 'Categoria Agregada');
+        
 
     }
 
@@ -68,10 +93,15 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $categoria = Categoria::findOrFail($id);
-        return view('productos.detalleCategoria', compact('categoria'));
+        if($request->ajax()){
+            $categoria = Categoria::with('children.padre', 'padre.children')->findOrFail($id);
+            return response()->json($categoria);
+        } else {
+            $categoria = Categoria::findOrFail($id);
+            return view('productos.detalleCategoria', compact('categoria'));
+        }
     }
 
     /**
@@ -92,9 +122,24 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        if($request->ajax()){
+            
+            $categoria = Categoria::findOrFail($id);
+            $categoria->nombre = $request->nombre;
+            if ($request->categoria_id != null){
+                //queria hacer una funcion busca categoria... no la pude hacer andar 
+                $padre = Categoria::findOrFail($request->categoria_id);
+                $categoria->categoria_id = $padre->id;
+            }
+            $categoria->save();
+
+            return response()->json([
+                'categoria' => $categoria,
+                'message' => 'Actualizado'
+            ], 200);
+        }        
     }
 
     /**
@@ -108,4 +153,3 @@ class CategoriaController extends Controller
         //
     }
 }
-
