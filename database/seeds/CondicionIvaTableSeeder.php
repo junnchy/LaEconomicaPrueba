@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\CondicionIva;
+
+
+class CondicionIvaTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+        CondicionIva::truncate();
+        CondicionIva::insert(['denominacion'=>'Responsable Inscripto']);
+        CondicionIva::insert(['denominacion'=>'Responsable No Inscripto']);
+        CondicionIva::insert(['denominacion'=>'Consumidor Final']);
+        CondicionIva::insert(['denominacion'=>'Exento']);
+        CondicionIva::insert(['denominacion'=>'Monotributista']);
+        CondicionIva::insert(['denominacion'=>'No Categorizado']);
+        
+    }
+}

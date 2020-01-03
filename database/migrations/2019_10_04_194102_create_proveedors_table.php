@@ -32,3 +32,4 @@ class CreateProveedorsTable extends Migration
         Schema::dropIfExists('proveedors');
     }
 }
+

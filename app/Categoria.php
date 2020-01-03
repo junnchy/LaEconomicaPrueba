@@ -8,7 +8,7 @@ use App\Producto;
 use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
-{
+{ 
     public function padre()
     { //$libro->categoria->nombre
         return $this->belongsTo(self::class, 'categoria_id');
@@ -29,3 +29,4 @@ class Categoria extends Model
         return $this->hasMany(Producto::class, 'categoria_id');
     }
 }
+
