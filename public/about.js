@@ -448,6 +448,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'editarProducto',
@@ -1657,197 +1658,7 @@ var render = function() {
       },
       [
         _vm.tab === 0
-          ? _c("div", { staticClass: "form-group mt-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Nombre Producto")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.producto.nombre,
-                      expression: "producto.nombre"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text" },
-                  domProps: { value: _vm.producto.nombre },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.producto, "nombre", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-10" }, [
-                    _c("label", [_vm._v("Proveedor:")]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.producto.proveedor,
-                            expression: "producto.proveedor"
-                          }
-                        ],
-                        staticClass: "custom-select",
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.producto,
-                              "proveedor",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          {
-                            attrs: { selected: "" },
-                            domProps: { value: _vm.producto.proveedor }
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(_vm.producto.proveedor.id) +
-                                "-" +
-                                _vm._s(_vm.producto.proveedor.nombre)
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.proveedores, function(proveedor) {
-                          return _c(
-                            "option",
-                            {
-                              key: proveedor.id,
-                              domProps: { value: proveedor }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(proveedor.id) +
-                                  " - " +
-                                  _vm._s(proveedor.nombre)
-                              )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm.producto.proveedor.nombre != ""
-                    ? _c(
-                        "div",
-                        { staticClass: "col-2" },
-                        [
-                          _c("hr"),
-                          _vm._v(" "),
-                          _c("componente-facp", {
-                            attrs: { proveedor: _vm.producto.proveedor }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e()
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("Categoria:")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.producto.categoria,
-                        expression: "producto.categoria"
-                      }
-                    ],
-                    staticClass: "custom-select",
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.producto,
-                          "categoria",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _vm.producto.proveedor_id === _vm.producto.proveedor.id
-                      ? _c(
-                          "option",
-                          {
-                            attrs: { selected: "" },
-                            domProps: { value: _vm.producto.categoria }
-                          },
-                          [
-                            _vm._v(
-                              _vm._s(_vm.producto.categoria.id) +
-                                "-" +
-                                _vm._s(_vm.producto.categoria.nombre)
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm._l(_vm.producto.proveedor.categorias, function(
-                      categoria
-                    ) {
-                      return _c(
-                        "option",
-                        { key: categoria.id, domProps: { value: categoria } },
-                        [
-                          _vm._v(
-                            _vm._s(categoria.id) +
-                              " - " +
-                              _vm._s(categoria.nombre)
-                          )
-                        ]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ])
-            ])
+          ? _c("componente-fdatosprod", { attrs: { producto: _vm.producto } })
           : _vm._e(),
         _vm._v(" "),
         _c(
@@ -1877,7 +1688,8 @@ var render = function() {
               [_vm._v("Guardar Cambios")]
             )
           : _vm._e()
-      ]
+      ],
+      1
     )
   ])
 }

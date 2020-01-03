@@ -44,10 +44,12 @@
 
                                 <a class="dropdown-item" href="/productos/home">Productos</a>
                                 <router-link :to="{name: 'listadoCategorias'}" >
-                                    <a class="dropdown-item">Categorias</a>
+                                    <a class="dropdown-item" href="#">Categorias</a>
                                 </router-link>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
+                                <router-link :to="{name:'agregarProducto'}">
+                                    <a class="dropdown-item" href="#">Agregar Producto</a>
+                                </router-link>
                             </div>
                         </li>
                     </ul>

@@ -16,11 +16,11 @@ class AddForeignKeyClientesTable extends Migration
     {
         Schema::table('clientes', function (Blueprint $table)
         {
-            $table->unsignedBigInteger('cat_clientes_id')->nullable();
+            $table->unsignedBigInteger('cat_clientes_id')->nullable()->unsigned();
             $table->foreign('cat_clientes_id')->references('id')->on('categoria_clientes');
-            $table->unsignedBigInteger('condicion_iva_id')->nullable();
+            $table->unsignedBigInteger('condicion_iva_id')->nullable()->unsigned();
             $table->foreign('condicion_iva_id')->references('id')->on('condicion_iva');
-            $table->unsignedBigInteger('localidad_id')->nullable();
+            $table->unsignedBigInteger('localidad_id')->nullable()->unsigned();
             $table->foreign('localidad_id')->references('id')->on('localidades');
         });
     }

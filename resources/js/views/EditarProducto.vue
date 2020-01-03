@@ -34,7 +34,8 @@
             </li>
         </ul>
         <form @submit.prevent="editarProducto(producto)">
-            <div class="form-group mt-4" v-if="tab === 0">
+            <componente-fdatosprod v-bind:producto="producto" v-if="tab === 0"></componente-fdatosprod>
+            <!-- <div class="form-group mt-4" v-if="tab === 0">
                 <div class="form-group">
                     <label>Nombre Producto</label>
                     <input type="text" v-model="producto.nombre" class="form-control" >
@@ -61,7 +62,7 @@
                         <option v-for="categoria in producto.proveedor.categorias" :key="categoria.id" :value="categoria">{{categoria.id}} - {{categoria.nombre}}</option>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group my-4">
                 <componente-fcosto v-bind:producto="producto" v-if="tab === 1"></componente-fcosto>
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>

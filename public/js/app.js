@@ -2295,6 +2295,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     producto: {
@@ -39057,18 +39058,35 @@ var render = function() {
                 }
               }
             },
-            _vm._l(this.$store.state.proveedores, function(proveedor) {
-              return _c(
+            [
+              _c(
                 "option",
-                { key: proveedor.id, domProps: { value: proveedor } },
+                {
+                  attrs: { selected: "" },
+                  domProps: { value: _vm.producto.proveedor }
+                },
                 [
                   _vm._v(
-                    _vm._s(proveedor.id) + " - " + _vm._s(proveedor.nombre)
+                    _vm._s(_vm.producto.proveedor.id) +
+                      "-" +
+                      _vm._s(_vm.producto.proveedor.nombre)
                   )
                 ]
-              )
-            }),
-            0
+              ),
+              _vm._v(" "),
+              _vm._l(this.$store.state.proveedores, function(proveedor) {
+                return _c(
+                  "option",
+                  { key: proveedor.id, domProps: { value: proveedor } },
+                  [
+                    _vm._v(
+                      _vm._s(proveedor.id) + " - " + _vm._s(proveedor.nombre)
+                    )
+                  ]
+                )
+              })
+            ],
+            2
           )
         ]),
         _vm._v(" "),
