@@ -54,7 +54,21 @@ const routes = [
       name: 'editarProducto',
       component: () => import(/* webpackChunkName: "about" */ '../views/EditarProducto.vue')
     },
-
+    {
+      path: '/clientes/',
+      name: 'menuClientes',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuClientes.vue')
+    },
+    {
+      path: '/agregarCliente',
+      name: 'agregarCliente',
+      component: () => import(/* webpackChunkName: "about" */ '../views/AgregarCliente.vue')
+    },
+    {
+      path: '/detalleCliente/:id',
+      name: 'detalleCliente',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DetalleCliente.vue')
+    },
 ]
 
 

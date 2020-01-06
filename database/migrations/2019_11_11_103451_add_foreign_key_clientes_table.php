@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -14,14 +13,14 @@ class AddForeignKeyClientesTable extends Migration
      */
     public function up()
     {
-        Schema::table('clientes', function (Blueprint $table)
-        {
-            $table->unsignedBigInteger('cat_clientes_id')->nullable()->unsigned();
+        Schema::table('clientes', function (Blueprint $table) {
+            $table->unsignedBigInteger('cat_clientes_id')->nullable();
             $table->foreign('cat_clientes_id')->references('id')->on('categoria_clientes');
-            $table->unsignedBigInteger('condicion_iva_id')->nullable()->unsigned();
+            $table->unsignedBigInteger('condicion_iva_id')->nullable();
             $table->foreign('condicion_iva_id')->references('id')->on('condicion_iva');
-            $table->unsignedBigInteger('localidad_id')->nullable()->unsigned();
+            $table->unsignedBigInteger('localidad_id')->nullable();
             $table->foreign('localidad_id')->references('id')->on('localidades');
+    
         });
     }
 
@@ -32,16 +31,15 @@ class AddForeignKeyClientesTable extends Migration
      */
     public function down()
     {
-        Schema::table('clientes', function (Blueprint $table) 
-        {
-            
+        /* Schema::disableForeignKeyConstraints();
+        Schema::table('clientes', function (Blueprint $table) {
             $table->dropForeign(['cat_clientes_id']);
             $table->dropColumn('cat_clientes_id');
             $table->dropForeign(['condicion_iva_id']);
             $table->dropColumn('condicion_iva_id');
             $table->dropForeign('localidad_id');
             $table->dropColumn('localidad_id');
-    
         });
+        Schema::enableForeignKeyConstraints(); */
     }
 }

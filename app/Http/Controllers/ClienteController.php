@@ -17,13 +17,20 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::all();
-        $categorias = CategoriaClientes::all();
-        $condicionesIva = CondicionIva::all();
-        $localidades = Localidad::all();
-        return view('clientes.home', compact('clientes','categorias','condicionesIva','localidades'));
+
+        if($request->ajax()){
+            $clientes = Cliente::all();
+            return response()->json($clientes);
+        } else {
+            $clientes = Cliente::all();
+            $categorias = CategoriaClientes::all();
+            $condicionesIva = CondicionIva::all();
+            $localidades = Localidad::all();
+            return view('clientes.home', compact('clientes','categorias','condicionesIva','localidades'));
+        }
+        
     }
 
     /**
@@ -44,23 +51,45 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nombre' => 'required',
-            'cuit' => 'required',
-        ]);
-        $cliente = new Cliente();
-        $cliente->nombre = $request->nombre;
-        $cliente->cuit = $request->cuit;
-        $cliente->telefono = $request->telefono;
-        $cliente->celular = $request->celular;
-        $cliente->email = $request->email;
-        $cliente->direccion = $request->direccion;
-        $cliente->localidad_id = $request->localidad_id;
-        $cliente->cat_clientes_id = $request->categoria_id;
-        $cliente->condicion_iva_id = $request->condicion_iva_id;
-        $cliente->save();
 
-        return back()->with('mensaje', 'Cliente Agregado');
+        if($request->ajax()){
+            $cliente = new Cliente();
+            $cliente->nombre = $request->nombre;
+            $cliente->cuit = $request->cuit;
+            $cliente->telefono = $request->telefono;
+            $cliente->celular = $request->celular;
+            $cliente->email = $request->email;
+            $cliente->direccion = $request->direccion;
+            $cliente->localidad_id = $request->localidad_id;
+            $cliente->cat_clientes_id = $request->categoria_id;
+            $cliente->condicion_iva_id = $request->condicion_iva_id;
+            $cliente->save();
+            
+            return response()->json([
+                'producto' => $cliente,
+                'message' => 'Cliente Agregado'
+            ], 200);
+
+        } else {
+            $validatedData = $request->validate([
+                'nombre' => 'required',
+                'cuit' => 'required',
+            ]);
+            $cliente = new Cliente();
+            $cliente->nombre = $request->nombre;
+            $cliente->cuit = $request->cuit;
+            $cliente->telefono = $request->telefono;
+            $cliente->celular = $request->celular;
+            $cliente->email = $request->email;
+            $cliente->direccion = $request->direccion;
+            $cliente->localidad_id = $request->localidad_id;
+            $cliente->cat_clientes_id = $request->categoria_id;
+            $cliente->condicion_iva_id = $request->condicion_iva_id;
+            $cliente->save();
+    
+            return back()->with('mensaje', 'Cliente Agregado');
+        }
+        
     }
 
     /**
@@ -69,13 +98,18 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $cliente = Cliente::findOrFail($id);
-        $categorias = CategoriaClientes::all();
-        $condicionesIva = CondicionIva::all();
-        $localidades = Localidad::all();
-        return view('clientes.editar', compact('cliente', 'categorias', 'condicionesIva', 'localidades'));
+        if($request->ajax()){
+            $cliente = Cliente::findOrFail($id);
+            return response()->json($cliente);
+        }else {
+            $cliente = Cliente::findOrFail($id);
+            $categorias = CategoriaClientes::all();
+            $condicionesIva = CondicionIva::all();
+            $localidades = Localidad::all();
+            return view('clientes.editar', compact('cliente', 'categorias', 'condicionesIva', 'localidades'));
+        } 
     }
 
     /**

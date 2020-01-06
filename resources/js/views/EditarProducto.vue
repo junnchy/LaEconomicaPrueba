@@ -35,34 +35,6 @@
         </ul>
         <form @submit.prevent="editarProducto(producto)">
             <componente-fdatosprod v-bind:producto="producto" v-if="tab === 0"></componente-fdatosprod>
-            <!-- <div class="form-group mt-4" v-if="tab === 0">
-                <div class="form-group">
-                    <label>Nombre Producto</label>
-                    <input type="text" v-model="producto.nombre" class="form-control" >
-                </div> 
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-10">
-                            <label>Proveedor:</label> 
-                            <select class="custom-select" v-model="producto.proveedor">
-                                <option selected :value="producto.proveedor">{{producto.proveedor.id}}-{{producto.proveedor.nombre}}</option>
-                                <option v-for="proveedor in proveedores" :key="proveedor.id" :value="proveedor">{{proveedor.id}} - {{proveedor.nombre}}</option>
-                            </select>
-                        </div>
-                            <div class="col-2" v-if="producto.proveedor.nombre != ''">
-                            <hr/>
-                            <componente-facp :proveedor="producto.proveedor"></componente-facp>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Categoria:</label> 
-                    <select class="custom-select" v-model="producto.categoria">
-                        <option selected :value="producto.categoria" v-if="producto.proveedor_id === producto.proveedor.id">{{producto.categoria.id}}-{{producto.categoria.nombre}}</option>
-                        <option v-for="categoria in producto.proveedor.categorias" :key="categoria.id" :value="categoria">{{categoria.id}} - {{categoria.nombre}}</option>
-                    </select>
-                </div>
-            </div> -->
             <div class="form-group my-4">
                 <componente-fcosto v-bind:producto="producto" v-if="tab === 1"></componente-fcosto>
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>

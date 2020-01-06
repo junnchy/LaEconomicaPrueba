@@ -13,11 +13,13 @@ class CategoriaClientesTableSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         CategoriaClientes::truncate();
         CategoriaClientes::insert(['denominacion'=>'Consumidor Final']);
         CategoriaClientes::insert(['denominacion'=>'Empresa']);
         CategoriaClientes::insert(['denominacion'=>'Profesional']);
         CategoriaClientes::insert(['denominacion'=>'Organización']);
         CategoriaClientes::insert(['denominacion'=>'Responsable Inscripto']);
+        Schema::enableForeignKeyConstraints(); 
     }
 }

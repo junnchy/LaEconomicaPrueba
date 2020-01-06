@@ -12,7 +12,7 @@
                     <a href="{{route('homeProductos')}}" class="btn btn-primary btn-block" >Modulo Productos</a>
                 </div>
                 <div class="col-md-3">
-                    <a href="/productos/home" class="btn btn-primary btn-block" >TEST</a>
+                    <a href="/clientes/" class="btn btn-primary btn-block" >Clientes</a>
                 </div>
                 <div class="col-md-3">
                     <a href="#" class="btn btn-primary btn-block" >BTN</a>

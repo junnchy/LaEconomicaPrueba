@@ -19,6 +19,7 @@
                     </div>
                 </div>
             </form>
+            <!-- Pasar a una vista todo le modal -->
             <div class="container">
                 <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar</button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,7 +39,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Categoria Padre:</label>
-                                        <select class="custom-select" v-model="ncat.categoria_id">
+                                        <select class="form-control" v-model="ncat.categoria_id">
                                             <option selected="selected" :value='null'>0 - Vacio</option>
                                             <option v-for="(categoria, index) in categorias" :key="index">{{categoria.id}} - {{categoria.nombre}}</option>
                                         </select>

@@ -15,7 +15,7 @@
                             <h4>Proveedor: {{proveedor.nombre}}</h4>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Categoria:</label>
-                                <select class="custom-select" v-model="categoria">
+                                <select class="form-control" v-model="categoria">
                                     <option v-for="(categoria, index) in categorias" :key="index" :value="categoria.id">{{categoria.id}} - {{categoria.nombre}}</option>
                                 </select>
                             </div>

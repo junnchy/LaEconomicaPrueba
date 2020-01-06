@@ -1,12 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index.js'
+import clientes from './modules/clientes'
+import localidades from './modules/localidades'
+import condicionIva from './modules/condiconIva'
 
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  modules: {
+    clientes,
+    localidades,
+    condicionIva
+  },
   state: {
     producto: {},
     respuesta: null,
