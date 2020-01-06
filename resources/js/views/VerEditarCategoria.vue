@@ -53,14 +53,14 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getCategoria','getCategoriasO', 'editarCategoria'])
+        ...mapActions('categorias',['getCategoria','getCategoriasO', 'editarCategoria'])
     },
     created() {
         this.getCategoria(this.id)
         this.getCategoriasO()
     },
     computed: {
-        ...mapState(['categoria', 'categorias'])
+        ...mapState('categorias',['categoria', 'categorias'])
     }
 }
 </script>

@@ -68,7 +68,9 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getProveedores','getProductos', 'getCategoriasO'])
+        ...mapActions('categorias',['getCategoriasO']),
+        ...mapActions('proveedores',['getProveedores']),
+        ...mapActions('productos',['getProductos'])
     },
     created() {
         this.getProductos()
@@ -76,32 +78,41 @@ export default {
         this.getCategoriasO()
     },
     computed: {
-        ...mapState(['productos', 'categorias', 'proveedores']),
-        ...mapGetters(['filtered_productos']),
+        ...mapState('productos',['productos']),
+        ...mapState('categorias',['categorias']),
+        ...mapState('proveedores',['proveedores']),
+        ...mapGetters('productos',['filtered_productos']),
         search:{
             get(){
-                return this.$store.state.filter.query;
+                return this.$store.state.productos.filter.query;
             },
             set(val){
-                this.$store.commit('SET_QUERY', val);
+                this.$store.commit('productos/SET_QUERY', val)
             }
         },
         fcat:{
             get(){
-                return this.$store.state.filter.categoria;
+                return this.$store.state.productos.filter.categoria;
             },
             set(val){
-                this.$store.commit('SET_CATEGORIA', val);
+                this.$store.commit('productos/SET_CATEGORIA', val)
             }
         },
         fpro:{
             get(){
-                return this.$store.state.filter.proveedor;
+                return this.$store.state.productos.filter.proveedor;
             },
             set(val){
-                this.$store.commit('SET_PROVEEDOR', val);
+                this.$store.commit('productos/SET_PROVEEDOR', val)
             }
         }
     },
 }
 </script>
+
+get(){
+                    return this.$store.state.categorias.filter.query;
+                },
+                set(val){
+                    this.$store.commit('categorias/SET_QUERY', val)
+                }

@@ -36,9 +36,6 @@
                         <li>
                             <a class="nav-link" href="/proveedores/" class="">Proveedores</a>
                         </li> 
-                        <li>
-                            <a class="nav-link" href="{{ route('clientes.index') }}" class="">Clientes</a>  
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Productos
@@ -46,13 +43,29 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                                 <a class="dropdown-item" href="/productos/home">Productos</a>
-                                <router-link :to="{name: 'listadoCategorias'}" >
-                                    <a class="dropdown-item" href="#">Categorias</a>
-                                </router-link>
-                                <div class="dropdown-divider"></div>
                                 <router-link :to="{name:'agregarProducto'}">
                                     <a class="dropdown-item" href="#">Agregar Producto</a>
                                 </router-link>
+                                <div class="dropdown-divider"></div>
+                                <router-link :to="{name: 'listadoCategorias'}" >
+                                    <a class="dropdown-item" href="#">Categorias</a>
+                                </router-link>
+                                <!-- <router-link :to="{name: 'listadoCategorias'}" >
+                                    <a class="dropdown-item" href="#">Agregar Categoria</a>
+                                </router-link> -->
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Clientes
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                <a class="dropdown-item" href="/clientes/">Listado Clientes</a>
+                                <router-link :to="{name: 'agregarCliente'}" >
+                                    <a class="dropdown-item" href="#">Agregar Cliente</a>
+                                </router-link>
+                                <div class="dropdown-divider"></div>
                             </div>
                         </li>
                     </ul>

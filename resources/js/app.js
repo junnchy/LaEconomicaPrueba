@@ -16,6 +16,8 @@ Vue.component('componente-frentabilidad', require('./components/FormularioRentab
 Vue.component('componente-fdatosprod', require('./components/FormularioDatosProducto.vue').default);
 Vue.component('componente-listadoClientes', require('./components/ListadoClientes.vue').default);
 Vue.component('componente-fdatoscliente', require('./components/FormularioDatosCliente.vue').default);
+Vue.component('componente-fagregarcategoria', require('./components/FormularioAgregarCategoria.vue').default);
+
 
 const app = new Vue({
     router,

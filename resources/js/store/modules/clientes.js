@@ -4,7 +4,10 @@ export default {
         clientes: [],
         categoriasCli: [],
         cliente: {},
-        respuestaS: null
+        respuestaS: null,
+        filter: {
+            query: '',
+        }
     },
     mutations: {
         setClientes(state, clientes){
@@ -18,7 +21,10 @@ export default {
         },
         setCliente(state, cliente){
             state.cliente = cliente
-        }
+        },
+        SET_QUERY(state, query){
+            state.filter.query = query;
+        },
     },
     actions:{
         async getClientes({commit}){
@@ -50,6 +56,7 @@ export default {
             }
         },
         agregarCliente({commit}, cliente){
+            console.log(cliente)
             axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
               console.log(response);
               commit('setRespuestaServidor', response.data.message)

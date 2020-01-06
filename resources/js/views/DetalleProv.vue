@@ -49,19 +49,19 @@ export default {
     data() {
         return {
             id: this.$route.params.id,
-            categoria:'',
-            descuento: 0
         }
     },
     methods: {
-        ...mapActions(['getProveedor', 'getCategorias', 'agregarCategoriaProveedor'])
+        ...mapActions('proveedores',['getProveedor']),
+        ...mapActions('categorias', ['getCategoriasO', 'agregarCategoriaProveedor'])
     },
     created() {
         this.getProveedor(this.id)
-        this.getCategorias()
+        this.getCategoriasO()
     },
     computed: {
-        ...mapState(['proveedor', 'categorias'])
+        ...mapState('proveedores', ['proveedor']),
+        ...mapState('categorias', ['categorias'])
     },
 
 }

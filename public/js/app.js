@@ -2070,6 +2070,81 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioAgregarCategoria.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioAgregarCategoria.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      ncat: {
+        nombre: '',
+        categoria_id: 0
+      }
+    };
+  },
+  mounted: function mounted() {
+    console.log('component mounted');
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria'])),
+  created: function created() {
+    this.getCategoriasO();
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']))
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioAgregarCategoriaProveedor.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioAgregarCategoriaProveedor.vue?vue&type=script&lang=js& ***!
@@ -2134,15 +2209,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       descuento: 0,
-      categoria: ''
+      categoria: 0
     };
   },
   mounted: function mounted() {
     console.log('component mounted');
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['agregarCategoriaProveedor'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['agregarCategoriaProveedor'])),
   created: function created() {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categorias', 'proveedores', 'respuesta']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']))
 });
 
 /***/ }),
@@ -2411,21 +2486,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      cliente: {
-        nombre: '',
-        cuit: '',
-        telefono: '',
-        celular: '',
-        email: '',
-        direccion: '',
-        localidad_id: 0,
-        cat_clientes_id: 0,
-        condicion_iva_id: 0
-      }
-    };
+  props: {
+    cliente: {
+      type: Object,
+      required: true
+    }
   },
+
+  /* data() {
+      return{
+          cliente:{nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
+          localidad_id: 0, cat_clientes_id : 0, condicion_iva_id: 0}
+      }
+  }, */
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getCategoriasCli', 'agregarCliente']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['getLocalidades']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('condicionIva', ['getCondicionesIva'])),
   created: function created() {
     this.getCategoriasCli();
@@ -38736,6 +38809,227 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-success btn-block",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#exampleModal",
+          "data-whatever": "@mdo"
+        }
+      },
+      [_vm._v("Agregar Categoria")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.agregarCategoria(_vm.ncat)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { staticClass: "col-form-label" }, [
+                        _vm._v("Nombre de la Nueva Categoria:")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.ncat.nombre,
+                            expression: "ncat.nombre"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text" },
+                        domProps: { value: _vm.ncat.nombre },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.ncat, "nombre", $event.target.value)
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-name" }
+                        },
+                        [_vm._v("Categoria Padre:")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.ncat.categoria_id,
+                              expression: "ncat.categoria_id"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.ncat,
+                                "categoria_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "selected" },
+                              domProps: { value: null }
+                            },
+                            [_vm._v("0 - Vacio")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.categorias, function(categoria, index) {
+                            return _c("option", { key: index }, [
+                              _vm._v(
+                                _vm._s(categoria.id) +
+                                  " - " +
+                                  _vm._s(categoria.nombre)
+                              )
+                            ])
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Agregar Categoria")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Cerrar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
+        [_vm._v("Agregar")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioAgregarCategoriaProveedor.vue?vue&type=template&id=26e43286&":
 /*!**************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/FormularioAgregarCategoriaProveedor.vue?vue&type=template&id=26e43286& ***!
@@ -39736,7 +40030,9 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._l(this.$store.state.proveedores, function(proveedor) {
+              _vm._l(this.$store.state.proveedores.proveedores, function(
+                proveedor
+              ) {
                 return _c(
                   "option",
                   { key: proveedor.id, domProps: { value: proveedor } },
@@ -56129,6 +56425,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-frentabilidad',
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-fdatosprod', __webpack_require__(/*! ./components/FormularioDatosProducto.vue */ "./resources/js/components/FormularioDatosProducto.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-listadoClientes', __webpack_require__(/*! ./components/ListadoClientes.vue */ "./resources/js/components/ListadoClientes.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-fdatoscliente', __webpack_require__(/*! ./components/FormularioDatosCliente.vue */ "./resources/js/components/FormularioDatosCliente.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-fagregarcategoria', __webpack_require__(/*! ./components/FormularioAgregarCategoria.vue */ "./resources/js/components/FormularioAgregarCategoria.vue")["default"]);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: _router_index_js__WEBPACK_IMPORTED_MODULE_1__["default"],
   store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -56453,6 +56750,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioAgregarCategoria.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/FormularioAgregarCategoria.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _FormularioAgregarCategoria_vue_vue_type_template_id_512d0b5e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e& */ "./resources/js/components/FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e&");
+/* harmony import */ var _FormularioAgregarCategoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormularioAgregarCategoria.vue?vue&type=script&lang=js& */ "./resources/js/components/FormularioAgregarCategoria.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _FormularioAgregarCategoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FormularioAgregarCategoria_vue_vue_type_template_id_512d0b5e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _FormularioAgregarCategoria_vue_vue_type_template_id_512d0b5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FormularioAgregarCategoria.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioAgregarCategoria.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/FormularioAgregarCategoria.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioAgregarCategoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioAgregarCategoria.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioAgregarCategoria.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioAgregarCategoria_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioAgregarCategoria_vue_vue_type_template_id_512d0b5e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/FormularioAgregarCategoria.vue?vue&type=template&id=512d0b5e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioAgregarCategoria_vue_vue_type_template_id_512d0b5e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FormularioAgregarCategoria_vue_vue_type_template_id_512d0b5e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -56985,114 +57351,104 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _router_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../router/index.js */ "./resources/js/router/index.js");
+/* harmony import */ var _modules_clientes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/clientes */ "./resources/js/store/modules/clientes.js");
+/* harmony import */ var _modules_localidades__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/localidades */ "./resources/js/store/modules/localidades.js");
+/* harmony import */ var _modules_condiconIva__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/condiconIva */ "./resources/js/store/modules/condiconIva.js");
+/* harmony import */ var _modules_proveedores__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/proveedores */ "./resources/js/store/modules/proveedores.js");
+/* harmony import */ var _modules_categorias__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/categorias */ "./resources/js/store/modules/categorias.js");
+/* harmony import */ var _modules_productos__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/productos */ "./resources/js/store/modules/productos.js");
+
+
+
+
+
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  modules: {
+    clientes: _modules_clientes__WEBPACK_IMPORTED_MODULE_3__["default"],
+    localidades: _modules_localidades__WEBPACK_IMPORTED_MODULE_4__["default"],
+    condicionIva: _modules_condiconIva__WEBPACK_IMPORTED_MODULE_5__["default"],
+    proveedores: _modules_proveedores__WEBPACK_IMPORTED_MODULE_6__["default"],
+    categorias: _modules_categorias__WEBPACK_IMPORTED_MODULE_7__["default"],
+    productos: _modules_productos__WEBPACK_IMPORTED_MODULE_8__["default"]
+  },
+  state: {},
+  mutations: {},
+  actions: {},
+  getters: {}
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/categorias.js":
+/*!**************************************************!*\
+  !*** ./resources/js/store/modules/categorias.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _router_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../router/index.js */ "./resources/js/router/index.js");
-/* harmony import */ var _modules_clientes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/clientes */ "./resources/js/store/modules/clientes.js");
-/* harmony import */ var _modules_localidades__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/localidades */ "./resources/js/store/modules/localidades.js");
-/* harmony import */ var _modules_condiconIva__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/condiconIva */ "./resources/js/store/modules/condiconIva.js");
 
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-
-
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_2__["default"].Store({
-  modules: {
-    clientes: _modules_clientes__WEBPACK_IMPORTED_MODULE_4__["default"],
-    localidades: _modules_localidades__WEBPACK_IMPORTED_MODULE_5__["default"],
-    condicionIva: _modules_condiconIva__WEBPACK_IMPORTED_MODULE_6__["default"]
-  },
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
   state: {
-    producto: {},
     respuesta: null,
-    productos: [],
-    proveedores: [],
     categorias: [],
-    proveedor: {
-      id: '',
-      nombre: '',
-      cuit: '',
-      telefono: ''
-    },
     categoria: {},
     filter: {
-      query: '',
-      categoria: 0,
-      proveedor: 0
+      query: ''
     }
   },
   mutations: {
-    setProveedores: function setProveedores(state, proveedores) {
-      state.proveedores = proveedores;
-    },
-    setProveedor: function setProveedor(state, proveedor) {
-      state.proveedor = proveedor;
-    },
     setCategorias: function setCategorias(state, categorias) {
       state.categorias = categorias;
     },
     setCategoria: function setCategoria(state, categoria) {
       state.categoria = categoria;
     },
-    setProductos: function setProductos(state, productos) {
-      state.productos = productos;
-    },
-    SET_QUERY: function SET_QUERY(state, query) {
-      state.filter.query = query;
-    },
-    SET_CATEGORIA: function SET_CATEGORIA(state, categoria) {
-      state.filter.categoria = categoria;
-    },
-    SET_PROVEEDOR: function SET_PROVEEDOR(state, proveedor) {
-      state.filter.proveedor = proveedor;
-    },
     setRespuesta: function setRespuesta(state, respuesta) {
       state.respuesta = respuesta;
     },
-    setProducto: function setProducto(state, producto) {
-      producto.descuentoProducto = [producto.descuentoProducto_1, producto.descuentoProducto_2, producto.descuentoProducto_3, producto.descuentoProducto_4, producto.descuentoProducto_5];
-      state.producto = producto;
+    SET_QUERY: function SET_QUERY(state, query) {
+      state.filter.query = query;
     }
   },
   actions: {
-    getProveedores: function () {
-      var _getProveedores = _asyncToGenerator(
+    getCategorias: function () {
+      var _getCategorias = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
-        var commit, p, proveedores;
+        var commit, cat, categorias;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 commit = _ref.commit;
-                p = [];
+                cat = [];
                 _context.prev = 2;
                 _context.next = 5;
-                return axios.get('http://127.0.0.1:8000/proveedores');
+                return axios.get('http://127.0.0.1:8000/categoria');
 
               case 5:
-                proveedores = _context.sent;
-                proveedores.data.forEach(function (element) {
-                  p.push(element);
+                categorias = _context.sent;
+                categorias.data.forEach(function (element) {
+                  cat.push(element);
                 });
                 _context.next = 12;
                 break;
@@ -57104,7 +57460,7 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
 
               case 12:
                 _context.prev = 12;
-                commit('setProveedores', p);
+                commit('setCategorias', cat);
                 return _context.finish(12);
 
               case 15:
@@ -57115,184 +57471,29 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
         }, _callee, null, [[2, 9, 12, 15]]);
       }));
 
-      function getProveedores(_x) {
-        return _getProveedores.apply(this, arguments);
-      }
-
-      return getProveedores;
-    }(),
-    getProveedor: function () {
-      var _getProveedor = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2, id) {
-        var commit, proveedor, aux, p;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                commit = _ref2.commit;
-                proveedor = {
-                  id: '',
-                  nombre: '',
-                  cuit: '',
-                  telefono: '',
-                  categorias: []
-                };
-                aux = {};
-                _context2.next = 5;
-                return axios.get("http://127.0.0.1:8000/proveedores/".concat(id)).then(function (response) {
-                  console.log(response.data);
-                  proveedor.id = response.data.id;
-                  proveedor.nombre = response.data.nombre;
-                  proveedor.telefono = response.data.telefono;
-                  proveedor.cuit = response.data.cuit;
-                  proveedor.categorias = response.data.categorias;
-                });
-
-              case 5:
-                p = _context2.sent;
-                commit('setProveedor', proveedor);
-
-              case 7:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function getProveedor(_x2, _x3) {
-        return _getProveedor.apply(this, arguments);
-      }
-
-      return getProveedor;
-    }(),
-    agregarProveedor: function agregarProveedor(_ref3, proveedor) {
-      var commit = _ref3.commit;
-      axios.post('http://127.0.0.1:8000/proveedores', {
-        nombre: proveedor.nombre,
-        telefono: proveedor.telefono,
-        cuit: proveedor.cuit
-      }).then(function (response) {
-        console.log(response);
-        _router_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].push({
-          name: 'listadoProveedores'
-        });
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    editarProveedor: function editarProveedor(_ref4, proveedor) {
-      var commit = _ref4.commit;
-      var id = proveedor.id;
-      var prov = {
-        nombre: proveedor.nombre,
-        telefono: proveedor.telefono,
-        cuit: proveedor.cuit
-      };
-      console.log(id);
-      console.log(prov);
-      axios.put("http://127.0.0.1:8000/proveedores/".concat(id), prov).then(function (response) {
-        console.log(response);
-        _router_index_js__WEBPACK_IMPORTED_MODULE_3__["default"].push({
-          name: 'detalleProv',
-          params: {
-            id: proveedor.id
-          }
-        });
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getCategorias: function () {
-      var _getCategorias = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref5) {
-        var commit, cat, categorias;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                commit = _ref5.commit;
-                cat = [];
-                _context3.prev = 2;
-                _context3.next = 5;
-                return axios.get('http://127.0.0.1:8000/categoria');
-
-              case 5:
-                categorias = _context3.sent;
-                categorias.data.forEach(function (element) {
-                  cat.push(element);
-                });
-                _context3.next = 12;
-                break;
-
-              case 9:
-                _context3.prev = 9;
-                _context3.t0 = _context3["catch"](2);
-                console.log(_context3.t0);
-
-              case 12:
-                _context3.prev = 12;
-                commit('setCategorias', cat);
-                return _context3.finish(12);
-
-              case 15:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, null, [[2, 9, 12, 15]]);
-      }));
-
-      function getCategorias(_x4) {
+      function getCategorias(_x) {
         return _getCategorias.apply(this, arguments);
       }
 
       return getCategorias;
     }(),
-    agregarCategoriaProveedor: function agregarCategoriaProveedor(_ref6, _ref7) {
-      var commit = _ref6.commit,
-          dispatch = _ref6.dispatch;
-
-      var _ref8 = _slicedToArray(_ref7, 3),
-          categoria = _ref8[0],
-          proveedor = _ref8[1],
-          descuento = _ref8[2];
-
-      var id = proveedor.id;
-      var cat = parseInt(categoria);
-      var prov = {
-        nombre: proveedor.nombre,
-        telefono: proveedor.telefono,
-        cuit: proveedor.cuit,
-        id_cat: cat,
-        descuento: descuento
-      };
-      axios.put("http://127.0.0.1:8000/proveedores/".concat(id), prov).then(function (response) {
-        dispatch('getProveedor', id);
-        dispatch('getProveedores');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
     getCategoriasO: function () {
       var _getCategoriasO = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(_ref9) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2) {
         var commit, cat, categorias, aux;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                commit = _ref9.commit;
+                commit = _ref2.commit;
                 cat = [];
-                _context4.prev = 2;
-                _context4.next = 5;
+                _context2.prev = 2;
+                _context2.next = 5;
                 return axios.get('http://127.0.0.1:8000/categoria');
 
               case 5:
-                categorias = _context4.sent;
+                categorias = _context2.sent;
                 categorias.data.forEach(function (element) {
                   cat.push(element);
                 });
@@ -57316,28 +57517,28 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
                     }
                   }
                 });
-                _context4.next = 14;
+                _context2.next = 14;
                 break;
 
               case 11:
-                _context4.prev = 11;
-                _context4.t0 = _context4["catch"](2);
-                console.log(_context4.t0);
+                _context2.prev = 11;
+                _context2.t0 = _context2["catch"](2);
+                console.log(_context2.t0);
 
               case 14:
-                _context4.prev = 14;
+                _context2.prev = 14;
                 commit('setCategorias', aux);
-                return _context4.finish(14);
+                return _context2.finish(14);
 
               case 17:
               case "end":
-                return _context4.stop();
+                return _context2.stop();
             }
           }
-        }, _callee4, null, [[2, 11, 14, 17]]);
+        }, _callee2, null, [[2, 11, 14, 17]]);
       }));
 
-      function getCategoriasO(_x5) {
+      function getCategoriasO(_x2) {
         return _getCategoriasO.apply(this, arguments);
       }
 
@@ -57346,14 +57547,14 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
     getCategoria: function () {
       var _getCategoria = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(_ref10, id) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref3, id) {
         var commit, cat, categoria;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                commit = _ref10.commit;
-                _context5.next = 3;
+                commit = _ref3.commit;
+                _context3.next = 3;
                 return axios.get("http://127.0.0.1:8000/categoria/".concat(id)).then(function (response) {
                   cat = response.data;
                   cat.cant_hijos = cat.children.length;
@@ -57362,24 +57563,24 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
                 });
 
               case 3:
-                categoria = _context5.sent;
+                categoria = _context3.sent;
 
               case 4:
               case "end":
-                return _context5.stop();
+                return _context3.stop();
             }
           }
-        }, _callee5);
+        }, _callee3);
       }));
 
-      function getCategoria(_x6, _x7) {
+      function getCategoria(_x3, _x4) {
         return _getCategoria.apply(this, arguments);
       }
 
       return getCategoria;
     }(),
-    editarCategoria: function editarCategoria(_ref11, categoria) {
-      var commit = _ref11.commit;
+    editarCategoria: function editarCategoria(_ref4, categoria) {
+      var commit = _ref4.commit;
       var id = categoria.id;
 
       if (categoria.categoria_id != null) {
@@ -57404,135 +57605,13 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
         console.log(error);
       });
     },
-    agregarCategoria: function agregarCategoria(_ref12, categoria) {
-      var commit = _ref12.commit,
-          dispatch = _ref12.dispatch;
+    agregarCategoria: function agregarCategoria(_ref5, categoria) {
+      var commit = _ref5.commit,
+          dispatch = _ref5.dispatch;
       axios.post('http://127.0.0.1:8000/categoria', categoria).then(function (response) {
         console.log(response);
         dispatch('getCategoriasO');
         commit('SET_QUERY', '');
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getProductos: function () {
-      var _getProductos = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(_ref13) {
-        var commit, prod, productos;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                commit = _ref13.commit;
-                prod = [];
-                _context6.prev = 2;
-                _context6.next = 5;
-                return axios.get('http://127.0.0.1:8000/productos');
-
-              case 5:
-                productos = _context6.sent;
-                productos.data.forEach(function (producto) {
-                  prod.push(producto);
-                });
-                _context6.next = 12;
-                break;
-
-              case 9:
-                _context6.prev = 9;
-                _context6.t0 = _context6["catch"](2);
-                console.log(_context6.t0);
-
-              case 12:
-                _context6.prev = 12;
-                commit('setProductos', prod);
-                return _context6.finish(12);
-
-              case 15:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, null, [[2, 9, 12, 15]]);
-      }));
-
-      function getProductos(_x8) {
-        return _getProductos.apply(this, arguments);
-      }
-
-      return getProductos;
-    }(),
-    agregarProducto: function agregarProducto(_ref14, producto) {
-      var commit = _ref14.commit;
-      var prod = {
-        id: null,
-        nombre: producto.nombre,
-        precioBase: producto.precioBase,
-        descuentoProducto_1: producto.descuentoProducto[0],
-        descuentoProducto_2: producto.descuentoProducto[1],
-        descuentoProducto_3: producto.descuentoProducto[2],
-        descuentoProducto_4: producto.descuentoProducto[3],
-        descuentoProducto_5: producto.descuentoProducto[4],
-        rentabilidad: producto.rentabilidad,
-        precioVenta: producto.precioVenta,
-        dtoReal: producto.dre,
-        iva: producto.iva,
-        flete: producto.flete,
-        precioCosto: producto.precioCosto,
-        proveedor_id: producto.proveedor.id,
-        categoria_id: producto.categoria.id
-      };
-      console.log(prod);
-      axios.post('http://127.0.0.1:8000/productos', prod).then(function (response) {
-        console.log(response);
-        commit('setRespuesta', response.data.message);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getProducto: function () {
-      var _getProducto = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7(_ref15, id) {
-        var commit, prod, producto;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                commit = _ref15.commit;
-                _context7.next = 3;
-                return axios.get("http://127.0.0.1:8000/productos/".concat(id)).then(function (response) {
-                  prod = response.data;
-                  console.log(prod);
-                  commit('setProducto', prod);
-                  commit('setProveedor', prod.proveedor);
-                  commit('setCategoria', prod.categoria);
-                });
-
-              case 3:
-                producto = _context7.sent;
-
-              case 4:
-              case "end":
-                return _context7.stop();
-            }
-          }
-        }, _callee7);
-      }));
-
-      function getProducto(_x9, _x10) {
-        return _getProducto.apply(this, arguments);
-      }
-
-      return getProducto;
-    }(),
-    editarProducto: function editarProducto(_ref16, producto) {
-      var commit = _ref16.commit;
-      var id = producto.id;
-      producto.descuentoProducto_1 = producto.descuentoProducto[0], producto.descuentoProducto_2 = producto.descuentoProducto[1], producto.descuentoProducto_3 = producto.descuentoProducto[2], producto.descuentoProducto_4 = producto.descuentoProducto[3], producto.descuentoProducto_5 = producto.descuentoProducto[4], producto.proveedor_id = producto.proveedor.id, producto.categoria_id = producto.categoria.id;
-      axios.put("http://127.0.0.1:8000/productos/".concat(id), producto).then(function (response) {
-        console.log(response);
-        commit('setRespuesta', response.data.message);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -57547,41 +57626,9 @@ vue__WEBPACK_IMPORTED_MODULE_1___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_2__
       } else {
         return state.categorias;
       }
-    },
-    filtered_proveedores: function filtered_proveedores(state) {
-      if (state.filter.query.length >= 1) {
-        return state.proveedores.filter(function (proveedor) {
-          return proveedor.nombre.toLowerCase().includes(state.filter.query);
-        });
-      } else {
-        return state.proveedores;
-      }
-    },
-    filtered_productos: function filtered_productos(state) {
-      var pfil = state.productos;
-
-      if (state.filter.categoria > 0) {
-        pfil = pfil.filter(function (producto) {
-          return producto.categoria_id === state.filter.categoria;
-        });
-      }
-
-      if (state.filter.proveedor > 0) {
-        pfil = pfil.filter(function (producto) {
-          return producto.proveedor_id === state.filter.proveedor;
-        });
-      }
-
-      if (state.filter.query.length >= 1) {
-        return pfil.filter(function (producto) {
-          return producto.nombre.toLowerCase().includes(state.filter.query);
-        });
-      } else {
-        return pfil;
-      }
     }
   }
-}));
+});
 
 /***/ }),
 
@@ -57608,7 +57655,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     clientes: [],
     categoriasCli: [],
     cliente: {},
-    respuestaS: null
+    respuestaS: null,
+    filter: {
+      query: ''
+    }
   },
   mutations: {
     setClientes: function setClientes(state, clientes) {
@@ -57622,6 +57672,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setCliente: function setCliente(state, cliente) {
       state.cliente = cliente;
+    },
+    SET_QUERY: function SET_QUERY(state, query) {
+      state.filter.query = query;
     }
   },
   actions: {
@@ -57721,6 +57774,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     agregarCliente: function agregarCliente(_ref3, cliente) {
       var commit = _ref3.commit;
+      console.log(cliente);
       axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
         console.log(response);
         commit('setRespuestaServidor', response.data.message);
@@ -57926,6 +57980,439 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getLocalidades;
     }()
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/productos.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/productos.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    respuesta: null,
+    productos: [],
+    producto: {},
+    filter: {
+      query: '',
+      categoria: 0,
+      proveedor: 0
+    }
+  },
+  mutations: _defineProperty({
+    setRespuesta: function setRespuesta(state, respuesta) {
+      state.respuesta = respuesta;
+    },
+    setProducto: function setProducto(state, producto) {
+      producto.descuentoProducto = [producto.descuentoProducto_1, producto.descuentoProducto_2, producto.descuentoProducto_3, producto.descuentoProducto_4, producto.descuentoProducto_5];
+      state.producto = producto;
+    },
+    setProductos: function setProductos(state, productos) {
+      state.productos = productos;
+    },
+    SET_QUERY: function SET_QUERY(state, query) {
+      state.filter.query = query;
+    },
+    SET_CATEGORIA: function SET_CATEGORIA(state, categoria) {
+      state.filter.categoria = categoria;
+    },
+    SET_PROVEEDOR: function SET_PROVEEDOR(state, proveedor) {
+      state.filter.proveedor = proveedor;
+    }
+  }, "SET_QUERY", function SET_QUERY(state, query) {
+    state.filter.query = query;
+  }),
+  actions: {
+    getProductos: function () {
+      var _getProductos = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+        var commit, prod, productos;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                prod = [];
+                _context.prev = 2;
+                _context.next = 5;
+                return axios.get('http://127.0.0.1:8000/productos');
+
+              case 5:
+                productos = _context.sent;
+                productos.data.forEach(function (producto) {
+                  prod.push(producto);
+                });
+                _context.next = 12;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
+                console.log(_context.t0);
+
+              case 12:
+                _context.prev = 12;
+                commit('setProductos', prod);
+                return _context.finish(12);
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 9, 12, 15]]);
+      }));
+
+      function getProductos(_x) {
+        return _getProductos.apply(this, arguments);
+      }
+
+      return getProductos;
+    }(),
+    agregarProducto: function agregarProducto(_ref2, producto) {
+      var commit = _ref2.commit;
+      var prod = {
+        id: null,
+        nombre: producto.nombre,
+        precioBase: producto.precioBase,
+        descuentoProducto_1: producto.descuentoProducto[0],
+        descuentoProducto_2: producto.descuentoProducto[1],
+        descuentoProducto_3: producto.descuentoProducto[2],
+        descuentoProducto_4: producto.descuentoProducto[3],
+        descuentoProducto_5: producto.descuentoProducto[4],
+        rentabilidad: producto.rentabilidad,
+        precioVenta: producto.precioVenta,
+        dtoReal: producto.dre,
+        iva: producto.iva,
+        flete: producto.flete,
+        precioCosto: producto.precioCosto,
+        proveedor_id: producto.proveedor.id,
+        categoria_id: producto.categoria.id
+      };
+      console.log(prod);
+      axios.post('http://127.0.0.1:8000/productos', prod).then(function (response) {
+        console.log(response);
+        commit('setRespuesta', response.data.message);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getProducto: function () {
+      var _getProducto = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, id) {
+        var commit, prod, producto;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref3.commit;
+                _context2.next = 3;
+                return axios.get("http://127.0.0.1:8000/productos/".concat(id)).then(function (response) {
+                  prod = response.data;
+                  console.log(prod);
+                  commit('setProducto', prod);
+                });
+
+              case 3:
+                producto = _context2.sent;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function getProducto(_x2, _x3) {
+        return _getProducto.apply(this, arguments);
+      }
+
+      return getProducto;
+    }(),
+    editarProducto: function editarProducto(_ref4, producto) {
+      var commit = _ref4.commit;
+      var id = producto.id;
+      producto.descuentoProducto_1 = producto.descuentoProducto[0], producto.descuentoProducto_2 = producto.descuentoProducto[1], producto.descuentoProducto_3 = producto.descuentoProducto[2], producto.descuentoProducto_4 = producto.descuentoProducto[3], producto.descuentoProducto_5 = producto.descuentoProducto[4], producto.proveedor_id = producto.proveedor.id, producto.categoria_id = producto.categoria.id;
+      axios.put("http://127.0.0.1:8000/productos/".concat(id), producto).then(function (response) {
+        console.log(response);
+        commit('setRespuesta', response.data.message);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  getters: {
+    filtered_productos: function filtered_productos(state) {
+      var pfil = state.productos;
+
+      if (state.filter.categoria > 0) {
+        pfil = pfil.filter(function (producto) {
+          return producto.categoria_id === state.filter.categoria;
+        });
+      }
+
+      if (state.filter.proveedor > 0) {
+        pfil = pfil.filter(function (producto) {
+          return producto.proveedor_id === state.filter.proveedor;
+        });
+      }
+
+      if (state.filter.query.length >= 1) {
+        return pfil.filter(function (producto) {
+          return producto.nombre.toLowerCase().includes(state.filter.query);
+        });
+      } else {
+        return pfil;
+      }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/proveedores.js":
+/*!***************************************************!*\
+  !*** ./resources/js/store/modules/proveedores.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../router */ "./resources/js/router/index.js");
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    respuesta: null,
+    proveedores: [],
+    proveedor: {
+      id: '',
+      nombre: '',
+      cuit: '',
+      telefono: ''
+    },
+    filter: {
+      query: ''
+    }
+  },
+  mutations: {
+    setProveedores: function setProveedores(state, proveedores) {
+      state.proveedores = proveedores;
+    },
+    setProveedor: function setProveedor(state, proveedor) {
+      state.proveedor = proveedor;
+    },
+    setRespuesta: function setRespuesta(state, respuesta) {
+      state.respuesta = respuesta;
+    },
+    SET_QUERY: function SET_QUERY(state, query) {
+      state.filter.query = query;
+    }
+  },
+  actions: {
+    getProveedores: function () {
+      var _getProveedores = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+        var commit, p, proveedores;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                p = [];
+                _context.prev = 2;
+                _context.next = 5;
+                return axios.get('http://127.0.0.1:8000/proveedores');
+
+              case 5:
+                proveedores = _context.sent;
+                proveedores.data.forEach(function (element) {
+                  p.push(element);
+                });
+                _context.next = 12;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](2);
+                console.log(_context.t0);
+
+              case 12:
+                _context.prev = 12;
+                commit('setProveedores', p);
+                return _context.finish(12);
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[2, 9, 12, 15]]);
+      }));
+
+      function getProveedores(_x) {
+        return _getProveedores.apply(this, arguments);
+      }
+
+      return getProveedores;
+    }(),
+    getProveedor: function () {
+      var _getProveedor = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2, id) {
+        var commit, proveedor, aux, p;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref2.commit;
+                proveedor = {
+                  id: '',
+                  nombre: '',
+                  cuit: '',
+                  telefono: '',
+                  categorias: []
+                };
+                aux = {};
+                _context2.next = 5;
+                return axios.get("http://127.0.0.1:8000/proveedores/".concat(id)).then(function (response) {
+                  console.log(response.data);
+                  proveedor.id = response.data.id;
+                  proveedor.nombre = response.data.nombre;
+                  proveedor.telefono = response.data.telefono;
+                  proveedor.cuit = response.data.cuit;
+                  proveedor.categorias = response.data.categorias;
+                });
+
+              case 5:
+                p = _context2.sent;
+                commit('setProveedor', proveedor);
+
+              case 7:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function getProveedor(_x2, _x3) {
+        return _getProveedor.apply(this, arguments);
+      }
+
+      return getProveedor;
+    }(),
+    agregarProveedor: function agregarProveedor(_ref3, proveedor) {
+      var commit = _ref3.commit;
+      axios.post('http://127.0.0.1:8000/proveedores', {
+        nombre: proveedor.nombre,
+        telefono: proveedor.telefono,
+        cuit: proveedor.cuit
+      }).then(function (response) {
+        console.log(response);
+        _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+          name: 'listadoProveedores'
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    editarProveedor: function editarProveedor(_ref4, proveedor) {
+      var commit = _ref4.commit;
+      var id = proveedor.id;
+      var prov = {
+        nombre: proveedor.nombre,
+        telefono: proveedor.telefono,
+        cuit: proveedor.cuit
+      };
+      console.log(id);
+      console.log(prov);
+      axios.put("http://127.0.0.1:8000/proveedores/".concat(id), prov).then(function (response) {
+        console.log(response);
+        _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+          name: 'detalleProv',
+          params: {
+            id: proveedor.id
+          }
+        });
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    agregarCategoriaProveedor: function agregarCategoriaProveedor(_ref5, _ref6) {
+      var commit = _ref5.commit,
+          dispatch = _ref5.dispatch;
+
+      var _ref7 = _slicedToArray(_ref6, 3),
+          categoria = _ref7[0],
+          proveedor = _ref7[1],
+          descuento = _ref7[2];
+
+      var id = proveedor.id;
+      var cat = parseInt(categoria);
+      var prov = {
+        nombre: proveedor.nombre,
+        telefono: proveedor.telefono,
+        cuit: proveedor.cuit,
+        id_cat: cat,
+        descuento: descuento
+      };
+      axios.put("http://127.0.0.1:8000/proveedores/".concat(id), prov).then(function (response) {
+        dispatch('getProveedor', id);
+        dispatch('getProveedores');
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  getters: {
+    filtered_proveedores: function filtered_proveedores(state) {
+      if (state.filter.query.length >= 1) {
+        return state.proveedores.filter(function (proveedor) {
+          return proveedor.nombre.toLowerCase().includes(state.filter.query);
+        });
+      } else {
+        return state.proveedores;
+      }
+    }
   }
 });
 

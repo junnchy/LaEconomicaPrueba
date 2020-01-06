@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-4">
                     <router-link :to="{name:'MenuProductos'}">
-                        <button class="btn btn-warning" v-if="respuesta != null" @click="$store.state.respuesta = null">
+                        <button class="btn btn-warning" v-if="respuesta != null" @click="$store.state.productos.respuesta = null">
                             Finalizar
                         </button>
                     </router-link>
@@ -57,7 +57,9 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getProducto', 'getCategoriasO', 'getProveedores','editarProducto']),
+        ...mapActions('productos',['getProducto','editarProducto']),
+        ...mapActions('categorias',[ 'getCategoriasO']),
+        ...mapActions('proveedores',['getProveedores']),
         setTab(nro){
             this.tab = nro
             if (nro===0) {
@@ -77,7 +79,9 @@ export default {
 
     },
     computed: {
-        ...mapState(['producto','categorias','proveedores', 'respuesta', 'descuentosProducto']),    
+        ...mapState('productos',['producto', 'respuesta', 'descuentosProducto']),
+        ...mapState('categorias',['categorias']),    
+        ...mapState('proveedores',['proveedores']),        
     }
 }
 </script>

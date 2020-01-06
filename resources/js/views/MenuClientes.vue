@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-12">
-                    <h1 class="text-center">Sección Clientes</h1>
+                    <h1 class="text-center">Clientes</h1>
             </div>
         </div>
          <div class="row mt-5">

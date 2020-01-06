@@ -42,7 +42,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['agregarProveedor'])
+        ...mapActions('proveedores',['agregarProveedor'])
     },
     created() {
     },

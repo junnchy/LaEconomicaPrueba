@@ -24,13 +24,13 @@
                 <h5>${{producto.precioVenta}}</h5>
             </li>
             <li class="list-group-item"><strong>Proveedor: </strong> 
-                <router-link :to="{name: 'detalleProv', params:{id: proveedor.id}}">
-                    <a>{{proveedor.nombre}}</a>
+                <router-link :to="{name: 'detalleProv', params:{id: producto.proveedor_id}}">
+                    <a>{{producto.proveedor.nombre}}</a>
                 </router-link>
             </li>
             <li class="list-group-item"><strong>Categoria: </strong> 
-                <router-link :to="{name: 'verEditarCategoria', params:{id: categoria.id}}">
-                    <a>{{categoria.nombre}}</a>
+                <router-link :to="{name: 'verEditarCategoria', params:{id: producto.categoria_id}}">
+                    <a>{{producto.categoria.nombre}}</a>
                 </router-link>
             </li>
             <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{producto.updated_at}}</li>
@@ -50,13 +50,15 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getProducto'])
+        ...mapActions('productos',['getProducto'])
     },
     created() {
         this.getProducto(this.id)
     },
     computed: {
-        ...mapState(['producto', 'proveedor', 'categoria'])
+        ...mapState('productos',['producto']),
+        ...mapState('proveedores',['proveedor']),
+        ...mapState('categorias',['categoria'])
     },
 
 }

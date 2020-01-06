@@ -50,6 +50,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'AgregarCliente',
+  data: function data() {
+    return {
+      cliente: {
+        nombre: '',
+        cuit: '',
+        telefono: '',
+        celular: '',
+        email: '',
+        direccion: '',
+        localidad_id: 0,
+        cat_clientes_id: 0,
+        condicion_iva_id: 0
+      }
+    };
+  },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['resetResp'])),
   created: function created() {},
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['respuestaS']))
@@ -144,7 +159,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ctab1: 'nav-link'
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['agregarProducto', 'getCategoriasO', 'getProveedores', 'agregarCategoriaProveedor']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores', 'agregarCategoriaProveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['agregarProducto']), {
     setTab: function setTab(nro) {
       this.tab = nro;
 
@@ -163,7 +178,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getCategoriasO();
     this.getProveedores();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categorias', 'proveedores', 'respuesta']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['respuesta']))
 });
 
 /***/ }),
@@ -230,7 +245,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['agregarProveedor'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['agregarProveedor'])),
   created: function created() {},
   computed: {}
 });
@@ -253,6 +268,29 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -340,11 +378,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: this.$route.params.id
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProducto'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProducto'])),
   created: function created() {
     this.getProducto(this.id);
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['producto', 'proveedor', 'categoria']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['producto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categoria']))
 });
 
 /***/ }),
@@ -412,17 +450,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: 'DetalleProv',
   data: function data() {
     return {
-      id: this.$route.params.id,
-      categoria: '',
-      descuento: 0
+      id: this.$route.params.id
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProveedor', 'getCategorias', 'agregarCategoriaProveedor'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoriaProveedor'])),
   created: function created() {
     this.getProveedor(this.id);
-    this.getCategorias();
+    this.getCategoriasO();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['proveedor', 'categorias']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']))
 });
 
 /***/ }),
@@ -500,7 +536,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ctab1: 'nav-link'
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProducto', 'getCategoriasO', 'getProveedores', 'editarProducto']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProducto', 'editarProducto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores']), {
     setTab: function setTab(nro) {
       this.tab = nro;
 
@@ -520,7 +556,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getCategoriasO();
     this.getProveedores();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['producto', 'categorias', 'proveedores', 'respuesta', 'descuentosProducto']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['producto', 'respuesta', 'descuentosProducto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']))
 });
 
 /***/ }),
@@ -583,11 +619,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: this.$route.params.id
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProveedor', 'editarProveedor'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedor', 'editarProveedor'])),
   created: function created() {
     this.getProveedor(this.id);
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['proveedor']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedor']))
 });
 
 /***/ }),
@@ -659,36 +695,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -696,24 +702,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ncat: {
         nombre: '',
         categoria_id: ''
-      }
+      },
+      searched: ''
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getCategoriasO', 'agregarCategoria'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria'])),
   created: function created() {
     this.getCategoriasO();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['filtered_categorias']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('categorias', ['filtered_categorias']), {
     search: {
       get: function get() {
-        return this.$store.state.filter.query;
+        return this.$store.state.categorias.filter.query;
       },
       set: function set(val) {
-        this.$store.commit('SET_QUERY', val);
+        this.$store.commit('categorias/SET_QUERY', val);
       }
     }
   }),
-  mutations: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['SET_QUERY']))
+  mutations: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('categorias', ['SET_QUERY']))
 });
 
 /***/ }),
@@ -786,17 +793,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProveedores'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores'])),
   created: function created() {
     this.getProveedores();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['proveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['filtered_proveedores']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('proveedores', ['filtered_proveedores']), {
     search: {
       get: function get() {
-        return this.$store.state.filter.query;
+        return this.$store.state.proveedores.filter.query;
       },
       set: function set(val) {
-        this.$store.commit('SET_QUERY', val);
+        this.$store.commit('proveedores/SET_QUERY', val);
       }
     }
   })
@@ -939,35 +946,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getProveedores', 'getProductos', 'getCategoriasO'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProductos'])),
   created: function created() {
     this.getProductos();
     this.getProveedores();
     this.getCategoriasO();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['productos', 'categorias', 'proveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(['filtered_productos']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['productos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('productos', ['filtered_productos']), {
     search: {
       get: function get() {
-        return this.$store.state.filter.query;
+        return this.$store.state.productos.filter.query;
       },
       set: function set(val) {
-        this.$store.commit('SET_QUERY', val);
+        this.$store.commit('productos/SET_QUERY', val);
       }
     },
     fcat: {
       get: function get() {
-        return this.$store.state.filter.categoria;
+        return this.$store.state.productos.filter.categoria;
       },
       set: function set(val) {
-        this.$store.commit('SET_CATEGORIA', val);
+        this.$store.commit('productos/SET_CATEGORIA', val);
       }
     },
     fpro: {
       get: function get() {
-        return this.$store.state.filter.proveedor;
+        return this.$store.state.productos.filter.proveedor;
       },
       set: function set(val) {
-        this.$store.commit('SET_PROVEEDOR', val);
+        this.$store.commit('productos/SET_PROVEEDOR', val);
       }
     }
   })
@@ -1044,12 +1051,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: this.$route.params.id
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getCategoria', 'getCategoriasO', 'editarCategoria'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoria', 'getCategoriasO', 'editarCategoria'])),
   created: function created() {
     this.getCategoria(this.id);
     this.getCategoriasO();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['categoria', 'categorias']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categoria', 'categorias']))
 });
 
 /***/ }),
@@ -1122,7 +1129,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "container mt-5" },
-      [_c("componente-fdatoscliente")],
+      [_c("componente-fdatoscliente", { attrs: { cliente: _vm.cliente } })],
       1
     )
   ])
@@ -1191,7 +1198,7 @@ var render = function() {
                     staticClass: "btn btn-warning",
                     on: {
                       click: function($event) {
-                        _vm.$store.state.respuesta = null
+                        _vm.$store.state.productos.respuesta = null
                       }
                     }
                   },
@@ -1507,9 +1514,75 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    " + _vm._s(_vm.cliente) + "\n")])
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-4" },
+        [
+          _c("button", { staticClass: "btn btn-warning" }, [
+            _vm._v("\n                Editar\n            ")
+          ]),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: { name: "menuClientes" } } }, [
+            _c("button", { staticClass: "btn btn-danger" }, [
+              _vm._v("\n                    Volver\n                ")
+            ])
+          ])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("ul", { staticClass: "list-group mt-3" }, [
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_c("h3", [_vm._v(_vm._s(_vm.cliente.nombre))])])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Codigo: ")]),
+        _vm._v(" " + _vm._s(_vm.cliente.id))
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Direccion: ")]),
+        _vm._v(" " + _vm._s(_vm.cliente.direccion))
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Telefono: ")]),
+        _vm._v(_vm._s(_vm.cliente.telefono) + " ")
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Celular: ")]),
+        _vm._v(" " + _vm._s(_vm.cliente.celular))
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Email: ")]),
+        _vm._v(" " + _vm._s(_vm.cliente.email))
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Ultima Actualizacion: ")]),
+        _vm._v(" " + _vm._s(_vm.cliente.updated_at))
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c("h2", [_vm._v("Detalle de Cliente ")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -1589,10 +1662,13 @@ var render = function() {
             "router-link",
             {
               attrs: {
-                to: { name: "detalleProv", params: { id: _vm.proveedor.id } }
+                to: {
+                  name: "detalleProv",
+                  params: { id: _vm.producto.proveedor_id }
+                }
               }
             },
-            [_c("a", [_vm._v(_vm._s(_vm.proveedor.nombre))])]
+            [_c("a", [_vm._v(_vm._s(_vm.producto.proveedor.nombre))])]
           )
         ],
         1
@@ -1610,11 +1686,11 @@ var render = function() {
               attrs: {
                 to: {
                   name: "verEditarCategoria",
-                  params: { id: _vm.categoria.id }
+                  params: { id: _vm.producto.categoria_id }
                 }
               }
             },
-            [_c("a", [_vm._v(_vm._s(_vm.categoria.nombre))])]
+            [_c("a", [_vm._v(_vm._s(_vm.producto.categoria.nombre))])]
           )
         ],
         1
@@ -1781,7 +1857,7 @@ var render = function() {
                       staticClass: "btn btn-warning",
                       on: {
                         click: function($event) {
-                          _vm.$store.state.respuesta = null
+                          _vm.$store.state.productos.respuesta = null
                         }
                       }
                     },
@@ -2180,216 +2256,67 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success btn-block",
-            attrs: {
-              type: "button",
-              "data-toggle": "modal",
-              "data-target": "#exampleModal",
-              "data-whatever": "@mdo"
-            }
-          },
-          [_vm._v("Agregar")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "modal fade",
-            attrs: {
-              id: "exampleModal",
-              tabindex: "-1",
-              role: "dialog",
-              "aria-labelledby": "exampleModalLabel",
-              "aria-hidden": "true"
-            }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "modal-dialog", attrs: { role: "document" } },
-              [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "form",
-                      {
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.agregarCategoria(_vm.ncat)
-                          }
-                        }
-                      },
-                      [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { staticClass: "col-form-label" }, [
-                            _vm._v("Nombre de la Nueva Categoria:")
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.ncat.nombre,
-                                expression: "ncat.nombre"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: { type: "text" },
-                            domProps: { value: _vm.ncat.nombre },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.ncat,
-                                  "nombre",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "col-form-label",
-                              attrs: { for: "recipient-name" }
-                            },
-                            [_vm._v("Categoria Padre:")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.ncat.categoria_id,
-                                  expression: "ncat.categoria_id"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.ncat,
-                                    "categoria_id",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "option",
-                                {
-                                  attrs: { selected: "selected" },
-                                  domProps: { value: null }
-                                },
-                                [_vm._v("0 - Vacio")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.categorias, function(
-                                categoria,
-                                index
-                              ) {
-                                return _c("option", { key: index }, [
-                                  _vm._v(
-                                    _vm._s(categoria.id) +
-                                      " - " +
-                                      _vm._s(categoria.nombre)
-                                  )
-                                ])
-                              })
-                            ],
-                            2
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._m(3)
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("table", { staticClass: "table table-striped" }, [
-          _vm._m(4),
+      _c(
+        "div",
+        { staticClass: "container" },
+        [
+          _c("componente-fagregarcategoria"),
           _vm._v(" "),
-          _c(
-            "tbody",
-            _vm._l(_vm.filtered_categorias, function(categoria) {
-              return _c("tr", { key: categoria.id }, [
-                _c("th", [_vm._v(_vm._s(categoria.id))]),
-                _vm._v(" "),
-                categoria.nro === 2
-                  ? _c("td", [_vm._v(" ----" + _vm._s(categoria.nombre))])
-                  : _vm._e(),
-                _vm._v(" "),
-                categoria.nro === 1
-                  ? _c("td", [_vm._v(" --" + _vm._s(categoria.nombre))])
-                  : _vm._e(),
-                _vm._v(" "),
-                categoria.nro === 0
-                  ? _c("td", [_c("strong", [_vm._v(_vm._s(categoria.nombre))])])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  [
-                    _c(
-                      "router-link",
-                      {
-                        attrs: {
-                          to: {
-                            name: "verEditarCategoria",
-                            params: { id: categoria.id }
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.filtered_categorias, function(categoria) {
+                return _c("tr", { key: categoria.id }, [
+                  _c("th", [_vm._v(_vm._s(categoria.id))]),
+                  _vm._v(" "),
+                  categoria.nro === 2
+                    ? _c("td", [_vm._v(" ----" + _vm._s(categoria.nombre))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  categoria.nro === 1
+                    ? _c("td", [_vm._v(" --" + _vm._s(categoria.nombre))])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  categoria.nro === 0
+                    ? _c("td", [
+                        _c("strong", [_vm._v(_vm._s(categoria.nombre))])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          attrs: {
+                            to: {
+                              name: "verEditarCategoria",
+                              params: { id: categoria.id }
+                            }
                           }
-                        }
-                      },
-                      [
-                        _c(
-                          "button",
-                          { staticClass: "btn btn-warning btn-sm" },
-                          [_vm._v("Ver / Editar")]
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                )
-              ])
-            }),
-            0
-          )
-        ])
-      ])
+                        },
+                        [
+                          _c(
+                            "button",
+                            { staticClass: "btn btn-warning btn-sm" },
+                            [_vm._v("Ver / Editar")]
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              }),
+              0
+            )
+          ])
+        ],
+        1
+      )
     ])
   ])
 }
@@ -2414,52 +2341,6 @@ var staticRenderFns = [
           attrs: { type: "submit" }
         },
         [_vm._v("Buscar")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Agregar Categoria")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Cerrar")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
-        [_vm._v("Agregar")]
       )
     ])
   },
@@ -2680,7 +2561,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-12" }, [
-        _c("h1", { staticClass: "text-center" }, [_vm._v("Sección Clientes")])
+        _c("h1", { staticClass: "text-center" }, [_vm._v("Clientes")])
       ])
     ])
   },

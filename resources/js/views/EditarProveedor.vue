@@ -42,13 +42,13 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getProveedor', 'editarProveedor']),
+        ...mapActions('proveedores',['getProveedor', 'editarProveedor']),
     },
     created() {
         this.getProveedor(this.id)
     },
     computed: {
-        ...mapState(['proveedor'])
+        ...mapState('proveedores', ['proveedor'])
     },
 }
 </script>

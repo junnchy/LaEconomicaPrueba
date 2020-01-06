@@ -24,7 +24,7 @@
             </button>
         </div>
         <div class="container mt-5">
-            <componente-fdatoscliente/>
+            <componente-fdatoscliente v-bind:cliente="cliente"/>
         </div>
     </div>
 </template>
@@ -33,7 +33,12 @@
 import {mapActions, mapState} from 'vuex'
 export default {
     name: 'AgregarCliente',
-
+    data() {
+        return {
+            cliente:{nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
+                localidad_id: 0, cat_clientes_id : 0, condicion_iva_id: 0}
+        }
+    },
     methods: {
     ...mapActions('clientes', ['resetResp'])
     },

@@ -53,22 +53,22 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getProveedores'])
+        ...mapActions('proveedores', ['getProveedores'])
     },
     created() {
         this.getProveedores()
     },
     computed: {
-        ...mapState(['proveedores']),
-        ...mapGetters(['filtered_proveedores']),
+        ...mapState('proveedores',['proveedores']),
+        ...mapGetters('proveedores',['filtered_proveedores']),
         search:{
-                get(){
-                    return this.$store.state.filter.query;
-                },
-                set(val){
-                    this.$store.commit('SET_QUERY', val);
-                }
+            get(){
+                return this.$store.state.proveedores.filter.query;
             },
-    },
+            set(val){
+                this.$store.commit('proveedores/SET_QUERY', val)
+            }
+        },
+    }
 }
 </script>

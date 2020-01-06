@@ -110,12 +110,18 @@
 <script>
 import {mapActions, mapState} from 'vuex'
     export default {
-        data() {
+        props:{
+            cliente:{
+                type: Object,
+                required: true
+            }
+        },
+        /* data() {
             return{
                 cliente:{nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
                 localidad_id: 0, cat_clientes_id : 0, condicion_iva_id: 0}
             }
-        },
+        }, */
         methods: {
             ...mapActions('clientes',['getCategoriasCli', 'agregarCliente']),
             ...mapActions('localidades',['getLocalidades']),
