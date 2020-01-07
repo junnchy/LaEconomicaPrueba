@@ -6,15 +6,21 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="resetResp(null)">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form @submit.prevent="agregarCategoria(ncat)">
+                            <div class="alert alert-success alert-dismissible fade show mt-4" v-if="respuesta != null">
+                                {{respuesta}} 
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                             <div class="form-group">
                                 <label class="col-form-label">Nombre de la Nueva Categoria:</label>
-                                <input type="text" v-model="ncat.nombre" class="form-control">
+                                <input type="text" v-model="ncat.nombre" :placeholder="reset" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Categoria Padre:</label>
@@ -24,7 +30,7 @@
                                 </select>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="resetResp(null)">Cerrar</button>
                                 <button type="submit" class="btn btn-success btn-block">Agregar</button>
                             </div>
                         </form>
@@ -47,14 +53,23 @@ import {mapActions, mapState} from 'vuex'
             console.log('component mounted')
         },
         methods: {
-            ...mapActions('categorias', ['getCategoriasO','agregarCategoria'])
+            ...mapActions('categorias', ['getCategoriasO','agregarCategoria', 'resetResp'])
         },
         created() {
             this.getCategoriasO()
         },
         computed: {
-            ...mapState('categorias',['categorias']),
-            ...mapState('proveedores',['proveedores'])
+            ...mapState('categorias',['categorias', 'respuesta']),
+            ...mapState('proveedores',['proveedores']),
+            reset(){
+                if(this.$store.state.categorias.respuesta != null){
+                    this.ncat.nombre='',
+                    this.ncat.categoria_id=0
+                    return this.ncat.nombre
+                }else{
+                    return this.ncat.nombre
+                }
+            }
         }
     }
 </script>

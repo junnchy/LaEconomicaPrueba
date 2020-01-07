@@ -2123,6 +2123,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2136,11 +2142,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     console.log('component mounted');
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria', 'resetResp'])),
   created: function created() {
     this.getCategoriasO();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias', 'respuesta']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']), {
+    reset: function reset() {
+      if (this.$store.state.categorias.respuesta != null) {
+        this.ncat.nombre = '', this.ncat.categoria_id = 0;
+        return this.ncat.nombre;
+      } else {
+        return this.ncat.nombre;
+      }
+    }
+  })
 });
 
 /***/ }),
@@ -2198,6 +2213,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2215,9 +2236,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     console.log('component mounted');
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['agregarCategoriaProveedor'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['agregarCategoriaProveedor', 'resetResp'])),
   created: function created() {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categorias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedores', 'respuesta']), {
+    reset: function reset() {
+      if (this.$store.state.proveedores.respuesta != null) {
+        this.descuento = 0, this.categoria = 0;
+        return this.descuento;
+      } else {
+        return this.descuento;
+      }
+    }
+  })
 });
 
 /***/ }),
@@ -38857,7 +38887,38 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLabel" }
+                  },
+                  [_vm._v("Agregar Categoria")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.resetResp(null)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -38871,6 +38932,24 @@ var render = function() {
                     }
                   },
                   [
+                    _vm.respuesta != null
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "alert alert-success alert-dismissible fade show mt-4"
+                          },
+                          [
+                            _vm._v(
+                              "\n                             " +
+                                _vm._s(_vm.respuesta) +
+                                " \n                             "
+                            ),
+                            _vm._m(0)
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { staticClass: "col-form-label" }, [
                         _vm._v("Nombre de la Nueva Categoria:")
@@ -38886,7 +38965,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "text" },
+                        attrs: { type: "text", placeholder: _vm.reset },
                         domProps: { value: _vm.ncat.nombre },
                         on: {
                           input: function($event) {
@@ -38965,7 +39044,30 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _vm._m(1)
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" },
+                          on: {
+                            click: function($event) {
+                              return _vm.resetResp(null)
+                            }
+                          }
+                        },
+                        [_vm._v("Cerrar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-block",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Agregar")]
+                      )
+                    ])
                   ]
                 )
               ])
@@ -38981,47 +39083,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Agregar Categoria")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Cerrar")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
-        [_vm._v("Agregar")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -39078,7 +39151,38 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLabel" }
+                  },
+                  [_vm._v("Agregar Categoria a Proveedor")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.resetResp(null)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c(
@@ -39099,6 +39203,24 @@ var render = function() {
                     _c("h4", [
                       _vm._v("Proveedor: " + _vm._s(_vm.proveedor.nombre))
                     ]),
+                    _vm._v(" "),
+                    _vm.respuesta != null
+                      ? _c(
+                          "div",
+                          {
+                            staticClass:
+                              "alert alert-success alert-dismissible fade show mt-4"
+                          },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.respuesta) +
+                                " \n                            "
+                            ),
+                            _vm._m(0)
+                          ]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
                       _c(
@@ -39170,7 +39292,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
-                        attrs: { type: "number" },
+                        attrs: { type: "number", placeholder: _vm.reset },
                         domProps: { value: _vm.descuento },
                         on: {
                           input: function($event) {
@@ -39183,7 +39305,30 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _vm._m(1)
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" },
+                          on: {
+                            click: function($event) {
+                              return _vm.resetResp(null)
+                            }
+                          }
+                        },
+                        [_vm._v("Cerrar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-block",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Agregar")]
+                      )
+                    ])
                   ]
                 )
               ])
@@ -39199,47 +39344,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Agregar Categoria a Proveedor")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Cerrar")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
-        [_vm._v("Agregar")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -57611,10 +57727,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.post('http://127.0.0.1:8000/categoria', categoria).then(function (response) {
         console.log(response);
         dispatch('getCategoriasO');
+        commit('setRespuesta', response.data.message);
         commit('SET_QUERY', '');
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    resetResp: function resetResp(_ref6, resp) {
+      var commit = _ref6.commit;
+      commit('setRespuesta', resp);
     }
   },
   getters: {
@@ -58159,6 +58280,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    resetResp: function resetResp(_ref5, resp) {
+      var commit = _ref5.commit;
+      commit('setRespuesta', resp);
     }
   },
   getters: {
@@ -58351,6 +58476,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
           name: 'listadoProveedores'
         });
+        commit('setRespuesta', response.data.message);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -58396,11 +58522,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         descuento: descuento
       };
       axios.put("http://127.0.0.1:8000/proveedores/".concat(id), prov).then(function (response) {
+        commit('setRespuesta', response.data.message);
         dispatch('getProveedor', id);
         dispatch('getProveedores');
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    resetResp: function resetResp(_ref8, resp) {
+      var commit = _ref8.commit;
+      commit('setRespuesta', resp);
     }
   },
   getters: {

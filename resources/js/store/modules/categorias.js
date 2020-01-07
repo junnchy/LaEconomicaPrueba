@@ -99,11 +99,15 @@ export default {
             axios.post('http://127.0.0.1:8000/categoria', categoria).then(function (response) {
                 console.log(response);
                 dispatch('getCategoriasO')
+                commit('setRespuesta', response.data.message)
                 commit('SET_QUERY', '')
             })
             .catch(function (error) {
                 console.log(error);
             });
+        },
+        resetResp({commit}, resp){
+            commit('setRespuesta', resp)
         },
     }, 
     getters:{

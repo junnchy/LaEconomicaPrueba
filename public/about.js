@@ -159,7 +159,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ctab1: 'nav-link'
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores', 'agregarCategoriaProveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['agregarProducto']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores', 'agregarCategoriaProveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['agregarProducto', 'resetResp']), {
     setTab: function setTab(nro) {
       this.tab = nro;
 
@@ -1198,7 +1198,7 @@ var render = function() {
                     staticClass: "btn btn-warning",
                     on: {
                       click: function($event) {
-                        _vm.$store.state.productos.respuesta = null
+                        return _vm.resetResp(null)
                       }
                     }
                   },
