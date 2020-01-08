@@ -5,9 +5,9 @@
                     <h1 class="text-center">Clientes</h1>
             </div>
         </div>
-         <div class="row mt-5">
+         <div class="row">
             <div class="col-9">
-                    <input class="form-control my-3" type="search" placeholder="Buscar" aria-label="Search">
+                    <input class="form-control mt-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
             </div>
             <div class="col-3">
                 <router-link :to="{name:'agregarCliente'}">
@@ -35,6 +35,14 @@ export default {
     },
     computed: {
         ...mapState('clientes', ['clientes']),
+        search:{
+            get(){
+                return this.$store.state.clientes.filter.query;
+            },
+            set(val){
+                this.$store.commit('clientes/SET_QUERY', val)
+            }
+        },
     },
 }
 </script>

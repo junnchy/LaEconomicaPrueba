@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-8">
-                <h3>Ingreso de Nuevo Cliente</h3>
+                <h3>Editar Cliente</h3>
             </div>
             <div class="col-4">
                 <router-link :to="{name:'menuClientes'}">
@@ -24,10 +24,10 @@
             </button>
         </div>
         <div class="container mt-5">
-            <form @submit.prevent="agregarCliente(cliente)">
+            <form @submit.prevent="editarCliente(cliente)">
                 <componente-fdatoscliente v-bind:cliente="cliente"/>
                 <div class="modal-footer" v-if="respuestaS === null">
-                    <button type="submit" class="btn btn-success btn-block">Agregar</button>
+                    <button type="submit" class="btn btn-warning btn-block">Actualizar</button>
                 </div>
             </form>
         </div>
@@ -37,29 +37,20 @@
 <script>
 import {mapActions, mapState} from 'vuex'
 export default {
-    name: 'AgregarCliente',
+    name: 'EditarCliente',
     data() {
         return {
-            cliente:{
-                nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
-                localidad_id: 0, cat_clientes_id: 0, condicion_iva_id: 0,
-                localidad:{nombre: '', cod_postal: ''},
-                categoria:{denominacion: ''},
-                condicion_iva:{denominacion: ''}
-            }
+            id: this.$route.params.id,
         }
     },
     methods: {
-    ...mapActions('clientes', ['resetResp', 'agregarCliente'])
+    ...mapActions('clientes', ['resetResp', 'getCliente', 'editarCliente'])
     },
     created() {
-        
+        this.getCliente(this.id)
     },
     computed: {
-        ...mapState('clientes', ['respuestaS']),    
-    }
-    
+        ...mapState('clientes', ['respuestaS', 'cliente']),    
+    }   
 }
 </script>
-
-

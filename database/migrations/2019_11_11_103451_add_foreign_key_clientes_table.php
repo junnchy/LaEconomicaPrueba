@@ -20,7 +20,6 @@ class AddForeignKeyClientesTable extends Migration
             $table->foreign('condicion_iva_id')->references('id')->on('condicion_iva');
             $table->unsignedBigInteger('localidad_id')->nullable();
             $table->foreign('localidad_id')->references('id')->on('localidades');
-    
         });
     }
 

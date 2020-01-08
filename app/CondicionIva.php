@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Cliente;
+
 use Illuminate\Database\Eloquent\Model;
 
 class CondicionIva extends Model
@@ -10,6 +12,6 @@ class CondicionIva extends Model
 
     public function clientes()
     {
-        return $this->belongsToMany(Cliente::class);
+        return $this->hasMany(Cliente::class);
     }
 }

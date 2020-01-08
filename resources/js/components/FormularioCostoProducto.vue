@@ -37,8 +37,10 @@
                 <input type="number" step=0.01 v-model="producto.descuentoProducto[4]" class="form-control">
             </div>
             <div class="col-2">
-                <p>Dto Total</p>
-                <P v-if="producto.dre != 1">{{setDre[0] *100}}%</P>
+                 <div class="alert alert-dark" role="alert">
+                    <h6 class="text-center">Dto Total</h6>
+                    <h5 class="text-center" v-if="producto.dre != 1">{{setDre[0] *100}}%</h5>
+                </div>
             </div>
         </div>
         <div class="row">

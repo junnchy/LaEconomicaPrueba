@@ -39,7 +39,20 @@ class LocalidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+
+            $localidad = new Localidad;
+            $localidad->localidad = $request->localidad;
+            $localidad->provincia = $request->provincia;
+            $localidad->cod_postal = $request->cod_postal;
+            $localidad->save();
+
+            return response()->json([
+                'producto' => $localidad,
+                'message' => 'Localidad Agregada'
+            ], 200);
+
+        }
     }
 
     /**

@@ -69,6 +69,16 @@ const routes = [
       name: 'detalleCliente',
       component: () => import(/* webpackChunkName: "about" */ '../views/DetalleCliente.vue')
     },
+    {
+      path: '/editarCliente/:id',
+      name: 'editarCliente',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EditarCliente.vue')
+    },
+    {
+      path: '/tablaDatosCliente',
+      name: 'tablaDatosCliente',
+      component: () => import(/* webpackChunkName: "about" */ '../views/TablasDatosClientes.vue')
+    },
 ]
 
 

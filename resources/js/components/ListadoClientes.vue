@@ -11,7 +11,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="cliente in clientes" :key="cliente.id">
+                    <tr v-for="cliente in filtered_clientes" :key="cliente.id">
                         <th scope="row">{{cliente.id}}</th>
                         <td class="mt-2">{{cliente.nombre}}</td>
                         <td class="mt-2">{{cliente.cuit}}</td>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {mapState, mapActions} from 'vuex'
+import {mapState, mapActions, mapGetters} from 'vuex'
 export default {
     name: 'MenuClientes',
     data() {
@@ -42,6 +42,7 @@ export default {
     },
     computed: {
         ...mapState('clientes', ['clientes']),
+        ...mapGetters('clientes', ['filtered_clientes'])
     },
 }
 </script>        

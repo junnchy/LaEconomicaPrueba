@@ -1,7 +1,8 @@
 <template>
     <div>
         <form class="my-4">
-            <div class="row">
+            <h1 class="text-center">Proveedores</h1>
+            <div class="row mt-3">
                 <div class="col-10">
                     <input class="form-control mr-sm-2 form-block" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
                 </div>

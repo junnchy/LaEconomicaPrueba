@@ -58,7 +58,6 @@ export default {
         agregarCliente({commit}, cliente){
             console.log(cliente)
             axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
-              console.log(response);
               commit('setRespuestaServidor', response.data.message)
             })
             .catch(function (error) {
@@ -69,12 +68,37 @@ export default {
             commit('setRespuestaServidor', resp)
         },
         async getCliente({commit}, id){
-            console.log(id)
             let cliente = await axios.get(`http://127.0.0.1:8000/clientes/${id}`).then(response => {
-              console.log(response.data)
               commit('setCliente', response.data)
             }) 
         },
+        editarCliente({commit},cliente){
+            let id = cliente.id
+            axios.put(`http://127.0.0.1:8000/clientes/${id}`, cliente).then(function (response) {
+              commit('setRespuestaServidor', response.data.message)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        },
+        agregarCategoriaCli({commit, dispatch}, categoria){
+            axios.post('http://127.0.0.1:8000/categoriaCliente', categoria).then(function (response) {
+              dispatch('getCategoriasCli')
+              commit('setRespuestaServidor', response.data.message)
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+        }
     }, 
+    getters:{
+        filtered_clientes(state){
+            if(state.filter.query.length >= 1){
+              return state.clientes.filter(cliente => cliente.nombre.toLowerCase().includes(state.filter.query))
+            }else{
+              return state.clientes
+            }
+        },
+    }  
 }
 

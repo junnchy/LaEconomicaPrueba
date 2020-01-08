@@ -66,6 +66,9 @@
                                     <a class="dropdown-item" href="#">Agregar Cliente</a>
                                 </router-link>
                                 <div class="dropdown-divider"></div>
+                                <router-link :to="{name: 'tablaDatosCliente'}" >
+                                    <a class="dropdown-item" href="#">Tablas de Datos</a>
+                                </router-link>
                             </div>
                         </li>
                     </ul>

@@ -68,9 +68,7 @@ export default {
             dtoReal: producto.dre, iva: producto.iva, flete: producto.flete,
             precioCosto: producto.precioCosto,
             proveedor_id: producto.proveedor.id, categoria_id: producto.categoria.id}
-          console.log(prod)
           axios.post('http://127.0.0.1:8000/productos', prod).then(function (response) {
-            console.log(response);
             commit('setRespuesta', response.data.message)
           })
           .catch(function (error) {
@@ -81,7 +79,6 @@ export default {
           var prod
           let producto = await axios.get(`http://127.0.0.1:8000/productos/${id}`).then(response => {
             prod = response.data
-            console.log(prod)
             commit('setProducto', prod)
           })
         },
@@ -95,7 +92,6 @@ export default {
           producto.proveedor_id= producto.proveedor.id, 
           producto.categoria_id= producto.categoria.id
           axios.put(`http://127.0.0.1:8000/productos/${id}`, producto).then(function (response) {
-            console.log(response);
             commit('setRespuesta', response.data.message)
           })
           .catch(function (error) {

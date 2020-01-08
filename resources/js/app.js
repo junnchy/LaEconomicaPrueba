@@ -17,6 +17,12 @@ Vue.component('componente-fdatosprod', require('./components/FormularioDatosProd
 Vue.component('componente-listadoClientes', require('./components/ListadoClientes.vue').default);
 Vue.component('componente-fdatoscliente', require('./components/FormularioDatosCliente.vue').default);
 Vue.component('componente-fagregarcategoria', require('./components/FormularioAgregarCategoria.vue').default);
+Vue.component('componente-lidadolocalidades', require('./components/ListadoLocalidades.vue').default);
+Vue.component('componente-lidadocategoriascli', require('./components/ListadoCategoriasClientes.vue').default);
+Vue.component('componente-lidadocondicionesiva', require('./components/ListadoCondicionesDeIva.vue').default);
+Vue.component('componente-fagregarlocalidad', require('./components/FormularioAgregarLocalidad.vue').default);
+Vue.component('componente-fagregarcatecli', require('./components/FormularioAgregarCategoriaCliente.vue').default);
+
 
 
 const app = new Vue({

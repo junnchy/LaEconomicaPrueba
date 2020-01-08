@@ -75,7 +75,6 @@ export default {
         let categoria = await axios.get(`http://127.0.0.1:8000/categoria/${id}`).then(response => {
             cat = response.data
             cat.cant_hijos = cat.children.length
-            console.log(cat)
             commit('setCategoria', cat)
         })
         },
@@ -97,7 +96,6 @@ export default {
         },
         agregarCategoria({commit, dispatch}, categoria){
             axios.post('http://127.0.0.1:8000/categoria', categoria).then(function (response) {
-                console.log(response);
                 dispatch('getCategoriasO')
                 commit('setRespuesta', response.data.message)
                 commit('SET_QUERY', '')
