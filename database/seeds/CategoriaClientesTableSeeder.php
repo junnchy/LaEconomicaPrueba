@@ -15,7 +15,7 @@ class CategoriaClientesTableSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
         CategoriaClientes::truncate();
-        CategoriaClientes::insert(['denominacion'=>'Consumidor Final']);
+        CategoriaClientes::insert(['denominacion'=>'Persona']);
         CategoriaClientes::insert(['denominacion'=>'Empresa']);
         CategoriaClientes::insert(['denominacion'=>'Profesional']);
         CategoriaClientes::insert(['denominacion'=>'Organización']);

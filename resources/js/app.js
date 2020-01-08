@@ -22,8 +22,7 @@ Vue.component('componente-lidadocategoriascli', require('./components/ListadoCat
 Vue.component('componente-lidadocondicionesiva', require('./components/ListadoCondicionesDeIva.vue').default);
 Vue.component('componente-fagregarlocalidad', require('./components/FormularioAgregarLocalidad.vue').default);
 Vue.component('componente-fagregarcatecli', require('./components/FormularioAgregarCategoriaCliente.vue').default);
-
-
+Vue.component('componente-fdatosprov', require('./components/FormularioDatosProveedor.vue').default);
 
 const app = new Vue({
     router,

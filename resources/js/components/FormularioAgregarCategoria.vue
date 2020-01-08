@@ -24,9 +24,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Categoria Padre:</label>
-                                <select class="form-control" v-model="ncat.categoria_id">
-                                    <option selected="selected" :value='null'>0 - Vacio</option>
-                                    <option v-for="(categoria, index) in categorias" :key="index">{{categoria.id}} - {{categoria.nombre}}</option>
+                                <select class="form-control" v-model="ncat.categoria_id" type="number" >
+                                    <option selected  :value='null'>0 - Vacio</option>
+                                    <option v-for="(categoria, index) in categorias" :key="index" :value="categoria.id">{{categoria.id}} - {{categoria.nombre}}</option>
                                 </select>
                             </div>
                             <div class="modal-footer">
@@ -46,7 +46,8 @@ import {mapActions, mapState} from 'vuex'
     export default {
         data() {
             return{
-                ncat: {nombre:'', categoria_id: 0}
+                ncat: {nombre:'', categoria_id: 0},
+                aux: ''
             }
         },
         mounted(){
@@ -63,9 +64,9 @@ import {mapActions, mapState} from 'vuex'
             ...mapState('proveedores',['proveedores']),
             reset(){
                 if(this.$store.state.categorias.respuesta != null){
-                    this.ncat.nombre='',
+                    this.ncat.nombre=this.aux,
                     this.ncat.categoria_id=0
-                    return this.ncat.nombre
+                    return this.aux
                 }else{
                     return this.ncat.nombre
                 }

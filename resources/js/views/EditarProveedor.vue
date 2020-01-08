@@ -1,7 +1,8 @@
 <template>
     <div>
         <form @submit.prevent="editarProveedor(proveedor)">
-            <div class="form-group mt-5">
+            <componente-fdatosprov v-bind:proveedor="proveedor"/>
+            <!-- <div class="form-group mt-5">
                 <div class="row">
                     <div class="col-8">
                         <h3>Editar Proveedor</h3>
@@ -26,7 +27,7 @@
                     <label>Telefono</label>
                     <input type="number" v-model="proveedor.telefono" class="form-control">
                 </div>
-            </div>
+            </div> -->
             <button type="submit" class="btn btn-success btn-block">Guardar</button>
         </form>
     </div>

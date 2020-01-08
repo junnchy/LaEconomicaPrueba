@@ -31,6 +31,7 @@ export default {
             let proveedores = await axios.get('http://127.0.0.1:8000/proveedores')
             proveedores.data.forEach(element => {
               p.push(element)
+              console.log(element)
             });
           } catch (error) {
             console.log(error)
@@ -43,16 +44,11 @@ export default {
           let proveedor = {id:'', nombre:'', cuit:'', telefono:'', categorias: []}
           let aux = {}
           let p = await axios.get(`http://127.0.0.1:8000/proveedores/${id}`).then(response => {
-            proveedor.id = response.data.id
-            proveedor.nombre = response.data.nombre
-            proveedor.telefono = response.data.telefono
-            proveedor.cuit = response.data.cuit
-            proveedor.categorias = response.data.categorias
+            commit('setProveedor', response.data)
           })
-          commit('setProveedor', proveedor)
       },
       agregarProveedor({commit}, proveedor){
-        axios.post('http://127.0.0.1:8000/proveedores', {nombre: proveedor.nombre, telefono: proveedor.telefono, cuit: proveedor.cuit}).then(function (response) {
+        axios.post('http://127.0.0.1:8000/proveedores', proveedor).then(function (response) {
           router.push({name: 'listadoProveedores'})
           commit('setRespuesta', response.data.message)
         })
@@ -62,8 +58,7 @@ export default {
       },
       editarProveedor({commit},proveedor){
         let id = proveedor.id
-        let prov = {nombre: proveedor.nombre, telefono: proveedor.telefono, cuit: proveedor.cuit}
-        axios.put(`http://127.0.0.1:8000/proveedores/${id}`, prov).then(function (response) {
+        axios.put(`http://127.0.0.1:8000/proveedores/${id}`, proveedor).then(function (response) {
           router.push({name: 'detalleProv', params:{id: proveedor.id}})
         })
         .catch(function (error) {
@@ -73,8 +68,10 @@ export default {
       agregarCategoriaProveedor({commit, dispatch},[categoria, proveedor, descuento]){
         let id = proveedor.id
         let  cat = parseInt(categoria)
-        let prov = {nombre: proveedor.nombre, telefono: proveedor.telefono, cuit: proveedor.cuit, id_cat: cat, descuento: descuento}
-        axios.put(`http://127.0.0.1:8000/proveedores/${id}`, prov).then(function (response) {
+        proveedor.id_cat = cat
+        proveedor.descuento = descuento
+        console.log(proveedor)
+        axios.put(`http://127.0.0.1:8000/proveedores/${id}`, proveedor).then(function (response) {
             commit('setRespuesta', response.data.message)
             dispatch('getProveedor', id)
             dispatch('getProveedores')

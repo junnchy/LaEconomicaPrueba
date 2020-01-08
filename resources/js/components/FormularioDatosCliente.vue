@@ -15,12 +15,12 @@
             </div>
             <div class="col-4">
                 <div class="form-group">
-                    <label>CUIT/CUIL</label>
+                    <label>DNI/Cuit</label>
                     <input 
                         type="text" 
                         class="form-control" 
                         name="cuit" 
-                        placeholder="CUIT/CUIL"
+                        placeholder="DNI/Cuit"
                         v-model="cliente.cuit"
                     />
                 </div>

@@ -90,7 +90,6 @@ export default {
                     }else{
                         i = p
                     }
-
                 }
             })
             this.producto.dre = (1 - i)

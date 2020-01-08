@@ -66,7 +66,7 @@ import {mapActions, mapState} from 'vuex'
         },
         computed: {
             ...mapState('categorias',['categorias']),
-            ...mapState('proveedores',['proveedores', 'respuesta']),
+            ...mapState('proveedores',['respuesta']),
             reset(){
                 if(this.$store.state.proveedores.respuesta != null){
                     this.descuento =0,

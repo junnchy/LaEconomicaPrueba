@@ -20,7 +20,7 @@ class ProveedorControler extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $proveedores = Proveedor::with('categorias.proveedores')->get();
+            $proveedores = Proveedor::with(['localidad.proveedores', 'condicion_iva.proveedores','categorias.proveedores'])->get();
             return response()->json($proveedores);
         } else {
             $proveedores = Proveedor::all();
@@ -53,6 +53,9 @@ class ProveedorControler extends Controller
             $proveedor->nombre = $request->nombre;
             $proveedor->cuit = $request->cuit;
             $proveedor->telefono = $request->telefono;
+            $proveedor->direccion = $request->direccion;
+            $proveedor->condicion_iva_id = $request->condicion_iva_id;
+            $proveedor->localidad_id = $request->localidad_id;
             $proveedor->save();
           
             return response()->json([
@@ -85,7 +88,7 @@ class ProveedorControler extends Controller
     public function show($id, Request $request)
     {
 
-        $proveedor = App\Proveedor::with('categorias.proveedores')->findOrFail($id);
+        $proveedor = App\Proveedor::with(['localidad.proveedores', 'condicion_iva.proveedores','categorias.proveedores'])->findOrFail($id);
 
         if($request->ajax()){
             return response()->json($proveedor);
@@ -122,6 +125,9 @@ class ProveedorControler extends Controller
             $proveedor->nombre = $request->nombre;
             $proveedor->cuit = $request->cuit;
             $proveedor->telefono = $request->telefono;
+            $proveedor->direccion = $request->direccion;
+            $proveedor->condicion_iva_id = $request->condicion_iva_id;
+            $proveedor->localidad_id = $request->localidad_id;
             if ($request->id_cat != null) {
                 
                 $categoria = Categoria::findOrFail($request->id_cat);

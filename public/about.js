@@ -248,6 +248,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'agregarProv',
@@ -256,7 +298,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       proveedor: {
         nombre: '',
         cuit: '',
-        telefono: ''
+        telefono: '',
+        direccion: '',
+        localidad_id: 0,
+        condicion_iva_id: 0,
+        localidad: {
+          nombre: '',
+          cod_postal: ''
+        },
+        condicion_iva: {
+          denominacion: ''
+        }
       }
     };
   },
@@ -422,6 +474,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -665,6 +719,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -1602,128 +1657,19 @@ var render = function() {
         }
       },
       [
-        _c("div", { staticClass: "form-group mt-5" }, [
-          _c("div", { staticClass: "row" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-4" },
-              [
-                _c(
-                  "router-link",
-                  { attrs: { to: { name: "listadoProveedores" } } },
-                  [
-                    _c("button", { staticClass: "btn btn-danger" }, [
-                      _vm._v(
-                        "\n                            Cancelar\n                        "
-                      )
-                    ])
-                  ]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Nombre Proveedor")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.nombre,
-                  expression: "proveedor.nombre"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.proveedor.nombre },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "nombre", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("CUIT")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.cuit,
-                  expression: "proveedor.cuit"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.proveedor.cuit },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "cuit", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Telefono")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.telefono,
-                  expression: "proveedor.telefono"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.proveedor.telefono },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "telefono", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
+        _c("componente-fdatosprov", { attrs: { proveedor: _vm.proveedor } }),
         _vm._v(" "),
         _c(
           "button",
           { staticClass: "btn btn-success", attrs: { type: "submit" } },
           [_vm._v("Agregar")]
         )
-      ]
+      ],
+      1
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("h3", [_vm._v("Ingreso de Nuevo Proveedor")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -2036,6 +1982,25 @@ var render = function() {
       _c("li", { staticClass: "list-group-item" }, [
         _c("strong", [_vm._v("Telefono: ")]),
         _vm._v(" " + _vm._s(_vm.proveedor.telefono))
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Telefono: ")]),
+        _vm._v(
+          " " +
+            _vm._s(_vm.proveedor.direccion) +
+            " - (" +
+            _vm._s(_vm.proveedor.localidad.cod_postal) +
+            ") " +
+            _vm._s(_vm.proveedor.localidad.localidad) +
+            ", " +
+            _vm._s(_vm.proveedor.localidad.provincia)
+        )
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Telefono: ")]),
+        _vm._v(" " + _vm._s(_vm.proveedor.condicion_iva.denominacion))
       ]),
       _vm._v(" "),
       _c("li", { staticClass: "list-group-item" }, [
@@ -2441,112 +2406,7 @@ var render = function() {
         }
       },
       [
-        _c("div", { staticClass: "form-group mt-5" }, [
-          _c("div", { staticClass: "row" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-4" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    attrs: {
-                      to: { name: "detalleProv", params: { id: _vm.id } }
-                    }
-                  },
-                  [
-                    _c("button", { staticClass: "btn btn-danger" }, [
-                      _vm._v(
-                        "\n                            Cancelar\n                        "
-                      )
-                    ])
-                  ]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Nombre Proveedor")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.nombre,
-                  expression: "proveedor.nombre"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text" },
-              domProps: { value: _vm.proveedor.nombre },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "nombre", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("CUIT")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.cuit,
-                  expression: "proveedor.cuit"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.proveedor.cuit },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "cuit", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Telefono")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.telefono,
-                  expression: "proveedor.telefono"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.proveedor.telefono },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "telefono", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]),
+        _c("componente-fdatosprov", { attrs: { proveedor: _vm.proveedor } }),
         _vm._v(" "),
         _c(
           "button",
@@ -2556,20 +2416,12 @@ var render = function() {
           },
           [_vm._v("Guardar")]
         )
-      ]
+      ],
+      1
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("h3", [_vm._v("Editar Proveedor")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
