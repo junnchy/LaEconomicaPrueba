@@ -78,7 +78,13 @@
                     <option v-for="(localidad, index) in localidades" :key="index" :value="localidad.id">
                         {{localidad.cod_postal}} - {{localidad.localidad}}
                     </option>
+                    {{localidadC}}
                 </select>
+            </div>
+        </div>
+        <div class="row text-center my-4">
+            <div class="col-12">
+                <componente-gmap v-bind:cliente="cliente"/>
             </div>
         </div>
         <div class="row">
@@ -113,6 +119,11 @@
 <script>
 import {mapActions, mapState} from 'vuex'
     export default {
+        data() {
+            return {
+                locAc: 0
+            }
+        },
         props:{
             cliente:{
                 type: Object,
@@ -121,9 +132,8 @@ import {mapActions, mapState} from 'vuex'
         },
         methods: {
             ...mapActions('clientes',['getCategoriasCli']),
-            ...mapActions('localidades',['getLocalidades']),
+            ...mapActions('localidades',['getLocalidades', 'getLocalidad']),
             ...mapActions('condicionIva',['getCondicionesIva'])
-        
         },
         created() {
             this.getCategoriasCli()
@@ -133,9 +143,18 @@ import {mapActions, mapState} from 'vuex'
         },
         computed: {
             ...mapState('clientes', ['categoriasCli']),
-            ...mapState('localidades', ['localidades']),
+            ...mapState('localidades', ['localidades','localidad']),
             ...mapState('condicionIva', ['condicionIva']),
-        
+            localidadC(){
+                if(this.cliente.localidad_id > 0 && this.cliente.localidad_id != this.locAc){
+                        this.getLocalidad(this.cliente.localidad_id)
+                        this.cliente.localidad = this.localidad
+                        this.locAc = this.cliente.localidad.id
+                        return this.localidad
+                }else{
+                    return this.localidad
+                }
+            }   
         }
     }
 </script>

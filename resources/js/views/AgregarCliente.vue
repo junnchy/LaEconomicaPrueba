@@ -43,20 +43,21 @@ export default {
             cliente:{
                 nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
                 localidad_id: 0, cat_clientes_id: 0, condicion_iva_id: 0,
-                localidad:{nombre: '', cod_postal: ''},
+                localidad:{localidad: '', cod_postal: '', provincia: ''},
                 categoria:{denominacion: ''},
                 condicion_iva:{denominacion: ''}
             }
         }
     },
     methods: {
-    ...mapActions('clientes', ['resetResp', 'agregarCliente'])
+    ...mapActions('clientes', ['resetResp', 'agregarCliente']),
+    
     },
     created() {
         
     },
     computed: {
-        ...mapState('clientes', ['respuestaS']),    
+        ...mapState('clientes', ['respuestaS']),            
     }
     
 }

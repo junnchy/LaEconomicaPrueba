@@ -2,6 +2,37 @@ import Vue from 'vue'
 import router from './router/index.js'
 import store from './store'
 
+// MAPS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+ 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyCbASazHk3QISMptpk_C-AN99YU1gO5JFM',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+    // OR: libraries: 'places,drawing'
+    // OR: libraries: 'places,drawing,visualization'
+    // (as you require)
+ 
+    //// If you want to set the version, you can do so:
+    // v: '3.26',
+  },
+ 
+  //// If you intend to programmatically custom event listener code
+  //// (e.g. `this.$refs.gmap.$on('zoom_changed', someFunc)`)
+  //// instead of going through Vue templates (e.g. `<GmapMap @zoom_changed="someFunc">`)
+  //// you might need to turn this on.
+  // autobindAllEvents: false,
+ 
+  //// If you want to manually install components, e.g.
+  //// import {GmapMarker} from 'vue2-google-maps/src/components/marker'
+  //// Vue.component('GmapMarker', GmapMarker)
+  //// then disable the following:
+  // installComponents: true,
+})
+// MAPS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -23,6 +54,8 @@ Vue.component('componente-lidadocondicionesiva', require('./components/ListadoCo
 Vue.component('componente-fagregarlocalidad', require('./components/FormularioAgregarLocalidad.vue').default);
 Vue.component('componente-fagregarcatecli', require('./components/FormularioAgregarCategoriaCliente.vue').default);
 Vue.component('componente-fdatosprov', require('./components/FormularioDatosProveedor.vue').default);
+Vue.component('componente-gmap', require('./components/PruebaGMap.vue').default);
+
 
 const app = new Vue({
     router,

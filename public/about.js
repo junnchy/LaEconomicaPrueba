@@ -68,8 +68,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cat_clientes_id: 0,
         condicion_iva_id: 0,
         localidad: {
-          nombre: '',
-          cod_postal: ''
+          localidad: '',
+          cod_postal: '',
+          provincia: ''
         },
         categoria: {
           denominacion: ''

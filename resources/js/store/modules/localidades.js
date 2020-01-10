@@ -2,6 +2,7 @@ export default {
     namespaced: true,
     state:{
         localidades: [],
+        localidad: {},
         respuesta: null,
     },
     mutations: {
@@ -11,6 +12,9 @@ export default {
         setRespuesta(state, respuesta){
             state.respuesta = respuesta
         },
+        setLocalidad(state, localidad){
+            state.localidad = localidad
+        }
     },
     actions:{
         async getLocalidades({commit}){
@@ -39,6 +43,14 @@ export default {
         },
         resetResp({commit}, resp){
             commit('setRespuesta', resp)
-        },   
+        },
+        
+        async getLocalidad({commit}, id){
+            var loc
+            let localidad = await axios.get(`http://127.0.0.1:8000/localidades/${id}`).then(response=>{
+                loc = response.data
+                commit('setLocalidad', loc)
+            })
+        }
     }, 
 }
