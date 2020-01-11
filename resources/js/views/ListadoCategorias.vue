@@ -21,7 +21,7 @@
             </form>
             
             <div class="container">
-                <componente-fagregarcategoria></componente-fagregarcategoria>
+                <componente-fagregarcategoria/>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -84,11 +84,3 @@
     }
 </script>
 
-search:{
-                get(){
-                    return this.$store.state.filter.query;
-                },
-                set(val){
-                    this.$store.commit('SET_QUERY', val);
-                }
-            },

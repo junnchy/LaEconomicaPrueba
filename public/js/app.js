@@ -41866,6 +41866,138 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-6" }, [
         _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Categoría Cliente")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cliente.cat_clientes_id,
+                  expression: "cliente.cat_clientes_id"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.cliente,
+                    "cat_clientes_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _vm.cliente.cat_clientes_id === _vm.cliente.categoria.id
+                ? _c(
+                    "option",
+                    {
+                      attrs: { selected: "" },
+                      domProps: { value: _vm.cliente.cat_cliente_id }
+                    },
+                    [_vm._v(_vm._s(_vm.cliente.categoria.denominacion))]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.categoriasCli, function(categoria, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: categoria.id } },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(categoria.denominacion) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Condición de IVA")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cliente.condicion_iva_id,
+                  expression: "cliente.condicion_iva_id"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.cliente,
+                    "condicion_iva_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _vm.cliente.condicion_iva_id === _vm.cliente.condicion_iva.id
+                ? _c(
+                    "option",
+                    {
+                      attrs: { selected: "" },
+                      domProps: { value: _vm.cliente.condicion_iva_id }
+                    },
+                    [_vm._v(_vm._s(_vm.cliente.condicion_iva.denominacion))]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.condicionIva, function(condicion, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: condicion.id } },
+                  [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(condicion.denominacion) +
+                        "\n                        "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Teléfono")]),
           _vm._v(" "),
           _c("input", {
@@ -42069,138 +42201,6 @@ var render = function() {
         [_c("componente-gmap", { attrs: { cliente: _vm.cliente } })],
         1
       )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Categoría Cliente")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cliente.cat_clientes_id,
-                  expression: "cliente.cat_clientes_id"
-                }
-              ],
-              staticClass: "form-control",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.cliente,
-                    "cat_clientes_id",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            [
-              _vm.cliente.cat_clientes_id === _vm.cliente.categoria.id
-                ? _c(
-                    "option",
-                    {
-                      attrs: { selected: "" },
-                      domProps: { value: _vm.cliente.cat_cliente_id }
-                    },
-                    [_vm._v(_vm._s(_vm.cliente.categoria.denominacion))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.categoriasCli, function(categoria, index) {
-                return _c(
-                  "option",
-                  { key: index, domProps: { value: categoria.id } },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(categoria.denominacion) +
-                        "\n                    "
-                    )
-                  ]
-                )
-              })
-            ],
-            2
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("Condición de IVA")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cliente.condicion_iva_id,
-                  expression: "cliente.condicion_iva_id"
-                }
-              ],
-              staticClass: "form-control",
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.cliente,
-                    "condicion_iva_id",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            [
-              _vm.cliente.condicion_iva_id === _vm.cliente.condicion_iva.id
-                ? _c(
-                    "option",
-                    {
-                      attrs: { selected: "" },
-                      domProps: { value: _vm.cliente.condicion_iva_id }
-                    },
-                    [_vm._v(_vm._s(_vm.cliente.condicion_iva.denominacion))]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.condicionIva, function(condicion, index) {
-                return _c(
-                  "option",
-                  { key: index, domProps: { value: condicion.id } },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(condicion.denominacion) +
-                        "\n                        "
-                    )
-                  ]
-                )
-              })
-            ],
-            2
-          )
-        ])
-      ])
     ])
   ])
 }

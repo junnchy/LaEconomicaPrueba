@@ -26,6 +26,32 @@
                 </div>
             </div>
         </div>
+         <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Categoría Cliente</label>
+                    <select class="form-control" v-model="cliente.cat_clientes_id">
+                        <option selected :value="cliente.cat_cliente_id" 
+                        v-if="cliente.cat_clientes_id === cliente.categoria.id">{{cliente.categoria.denominacion}}</option>
+                        <option v-for="(categoria, index) in categoriasCli" :key="index" :value="categoria.id">
+                            {{categoria.denominacion}}
+                        </option>
+                    </select>
+                </div>
+            </div>        
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Condición de IVA</label>
+                    <select class="form-control" v-model="cliente.condicion_iva_id">
+                            <option selected :value="cliente.condicion_iva_id" 
+                            v-if="cliente.condicion_iva_id === cliente.condicion_iva.id">{{cliente.condicion_iva.denominacion}}</option>
+                            <option v-for="(condicion, index) in condicionIva" :key="index" :value="condicion.id">
+                                {{condicion.denominacion}}
+                            </option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-6">
                     <div class="form-group">
@@ -85,32 +111,6 @@
         <div class="row text-center my-4">
             <div class="col-12">
                 <componente-gmap v-bind:cliente="cliente"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label>Categoría Cliente</label>
-                    <select class="form-control" v-model="cliente.cat_clientes_id">
-                        <option selected :value="cliente.cat_cliente_id" 
-                        v-if="cliente.cat_clientes_id === cliente.categoria.id">{{cliente.categoria.denominacion}}</option>
-                        <option v-for="(categoria, index) in categoriasCli" :key="index" :value="categoria.id">
-                            {{categoria.denominacion}}
-                        </option>
-                    </select>
-                </div>
-            </div>        
-            <div class="col-6">
-                <div class="form-group">
-                    <label>Condición de IVA</label>
-                    <select class="form-control" v-model="cliente.condicion_iva_id">
-                            <option selected :value="cliente.condicion_iva_id" 
-                            v-if="cliente.condicion_iva_id === cliente.condicion_iva.id">{{cliente.condicion_iva.denominacion}}</option>
-                            <option v-for="(condicion, index) in condicionIva" :key="index" :value="condicion.id">
-                                {{condicion.denominacion}}
-                            </option>
-                    </select>
-                </div>
             </div>
         </div>
     </div>
