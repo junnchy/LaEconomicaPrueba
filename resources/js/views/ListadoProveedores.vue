@@ -18,7 +18,7 @@
                 </button>
             </router-link>
         </div>
-        <table class="table">
+        <table class="table table-hover">
             <thead class="thead">
                 <tr>
                     <th scope="col">#ID</th>

@@ -18,23 +18,23 @@ class LocalidadesTableSeeder extends Seeder
         Localidad::insert(
             ['cod_postal' => 2000,
             'localidad' => 'Rosario',
-            'provincia' => 'Santa Fe']);
+            'provincia_id' => 82]);
         Localidad::insert(
             ['cod_postal' => 2124,
             'localidad' => 'Villa Gobernador Galvez',
-            'provincia' => 'Santa Fe']);
+            'provincia_id' => 82]);
         Localidad::insert(
             ['cod_postal' => 2126,
             'localidad' => 'Alvear',
-            'provincia' => 'Santa Fe']);
+            'provincia_id' => 82]);
         Localidad::insert(
             ['cod_postal' => 2126,
             'localidad' => 'Pueblo Esther',
-            'provincia' => 'Santa Fe']);
+            'provincia_id' => 82]);
         Localidad::insert(
             ['cod_postal' => 2132,
             'localidad' => 'Funes',
-            'provincia' => 'Santa Fe']);    
+            'provincia_id' => 82]);    
         Schema::enableForeignKeyConstraints();
     }
 }

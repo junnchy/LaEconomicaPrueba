@@ -27,8 +27,11 @@
                                 <input type="number" v-model="nloc.cod_postal" :placeholder="reset" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-form-label">Provincia de Localidad::</label>
-                                <input type="text" v-model="nloc.provincia" class="form-control">
+                                <label for="recipient-name" class="col-form-label">Provincia:</label>
+                                <select class="form-control" v-model="nloc.provincia_id" type="number" >
+                                    <option selected :value='null'>0 - Vacio</option>
+                                    <option v-for="(provincia, index) in provincias" :key="index" :value="provincia.id">{{provincia.iso_nombre}}</option>
+                                </select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="resetResp(null)">Cerrar</button>
@@ -47,19 +50,20 @@ import {mapActions, mapState} from 'vuex'
     export default {
         data() {
             return{
-                nloc: {localidad:'', provincia: '', cod_postal: 0}
+                nloc: {localidad:'', provincia_id: 0, cod_postal: 0}
             }
         },
         mounted(){
             console.log('component mounted')
         },
         methods: {
-            ...mapActions('localidades', ['agregarLocalidad', 'resetResp'])
+            ...mapActions('localidades', ['agregarLocalidad', 'resetResp', 'getProvincias'])
         },
         created() {
+            this.getProvincias()
         },
         computed: {
-            ...mapState('localidades', ['respuesta']),
+            ...mapState('localidades', ['respuesta', 'provincias']),
             reset(){
                 if(this.$store.state.localidades.respuesta != null){
                     this.nloc.localidad='',

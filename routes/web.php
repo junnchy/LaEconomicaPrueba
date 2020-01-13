@@ -23,6 +23,8 @@ Route::get('/productos/home', 'HomeProductosController@index')->name('homeProduc
 
 Route::resource('/proveedores', 'ProveedorControler')->middleware('auth');
 
+Route::resource('/provincias', 'ProvinciaController')->middleware('auth');
+
 Route::resource('/productos', 'ProductosController')->middleware('auth');
 
 Route::resource('/categoria', 'CategoriaController')->middleware('auth');

@@ -2394,13 +2394,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       nloc: {
         localidad: '',
-        provincia: '',
+        provincia_id: 0,
         cod_postal: 0
       }
     };
@@ -2408,9 +2411,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     console.log('component mounted');
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['agregarLocalidad', 'resetResp'])),
-  created: function created() {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['respuesta']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['agregarLocalidad', 'resetResp', 'getProvincias'])),
+  created: function created() {
+    this.getProvincias();
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['respuesta', 'provincias']), {
     reset: function reset() {
       if (this.$store.state.localidades.respuesta != null) {
         this.nloc.localidad = '', this.nloc.provincia = '', this.nloc.cod_postal = 0;
@@ -3246,7 +3251,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     buscar: function buscar() {
       if (this.cliente.localidad.id > 0 && this.cliente.direccion != '') {
         if (this.cliente.localidad.id != this.localidadActual || this.cliente.direccion != this.direccionActual) {
-          var cad = "".concat(this.cliente.direccion, " ").concat(this.cliente.localidad.localidad, " ").concat(this.cliente.localidad.provincia);
+          var cad = "".concat(this.cliente.direccion, " ").concat(this.cliente.localidad.localidad, " ").concat(this.cliente.localidad.provincia.iso_nombre);
           console.log(cad);
           this.getDireccion(cad);
           this.posicion.lat = this.latlog.lat;
@@ -41410,31 +41415,68 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group" }, [
-                      _c("label", { staticClass: "col-form-label" }, [
-                        _vm._v("Provincia de Localidad::")
-                      ]),
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "recipient-name" }
+                        },
+                        [_vm._v("Provincia:")]
+                      ),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.nloc.provincia,
-                            expression: "nloc.provincia"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.nloc.provincia },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.nloc.provincia_id,
+                              expression: "nloc.provincia_id"
                             }
-                            _vm.$set(_vm.nloc, "provincia", $event.target.value)
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "number" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.nloc,
+                                "provincia_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
                           }
-                        }
-                      })
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { selected: "" },
+                              domProps: { value: null }
+                            },
+                            [_vm._v("0 - Vacio")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.provincias, function(provincia, index) {
+                            return _c(
+                              "option",
+                              { key: index, domProps: { value: provincia.id } },
+                              [_vm._v(_vm._s(provincia.iso_nombre))]
+                            )
+                          })
+                        ],
+                        2
+                      )
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-footer" }, [
@@ -43055,7 +43097,7 @@ var render = function() {
               _vm._v(
                 _vm._s(localidad.localidad) +
                   ", " +
-                  _vm._s(localidad.provincia) +
+                  _vm._s(localidad.provincia.iso_nombre) +
                   " "
               )
             ]),
@@ -61805,7 +61847,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_google_maps__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__);
 
 
- // MAPS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ // import vuetify from './plugins/vuetify'
+// MAPS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue2_google_maps__WEBPACK_IMPORTED_MODULE_3__, {
@@ -63724,6 +63767,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 commit = _ref5.commit;
                 _context3.next = 3;
                 return axios.get("http://127.0.0.1:8000/clientes/".concat(id)).then(function (response) {
+                  console.log(response.data);
                   commit('setCliente', response.data);
                 });
 
@@ -63881,7 +63925,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   state: {
     localidades: [],
     localidad: {},
-    respuesta: null
+    respuesta: null,
+    provincias: []
   },
   mutations: {
     setLocalidades: function setLocalidades(state, localidades) {
@@ -63892,6 +63937,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setLocalidad: function setLocalidad(state, localidad) {
       state.localidad = localidad;
+    },
+    setProvincias: function setProvincias(state, provincias) {
+      state.provincias = provincias;
     }
   },
   actions: {
@@ -63942,9 +63990,58 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getLocalidades;
     }(),
-    agregarLocalidad: function agregarLocalidad(_ref2, localidad) {
-      var commit = _ref2.commit,
-          dispatch = _ref2.dispatch;
+    getProvincias: function () {
+      var _getProvincias = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2) {
+        var commit, p, provincias;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref2.commit;
+                p = [];
+                _context2.prev = 2;
+                _context2.next = 5;
+                return axios.get('http://127.0.0.1:8000/provincias');
+
+              case 5:
+                provincias = _context2.sent;
+                provincias.data.forEach(function (element) {
+                  p.push(element);
+                });
+                console.log(p);
+                _context2.next = 13;
+                break;
+
+              case 10:
+                _context2.prev = 10;
+                _context2.t0 = _context2["catch"](2);
+                console.log(_context2.t0);
+
+              case 13:
+                _context2.prev = 13;
+                commit('setProvincias', p);
+                return _context2.finish(13);
+
+              case 16:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[2, 10, 13, 16]]);
+      }));
+
+      function getProvincias(_x2) {
+        return _getProvincias.apply(this, arguments);
+      }
+
+      return getProvincias;
+    }(),
+    agregarLocalidad: function agregarLocalidad(_ref3, localidad) {
+      var commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
+      console.log(localidad);
       axios.post('http://127.0.0.1:8000/localidades', localidad).then(function (response) {
         // dispatch('getCategoriasO')
         commit('setRespuesta', response.data.message);
@@ -63953,38 +64050,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error);
       });
     },
-    resetResp: function resetResp(_ref3, resp) {
-      var commit = _ref3.commit;
+    resetResp: function resetResp(_ref4, resp) {
+      var commit = _ref4.commit;
       commit('setRespuesta', resp);
     },
     getLocalidad: function () {
       var _getLocalidad = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref4, id) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref5, id) {
         var commit, loc, localidad;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                commit = _ref4.commit;
-                _context2.next = 3;
+                commit = _ref5.commit;
+                _context3.next = 3;
                 return axios.get("http://127.0.0.1:8000/localidades/".concat(id)).then(function (response) {
                   loc = response.data;
                   commit('setLocalidad', loc);
                 });
 
               case 3:
-                localidad = _context2.sent;
+                localidad = _context3.sent;
 
               case 4:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }));
 
-      function getLocalidad(_x2, _x3) {
+      function getLocalidad(_x3, _x4) {
         return _getLocalidad.apply(this, arguments);
       }
 

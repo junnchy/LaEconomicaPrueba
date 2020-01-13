@@ -43,7 +43,7 @@ export default {
             cliente:{
                 nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
                 localidad_id: 0, cat_clientes_id: 0, condicion_iva_id: 0,
-                localidad:{localidad: '', cod_postal: '', provincia: ''},
+                localidad:{localidad: '', cod_postal: '', provincia: {iso_nombre: ''}},
                 categoria:{denominacion: ''},
                 condicion_iva:{denominacion: ''}
             }

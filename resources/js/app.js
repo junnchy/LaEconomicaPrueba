@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import router from './router/index.js'
 import store from './store'
+// import vuetify from './plugins/vuetify'
 
 // MAPS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-import * as VueGoogleMaps from 'vue2-google-maps'
-
- 
+import * as VueGoogleMaps from 'vue2-google-maps' 
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyCbASazHk3QISMptpk_C-AN99YU1gO5JFM',
@@ -31,6 +30,7 @@ Vue.use(VueGoogleMaps, {
   // installComponents: true,
 })
 // MAPS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 
 
 require('./bootstrap');

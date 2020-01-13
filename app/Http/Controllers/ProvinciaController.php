@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Provincia;
 
-use App\Localidad;
-
-class LocalidadController extends Controller
+class ProvinciaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class LocalidadController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $localidades = Localidad::with('provincia.localidades')->get();
-            return response()->json($localidades);
+            $provincias = Provincia::all();
+            return response()->json($provincias);
         }
     }
 
@@ -39,20 +38,7 @@ class LocalidadController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax()){
-
-            $localidad = new Localidad;
-            $localidad->localidad = $request->localidad;
-            $localidad->provincia_id = $request->provincia_id;
-            $localidad->cod_postal = $request->cod_postal;
-            $localidad->save();
-
-            return response()->json([
-                'producto' => $localidad,
-                'message' => 'Localidad Agregada'
-            ], 200);
-
-        }
+        //
     }
 
     /**
@@ -61,14 +47,10 @@ class LocalidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        if($request->ajax()){
-            $localidad = Localidad::with('provincia')->findOrFail($id);
-            return response()->json($localidad);
-        }
+        //
     }
-
 
     /**
      * Show the form for editing the specified resource.

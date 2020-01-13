@@ -11,7 +11,9 @@
             </div>
             <div class="col-3">
                 <router-link :to="{name:'agregarCliente'}">
-                    <button class="btn btn-success btn-block my-3"> Agregar Cliente</button>
+                    <button class="btn btn-success btn-block my-3"> 
+                        Agregar Cliente <i class="material-icons md-18"> person_add</i>
+                    </button>
                 </router-link>
             </div>
         </div>

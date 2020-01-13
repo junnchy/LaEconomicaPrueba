@@ -70,7 +70,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         localidad: {
           localidad: '',
           cod_postal: '',
-          provincia: ''
+          provincia: {
+            iso_nombre: ''
+          }
         },
         categoria: {
           denominacion: ''
@@ -369,11 +371,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DetalleCliente',
   data: function data() {
     return {
+      data: function data() {
+        return {};
+      },
       id: this.$route.params.id
     };
   },
@@ -381,6 +390,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getCliente(this.id);
   },
+  mounted: function mounted() {},
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['cliente']))
 });
 
@@ -839,6 +849,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -847,10 +875,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         nombre: '',
         categoria_id: ''
       },
-      searched: ''
+      searched: '',
+      upType: "page-item",
+      downType: "page-item disabled",
+      cantidadDeLineas: 0,
+      linePerPage: 5,
+      nro: 0,
+      paginas: [],
+      act: 1,
+      nroItems: 3,
+      pDesde: 0,
+      PHasta: 3
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria']), {
+    changePageUp: function changePageUp() {
+      this.act++;
+      this.pDesde += this.nroItems;
+      this.PHasta += this.nroItems;
+
+      if (this.act === 1) {
+        this.downType = "page-item disabled";
+      } else {
+        this.downType = "page-item";
+      }
+    },
+    changePageDown: function changePageDown() {
+      this.act--;
+      this.pDesde -= this.nroItems;
+      this.PHasta -= this.nroItems;
+    }
+  }),
   created: function created() {
     this.getCategoriasO();
   },
@@ -862,6 +917,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       set: function set(val) {
         this.$store.commit('categorias/SET_QUERY', val);
       }
+    },
+    count: function count() {
+      var aux;
+      this.paginas = [];
+      this.cantidadDeLineas = this.filtered_categorias.length;
+      aux = Math.ceil(this.cantidadDeLineas / this.linePerPage);
+
+      for (var index = 0; index < aux; index++) {
+        this.paginas.push(index);
+      }
+
+      return this.paginas.slice(this.pDesde, this.PHasta);
+    },
+    paginado: function paginado() {
+      var desde;
+      var hasta;
+
+      if (this.nro === 0) {
+        desde = 0;
+        hasta = this.linePerPage;
+      } else {
+        desde = this.nro * this.linePerPage;
+        hasta = desde + this.linePerPage;
+      }
+
+      return this.filtered_categorias.slice(desde, hasta);
     }
   }),
   mutations: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])('categorias', ['SET_QUERY']))
@@ -972,6 +1053,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -1734,19 +1817,19 @@ var render = function() {
         _vm._v(" " + _vm._s(_vm.cliente.id))
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "list-group-item" }, [
-        _c("strong", [_vm._v("Direccion: ")]),
-        _vm._v(
-          " " +
-            _vm._s(_vm.cliente.direccion) +
-            " - (" +
-            _vm._s(_vm.cliente.localidad.cod_postal) +
-            ") " +
-            _vm._s(_vm.cliente.localidad.localidad) +
-            ", " +
-            _vm._s(_vm.cliente.localidad.provincia)
-        )
-      ]),
+      _vm.cliente.localidad
+        ? _c("li", { staticClass: "list-group-item" }, [
+            _c("strong", [_vm._v("Direccion: ")]),
+            _vm._v(
+              " " +
+                _vm._s(_vm.cliente.direccion) +
+                " - " +
+                _vm._s(_vm.cliente.localidad.localidad) +
+                ", " +
+                _vm._s(_vm.cliente.localidad.provincia.iso_nombre)
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("li", { staticClass: "list-group-item" }, [
         _c("strong", [_vm._v("Telefono: ")]),
@@ -1763,13 +1846,17 @@ var render = function() {
         _vm._v(" " + _vm._s(_vm.cliente.email))
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "list-group-item" }, [
-        _c("strong", [_vm._v("Condicon de Iva: ")]),
-        _vm._v(" " + _vm._s(_vm.cliente.condicion_iva.denominacion))
-      ]),
+      _vm.cliente.condicion_iva
+        ? _c("li", { staticClass: "list-group-item" }, [
+            _c("strong", [_vm._v("Condicon de Iva: ")]),
+            _vm._v(" " + _vm._s(_vm.cliente.condicion_iva.denominacion))
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("li", { staticClass: "list-group-item" }, [
-        _c("strong", [_vm._v("Tipo de Cliente: ")]),
+        _vm.cliente.categoria != undefined
+          ? _c("strong", [_vm._v("Tipo de Cliente: ")])
+          : _vm._e(),
         _vm._v(" " + _vm._s(_vm.cliente.categoria.denominacion))
       ]),
       _vm._v(" "),
@@ -1777,7 +1864,18 @@ var render = function() {
         _c("strong", [_vm._v("Ultima Actualizacion: ")]),
         _vm._v(" " + _vm._s(_vm.cliente.updated_at))
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "container mt-5" },
+      [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("componente-gmap", { attrs: { cliente: _vm.cliente } })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -1787,6 +1885,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
       _c("h2", [_vm._v("Detalle de Cliente ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", [
+      _c("i", { staticClass: "material-icons" }, [_vm._v("map")]),
+      _vm._v(" Ubicacion en Mapa: ")
     ])
   }
 ]
@@ -1985,24 +2092,28 @@ var render = function() {
         _vm._v(" " + _vm._s(_vm.proveedor.telefono))
       ]),
       _vm._v(" "),
-      _c("li", { staticClass: "list-group-item" }, [
-        _c("strong", [_vm._v("Telefono: ")]),
-        _vm._v(
-          " " +
-            _vm._s(_vm.proveedor.direccion) +
-            " - (" +
-            _vm._s(_vm.proveedor.localidad.cod_postal) +
-            ") " +
-            _vm._s(_vm.proveedor.localidad.localidad) +
-            ", " +
-            _vm._s(_vm.proveedor.localidad.provincia)
-        )
-      ]),
+      _vm.proveedor.localidad
+        ? _c("li", { staticClass: "list-group-item" }, [
+            _c("strong", [_vm._v("Localidad: ")]),
+            _vm._v(
+              " " +
+                _vm._s(_vm.proveedor.direccion) +
+                " - (" +
+                _vm._s(_vm.proveedor.localidad.cod_postal) +
+                ") " +
+                _vm._s(_vm.proveedor.localidad.localidad) +
+                ", " +
+                _vm._s(_vm.proveedor.localidad.provincia)
+            )
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c("li", { staticClass: "list-group-item" }, [
-        _c("strong", [_vm._v("Telefono: ")]),
-        _vm._v(" " + _vm._s(_vm.proveedor.condicion_iva.denominacion))
-      ]),
+      _vm.proveedor.condicion_iva
+        ? _c("li", { staticClass: "list-group-item" }, [
+            _c("strong", [_vm._v("Condicion de IVA: ")]),
+            _vm._v(" " + _vm._s(_vm.proveedor.condicion_iva.denominacion))
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("li", { staticClass: "list-group-item" }, [
         _c("strong", [_vm._v("Categorias: ")]),
@@ -2505,12 +2616,12 @@ var render = function() {
         [
           _c("componente-fagregarcategoria"),
           _vm._v(" "),
-          _c("table", { staticClass: "table table-striped" }, [
+          _c("table", { staticClass: "table table-striped mt-4" }, [
             _vm._m(2),
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.filtered_categorias, function(categoria) {
+              _vm._l(_vm.paginado, function(categoria) {
                 return _c("tr", { key: categoria.id }, [
                   _c("th", [_vm._v(_vm._s(categoria.id))]),
                   _vm._v(" "),
@@ -2555,6 +2666,73 @@ var render = function() {
                 ])
               }),
               0
+            )
+          ]),
+          _vm._v(" "),
+          _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+            _c(
+              "ul",
+              { staticClass: "pagination justify-content-end pagination-sm" },
+              [
+                _c("li", { class: _vm.downType }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#", "aria-label": "Previous" },
+                      on: {
+                        click: function($event) {
+                          return _vm.changePageDown()
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("«")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.count, function(item, index) {
+                  return _c("li", { key: index, staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            _vm.nro = item
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(item))]
+                    )
+                  ])
+                }),
+                _vm._v(" "),
+                _c("li", { class: _vm.upType }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#", "aria-label": "Next" },
+                      on: {
+                        click: function($event) {
+                          return _vm.changePageUp()
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("»")
+                      ])
+                    ]
+                  )
+                ])
+              ],
+              2
             )
           ])
         ],
@@ -2673,7 +2851,7 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _c("table", { staticClass: "table" }, [
+    _c("table", { staticClass: "table table-hover" }, [
       _vm._m(1),
       _vm._v(" "),
       _c(
@@ -2812,7 +2990,10 @@ var render = function() {
           [
             _c("router-link", { attrs: { to: { name: "agregarCliente" } } }, [
               _c("button", { staticClass: "btn btn-success btn-block my-3" }, [
-                _vm._v(" Agregar Cliente")
+                _vm._v(" \n                    Agregar Cliente "),
+                _c("i", { staticClass: "material-icons md-18" }, [
+                  _vm._v(" person_add")
+                ])
               ])
             ])
           ],

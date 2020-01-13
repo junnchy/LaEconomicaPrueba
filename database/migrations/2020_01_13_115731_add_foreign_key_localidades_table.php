@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocalidadesTable extends Migration
+class AddForeignKeyLocalidadesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateLocalidadesTable extends Migration
      */
     public function up()
     {
-        Schema::create('localidades', function (Blueprint $table) 
-        {
-            $table->bigIncrements('id');
-            $table->integer('cod_postal');
-            $table->string('localidad');
-            $table->timestamps();
+        Schema::table('localidades', function (Blueprint $table) {
+            $table->unsignedBigInteger('provincia_id')->nullable();
+            $table->foreign('provincia_id')->references('id')->on('provincias');
         });
     }
 
@@ -30,7 +27,10 @@ class CreateLocalidadesTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('localidades');
+        Schema::table('localidades', function (Blueprint $table) {
+            $table->dropForeign(['provincia_id']);
+            $table->dropColumn('provincia_id');
+        });
         Schema::enableForeignKeyConstraints();
     }
 }

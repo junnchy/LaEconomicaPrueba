@@ -4,6 +4,7 @@ export default {
         localidades: [],
         localidad: {},
         respuesta: null,
+        provincias: []
     },
     mutations: {
         setLocalidades(state, localidades){
@@ -14,6 +15,9 @@ export default {
         },
         setLocalidad(state, localidad){
             state.localidad = localidad
+        },
+        setProvincias(state, provincias){
+            state.provincias = provincias
         }
     },
     actions:{
@@ -31,7 +35,23 @@ export default {
                 commit('setLocalidades', l)
             }
         },
+        async getProvincias({commit}){
+            let p = []
+            try {
+                let provincias = await axios.get('http://127.0.0.1:8000/provincias')
+                provincias.data.forEach(element => {
+                p.push(element)
+                });
+                console.log(p)
+            } catch (error) {
+                console.log(error)
+            }
+            finally{
+                commit('setProvincias', p)
+            }
+        },
         agregarLocalidad({commit, dispatch}, localidad){
+            console.log(localidad)
             axios.post('http://127.0.0.1:8000/localidades', localidad).then(function (response) {
                 // dispatch('getCategoriasO')
                 commit('setRespuesta', response.data.message)
