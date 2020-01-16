@@ -151,7 +151,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'agregarProducto',
@@ -305,6 +304,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cuit: '',
         telefono: '',
         direccion: '',
+        email: '',
         localidad_id: 0,
         condicion_iva_id: 0,
         localidad: {
@@ -487,6 +487,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -882,7 +883,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       upType: "page-item",
       downType: "page-item disabled",
       cantidadDeLineas: 0,
-      linePerPage: 5,
+      linePerPage: 7,
       nro: 0,
       paginas: [],
       act: 1,
@@ -1088,6 +1089,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getClientes'])),
   created: function created() {
     this.getClientes();
+  },
+  mounted: function mounted() {
+    console.log(this.$userName);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['clientes']), {
     search: {
@@ -1668,25 +1672,24 @@ var render = function() {
               },
               [_vm._v("Agregar")]
             )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.tab === 0
-          ? _c(
-              "button",
-              {
-                staticClass: "btn btn-success btn-block",
-                attrs: { type: "submit" },
-                on: {
-                  click: function($event) {
-                    return _vm.setTab(1)
-                  }
-                }
-              },
-              [_vm._v("Continuar")]
-            )
           : _vm._e()
       ]
-    )
+    ),
+    _vm._v(" "),
+    _vm.tab === 0
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-success btn-block",
+            on: {
+              click: function($event) {
+                return _vm.setTab(1)
+              }
+            }
+          },
+          [_vm._v("Continuar")]
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -1974,49 +1977,53 @@ var render = function() {
         _c("h5", [_vm._v("$" + _vm._s(_vm.producto.precioVenta))])
       ]),
       _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "list-group-item" },
-        [
-          _c("strong", [_vm._v("Proveedor: ")]),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              attrs: {
-                to: {
-                  name: "detalleProv",
-                  params: { id: _vm.producto.proveedor_id }
-                }
-              }
-            },
-            [_c("a", [_vm._v(_vm._s(_vm.producto.proveedor.nombre))])]
+      _vm.producto.proveedor
+        ? _c(
+            "li",
+            { staticClass: "list-group-item" },
+            [
+              _c("strong", [_vm._v("Proveedor: ")]),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "detalleProv",
+                      params: { id: _vm.producto.proveedor_id }
+                    }
+                  }
+                },
+                [_c("a", [_vm._v(_vm._s(_vm.producto.proveedor.nombre))])]
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "li",
-        { staticClass: "list-group-item" },
-        [
-          _c("strong", [_vm._v("Categoria: ")]),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            {
-              attrs: {
-                to: {
-                  name: "verEditarCategoria",
-                  params: { id: _vm.producto.categoria_id }
-                }
-              }
-            },
-            [_c("a", [_vm._v(_vm._s(_vm.producto.categoria.nombre))])]
+      _vm.producto.categoria
+        ? _c(
+            "li",
+            { staticClass: "list-group-item" },
+            [
+              _c("strong", [_vm._v("Categoria: ")]),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "verEditarCategoria",
+                      params: { id: _vm.producto.categoria_id }
+                    }
+                  }
+                },
+                [_c("a", [_vm._v(_vm._s(_vm.producto.categoria.nombre))])]
+              )
+            ],
+            1
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
       _c("li", { staticClass: "list-group-item" }, [
         _c("strong", [_vm._v("Ultima Actualizacion: ")]),
@@ -2098,6 +2105,11 @@ var render = function() {
       _c("li", { staticClass: "list-group-item" }, [
         _c("strong", [_vm._v("Telefono: ")]),
         _vm._v(" " + _vm._s(_vm.proveedor.telefono))
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-group-item" }, [
+        _c("strong", [_vm._v("Email: ")]),
+        _vm._v(" " + _vm._s(_vm.proveedor.email))
       ]),
       _vm._v(" "),
       _vm.proveedor.localidad
@@ -2650,11 +2662,11 @@ var render = function() {
                 _c("th", [_vm._v(_vm._s(categoria.id))]),
                 _vm._v(" "),
                 categoria.nro === 2
-                  ? _c("td", [_vm._v(" ----" + _vm._s(categoria.nombre))])
+                  ? _c("td", [_vm._v(" ------" + _vm._s(categoria.nombre))])
                   : _vm._e(),
                 _vm._v(" "),
                 categoria.nro === 1
-                  ? _c("td", [_vm._v(" --" + _vm._s(categoria.nombre))])
+                  ? _c("td", [_vm._v(" ---" + _vm._s(categoria.nombre))])
                   : _vm._e(),
                 _vm._v(" "),
                 categoria.nro === 0
@@ -3220,7 +3232,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(producto.nombre))]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(producto.precioVenta))]),
+                  _c("td", [_vm._v("$" + _vm._s(producto.precioVenta))]),
                   _vm._v(" "),
                   _c(
                     "td",

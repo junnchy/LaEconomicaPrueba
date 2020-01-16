@@ -15,13 +15,6 @@ export default {
             state.respuesta = respuesta
         },
         setProducto(state, producto){
-            producto.descuentoProducto= [
-              producto.descuentoProducto_1,
-              producto.descuentoProducto_2,
-              producto.descuentoProducto_3,
-              producto.descuentoProducto_4,
-              producto.descuentoProducto_5,
-            ]
             state.producto = producto
         },
         setProductos(state, productos){
@@ -57,18 +50,8 @@ export default {
           }
         },
         agregarProducto({commit}, producto){
-          let prod = {id: null, nombre: producto.nombre, precioBase: producto.precioBase,
-            descuentoProducto_1: producto.descuentoProducto[0],
-            descuentoProducto_2: producto.descuentoProducto[1],
-            descuentoProducto_3: producto.descuentoProducto[2],
-            descuentoProducto_4: producto.descuentoProducto[3],
-            descuentoProducto_5: producto.descuentoProducto[4],
-            rentabilidad: producto.rentabilidad,
-            precioVenta: producto.precioVenta,
-            dtoReal: producto.dre, iva: producto.iva, flete: producto.flete,
-            precioCosto: producto.precioCosto,
-            proveedor_id: producto.proveedor.id, categoria_id: producto.categoria.id}
-          axios.post('http://127.0.0.1:8000/productos', prod).then(function (response) {
+          producto.id = null   
+          axios.post('http://127.0.0.1:8000/productos', producto).then(function (response) {
             commit('setRespuesta', response.data.message)
           })
           .catch(function (error) {
@@ -84,13 +67,6 @@ export default {
         },
         editarProducto({commit},producto){
           var id = producto.id
-          producto.descuentoProducto_1= producto.descuentoProducto[0],
-          producto.descuentoProducto_2= producto.descuentoProducto[1],
-          producto.descuentoProducto_3= producto.descuentoProducto[2],
-          producto.descuentoProducto_4= producto.descuentoProducto[3],
-          producto.descuentoProducto_5= producto.descuentoProducto[4],
-          producto.proveedor_id= producto.proveedor.id, 
-          producto.categoria_id= producto.categoria.id
           axios.put(`http://127.0.0.1:8000/productos/${id}`, producto).then(function (response) {
             commit('setRespuesta', response.data.message)
           })

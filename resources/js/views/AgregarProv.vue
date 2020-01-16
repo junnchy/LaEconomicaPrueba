@@ -80,7 +80,7 @@ export default {
     name: 'agregarProv', 
     data() {
         return {
-                proveedor: {nombre: '', cuit:'', telefono: '', direccion: '', 
+                proveedor: {nombre: '', cuit:'', telefono: '', direccion: '', email: '', 
                 localidad_id: 0, condicion_iva_id: 0,
                 localidad:{nombre: '', cod_postal: ''},
                 condicion_iva:{denominacion: ''}

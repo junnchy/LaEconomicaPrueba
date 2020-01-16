@@ -22,6 +22,7 @@
             <li class="list-group-item"><strong>Codigo: </strong> {{proveedor.id}}</li>
             <li class="list-group-item"><strong>CUIT: </strong> {{proveedor.cuit}}</li>
             <li class="list-group-item"><strong>Telefono: </strong> {{proveedor.telefono}}</li>
+            <li class="list-group-item"><strong>Email: </strong> {{proveedor.email}}</li>
             <li class="list-group-item" v-if="proveedor.localidad"><strong>Localidad: </strong> {{proveedor.direccion}} - ({{proveedor.localidad.cod_postal}}) {{proveedor.localidad.localidad}}, {{proveedor.localidad.provincia}}</li>
             <li class="list-group-item" v-if="proveedor.condicion_iva"><strong>Condicion de IVA: </strong> {{proveedor.condicion_iva.denominacion}}</li>
             <li class="list-group-item"><strong>Categorias: </strong> 

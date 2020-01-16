@@ -31,7 +31,7 @@ Vue.use(VueGoogleMaps, {
 })
 // MAPS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-
+Vue.prototype.$userName = document.querySelector("meta[name='user-name']").getAttribute('content');
 
 require('./bootstrap');
 
@@ -55,6 +55,8 @@ Vue.component('componente-fagregarlocalidad', require('./components/FormularioAg
 Vue.component('componente-fagregarcatecli', require('./components/FormularioAgregarCategoriaCliente.vue').default);
 Vue.component('componente-fdatosprov', require('./components/FormularioDatosProveedor.vue').default);
 Vue.component('componente-gmap', require('./components/PruebaGMap.vue').default);
+Vue.component('componente-nav', require('./components/BarraDeNavegacion.vue').default);
+
 
 
 const app = new Vue({

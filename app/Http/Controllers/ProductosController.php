@@ -19,7 +19,7 @@ class ProductosController extends Controller
     public function index(Request $request)
     {    
         if($request->ajax()){
-            $productos = Producto::with(['proveedor.productos','categoria.productos'])->get();
+            $productos = Producto::with(['proveedor','categoria'])->get();
             return response()->json($productos);
         } else {
             $productos = Producto::all();
@@ -55,18 +55,18 @@ class ProductosController extends Controller
             }
             $producto->nombre = $request->nombre;
             $producto->precioBase = $request->precioBase;
-            $producto->descuentoProducto_1 = $request->descuentoProducto_1;
-            $producto->descuentoProducto_2 = $request->descuentoProducto_2;
-            $producto->descuentoProducto_3 = $request->descuentoProducto_3;
-            $producto->descuentoProducto_4 = $request->descuentoProducto_4;
-            $producto->descuentoProducto_5 = $request->descuentoProducto_5;
+            $producto->descuentoProducto_1 = $request->descuentoProducto[0];
+            $producto->descuentoProducto_2 = $request->descuentoProducto[1];
+            $producto->descuentoProducto_3 = $request->descuentoProducto[2];
+            $producto->descuentoProducto_4 = $request->descuentoProducto[3];
+            $producto->descuentoProducto_5 = $request->descuentoProducto[4];
             $producto->iva = $request->iva;
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
             $producto->precioVenta = $request->precioVenta;
             $producto->rentabilidad = $request->rentabilidad;
-            $producto->proveedor_id = $request->proveedor_id;
-            $producto->categoria_id = $request->categoria_id;
+            $producto->proveedor_id = $request->proveedor['id'];
+            $producto->categoria_id = $request->categoria['id'];
 
             $producto->save();
 
@@ -102,7 +102,14 @@ class ProductosController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $producto = Producto::with(['proveedor.productos','categoria.productos'])->findOrFail($id);
+            $producto = Producto::with(['proveedor','categoria'])->findOrFail($id);
+            $producto->descuentoProducto = [
+                $producto->descuentoProducto_1, 
+                $producto->descuentoProducto_2, 
+                $producto->descuentoProducto_3,
+                $producto->descuentoProducto_4,
+                $producto->descuentoProducto_5
+            ];
             return response()->json($producto);
         }
         else {
@@ -135,18 +142,18 @@ class ProductosController extends Controller
             $producto = Producto::findOrFail($id);
             $producto->nombre = $request->nombre;
             $producto->precioBase = $request->precioBase;
-            $producto->descuentoProducto_1 = $request->descuentoProducto_1;
-            $producto->descuentoProducto_2 = $request->descuentoProducto_2;
-            $producto->descuentoProducto_3 = $request->descuentoProducto_3;
-            $producto->descuentoProducto_4 = $request->descuentoProducto_4;
-            $producto->descuentoProducto_5 = $request->descuentoProducto_5;
+            $producto->descuentoProducto_1 = $request->descuentoProducto[0];
+            $producto->descuentoProducto_2 = $request->descuentoProducto[1];
+            $producto->descuentoProducto_3 = $request->descuentoProducto[2];
+            $producto->descuentoProducto_4 = $request->descuentoProducto[3];
+            $producto->descuentoProducto_5 = $request->descuentoProducto[4];
             $producto->iva = $request->iva;
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
             $producto->precioVenta = $request->precioVenta;
             $producto->rentabilidad = $request->rentabilidad;
-            $producto->proveedor_id = $request->proveedor_id;
-            $producto->categoria_id = $request->categoria_id;
+            $producto->proveedor_id = $request->proveedor['id'];
+            $producto->categoria_id = $request->categoria['id'];
 
             $producto->save();
 

@@ -23,12 +23,12 @@
             <li class="list-group-item"><strong>Precio de Venta: </strong> 
                 <h5>${{producto.precioVenta}}</h5>
             </li>
-            <li class="list-group-item"><strong>Proveedor: </strong> 
+            <li class="list-group-item" v-if="producto.proveedor"><strong>Proveedor: </strong> 
                 <router-link :to="{name: 'detalleProv', params:{id: producto.proveedor_id}}">
                     <a>{{producto.proveedor.nombre}}</a>
                 </router-link>
             </li>
-            <li class="list-group-item"><strong>Categoria: </strong> 
+            <li class="list-group-item" v-if="producto.categoria"><strong>Categoria: </strong> 
                 <router-link :to="{name: 'verEditarCategoria', params:{id: producto.categoria_id}}">
                     <a>{{producto.categoria.nombre}}</a>
                 </router-link>

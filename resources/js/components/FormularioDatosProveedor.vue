@@ -32,6 +32,17 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-8">
+                    <div class="form-group">     
+                        <label>Email</label>
+                        <input type="text" v-model="proveedor.email" class="form-control">
+                    </div> 
+                </div>
+                <div class="col-4">
+                    
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-6">
                     <div class="form-group">
                         <label>Dirección</label>

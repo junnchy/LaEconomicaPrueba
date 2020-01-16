@@ -54,6 +54,7 @@ class ProveedorControler extends Controller
             $proveedor->cuit = $request->cuit;
             $proveedor->telefono = $request->telefono;
             $proveedor->direccion = $request->direccion;
+            $proveedor->email = $request->email;
             $proveedor->condicion_iva_id = $request->condicion_iva_id;
             $proveedor->localidad_id = $request->localidad_id;
             $proveedor->save();
@@ -127,6 +128,7 @@ class ProveedorControler extends Controller
             $proveedor->telefono = $request->telefono;
             $proveedor->direccion = $request->direccion;
             $proveedor->condicion_iva_id = $request->condicion_iva_id;
+            $proveedor->email = $request->email;
             $proveedor->localidad_id = $request->localidad_id;
             if ($request->id_cat != null) {
                 

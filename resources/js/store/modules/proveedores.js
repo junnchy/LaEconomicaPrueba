@@ -31,7 +31,6 @@ export default {
             let proveedores = await axios.get('http://127.0.0.1:8000/proveedores')
             proveedores.data.forEach(element => {
               p.push(element)
-              console.log(element)
             });
           } catch (error) {
             console.log(error)
@@ -70,7 +69,6 @@ export default {
         let  cat = parseInt(categoria)
         proveedor.id_cat = cat
         proveedor.descuento = descuento
-        console.log(proveedor)
         axios.put(`http://127.0.0.1:8000/proveedores/${id}`, proveedor).then(function (response) {
             commit('setRespuesta', response.data.message)
             dispatch('getProveedor', id)

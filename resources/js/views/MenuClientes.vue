@@ -35,6 +35,9 @@ export default {
     created() {
         this.getClientes()
     },
+    mounted(){
+        console.log(this.$userName)
+    },
     computed: {
         ...mapState('clientes', ['clientes']),
         search:{

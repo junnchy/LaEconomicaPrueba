@@ -17,8 +17,28 @@ class CategoriaController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $categorias = Categoria::with('children.padre', 'padre.children')->get();
-            return response()->json($categorias);
+            $categorias = Categoria::with('children.children', 'padre.padre')->get();
+            $ordenadas = [];
+            foreach ($categorias as $categoria) {
+                if($categoria->padre ===  null){
+                    $categoria->nro = 0;
+                    array_push($ordenadas, $categoria);
+                    if ($categoria['children'] != []){
+                        foreach($categoria['children'] as $hijo) {
+                            $hijo->nro = 1;
+                            array_push($ordenadas, $hijo);
+                            if ($hijo['children'] != []){
+                                foreach($hijo['children'] as $nieto) {
+                                    $nieto->nro = 2;
+                                    array_push($ordenadas, $nieto);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return response()->json($ordenadas);
         } else {
             $categorias = Categoria::all();
             $proveedores = Proveedor::all();

@@ -31,8 +31,8 @@
                     <tbody>
                         <tr v-for="categoria in paginado" :key="categoria.id" >
                             <th>{{categoria.id}}</th>
-                            <td v-if="categoria.nro === 2"> ----{{categoria.nombre}}</td>
-                            <td v-if="categoria.nro === 1"> --{{categoria.nombre}}</td>
+                            <td v-if="categoria.nro === 2"> ------{{categoria.nombre}}</td>
+                            <td v-if="categoria.nro === 1"> ---{{categoria.nombre}}</td>
                             <td v-if="categoria.nro === 0"> <strong>{{categoria.nombre}}</strong></td>
                             <td>
                                 <router-link :to="{name: 'verEditarCategoria', params:{id: categoria.id}}">
@@ -76,7 +76,7 @@
                 upType: "page-item",
                 downType:"page-item disabled",
                 cantidadDeLineas: 0,
-                linePerPage: 5,
+                linePerPage: 7,
                 nro: 0,
                 paginas: [],
                 act: 1,

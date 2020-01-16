@@ -44,30 +44,11 @@ export default {
             categorias.data.forEach(element => {
                 cat.push(element)
             });
-            var aux = []
-            cat.forEach(h=>{
-            if (h.padre === null){
-                h.nro = 0
-                aux.push(h)
-                if (h.children != []) {
-                h.children.forEach(i=>{
-                    i.nro = 1
-                    aux.push(i)
-                    cat.forEach(j=>{
-                    if (j.categoria_id === i.id) {
-                        j.nro = 2
-                        aux.push(j)
-                    }
-                    })
-                })
-                }
-            }
-            })
         } catch (error) {
             console.log(error)
         }
         finally{
-            commit('setCategorias', aux)
+            commit('setCategorias', cat)
         }
         },
         async getCategoria({commit}, id){

@@ -38,9 +38,8 @@
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>
             </div>
             <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null && tab === 1">Agregar</button>
-            <button type="submit" class="btn btn-success btn-block" v-if="tab === 0" @click="setTab(1)">Continuar</button>
-
         </form>
+        <button class="btn btn-success btn-block" v-if="tab === 0" @click="setTab(1)">Continuar</button>
     </div>
 </template>
 
@@ -52,9 +51,11 @@ export default {
         return {
             descuento: 0,
             cate: {},
-            producto: {nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, 
-            categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0,
-            precioVenta: 0, rentabilidad: 0},
+            producto: {
+                nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, 
+                categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0,
+                precioVenta: 0, rentabilidad: 0
+            },
             tab: 0,
             ctab0: 'nav-link active',
             ctab1: 'nav-link'
