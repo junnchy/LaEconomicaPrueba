@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -41,20 +43,4 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
-    
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-    
-    public function hasRoles(array $roles)
-    {
-        return $this->roles()->pluck('nombre')->intersect($roles)->count();
-    }
-    
-    public function isAdmin()
-    {
-        return $this->hasRoles(['admin']);
-    }
-
 }

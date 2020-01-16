@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
-use App\Role;
+use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
     function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('roles:admin');
+        $this->middleware('permission:editar-usuario')->only(['edit', 'update']);
     }
     
     /**
@@ -35,7 +35,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('descripcion', 'id');
+        $roles = Role::pluck('name', 'id');
         return view('usuarios.crear', compact('roles'))->with('mensaje', 'Usuario Agregado');
     }
 
@@ -53,7 +53,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
-        $user->roles()->attach($request->roles);      
+        $user->assignRole($request->roles);    
 
         return back()->with('mensaje', 'Usuario Agregado');
     }
@@ -78,7 +78,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = Role::pluck('descripcion', 'id');
+        $roles = Role::pluck('name', 'id');
         return view('usuarios.editar', compact('user', 'roles'));
     }
 
@@ -96,7 +96,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
-        $user->roles()->sync($request->roles);        
+        $user->assignRole($request->roles);        
 
         return back()->with('mensaje', 'Usuario Actualizado');
     }

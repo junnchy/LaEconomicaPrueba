@@ -77,13 +77,13 @@
                     </div>
                     <div class="checkbox">
                         <label for="checkbox">Roles</label><br>
-                        @foreach ($roles as $id => $descripcion)
+                        @foreach ($roles as $id => $name)
                             <label for="roles">
                                     <input type="checkbox" 
                                         name="roles[]"
                                         value="{{ $id }}"
                                     >
-                                {{ $descripcion }}
+                                {{ $name }}
                             </label>                                                            
                         @endforeach
                     </div>                

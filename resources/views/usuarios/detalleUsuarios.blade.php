@@ -8,13 +8,11 @@
                     <h1>Listado de Usuarios</h1>
             </div>
             <div class="col-4">
-                    <a href="{{ route('usuarios.index') }}" class="btn btn-danger"> Volver</a>
+                    <a href="{{ route('homeUsers') }}" class="btn btn-danger"> Volver</a>
             </div>
         </div>
     </div>
-    <div class="container">
-        <a class="btn btn-primary btn-sm" href="{{ route('usuarios.create') }}">Crear Nuevo Usuario</a>
-    </div>
+    
     <div class="container mt-5">
         <table class="table">
                 <thead>
@@ -33,7 +31,7 @@
                         <td class="mt-2">{{ $user->name }}</td>
                         <td class="mt-2">{{ $user->email }}</td>
                         <td>
-                            {{ $user->roles()->pluck('descripcion')->implode(' - ') }}
+                            {{ $user->getPermissionsViaRoles()->pluck('name')->implode(' - ') }}
                         </td>
                         <td>
                             <a href="{{route('usuarios.edit', $user)}}" class="btn btn-warning btn-sm">Editar</a>

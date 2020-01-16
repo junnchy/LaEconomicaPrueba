@@ -42,8 +42,8 @@
                             <a href="{{ route('productos.index') }}" class="">Productos</a>
                             <a href="{{ route('clientes.index') }}" class="">Clientes</a> 
                             @auth
-                                @if (auth()->user()->isAdmin())
-                                <a href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
+                                @if (Auth::user()->hasRole('admin'))
+                                    <a href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
                                 @endif
                             @endauth
                         </li> <!--Sacar es solo prueba-->

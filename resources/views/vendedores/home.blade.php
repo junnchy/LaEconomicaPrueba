@@ -7,7 +7,7 @@
                     <h1>Sección Vendedores</h1>
             </div>
             <div class="col-4">
-                    <a href="{{ url()->previous() }}" class="btn btn-danger"> Volver</a>
+                    <a href="{{ route('homeUsers') }}" class="btn btn-danger"> Volver</a>
             </div>
         </div>
         

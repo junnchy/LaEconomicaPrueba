@@ -82,14 +82,14 @@
                     </div>
                     <div class="checkbox">
                         <label for="checkbox">Roles</label><br>
-                        @foreach ($roles as $id => $descripcion)
+                        @foreach ($roles as $id => $name)
                             <label for="roles">
                                     <input type="checkbox" 
                                         name="roles[]"
                                         value="{{ $id }}"
-                                	    {{ $user->roles()->pluck('descripcion')->contains($descripcion) ? "checked" : "" }}
+                                	    {{ $user->getPermissionsViaRoles()->pluck('name')->contains($name) ? "checked" : "" }}
                                     >
-                                {{ $descripcion }}
+                                {{ $name }}
                             </label>                                                            
                         @endforeach
                     </div>                

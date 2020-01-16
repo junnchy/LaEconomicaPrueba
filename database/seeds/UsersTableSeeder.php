@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Role;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,14 +14,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::truncate();
-             
-        $role_admin = Role::where('nombre', 'admin')->first();
         $user = new User();
         $user->name = 'Administrador';
         $user->email = 'admin@gmail.com';
-        $user->password = bcrypt('123456789');
+        $user->password = '12345678';
         $user->save();
-        $user->roles()->attach($role_admin);
-
+        $user->assignRole(Role::where('name', 'admin')->first());
     }
 }

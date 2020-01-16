@@ -13,23 +13,23 @@ class LocalidadesTableSeeder extends Seeder
     public function run()
     {
         Localidad::truncate();
-        Localidad::insert(
+        Localidad::create(
             ['cod_postal' => 2000,
             'localidad' => 'Rosario',
             'provincia' => 'Santa Fe']);
-        Localidad::insert(
+        Localidad::create(
             ['cod_postal' => 2124,
             'localidad' => 'Villa Gobernador Galvez',
             'provincia' => 'Santa Fe']);
-        Localidad::insert(
+        Localidad::create(
             ['cod_postal' => 2126,
             'localidad' => 'Alvear',
             'provincia' => 'Santa Fe']);
-        Localidad::insert(
+        Localidad::create(
             ['cod_postal' => 2126,
             'localidad' => 'Pueblo Esther',
             'provincia' => 'Santa Fe']);
-        Localidad::insert(
+        Localidad::create(
             ['cod_postal' => 2132,
             'localidad' => 'Funes',
             'provincia' => 'Santa Fe']);    

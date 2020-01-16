@@ -13,10 +13,10 @@ class CategoriaClientesTableSeeder extends Seeder
     public function run()
     {
         CategoriaClientes::truncate();
-        CategoriaClientes::insert(['denominacion'=>'Consumidor Final']);
-        CategoriaClientes::insert(['denominacion'=>'Empresa']);
-        CategoriaClientes::insert(['denominacion'=>'Profesional']);
-        CategoriaClientes::insert(['denominacion'=>'Organización']);
-        CategoriaClientes::insert(['denominacion'=>'Responsable Inscripto']);
+        CategoriaClientes::create(['denominacion'=>'Consumidor Final']);
+        CategoriaClientes::create(['denominacion'=>'Empresa']);
+        CategoriaClientes::create(['denominacion'=>'Profesional']);
+        CategoriaClientes::create(['denominacion'=>'Organización']);
+        CategoriaClientes::create(['denominacion'=>'Responsable Inscripto']);
     }
 }

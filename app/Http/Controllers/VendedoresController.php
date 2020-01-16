@@ -8,12 +8,18 @@ use App\Http\Requests\UpdateVendedorRequest;
 use App\Vendedor;
 use App\Localidad;
 use App\User;
-use App\Role;
+use Spatie\Permission\Models\Role;
 
 
 
 class VendedoresController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:crear-vendedor')->only('store');
+        $this->middleware('permission:editar-vendedor')->only(['show','update']);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +56,7 @@ class VendedoresController extends Controller
         $user->email = $request->email;
         $user->password = $request->password;
         $user->save();
-        $user->roles()->attach(Role::where('descripcion','Vendedor')->first());
+        $user->assignRole(Role::where('name','vend')->first());
         $vendedor = new Vendedor();
         $vendedor->user_id = $user->id;
         $vendedor->nombre = $request->nombre;

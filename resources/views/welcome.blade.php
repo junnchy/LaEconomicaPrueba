@@ -17,7 +17,7 @@
                         <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-block">Clientes</a>
                     </div>
                     @auth
-                        @if (auth()->user()->isAdmin())
+                        @if(Auth::user()->hasRole('admin'))
                             <div class="col-md-3">
                                 <a href="{{ route('homeUsers') }}" class="btn btn-primary btn-block">Perfiles de Usuario</a>                   
                             </div>

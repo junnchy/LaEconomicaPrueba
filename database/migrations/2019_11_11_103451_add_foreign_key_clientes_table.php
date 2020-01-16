@@ -35,12 +35,13 @@ class AddForeignKeyClientesTable extends Migration
         Schema::table('clientes', function (Blueprint $table) 
         {
             
-            $table->dropForeign(['cat_clientes_id']);
-            $table->dropColumn('cat_clientes_id');
+            $table->dropForeign(['localidad_id']);
+            $table->dropColumn('localidad_id');
             $table->dropForeign(['condicion_iva_id']);
             $table->dropColumn('condicion_iva_id');
-            $table->dropForeign('localidad_id');
-            $table->dropColumn('localidad_id');
+            $table->dropForeign(['cat_clientes_id']);
+            $table->dropColumn('cat_clientes_id');          
+            
     
         });
     }
