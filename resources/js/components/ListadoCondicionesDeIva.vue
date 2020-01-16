@@ -13,8 +13,8 @@
                     <th scope="row">{{condicion.id}}</th>
                     <td>{{condicion.denominacion}}</td>
                     <td>
-                        <button class="btn btn-warning btn-sm">
-                            Editar
+                        <button class="btn btn-outline-info btn-sm">
+                            Ver Mas
                         </button>
                     </td>
                 </tr>

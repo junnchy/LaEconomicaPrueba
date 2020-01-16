@@ -40530,7 +40530,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-success btn-block",
+        staticClass: "btn btn-outline-success btn-block",
         attrs: {
           type: "button",
           "data-toggle": "modal",
@@ -43054,8 +43054,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("td", [
-      _c("button", { staticClass: "btn btn-warning btn-sm" }, [
-        _vm._v("\n                        Editar\n                    ")
+      _c("button", { staticClass: "btn btn-outline-info btn-sm" }, [
+        _vm._v("\n                        Ver Mas\n                    ")
       ])
     ])
   }

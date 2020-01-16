@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-3">
                     <router-link :to="{name:'agregarProducto'}">
-                        <button class="btn btn-success btn-block my-3"> Agregar Producto</button>
+                        <button class="btn btn-outline-success btn-block my-3"> Agregar Producto</button>
                     </router-link>
                 </div>
             </div>

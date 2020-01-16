@@ -32,12 +32,14 @@
             </li>
         </ul>
         <form @submit.prevent="agregarProducto(producto)">
-            <componente-fdatosprod v-bind:producto="producto" v-if="tab === 0"></componente-fdatosprod>
             <div class="form-group my-4">
+                <componente-fdatosprod v-bind:producto="producto" v-if="tab === 0"></componente-fdatosprod>
                 <componente-fcosto v-bind:producto="producto" v-if="tab === 1"></componente-fcosto>
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>
             </div>
-            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null">Agregar</button>
+            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null && tab === 1">Agregar</button>
+            <button type="submit" class="btn btn-success btn-block" v-if="tab === 0" @click="setTab(1)">Continuar</button>
+
         </form>
     </div>
 </template>

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-10">
-                    <h1>Categorias</h1>
+                    <h1 class="text-center">Categorias</h1>
                 </div>
                 <div class="col-2">
                     <button class="btn btn-danger" @click="$router.go(-1)">Volver</button>
@@ -11,17 +11,15 @@
             </div>
             <form class="my-4">
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-8">
                         <input class="form-control mr-sm-2 form-block" type="search" placeholder="Search" aria-label="Search" v-model="search">
                     </div>
-                    <div class="col-2">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    <div class="col-4">
+                        <componente-fagregarcategoria/>
                     </div>
                 </div>
             </form>
-            
             <div class="container">
-                <componente-fagregarcategoria/>
                 <table class="table table-striped mt-4">
                     <thead>
                         <tr>

@@ -29,10 +29,13 @@
                     <div class="col-md-8">
                         <ul>
                             <li v-for="(categoria, index) in proveedor.categorias" :key="index">
-                                {{categoria.nombre}}
+                                <router-link :to="{name: 'verEditarCategoria', params:{id: categoria.id}}">
+                                    <a href="#">{{categoria.nombre}}</a>
+                                </router-link>
                             </li>
                         </ul>
                     </div>
+                    
                     <div class="col-md-4">
                         <componente-facp :proveedor="proveedor"></componente-facp>
                     </div>
