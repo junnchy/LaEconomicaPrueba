@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="producto in paginado" :key="producto.id">
+                        <tr v-for="producto in arregloPaginado" :key="producto.id">
                             <th scope="row">{{producto.id}}</th>
                             <td>{{producto.nombre}}</td>
                             <td>${{producto.precioVenta}}</td>
@@ -36,77 +36,41 @@
                         </tr>
                     </tbody>
                 </table>
-            <!-- Pensar como pasar todo el navegador a un componente -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end pagination-sm">
-                    <li :class="downType">
-                    <a class="page-link" href="#" aria-label="Previous"  @click="changePageDown()">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <li class="page-item" v-for="(item, index) in count" :key="index">
-                        <a class="page-link" href="#" @click="nro = item">{{item}}</a>
-                    </li>
-                    <li :class="upType">
-                    <a class="page-link" href="#" aria-label="Next" @click="changePageUp()">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    </li>
-                </ul>
-            </nav>
+            <Paginacion v-bind:filtered="filtered_productos" v-bind:nro_filas="7"/>
         </div>
     </div>
 </template>
 
 <script>
 import {mapActions, mapState, mapGetters} from 'vuex'
+import Paginacion from '../components/Paginacion'
 export default {
     name: 'MenuProductos',
     data() {
         return {
-            upType: "page-item",
-            downType:"page-item disabled",
-            cantidadDeLineas: 0,
-            linePerPage: 7,
-            nro: 0,
-            paginas: [],
-            act: 1,
-            nroItems: 3,
-            pDesde: 0,
-            PHasta: 3
         }
+    },
+    components:{
+        Paginacion
     },
     methods: {
         ...mapActions('categorias',['getCategoriasO']),
         ...mapActions('proveedores',['getProveedores']),
         ...mapActions('productos',['getProductos']),
-        ...mapActions(['cambiarEstado']),
-        changePageUp(){
-            this.act++
-            this.pDesde += this.nroItems
-            this.PHasta += this.nroItems
-            if (this.act === 1) {
-                this.downType = "page-item disabled"
-            }else{
-                this.downType = "page-item"
-            }
-        },
-        changePageDown(){
-            this.act--
-            this.pDesde -= this.nroItems
-            this.PHasta -= this.nroItems
-        },
+        ...mapActions(['cambiarEstado','setArregloPaginado']),
     },
     created() {
         this.getProductos()
         this.getProveedores()
         this.getCategoriasO()
         this.cambiarEstado(2)
+        this.$store.commit('setArregloPaginado', this.filtered_productos)
     },
     computed: {
         ...mapState('productos',['productos']),
         ...mapState('categorias',['categorias']),
         ...mapState('proveedores',['proveedores']),
+        ...mapState(['arregloPaginado']),
         ...mapGetters('productos',['filtered_productos']),
         search:{
             get(){
@@ -131,36 +95,7 @@ export default {
             set(val){
                 this.$store.commit('productos/SET_PROVEEDOR', val)
             }
-        },
-        count(){
-            let aux
-            this.paginas = []
-            this.cantidadDeLineas = this.filtered_productos.length
-            aux = Math.ceil(this.cantidadDeLineas / this.linePerPage)
-            for (let index = 0; index < aux; index++) {
-                this.paginas.push(index)
-            }
-            return this.paginas.slice(this.pDesde, this.PHasta) 
-        },
-        paginado(){
-            let desde 
-            let hasta
-            if (this.nro === 0) {
-                desde = 0
-                hasta = this.linePerPage
-            }else{
-                desde = this.nro*this.linePerPage
-                hasta = desde + this.linePerPage
-            }
-            return this.filtered_productos.slice(desde,hasta)
         }
     },
 }
 </script>
-
-get(){
-                    return this.$store.state.categorias.filter.query;
-                },
-                set(val){
-                    this.$store.commit('categorias/SET_QUERY', val)
-                }

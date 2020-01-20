@@ -2,6 +2,11 @@
 <!-- Recibe como parametro el arreglo de filtro usualmente se llama filtered_... -->
 <!-- 
     Para su uso incluir en codigo
+        import Paginacion from '../components/Paginacion'
+        
+        components:{
+            Paginacion
+        },
         >>>>>>
             created(){
                 ...
@@ -14,6 +19,12 @@
             mutations:{
                 ...mapMutations(['setArregloPaginado']),
             }
+
+            -------Llamada==============
+                <Paginacion v-bind:filtered="filtered_...." v-bind:nro_filas="N"/>
+            ============end---------
+
+            Arreglo a iterar: arregloPaginado
         <<<<<<
  -->
     <div>
