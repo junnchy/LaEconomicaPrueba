@@ -64020,11 +64020,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   state: {
-    actual: 0
+    actual: 0,
+    arregloPaginado: []
   },
   mutations: {
     setActual: function setActual(state, nro) {
       state.actual = nro;
+    },
+    setArregloPaginado: function setArregloPaginado(state, arreglo) {
+      state.arregloPaginado = arreglo;
     }
   },
   actions: {

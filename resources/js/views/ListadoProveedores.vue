@@ -28,7 +28,7 @@ export default {
         return {
         }
     },
-     components:{
+    components:{
         ListaProveedores,
     },
     computed: {

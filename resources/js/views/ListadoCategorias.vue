@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="categoria in paginado" :key="categoria.id" >
+                        <tr v-for="categoria in arregloPaginado" :key="categoria.id" >
                             <th>{{categoria.id}}</th>
                             <td v-if="categoria.nro === 2"> ------{{categoria.nombre}}</td>
                             <td v-if="categoria.nro === 1"> ---{{categoria.nombre}}</td>
@@ -43,7 +43,7 @@
                     </tbody>
                 </table>
                 <!-- Pensar como pasar todo el navegador a un componente -->
-                 <nav aria-label="Page navigation example">
+                <!-- <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end pagination-sm">
                         <li :class="downType">
                         <a class="page-link" href="#" aria-label="Previous"  @click="changePageDown()">
@@ -59,7 +59,8 @@
                         </a>
                         </li>
                     </ul>
-                </nav>
+                </nav> -->
+                <Paginacion v-bind:filtered="filtered_categorias" v-bind:nro_filas="7"/>
             </div>
         </div>
     </div>
@@ -67,51 +68,30 @@
 
 <script>
     import {mapActions, mapState, mapGetters, mapMutations} from 'vuex'
-
+    import Paginacion from '../components/Paginacion'
     export default {
         data() {
             return {
                 ncat: {nombre:'', categoria_id: ''},
                 searched: '',
-                upType: "page-item",
-                downType:"page-item disabled",
-                cantidadDeLineas: 0,
-                linePerPage: 7,
-                nro: 0,
-                paginas: [],
-                act: 1,
-                nroItems: 3,
-                pDesde: 0,
-                PHasta: 3
             }
+        },
+        components:{
+            Paginacion
         },
         methods: {
             ...mapActions('categorias',['getCategoriasO','agregarCategoria']),
             ...mapActions(['cambiarEstado']),
-            changePageUp(){
-                this.act++
-                this.pDesde += this.nroItems
-                this.PHasta += this.nroItems
-                if (this.act === 1) {
-                    this.downType = "page-item disabled"
-                }else{
-                    this.downType = "page-item"
-                }
-            },
-            changePageDown(){
-                this.act--
-                this.pDesde -= this.nroItems
-                this.PHasta -= this.nroItems
-            },
         },
         created() {
             this.getCategoriasO(),
-            this.cambiarEstado(1)
+            this.cambiarEstado(1),
+            this.$store.commit('setArregloPaginado', this.filtered_categorias)
         },
         computed: {
+            ...mapState(['arregloPaginado']),
             ...mapState('categorias',['categorias']),
             ...mapGetters('categorias',['filtered_categorias']),
-            
             search:{
                 get(){
                     return this.$store.state.categorias.filter.query;
@@ -120,31 +100,10 @@
                     this.$store.commit('categorias/SET_QUERY', val)
                 }
             },
-            count(){
-                let aux
-                this.paginas = []
-                this.cantidadDeLineas = this.filtered_categorias.length
-                aux = Math.ceil(this.cantidadDeLineas / this.linePerPage)
-                for (let index = 0; index < aux; index++) {
-                    this.paginas.push(index)
-                }
-                return this.paginas.slice(this.pDesde, this.PHasta) 
-            },
-            paginado(){
-                let desde 
-                let hasta
-                if (this.nro === 0) {
-                    desde = 0
-                    hasta = this.linePerPage
-                }else{
-                    desde = this.nro*this.linePerPage
-                    hasta = desde + this.linePerPage
-                }
-                return this.filtered_categorias.slice(desde,hasta)
-            }
         },
         mutations:{
             ...mapMutations('categorias',['SET_QUERY']),
+            ...mapMutations(['setArregloPaginado']),
         }
     }
 </script>

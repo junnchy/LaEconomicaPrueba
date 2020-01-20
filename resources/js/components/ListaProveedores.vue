@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(proveedor, index) in filtered_proveedores" :key="index">
+                <tr v-for="(proveedor, index) in arregloPaginado" :key="index">
                     <th scope="row">{{proveedor.id}}</th>
                     <td>{{proveedor.nombre}}</td>
                     <td>{{proveedor.cuit}}</td>
@@ -24,15 +24,20 @@
                 </tr>
             </tbody>
         </table>
+        <Paginacion v-bind:filtered="filtered_proveedores" v-bind:nro_filas="5"/>
     </div>
 </template>
 
 <script>
-import {mapActions, mapState, mapGetters} from 'vuex'
+import {mapActions, mapState, mapGetters, mapMutations} from 'vuex'
+import Paginacion from '../components/Paginacion'
 export default {
     data() {
         return {
         }
+    },
+    components:{
+        Paginacion
     },
     methods: {
         ...mapActions('proveedores', ['getProveedores']),
@@ -40,11 +45,16 @@ export default {
     },
     created() {
         this.getProveedores(),
-        this.cambiarEstado(0)
+        this.cambiarEstado(0),
+        this.$store.commit('setArregloPaginado', this.filtered_proveedores)
     },
     computed: {
+        ...mapState(['arregloPaginado']),
         ...mapState('proveedores',['proveedores']),
         ...mapGetters('proveedores',['filtered_proveedores']),
+    },
+    mutations:{
+        ...mapMutations(['setArregloPaginado']),
     }
 }
 </script>

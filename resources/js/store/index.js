@@ -25,17 +25,20 @@ export default new Vuex.Store({
   },
   state: {
     actual: 0,
+    arregloPaginado: []
   },
   mutations: {
     setActual(state, nro){
       state.actual = nro;
+    },
+    setArregloPaginado(state, arreglo){
+      state.arregloPaginado = arreglo
     }
   },
   actions: {
     cambiarEstado({commit}, valor){
       commit('setActual', valor)
     }
-    
   },
   getters:{
   }

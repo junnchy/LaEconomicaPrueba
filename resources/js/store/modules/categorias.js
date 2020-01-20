@@ -20,7 +20,7 @@ export default {
         },
         SET_QUERY(state, query){
             state.filter.query = query;
-        },
+        }
     },
     actions:{
         async getCategorias({commit}){
@@ -38,18 +38,18 @@ export default {
             }
         },
         async getCategoriasO({commit}){
-        let cat = []
-        try {
-            let categorias = await axios.get('http://127.0.0.1:8000/categoria')
-            categorias.data.forEach(element => {
-                cat.push(element)
-            });
-        } catch (error) {
-            console.log(error)
-        }
-        finally{
-            commit('setCategorias', cat)
-        }
+            let cat = []
+            try {
+                let categorias = await axios.get('http://127.0.0.1:8000/categoria')
+                categorias.data.forEach(element => {
+                    cat.push(element)
+                });
+            } catch (error) {
+                console.log(error)
+            }
+            finally{
+                commit('setCategorias', cat)
+            }
         },
         async getCategoria({commit}, id){
         var cat
