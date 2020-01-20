@@ -23,6 +23,16 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <div class="alert alert-danger alert-dismissible fade show mt-4" v-if="errors.length > 0">
+            <ul>
+                <li v-for="(error, index) in errors" :key="index">
+                    {{error}} 
+                </li>
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="container mt-5">
             <form @submit.prevent="agregarCliente(cliente)">
                 <componente-fdatoscliente v-bind:cliente="cliente"/>
@@ -41,6 +51,7 @@ export default {
     data() {
         return {
             cliente:{
+                id: null,
                 nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
                 localidad_id: 0, cat_clientes_id: 0, condicion_iva_id: 0,
                 localidad:{localidad: '', cod_postal: '', provincia: {iso_nombre: ''}},
@@ -51,15 +62,15 @@ export default {
     },
     methods: {
     ...mapActions('clientes', ['resetResp', 'agregarCliente']),
+    ...mapActions(['cambiarEstado']),
     
     },
     created() {
-        
+        this.cambiarEstado(3)
     },
     computed: {
-        ...mapState('clientes', ['respuestaS']),            
+        ...mapState('clientes', ['respuestaS', 'errors']),            
     }
-    
 }
 </script>
 

@@ -100,7 +100,7 @@
                 <label>Localidad</label>
                 <select class="form-control" v-model="cliente.localidad_id" type="number">
                     <option selected :value="cliente.localidad_id" 
-                    v-if="cliente.localidad_id === cliente.localidad.id">{{cliente.localidad.cod_postal}}-{{cliente.localidad.localidad}}</option>
+                    v-if="cliente.localidad_id === cliente.localidad.id && cliente.id != null">{{cliente.localidad.cod_postal}}-{{cliente.localidad.localidad}}</option>
                     <option v-for="(localidad, index) in localidades" :key="index" :value="localidad.id">
                         {{localidad.cod_postal}} - {{localidad.localidad}}
                     </option>

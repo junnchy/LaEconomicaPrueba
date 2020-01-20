@@ -7,7 +7,8 @@ export default {
         respuestaS: null,
         filter: {
             query: '',
-        }
+        },
+        errors: []
     },
     mutations: {
         setClientes(state, clientes){
@@ -25,6 +26,12 @@ export default {
         SET_QUERY(state, query){
             state.filter.query = query;
         },
+        setError(state, error){
+            state.errors.push(error)
+        },
+        resetEr(state){
+            state.errors = []
+        }
     },
     actions:{
         async getClientes({commit}){
@@ -56,12 +63,13 @@ export default {
             }
         },
         agregarCliente({commit}, cliente){
-            console.log(cliente)
+            
             axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
-              commit('setRespuestaServidor', response.data.message)
+                commit('setRespuestaServidor', response.data.message)
             })
             .catch(function (error) {
-              console.log(error);
+                console.log(error.response.data.errors);
+                commit('setError',error.response.data.errors)
             });
         },
         resetResp({commit}, resp){
@@ -90,6 +98,9 @@ export default {
             .catch(function (error) {
               console.log(error);
             });
+        },
+        resetError({commit}){
+            commit('resetEr')
         }
     }, 
     getters:{

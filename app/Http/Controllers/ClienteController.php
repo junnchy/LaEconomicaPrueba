@@ -53,7 +53,19 @@ class ClienteController extends Controller
     {
 
         if($request->ajax()){
+
+            $aux = $request->validate([
+                'nombre' => 'required',
+                'cuit' => 'required|min:7',
+                'email' => 'email',
+                'direccion' => 'required',
+                'cat_clientes_id' => 'required',
+                'condicion_iva_id' => 'required',
+                'localidad_id' => 'required'
+            ]);
+
             $cliente = new Cliente();
+            
             $cliente->nombre = $request->nombre;
             $cliente->cuit = $request->cuit;
             $cliente->telefono = $request->telefono;

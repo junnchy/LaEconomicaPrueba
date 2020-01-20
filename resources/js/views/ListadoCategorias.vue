@@ -87,6 +87,7 @@
         },
         methods: {
             ...mapActions('categorias',['getCategoriasO','agregarCategoria']),
+            ...mapActions(['cambiarEstado']),
             changePageUp(){
                 this.act++
                 this.pDesde += this.nroItems
@@ -104,11 +105,13 @@
             },
         },
         created() {
-            this.getCategoriasO()
+            this.getCategoriasO(),
+            this.cambiarEstado(1)
         },
         computed: {
             ...mapState('categorias',['categorias']),
             ...mapGetters('categorias',['filtered_categorias']),
+            
             search:{
                 get(){
                     return this.$store.state.categorias.filter.query;
@@ -141,7 +144,7 @@
             }
         },
         mutations:{
-            ...mapMutations('categorias',['SET_QUERY'])
+            ...mapMutations('categorias',['SET_QUERY']),
         }
     }
 </script>

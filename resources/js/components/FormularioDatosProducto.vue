@@ -9,7 +9,7 @@
                 <div class="col-10">
                     <label>Proveedor:</label> 
                     <select class="form-control" v-model="producto.proveedor">
-                        <option selected :value="producto.proveedor">{{producto.proveedor.id}}-{{producto.proveedor.nombre}}</option>
+                        <option selected :value="producto.proveedor" v-if="producto.id != null">{{producto.proveedor.id}}-{{producto.proveedor.nombre}}</option>
                         <option v-for="proveedor in this.$store.state.proveedores.proveedores" :key="proveedor.id" :value='proveedor'>{{proveedor.id}} - {{proveedor.nombre}}</option>
                     </select>
                 </div>

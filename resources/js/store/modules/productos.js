@@ -82,7 +82,7 @@ export default {
         filtered_productos(state){
             let pfil = state.productos
             if(state.filter.categoria > 0){
-              pfil = pfil.filter(producto => producto.categoria_id === state.filter.categoria)
+              pfil = pfil.filter(producto => (producto.categoria.categoria_id === state.filter.categoria || producto.categoria_id === state.filter.categoria))
             }
             if (state.filter.proveedor > 0){
               pfil = pfil.filter(producto => producto.proveedor_id === state.filter.proveedor)

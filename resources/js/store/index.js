@@ -24,10 +24,17 @@ export default new Vuex.Store({
     mapas
   },
   state: {
+    actual: 0,
   },
   mutations: {
+    setActual(state, nro){
+      state.actual = nro;
+    }
   },
   actions: {
+    cambiarEstado({commit}, valor){
+      commit('setActual', valor)
+    }
     
   },
   getters:{

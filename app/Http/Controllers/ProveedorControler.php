@@ -130,8 +130,7 @@ class ProveedorControler extends Controller
             $proveedor->condicion_iva_id = $request->condicion_iva_id;
             $proveedor->email = $request->email;
             $proveedor->localidad_id = $request->localidad_id;
-            if ($request->id_cat != null) {
-                
+            if($request->id_cat != null){
                 $categoria = Categoria::findOrFail($request->id_cat);
                 $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
             }

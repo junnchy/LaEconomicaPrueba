@@ -55,7 +55,9 @@ Vue.component('componente-fagregarlocalidad', require('./components/FormularioAg
 Vue.component('componente-fagregarcatecli', require('./components/FormularioAgregarCategoriaCliente.vue').default);
 Vue.component('componente-fdatosprov', require('./components/FormularioDatosProveedor.vue').default);
 Vue.component('componente-gmap', require('./components/PruebaGMap.vue').default);
-Vue.component('componente-nav', require('./components/BarraDeNavegacion.vue').default);
+Vue.component('componente-leftbar', require('./components/LeftNavbar.vue').default);
+Vue.component('componente-filtroproductos', require('./components/ComponenteFiltrosDeProductos.vue').default);
+Vue.component('componente-LNBProducto', require('./components/LNBProducto.vue').default);
 
 
 

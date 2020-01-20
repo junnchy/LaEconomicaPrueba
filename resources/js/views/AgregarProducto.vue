@@ -52,6 +52,7 @@ export default {
             descuento: 0,
             cate: {},
             producto: {
+                id: null,
                 nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, 
                 categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0,
                 precioVenta: 0, rentabilidad: 0
@@ -65,6 +66,7 @@ export default {
         ...mapActions('categorias',['getCategoriasO']),
         ...mapActions('proveedores',['getProveedores','agregarCategoriaProveedor']),
         ...mapActions('productos',['agregarProducto', 'resetResp']),
+        ...mapActions(['cambiarEstado']),
         setTab(nro){
             this.tab = nro
             if (this.tab===0) {
@@ -80,6 +82,7 @@ export default {
     created() {
         this.getCategoriasO()
         this.getProveedores()
+        this.cambiarEstado(1)
     },
     computed: {
         ...mapState('categorias',['categorias']),

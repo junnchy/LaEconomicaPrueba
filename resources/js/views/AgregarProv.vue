@@ -69,7 +69,7 @@
                     </div>
                 </div>                   
             </div> -->
-            <button type="submit" class="btn btn-success">Agregar</button>
+            <button type="submit" class="btn btn-success btn-block">Agregar</button>
         </form>
     </div>
 </template>
@@ -88,9 +88,11 @@ export default {
         }
     },
     methods: {
-        ...mapActions('proveedores',['agregarProveedor'])
+        ...mapActions('proveedores',['agregarProveedor']),
+        ...mapActions(['cambiarEstado']),
     },
     created() {
+        this.cambiarEstado(3)
     },
     computed: {
     },
