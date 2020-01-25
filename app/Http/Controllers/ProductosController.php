@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use App\Proveedor;
 use App\Categoria;
@@ -47,6 +48,7 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
+
         if($request->ajax()){
             
             $this->validateProducto($request);
@@ -63,7 +65,11 @@ class ProductosController extends Controller
             $producto->descuentoProducto_3 = $request->descuentoProducto[2];
             $producto->descuentoProducto_4 = $request->descuentoProducto[3];
             $producto->descuentoProducto_5 = $request->descuentoProducto[4];
-            $producto->descripcion = $request->descripcion;
+            if($request->descripcion != ""){
+                $producto->descripcion = $request->descripcion;
+            }else {
+                $producto->descripcion = "<p> Sin Descripcion </p>";
+            };
             $producto->iva = $request->iva;
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
@@ -72,7 +78,29 @@ class ProductosController extends Controller
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
 
+            if ($request->imagen) {
+                $exploded = explode(',', $request->imagen);
+                $decoded = base64_decode($exploded[1]);
+                    
+                if(Str::contains($exploded[0], 'jpeg')){
+                    $extension = 'jpg';
+                }else {
+                    $extension = 'png';
+                }
+
+                $fileName = Str::random(20).'.'.$extension;
+
+                $path = public_path('assets/productos/').$fileName;
+
+                file_put_contents($path, $decoded);
+
+                $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
+            }else {
+                $producto->imagen = "http://127.0.0.1:8000/assets/4fxp8923.bmp";
+            }
+
             $producto->save();
+            
 
             return response()->json([
                 'producto' => $producto,
@@ -163,6 +191,24 @@ class ProductosController extends Controller
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
 
+            if ($request->imagen) {
+                $exploded = explode(',', $request->imagen);
+                $decoded = base64_decode($exploded[1]);
+                    
+                if(Str::contains($exploded[0], 'jpeg')){
+                    $extension = 'jpg';
+                }else {
+                    $extension = 'png';
+                }
+
+                $fileName = Str::random(20).'.'.$extension;
+
+                $path = public_path('assets/productos/').$fileName;
+
+                file_put_contents($path, $decoded);
+
+                $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
+            }
             $producto->save();
 
             return response()->json([

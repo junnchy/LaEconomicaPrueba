@@ -33,7 +33,7 @@
             <form @submit.prevent="agregarCliente(cliente)">
                 <componente-fdatoscliente v-bind:cliente="cliente"/>
                 <button type="submit" class="btn btn-success btn-block sticky-button" v-if="respuestaS === null">
-                    Agregar Cliente
+                    Agregar Cliente <i class="fas fa-check-circle"></i>
                 </button>
             </form>
         </div>

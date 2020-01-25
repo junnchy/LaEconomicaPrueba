@@ -25,6 +25,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -39,6 +52,21 @@ __webpack_require__.r(__webpack_exports__);
     producto: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    imageChanged: function imageChanged(e) {
+      var _this = this;
+
+      var fileReader = new FileReader();
+      fileReader.readAsDataURL(e.target.files[0]);
+
+      fileReader.onload = function (e) {
+        _this.imagen = e.target.result;
+        _this.producto.imagen = e.target.result;
+      };
+
+      console.log(this.producto);
     }
   }
 });
@@ -283,6 +311,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -306,7 +341,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         flete: 0,
         precioVenta: 0,
         rentabilidad: 0,
-        descripcion: ''
+        descripcion: '',
+        imagen: ''
       },
       tab: 0,
       ctab0: 'nav-link active',
@@ -1170,6 +1206,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1557,6 +1595,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("div", { staticClass: "form-group" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6" }, [
+          _c("h4", [_vm._v("Imagen de Producto")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control-file",
+            attrs: { type: "file" },
+            on: { change: _vm.imageChanged }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c("img", {
+            staticClass: "img-thumbnail",
+            attrs: { src: _vm.producto.imagen, width: "250px" }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
     _c("div", { staticClass: "form-group my-4" }, [
       _c("div", { staticClass: "row" }, [
         _vm._m(0),
@@ -1800,7 +1861,10 @@ var render = function() {
                   staticClass: "btn btn-success btn-block sticky-button",
                   attrs: { type: "submit" }
                 },
-                [_vm._v("\n                Agregar Cliente\n            ")]
+                [
+                  _vm._v("\n                Agregar Cliente "),
+                  _c("i", { staticClass: "fas fa-check-circle" })
+                ]
               )
             : _vm._e()
         ],
@@ -2019,14 +2083,17 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm.respuesta === null && (_vm.tab === 1 || _vm.tab === 2)
+        _vm.respuesta === null && _vm.tab === 2
           ? _c(
               "button",
               {
                 staticClass: "btn btn-success btn-block",
                 attrs: { type: "submit" }
               },
-              [_vm._v("Agregar")]
+              [
+                _vm._v("\n            Agregar "),
+                _c("i", { staticClass: "fas fa-check-circle" })
+              ]
             )
           : _vm._e()
       ]
@@ -2036,14 +2103,35 @@ var render = function() {
       ? _c(
           "button",
           {
-            staticClass: "btn btn-success btn-block",
+            staticClass: "btn btn-primary btn-block",
             on: {
               click: function($event) {
                 return _vm.setTab(1)
               }
             }
           },
-          [_vm._v("Continuar")]
+          [
+            _vm._v("\n        Continuar "),
+            _c("i", { staticClass: "fas fa-chevron-circle-right" })
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.tab === 1
+      ? _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            on: {
+              click: function($event) {
+                return _vm.setTab(2)
+              }
+            }
+          },
+          [
+            _vm._v("\n        Continuar "),
+            _c("i", { staticClass: "fas fa-chevron-circle-right" })
+          ]
         )
       : _vm._e()
   ])
@@ -2395,7 +2483,12 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "col-6 mt-3" }, [
+        _c("img", {
+          staticClass: "img-thumbnail",
+          attrs: { src: _vm.producto.imagen, alt: "Example", width: "330px" }
+        })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "container mt-4" }, [
         _c("h3", [_vm._v("Descripcion")]),
@@ -2415,21 +2508,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
       _c("h2", [_vm._v("Detalle de Producto ")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-6 mt-3" }, [
-      _c("img", {
-        staticClass: "img-thumbnail",
-        attrs: {
-          src: "http://127.0.0.1:8000/assets/\\4fxp8923.bmp",
-          alt: "Example",
-          width: "330px"
-        }
-      })
     ])
   }
 ]
@@ -3445,6 +3523,13 @@ var render = function() {
                   _vm._v(_vm._s(producto.id))
                 ]),
                 _vm._v(" "),
+                _c("th", [
+                  _c("img", {
+                    staticClass: "rounded-circle",
+                    attrs: { src: producto.imagen, width: "50px" }
+                  })
+                ]),
+                _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(producto.nombre))]),
                 _vm._v(" "),
                 _c("td", [_vm._v("$" + _vm._s(producto.precioVenta))]),
@@ -3508,6 +3593,8 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#ID")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("IMG")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
         _vm._v(" "),

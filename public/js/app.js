@@ -2223,6 +2223,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2448,6 +2450,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -2945,13 +2949,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -41481,14 +41478,7 @@ var render = function() {
                         [_vm._v("Cerrar")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-block",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("Agregar")]
-                      )
+                      _vm._m(2)
                     ])
                   ]
                 )
@@ -41537,6 +41527,19 @@ var staticRenderFns = [
         }
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
+      [
+        _vm._v("\n                                 Agregar "),
+        _c("i", { staticClass: "fas fa-check-circle" })
+      ]
     )
   }
 ]
@@ -42266,14 +42269,7 @@ var render = function() {
                         [_vm._v("Cerrar")]
                       ),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success btn-block",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("Agregar Localidad")]
-                      )
+                      _vm._m(2)
                     ])
                   ]
                 )
@@ -42322,6 +42318,19 @@ var staticRenderFns = [
         }
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
+      [
+        _vm._v("\n                                 Agregar Localidad "),
+        _c("i", { staticClass: "fas fa-check-circle" })
+      ]
     )
   }
 ]
@@ -43311,30 +43320,10 @@ var render = function() {
         2
       )
     ]),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v("\n\n    " + _vm._s(_vm.validar) + "\n")
+    _vm._v("\n    " + _vm._s(_vm.validar) + "\n")
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "exampleFormControlFile1" } }, [
-          _vm._v("Imagen de Producto")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control-file",
-          attrs: { type: "file", id: "exampleFormControlFile1" }
-        })
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -65968,8 +65957,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(producto);
       axios.post('http://127.0.0.1:8000/productos', producto).then(function (response) {
         commit('setRespuesta', response.data.message);
+        console.log(response.data);
       })["catch"](function (error) {
-        console.log(error.response.data.errors);
+        console.log('algo va mal');
+        console.log(error.response.data);
         commit('setError', error.response.data.errors);
       });
     },

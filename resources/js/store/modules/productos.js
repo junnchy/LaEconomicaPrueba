@@ -69,7 +69,7 @@ export default {
             productos.data.forEach(producto => {
               prod.push(producto)
             });
-          } catch (error) {
+          }catch (error) {
             console.log(error)
           }
           finally{
@@ -81,9 +81,11 @@ export default {
           console.log(producto)
           axios.post('http://127.0.0.1:8000/productos', producto).then(function (response) {
             commit('setRespuesta', response.data.message)
+            console.log(response.data)
           })
           .catch(function (error) {
-            console.log(error.response.data.errors)
+            console.log('algo va mal')
+            console.log(error.response.data)
             commit('setError',error.response.data.errors)
           });
         },

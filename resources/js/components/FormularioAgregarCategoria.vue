@@ -33,7 +33,9 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="resetResp(null)">Cerrar</button>
-                                <button type="submit" class="btn btn-success btn-block">Agregar</button>
+                                <button type="submit" class="btn btn-success btn-block">
+                                    Agregar <i class="fas fa-check-circle"></i>
+                                </button>
                             </div>
                         </form>
                     </div>

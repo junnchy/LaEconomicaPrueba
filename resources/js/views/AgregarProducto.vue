@@ -41,9 +41,16 @@
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>
                 <descripcionProducto v-bind:producto="producto" v-if="tab === 2"/>
             </div>
-            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null && (tab === 1 || tab === 2)">Agregar</button>
+            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null && tab === 2">
+                Agregar <i class="fas fa-check-circle"></i>
+            </button>
         </form>
-        <button class="btn btn-success btn-block" v-if="tab === 0" @click="setTab(1)">Continuar</button>
+        <button class="btn btn-primary btn-block" v-if="tab === 0" @click="setTab(1)">
+            Continuar <i class="fas fa-chevron-circle-right"></i>
+        </button>
+        <button class="btn btn-primary btn-block" v-if="tab === 1 " @click="setTab(2)">
+            Continuar <i class="fas fa-chevron-circle-right"></i>
+        </button>
     </div>
 </template>
 
@@ -60,7 +67,7 @@ export default {
                 id: null,
                 nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, 
                 categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0,
-                precioVenta: 0, rentabilidad: 0, descripcion:''
+                precioVenta: 0, rentabilidad: 0, descripcion:'', imagen: ''
             },
             tab: 0,
             ctab0: 'nav-link active',

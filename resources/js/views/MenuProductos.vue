@@ -20,6 +20,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#ID</th>
+                            <th scope="col">IMG</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Acciones</th>
@@ -28,6 +29,7 @@
                     <tbody>
                         <tr v-for="producto in arregloPaginado" :key="producto.id">
                             <th scope="row">{{producto.id}}</th>
+                            <th><img :src="producto.imagen" width="50px" class="rounded-circle"></th>
                             <td>{{producto.nombre}}</td>
                             <td>${{producto.precioVenta}}</td>
                             <td>

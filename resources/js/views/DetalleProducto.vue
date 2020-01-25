@@ -39,7 +39,7 @@
                 </ul>
             </div>
             <div class="col-6 mt-3">
-                <img src="http://127.0.0.1:8000/assets/\4fxp8923.bmp" class="img-thumbnail" alt="Example" width="330px">
+                <img :src="producto.imagen" class="img-thumbnail" alt="Example" width="330px">
             </div>
             <div class="container mt-4">
                 <h3>Descripcion</h3>
