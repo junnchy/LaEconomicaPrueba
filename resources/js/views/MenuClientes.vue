@@ -12,7 +12,7 @@
             <div class="col-3">
                 <router-link :to="{name:'agregarCliente'}">
                     <button class="btn btn-outline-success btn-block my-3"> 
-                        Agregar Cliente <i class="material-icons md-18"> person_add</i>
+                        Agregar Cliente <i class="fas fa-user-plus"></i>
                     </button>
                 </router-link>
             </div>
@@ -30,10 +30,12 @@ export default {
         }
     },
     methods: {
-        ...mapActions('clientes',['getClientes'])
+        ...mapActions('clientes',['getClientes']),
+        ...mapActions(['cambiarEstado'])
     },
     created() {
         this.getClientes()
+        this.cambiarEstado(4)
     },
     mounted(){
         console.log(this.$userName)

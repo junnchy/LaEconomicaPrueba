@@ -49,6 +49,8 @@ class ProveedorControler extends Controller
     {
         if($request->ajax()){
 
+            $this->validateProveedor($request);
+
             $proveedor = new Proveedor();
             $proveedor->nombre = $request->nombre;
             $proveedor->cuit = $request->cuit;
@@ -120,6 +122,8 @@ class ProveedorControler extends Controller
     public function update(Request $request, $id)
     {
         if($request->ajax()){
+
+            $this->validateProveedor($request);
             
             $proveedor = App\Proveedor::findOrFail($id);
     
@@ -174,5 +178,17 @@ class ProveedorControler extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validateProveedor(Request $request)
+    {
+        $this->validate($request, [
+            'nombre' => 'required',
+            'cuit' => 'required|min:7',
+            'email' => 'email',
+            'direccion' => 'required',
+            'condicion_iva_id' => 'required',
+            'localidad_id' => 'required'
+        ]);
     }
 }

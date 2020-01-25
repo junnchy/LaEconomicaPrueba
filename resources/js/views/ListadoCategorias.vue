@@ -42,24 +42,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- Pensar como pasar todo el navegador a un componente -->
-                <!-- <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-end pagination-sm">
-                        <li :class="downType">
-                        <a class="page-link" href="#" aria-label="Previous"  @click="changePageDown()">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                        </li>
-                        <li class="page-item" v-for="(item, index) in count" :key="index">
-                            <a class="page-link" href="#" @click="nro = item">{{item}}</a>
-                        </li>
-                        <li :class="upType">
-                        <a class="page-link" href="#" aria-label="Next" @click="changePageUp()">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                        </li>
-                    </ul>
-                </nav> -->
                 <Paginacion v-bind:filtered="filtered_categorias" v-bind:nro_filas="7"/>
             </div>
         </div>

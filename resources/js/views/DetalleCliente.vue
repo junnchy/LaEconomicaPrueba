@@ -7,7 +7,7 @@
             <div class="col-4">
                 <router-link :to="{name: 'editarCliente', params:{id: cliente.id}}">
                     <button class="btn btn-warning">
-                        Editar
+                        Editar <i class="fas fa-pen"></i>
                     </button>
                 </router-link>
                 <router-link :to="{name: 'menuClientes'}">
@@ -29,7 +29,7 @@
             <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{cliente.updated_at}}</li>
         </ul>
         <div class="container mt-5">
-            <h3><i class="material-icons">map</i> Ubicacion en Mapa: </h3>
+            <h3><i class="fas fa-map-marker-alt"></i> Ubicacion en Mapa: </h3>
             <componente-gmap v-bind:cliente="cliente"/>
         </div>
     </div>

@@ -11,7 +11,7 @@
                     </button>
                 </router-link>
                 <router-link :to="{name:'MenuProductos'}" v-if="respuesta === null">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" @click="resetError()">
                         Cancelar
                     </button>
                 </router-link>
@@ -25,19 +25,23 @@
         </div>
         <ul class="nav nav-tabs mt-4">
             <li class="nav-item">
-                <a :class=this.ctab0 @click="setTab(0)">Datos Generales</a>
+                <a :class="ctab0" @click="setTab(0)">Datos Generales</a>
             </li>
             <li class="nav-item">
-                <a :class=this.ctab1 @click="setTab(1)">Precios</a>
+                <a :class="ctab1" @click="setTab(1)">Precios</a>
+            </li>
+            <li class="nav-item">
+                <a :class="ctab2" @click="setTab(2)">Descripcion</a>
             </li>
         </ul>
-        <form @submit.prevent="agregarProducto(producto)">
+        <form @submit.prevent="agregarProducto(producto)" enctype="multipart/form-data">
             <div class="form-group my-4">
                 <componente-fdatosprod v-bind:producto="producto" v-if="tab === 0"></componente-fdatosprod>
                 <componente-fcosto v-bind:producto="producto" v-if="tab === 1"></componente-fcosto>
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>
+                <descripcionProducto v-bind:producto="producto" v-if="tab === 2"/>
             </div>
-            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null && tab === 1">Agregar</button>
+            <button type="submit" class="btn btn-success btn-block" v-if="respuesta === null && (tab === 1 || tab === 2)">Agregar</button>
         </form>
         <button class="btn btn-success btn-block" v-if="tab === 0" @click="setTab(1)">Continuar</button>
     </div>
@@ -45,6 +49,7 @@
 
 <script>
 import {mapActions, mapState} from 'vuex'
+import descripcionProducto from '../components/FormularioDescripcionProducto'
 export default {
     name: 'agregarProducto', 
     data() {
@@ -55,27 +60,38 @@ export default {
                 id: null,
                 nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, 
                 categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0,
-                precioVenta: 0, rentabilidad: 0
+                precioVenta: 0, rentabilidad: 0, descripcion:''
             },
             tab: 0,
             ctab0: 'nav-link active',
-            ctab1: 'nav-link'
+            ctab1: 'nav-link',
+            ctab2: 'nav-link',
         }
+    },
+    components:{
+        descripcionProducto,
     },
     methods: {
         ...mapActions('categorias',['getCategoriasO']),
         ...mapActions('proveedores',['getProveedores','agregarCategoriaProveedor']),
-        ...mapActions('productos',['agregarProducto', 'resetResp']),
+        ...mapActions('productos',['agregarProducto', 'resetResp', 'resetError']),
         ...mapActions(['cambiarEstado']),
         setTab(nro){
             this.tab = nro
             if (this.tab===0) {
                 this.ctab0 ='nav-link active'
                 this.ctab1 ='nav-link'
+                this.ctab2 ='nav-link'
             }
             if (this.tab===1) {
-                this.ctab1 ='nav-link active'
                 this.ctab0 ='nav-link'
+                this.ctab1 ='nav-link active'
+                this.ctab2 ='nav-link'
+            }
+            if (this.tab===2) {
+                this.ctab0 ='nav-link'
+                this.ctab1 ='nav-link'
+                this.ctab2 ='nav-link active'
             }
         }
     },

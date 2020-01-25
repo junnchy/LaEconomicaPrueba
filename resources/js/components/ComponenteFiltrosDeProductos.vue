@@ -1,16 +1,30 @@
 <template>
     <div>
-         <label>Categoria</label> 
-        <select class="custom-select" v-model="fcat">
-            <option selected :value=0>Todos</option>
-            <option v-for="(categoria, index) in categorias" :key="index" :value='categoria.id'>{{categoria.id}} - {{categoria.nombre}}</option>
-        </select>
+        <div class="container">
+            <label>
+                Categoria 
+            </label> 
+            <select class="custom-select" v-model="fcat">
+                <option selected :value=0>Todos</option>
+                <option v-for="(categoria, index) in categorias" :key="index" :value='categoria.id'>{{categoria.id}} - {{categoria.nombre}}</option>
+            </select>
+            <hr/>
+            <label>
+                Proveedor 
+            </label> 
+            <select class="custom-select" v-model="fpro">
+                <option selected :value=0>Todos</option>
+                <option v-for="(proveedor, index) in proveedores" :key="index" :value='proveedor.id'>{{proveedor.id}} - {{proveedor.nombre}}</option>
+            </select>
+        </div>
         <hr/>
-        <label>Proveedor</label> 
-        <select class="custom-select" v-model="fpro">
-            <option selected :value=0>Todos</option>
-            <option v-for="(proveedor, index) in proveedores" :key="index" :value='proveedor.id'>{{proveedor.id}} - {{proveedor.nombre}}</option>
-        </select>
+        <div class="container mt-4">
+         <router-link :to="{name: 'listadoCategorias'}" >
+            <button class="btn btn-outline-info btn-block mt-2">
+                Categorias <i class="fas fa-info"></i>
+            </button>
+        </router-link>
+        </div>
     </div>
 </template>
 

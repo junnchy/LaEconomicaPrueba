@@ -4,8 +4,15 @@
             <div class="col-8">
                 <div class="form-group">     
                     <label>Rentabilidad</label>
-                    <input type="number" step=0.01 v-model="producto.rentabilidad" class="form-control">
+                    <input 
+                    type="number" 
+                    step=0.01 
+                    v-model="producto.rentabilidad" 
+                    :class="fRent">
                 </div>
+                <span class="invalid-feedback" role="alert" v-if="errors.rentabilidad != ''"> 
+                    <strong>{{errors.rentabilidad[0]}}</strong>
+                </span>
             </div>
             <div class="col-4">
                 <div class="alert alert-dark" role="alert">
@@ -14,6 +21,7 @@
                 </div>
             </div>
         </div>
+        {{validar}}
     </div>
 </template>
 
@@ -28,9 +36,13 @@ export default {
     },
     data() {
         return {
+            fRent: "form-control",
+            formClass: "form-control",
+            iFormClass: "form-control is-invalid",
         }
     },
     computed: {
+        ...mapState('productos', ['errors']),
         setPrecioDeVenta(){
             if (this.producto.precioCosto > 0) {
                 this.producto.precioVenta = this.producto.precioCosto + (this.producto.precioCosto * (this.producto.rentabilidad/100))
@@ -38,6 +50,13 @@ export default {
             }else{
                 this.producto.precioVenta = this.producto.precioCosto
                 return  this.producto.precioVenta
+            }
+        },
+        validar(){
+            if(this.errors.rentabilidad != ''){
+                this.fRent = this.iFormClass
+            }else{
+                    this.fRent = this.formClass
             }
         }
     },

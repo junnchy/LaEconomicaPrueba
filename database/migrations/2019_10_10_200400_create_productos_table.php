@@ -18,6 +18,7 @@ class CreateProductosTable extends Migration
             $table->float('precioBase');
             $table->float('precioCosto');
             $table->string('nombre');
+            $table->text('descripcion');
             $table->unsignedBigInteger('proveedor_id');
             $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->unsignedBigInteger('categoria_id');

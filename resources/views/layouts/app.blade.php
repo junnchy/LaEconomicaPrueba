@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'La Economica') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -19,13 +16,16 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   
 
-    <meta name="user-name" content="{{Auth::user()->name}}">
+    @if(Auth::check())
+        <meta name="user-name" content="{{Auth::user()->name}}">
+    @endif
 
 </head>
 <body>
     <div id="app">
-        <header class="navbar navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar">    
+        <header class="navbar navbar-expand navbar-light bg-light flex-column flex-md-row bd-navbar sticky-top">    
             <a class="navbar-brand mr-0 mr-md-2" href="{{ url('/') }}">
                 <img src="{{asset('assets/Logo-Completo(1).png')}}" width="200" height="75">
             </a>
@@ -52,9 +52,6 @@
                             <router-link :to="{name: 'listadoCategorias'}" >
                                 <a class="dropdown-item" href="#">Categorias</a>
                             </router-link>
-                            <!-- <router-link :to="{name: 'listadoCategorias'}" >
-                                <a class="dropdown-item" href="#">Agregar Categoria</a>
-                            </router-link> -->
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -122,5 +119,8 @@
             </div>
             </div>
     </div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/6876153f7d.js" crossorigin="anonymous"></script>
 </body>
 </html>

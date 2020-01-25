@@ -54,15 +54,7 @@ class ClienteController extends Controller
 
         if($request->ajax()){
 
-            $aux = $request->validate([
-                'nombre' => 'required',
-                'cuit' => 'required|min:7',
-                'email' => 'email',
-                'direccion' => 'required',
-                'cat_clientes_id' => 'required',
-                'condicion_iva_id' => 'required',
-                'localidad_id' => 'required'
-            ]);
+            $this->validateCliente($request);
 
             $cliente = new Cliente();
             
@@ -145,6 +137,9 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
         if ($request->ajax()) {
+
+            $this->validateCliente($request);
+            
             $cliente = Cliente::findOrFail($id);
             $cliente->nombre = $request->nombre;
             $cliente->cuit = $request->cuit;
@@ -195,5 +190,18 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validateCliente(Request $request)
+    {
+        $this->validate($request, [
+            'nombre' => 'required',
+            'cuit' => 'required|min:7',
+            'email' => 'email',
+            'direccion' => 'required',
+            'cat_clientes_id' => 'required',
+            'condicion_iva_id' => 'required',
+            'localidad_id' => 'required'
+        ]);
     }
 }

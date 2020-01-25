@@ -17,7 +17,9 @@
                         <td class="mt-2">{{cliente.cuit}}</td>
                         <td>
                             <router-link :to="{name: 'detalleCliente', params:{id: cliente.id}}">
-                                <button  class="btn btn-warning btn-sm">Ver Mas</button>
+                                <button  class="btn btn-warning btn-sm">
+                                    Ver Mas <i class="fas fa-eye"></i>
+                                </button>
                             </router-link>
                         </td>
                     </tr>

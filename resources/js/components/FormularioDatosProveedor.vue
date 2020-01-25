@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-4">
                     <router-link :to="{name:'listadoProveedores'}">
-                        <button class="btn btn-danger">
+                        <button class="btn btn-danger" @click="resetError()">
                             Cancelar
                         </button>
                     </router-link>
@@ -15,13 +15,25 @@
             </div> 
             <div class="form-group">
                 <label>Nombre Proveedor</label>
-                <input type="text" v-model="proveedor.nombre" class="form-control" >
+                <input 
+                type="text" 
+                v-model="proveedor.nombre" 
+                :class="fNombre">
+                <span class="invalid-feedback" role="alert" v-if="errors.nombre != ''"> 
+                    <strong>{{errors.nombre[0]}}</strong>
+                </span>
             </div>
             <div class="row">
                 <div class="col-6">
                     <div class="form-group">     
                         <label>CUIT</label>
-                        <input type="number" v-model="proveedor.cuit" class="form-control">
+                        <input 
+                        type="number" 
+                        v-model="proveedor.cuit" 
+                        :class="fCuit">
+                        <span class="invalid-feedback" role="alert" v-if="errors.nombre != ''"> 
+                            <strong>{{errors.cuit[0]}}</strong>
+                        </span>
                     </div> 
                 </div>
                 <div class="col-6">
@@ -35,7 +47,13 @@
                 <div class="col-8">
                     <div class="form-group">     
                         <label>Email</label>
-                        <input type="text" v-model="proveedor.email" class="form-control">
+                        <input 
+                        type="text" 
+                        v-model="proveedor.email" 
+                        :class="fEmail">
+                        <span class="invalid-feedback" role="alert" v-if="errors.nombre != ''"> 
+                            <strong>{{errors.email[0]}}</strong>
+                        </span>
                     </div> 
                 </div>
                 <div class="col-4">
@@ -46,7 +64,15 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label>Dirección</label>
-                        <input type="text" class="form-control" name="direccion" placeholder="Dirección" v-model="proveedor.direccion"/>
+                        <input 
+                        type="text" 
+                        :class="fDireccion" 
+                        name="direccion" 
+                        placeholder="Dirección" 
+                        v-model="proveedor.direccion"/>
+                        <span class="invalid-feedback" role="alert" v-if="errors.nombre != ''"> 
+                            <strong>{{errors.direccion[0]}}</strong>
+                        </span>
                     </div>
                 </div>
                 <div class="col-6">
@@ -55,7 +81,7 @@
                         <option selected :value="proveedor.localidad_id" 
                         v-if="proveedor.localidad_id === proveedor.localidad.id">{{proveedor.localidad.cod_postal}}-{{proveedor.localidad.localidad}}</option>
                         <option v-for="(localidad, index) in localidades" :key="index" :value="localidad.id">
-                            {{localidad.cod_postal}} - {{localidad.localidad}}
+                            {{localidad.cod_postal}} - {{localidad.localidad}}, {{localidad.provincia.iso_nombre}}
                         </option>
                     </select>
                 </div>
@@ -76,14 +102,26 @@
                 <div class="col-6">
                     
                 </div>
-            </div>                   
+            </div>         
         </div>
+        {{validar}}
     </div>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex'
+
     export default {
+        data() {
+            return {
+                fNombre: "form-control",
+                fDireccion: "form-control",
+                fEmail: "form-control",
+                fCuit: "form-control",
+                formClass: "form-control",
+                iFormClass: "form-control is-invalid",
+            }
+        },
         props:{
             proveedor:{
                 type: Object,
@@ -92,7 +130,8 @@ import {mapActions, mapState} from 'vuex'
         },
         methods: {
             ...mapActions('localidades',['getLocalidades']),
-            ...mapActions('condicionIva',['getCondicionesIva'])
+            ...mapActions('condicionIva',['getCondicionesIva']),
+            ...mapActions('proveedores',['resetError'])
         
         },
         created() {
@@ -102,8 +141,30 @@ import {mapActions, mapState} from 'vuex'
         },
         computed: {
             ...mapState('localidades', ['localidades']),
+            ...mapState('proveedores', ['errors']),
             ...mapState('condicionIva', ['condicionIva']),
-        
+            validar(){
+                if(this.errors.nombre != ''){
+                    this.fNombre = this.iFormClass
+                }else{
+                     this.fNombre = this.formClass
+                }
+                if(this.errors.direccion!= ''){
+                    this.fDireccion = this.iFormClass
+                }else{
+                     this.fDireccion = this.formClass
+                }
+                if(this.errors.cuit != ''){
+                    this.fCuit = this.iFormClass
+                }else{
+                     this.fCuit = this.formClass
+                }
+                if(this.errors.email!= ''){
+                    this.fEmail = this.iFormClass
+                }else{
+                     this.fEmail = this.formClass
+                }
+            }
         }
     }
 </script>

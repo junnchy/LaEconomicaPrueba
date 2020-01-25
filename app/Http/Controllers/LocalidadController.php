@@ -16,7 +16,7 @@ class LocalidadController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $localidades = Localidad::with('provincia.localidades')->get();
+            $localidades = Localidad::with('provincia')->get();
             return response()->json($localidades);
         }
     }

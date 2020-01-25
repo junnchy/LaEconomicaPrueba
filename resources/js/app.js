@@ -1,10 +1,15 @@
 import Vue from 'vue'
 import router from './router/index.js'
 import store from './store'
+import CKEditor from '@ckeditor/ckeditor5-vue'
+import * as VueGoogleMaps from 'vue2-google-maps' 
+
+Vue.use( CKEditor );
+
 // import vuetify from './plugins/vuetify'
 
 // MAPS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-import * as VueGoogleMaps from 'vue2-google-maps' 
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyCbASazHk3QISMptpk_C-AN99YU1gO5JFM',
@@ -35,6 +40,7 @@ Vue.prototype.$userName = document.querySelector("meta[name='user-name']").getAt
 
 require('./bootstrap');
 
+
 window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
@@ -57,7 +63,7 @@ Vue.component('componente-fdatosprov', require('./components/FormularioDatosProv
 Vue.component('componente-gmap', require('./components/PruebaGMap.vue').default);
 Vue.component('componente-leftbar', require('./components/LeftNavbar.vue').default);
 Vue.component('componente-filtroproductos', require('./components/ComponenteFiltrosDeProductos.vue').default);
-Vue.component('componente-LNBProducto', require('./components/LNBProducto.vue').default);
+Vue.component('componente-LNBAddCliente', require('./components/LNBAddCliente.vue').default);
 
 
 

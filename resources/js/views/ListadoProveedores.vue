@@ -9,7 +9,7 @@
                 <div class="col-4">
                     <router-link :to="{name: 'agregarProv'}">
                         <button class="btn btn-outline-success btn-block">
-                            Agregar Proveedor
+                            Agregar Proveedor <i class="fas fa-user-plus"></i>
                         </button>
                     </router-link>
                 </div>

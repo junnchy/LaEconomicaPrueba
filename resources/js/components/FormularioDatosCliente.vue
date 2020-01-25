@@ -6,11 +6,14 @@
                     <label>Nombre y Apellido/Razón Social</label>
                     <input 
                         type="text" 
-                        class="form-control" 
+                        :class="fNombre" 
                         name="nombre" 
                         placeholder="Nombre"
                         v-model="cliente.nombre"
                     />
+                    <span class="invalid-feedback" role="alert" v-if="errors.nombre != ''"> 
+                        <strong>{{errors.nombre[0]}}</strong>
+                    </span>
                 </div>
             </div>
             <div class="col-4">
@@ -18,11 +21,14 @@
                     <label>DNI/Cuit</label>
                     <input 
                         type="text" 
-                        class="form-control" 
+                        :class="fCuit" 
                         name="cuit" 
                         placeholder="DNI/Cuit"
                         v-model="cliente.cuit"
                     />
+                    <span class="invalid-feedback" role="alert" v-if="errors.cuit != ''"> 
+                        <strong>{{errors.cuit[0]}}</strong>
+                    </span>
                 </div>
             </div>
         </div>
@@ -82,7 +88,15 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="text" class="form-control" name="email" placeholder="Email" v-model="cliente.email"/>
+                    <input 
+                    type="text" 
+                    :class="fEmail" 
+                    name="email" 
+                    placeholder="Email" 
+                    v-model="cliente.email"/>
+                    <span class="invalid-feedback" role="alert" v-if="errors.email != ''"> 
+                        <strong>{{errors.email[0]}}</strong>
+                    </span>
                 </div>
             </div>
             <div class="col-6">
@@ -93,7 +107,15 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Dirección</label>
-                    <input type="text" class="form-control" name="direccion" placeholder="Dirección" v-model="cliente.direccion"/>
+                    <input 
+                    type="text" 
+                    :class="fDireccion" 
+                    name="direccion" 
+                    placeholder="Dirección" 
+                    v-model="cliente.direccion"/>
+                    <span class="invalid-feedback" role="alert" v-if="errors.direccion != ''"> 
+                        <strong>{{errors.email[0]}}</strong>
+                    </span>
                 </div>
             </div>
             <div class="col-6">
@@ -113,6 +135,7 @@
                 <componente-gmap v-bind:cliente="cliente"/>
             </div>
         </div>
+        {{validar}}
     </div>
 </template>
 
@@ -121,7 +144,13 @@ import {mapActions, mapState} from 'vuex'
     export default {
         data() {
             return {
-                locAc: 0
+                locAc: 0,
+                fNombre: "form-control",
+                fDireccion: "form-control",
+                fEmail: "form-control",
+                fCuit: "form-control",
+                formClass: "form-control",
+                iFormClass: "form-control is-invalid",
             }
         },
         props:{
@@ -142,7 +171,7 @@ import {mapActions, mapState} from 'vuex'
             
         },
         computed: {
-            ...mapState('clientes', ['categoriasCli']),
+            ...mapState('clientes', ['categoriasCli', 'errors']),
             ...mapState('localidades', ['localidades','localidad']),
             ...mapState('condicionIva', ['condicionIva']),
             localidadC(){
@@ -154,7 +183,29 @@ import {mapActions, mapState} from 'vuex'
                 }else{
                     return this.localidad
                 }
-            }   
+            },
+            validar(){
+                if(this.errors.nombre != ''){
+                    this.fNombre = this.iFormClass
+                }else{
+                     this.fNombre = this.formClass
+                }
+                if(this.errors.direccion!= ''){
+                    this.fDireccion = this.iFormClass
+                }else{
+                     this.fDireccion = this.formClass
+                }
+                if(this.errors.cuit != ''){
+                    this.fCuit = this.iFormClass
+                }else{
+                     this.fCuit = this.formClass
+                }
+                if(this.errors.email!= ''){
+                    this.fEmail = this.iFormClass
+                }else{
+                     this.fEmail = this.formClass
+                }
+            }
         }
     }
 </script>

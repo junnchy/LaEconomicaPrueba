@@ -14,7 +14,7 @@
                     <td>{{categoria.denominacion}}</td>
                     <td>
                         <button class="btn btn-warning btn-sm">
-                            Editar
+                            Editar <i class="fas fa-pen"></i>
                         </button>
                     </td>
                 </tr>

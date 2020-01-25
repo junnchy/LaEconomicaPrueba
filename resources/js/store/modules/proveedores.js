@@ -3,26 +3,46 @@ import router from '../../router'
 export default {
     namespaced: true,
     state:{
-        respuesta: null,
-        proveedores: [],
-        proveedor:{id:'', nombre:'', cuit:'', telefono:''},
-        filter: {
-            query: '',
-        }
+      respuesta: null,
+      proveedores: [],
+      proveedor:{id:'', nombre:'', cuit:'', telefono:''},
+      filter: {
+          query: '',
+      },
+      errors: {
+        nombre:'',
+        cuit: '',
+        email: '',
+        direccion:''
+      }
     },
     mutations: {
-        setProveedores(state, proveedores){
-          state.proveedores = proveedores
-        },
-        setProveedor(state, proveedor){
-          state.proveedor = proveedor
-        },
-        setRespuesta(state, respuesta){
-          state.respuesta = respuesta
-        },
-        SET_QUERY(state, query){
-          state.filter.query = query;
+      setProveedores(state, proveedores){
+        state.proveedores = proveedores
       },
+      setProveedor(state, proveedor){
+        state.proveedor = proveedor
+      },
+      setRespuesta(state, respuesta){
+        state.respuesta = respuesta
+      },
+      SET_QUERY(state, query){
+        state.filter.query = query;
+      },
+      setError(state, error){
+        if (error.nombre != undefined) {
+            state.errors.nombre = error.nombre
+        }
+        if (error.direccion != undefined) {
+            state.errors.direccion = error.direccion
+        }
+        if (error.email != undefined) {
+            state.errors.email = error.email
+        }
+        if (error.cuit != undefined) {
+            state.errors.cuit = error.cuit
+        }
+      }
     },
     actions:{
       async getProveedores({commit}){
@@ -52,7 +72,7 @@ export default {
           commit('setRespuesta', response.data.message)
         })
         .catch(function (error) {
-          console.log(error);
+          commit('setError',error.response.data.errors)
         });
       },
       editarProveedor({commit},proveedor){
@@ -61,7 +81,7 @@ export default {
           router.push({name: 'detalleProv', params:{id: proveedor.id}})
         })
         .catch(function (error) {
-          console.log(error);
+          commit('setError',error.response.data.errors)
         });
       },
       agregarCategoriaProveedor({commit, dispatch},[categoria, proveedor, descuento]){
@@ -80,7 +100,16 @@ export default {
       },
       resetResp({commit}, resp){
         commit('setRespuesta', resp)
-    },
+      },
+      resetError({commit}){
+        let error = {
+            nombre:'',
+            cuit: '',
+            email: '',
+            direccion:''
+        }
+        commit('setError', error)
+      }
     },
     getters:{
         filtered_proveedores(state){

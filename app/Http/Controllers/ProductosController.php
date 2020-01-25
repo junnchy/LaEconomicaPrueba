@@ -48,6 +48,9 @@ class ProductosController extends Controller
     public function store(Request $request)
     {
         if($request->ajax()){
+            
+            $this->validateProducto($request);
+
             $producto = new Producto();
 
             if ($request->id != null) {
@@ -60,6 +63,7 @@ class ProductosController extends Controller
             $producto->descuentoProducto_3 = $request->descuentoProducto[2];
             $producto->descuentoProducto_4 = $request->descuentoProducto[3];
             $producto->descuentoProducto_5 = $request->descuentoProducto[4];
+            $producto->descripcion = $request->descripcion;
             $producto->iva = $request->iva;
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
@@ -139,6 +143,9 @@ class ProductosController extends Controller
     public function update(Request $request, $id)
     {
         if($request->ajax()){
+
+            $this->validateProducto($request);
+
             $producto = Producto::findOrFail($id);
             $producto->nombre = $request->nombre;
             $producto->precioBase = $request->precioBase;
@@ -147,6 +154,7 @@ class ProductosController extends Controller
             $producto->descuentoProducto_3 = $request->descuentoProducto[2];
             $producto->descuentoProducto_4 = $request->descuentoProducto[3];
             $producto->descuentoProducto_5 = $request->descuentoProducto[4];
+            $producto->descripcion = $request->descripcion;
             $producto->iva = $request->iva;
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
@@ -175,4 +183,22 @@ class ProductosController extends Controller
     {
         //
     }
+
+    protected function validateProducto(Request $request)
+    {
+        $this->validate($request, [
+            'nombre' => 'required',
+            'precioBase' => 'required|numeric',
+            'precioBase' => 'numeric|gt:0',
+            'iva' => 'required|numeric',
+            'iva' => 'numeric|gt:0',
+            'rentabilidad' => 'required|numeric',
+            'rentabilidad' => 'numeric|gt:0',
+            'proveedor_id' => 'required',
+            'proveedor_id' => 'numeric|gt:0',
+            'categoria_id' => 'required',
+            'categoria_id' => 'numeric|gt:0'
+        ]);
+    }
 }
+

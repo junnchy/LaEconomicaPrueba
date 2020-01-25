@@ -6,11 +6,13 @@
         <div class="container"> 
             <div class="row">
                 <div class="col-9">
-                        <input class="form-control my-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
+                        <input class="form-control my-3" type="search" placeholder="Buscar " aria-label="Search" v-model="search">
                 </div>
                 <div class="col-3">
                     <router-link :to="{name:'agregarProducto'}">
-                        <button class="btn btn-outline-success btn-block my-3"> Agregar Producto</button>
+                        <button class="btn btn-outline-success btn-block my-3"> 
+                            Agregar Producto <i class="fas fa-plus-circle"></i>
+                        </button>
                     </router-link>
                 </div>
             </div>
@@ -30,7 +32,9 @@
                             <td>${{producto.precioVenta}}</td>
                             <td>
                                 <router-link :to="{name:'detalleProducto',params:{id: producto.id}}">
-                                    <button class="btn btn-warning btn-sm">Ver</button>
+                                    <button class="btn btn-warning btn-sm">
+                                        Ver <i class="fas fa-eye"></i>
+                                    </button>
                                 </router-link>
                             </td>
                         </tr>

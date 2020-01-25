@@ -6,12 +6,12 @@
             </div>
             <div class="col-4">
                 <router-link :to="{name:'menuClientes'}">
-                    <button class="btn btn-warning" v-if="respuestaS != null" @click="resetResp(null)">
+                    <button class="btn btn-warning" v-if="respuestaS != null" @click="cancelar()">
                         Finalizar
                     </button>
                 </router-link>
                 <router-link :to="{name:'menuClientes'}" v-if="respuestaS === null">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" @click="resetError()">
                         Cancelar
                     </button>
                 </router-link>
@@ -24,11 +24,7 @@
             </button>
         </div>
         <div class="alert alert-danger alert-dismissible fade show mt-4" v-if="errors.length > 0">
-            <ul>
-                <li v-for="(error, index) in errors" :key="index">
-                    {{error}} 
-                </li>
-            </ul>
+            {{errors}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -36,16 +32,16 @@
         <div class="container mt-5">
             <form @submit.prevent="agregarCliente(cliente)">
                 <componente-fdatoscliente v-bind:cliente="cliente"/>
-                <div class="modal-footer" v-if="respuestaS === null">
-                    <button type="submit" class="btn btn-success btn-block">Agregar</button>
-                </div>
+                <button type="submit" class="btn btn-success btn-block sticky-button" v-if="respuestaS === null">
+                    Agregar Cliente
+                </button>
             </form>
         </div>
     </div>
 </template>
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapState, mapMutations} from 'vuex'
 export default {
     name: 'AgregarCliente',
     data() {
@@ -61,9 +57,12 @@ export default {
         }
     },
     methods: {
-    ...mapActions('clientes', ['resetResp', 'agregarCliente']),
-    ...mapActions(['cambiarEstado']),
-    
+        ...mapActions('clientes', ['resetResp', 'agregarCliente', 'resetError']),
+        ...mapActions(['cambiarEstado']),
+        cancelar(){
+            this.resetError()
+            this.resetResp(null)
+        }
     },
     created() {
         this.cambiarEstado(3)
@@ -73,5 +72,16 @@ export default {
     }
 }
 </script>
+
+<style>
+    .sticky-button {
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    bottom: 10px;
+    }
+</style>
 
 

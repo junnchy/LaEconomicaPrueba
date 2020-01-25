@@ -6,12 +6,12 @@
             </div>
             <div class="col-4">
                 <router-link :to="{name:'menuClientes'}">
-                    <button class="btn btn-warning" v-if="respuestaS != null" @click="resetResp(null)">
+                    <button class="btn btn-warning" v-if="respuestaS != null" @click="cancelar()">
                         Finalizar
                     </button>
                 </router-link>
                 <router-link :to="{name:'menuClientes'}" v-if="respuestaS === null">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" @click="resetError()">
                         Cancelar
                     </button>
                 </router-link>
@@ -26,9 +26,9 @@
         <div class="container mt-5">
             <form @submit.prevent="editarCliente(cliente)">
                 <componente-fdatoscliente v-bind:cliente="cliente"/>
-                <div class="modal-footer" v-if="respuestaS === null">
-                    <button type="submit" class="btn btn-warning btn-block">Actualizar</button>
-                </div>
+                <button type="submit" class="btn btn-warning btn-block sticky-button" v-if="respuestaS === null">
+                    Guardar Cambios <i class="fas fa-save"></i>
+                </button>
             </form>
         </div>
     </div>
@@ -44,7 +44,11 @@ export default {
         }
     },
     methods: {
-    ...mapActions('clientes', ['resetResp', 'getCliente', 'editarCliente'])
+        ...mapActions('clientes', ['resetResp', 'getCliente', 'editarCliente', 'resetError']),
+        cancelar(){
+            this.resetError()
+            this.resetResp(null)
+        }
     },
     created() {
         this.getCliente(this.id)
@@ -54,3 +58,14 @@ export default {
     }   
 }
 </script>
+
+<style>
+    .sticky-button {
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    bottom: 10px;
+    }
+</style>

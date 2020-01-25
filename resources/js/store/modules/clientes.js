@@ -8,7 +8,12 @@ export default {
         filter: {
             query: '',
         },
-        errors: []
+        errors: {
+            nombre:'',
+            cuit: '',
+            email: '',
+            direccion:''
+        }
     },
     mutations: {
         setClientes(state, clientes){
@@ -27,10 +32,19 @@ export default {
             state.filter.query = query;
         },
         setError(state, error){
-            state.errors.push(error)
-        },
-        resetEr(state){
-            state.errors = []
+            if (error.nombre != undefined) {
+                state.errors.nombre = error.nombre
+            }
+            if (error.direccion != undefined) {
+                state.errors.direccion = error.direccion
+            }
+            if (error.email != undefined) {
+                state.errors.email = error.email
+            }
+            if (error.cuit != undefined) {
+                state.errors.cuit = error.cuit
+            }
+            
         }
     },
     actions:{
@@ -63,12 +77,10 @@ export default {
             }
         },
         agregarCliente({commit}, cliente){
-            
             axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
                 commit('setRespuestaServidor', response.data.message)
             })
             .catch(function (error) {
-                console.log(error.response.data.errors);
                 commit('setError',error.response.data.errors)
             });
         },
@@ -77,7 +89,6 @@ export default {
         },
         async getCliente({commit}, id){
             let cliente = await axios.get(`http://127.0.0.1:8000/clientes/${id}`).then(response => {
-            console.log(response.data)  
             commit('setCliente', response.data)
             }) 
         },
@@ -87,7 +98,7 @@ export default {
               commit('setRespuestaServidor', response.data.message)
             })
             .catch(function (error) {
-              console.log(error);
+                commit('setError',error.response.data.errors)
             });
         },
         agregarCategoriaCli({commit, dispatch}, categoria){
@@ -100,7 +111,13 @@ export default {
             });
         },
         resetError({commit}){
-            commit('resetEr')
+            let error = {
+                nombre:'',
+                cuit: '',
+                email: '',
+                direccion:''
+            }
+            commit('setError', error)
         }
     }, 
     getters:{

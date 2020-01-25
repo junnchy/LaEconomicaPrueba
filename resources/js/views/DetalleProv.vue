@@ -7,7 +7,7 @@
             <div class="col-4">
                 <router-link :to="{name: 'editarProveedor'}">
                     <button class="btn btn-warning">
-                        Editar
+                        Editar <i class="fas fa-pen"></i>
                     </button>
                 </router-link>
                 <router-link :to="{name: 'listadoProveedores'}">
@@ -31,8 +31,9 @@
                         <ul>
                             <li v-for="(categoria, index) in proveedor.categorias" :key="index">
                                 <router-link :to="{name: 'verEditarCategoria', params:{id: categoria.id}}">
-                                    <a href="#">{{categoria.nombre}}</a>
+                                    <a href="#">{{categoria.nombre}}</a> ---
                                 </router-link>
+                                <i class="fas fa-times"></i>
                             </li>
                         </ul>
                     </div>

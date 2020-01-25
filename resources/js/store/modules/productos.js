@@ -1,14 +1,22 @@
 export default {
     namespaced: true,
     state:{
-        respuesta: null,
-        productos: [],
-        producto: {},
-        filter: {
-            query: '',
-            categoria: 0,
-            proveedor: 0
-        }
+      respuesta: null,
+      productos: [],
+      producto: {},
+      filter: {
+          query: '',
+          categoria: 0,
+          proveedor: 0
+      },
+      errors: {
+        nombre:'',
+        precioBase: '',
+        iva: '',
+        rentabilidad:'',
+        proveedor_id:'',
+        categoria_id:''
+      }
     },
     mutations: {
         setRespuesta(state, respuesta){
@@ -32,7 +40,26 @@ export default {
         SET_QUERY(state, query){
             state.filter.query = query;
         },
-        
+        setError(state, error){
+          if (error.nombre != undefined) {
+              state.errors.nombre = error.nombre
+          }
+          if (error.precioBase != undefined) {
+              state.errors.precioBase = error.precioBase
+          }
+          if (error.iva != undefined) {
+              state.errors.iva = error.iva
+          }
+          if (error.rentabilidad != undefined) {
+              state.errors.rentabilidad = error.rentabilidad
+          }
+          if (error.proveedor_id != undefined) {
+              state.errors.proveedor_id = error.proveedor_id
+          }
+          if (error.categoria_id != undefined) {
+              state.errors.categoria_id = error.categoria_id
+          }
+        }
     },
     actions:{
       async getProductos({commit}){
@@ -51,11 +78,13 @@ export default {
         },
         agregarProducto({commit}, producto){
           producto.id = null   
+          console.log(producto)
           axios.post('http://127.0.0.1:8000/productos', producto).then(function (response) {
             commit('setRespuesta', response.data.message)
           })
           .catch(function (error) {
-            console.log(error);
+            console.log(error.response.data.errors)
+            commit('setError',error.response.data.errors)
           });
         },
         async getProducto({commit}, id){
@@ -71,12 +100,23 @@ export default {
             commit('setRespuesta', response.data.message)
           })
           .catch(function (error) {
-            console.log(error);
+            commit('setError',error.response.data.errors)
           });
         },
         resetResp({commit}, resp){
           commit('setRespuesta', resp)
       },
+      resetError({commit}){
+        let error = {
+          nombre:'',
+          precioBase: '',
+          iva: '',
+          rentabilidad:'',
+          proveedor_id:'',
+          categoria_id:''
+        }
+        commit('setError', error)
+      }
     },
     getters:{
         filtered_productos(state){
