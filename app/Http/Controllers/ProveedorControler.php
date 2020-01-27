@@ -91,7 +91,7 @@ class ProveedorControler extends Controller
     public function show($id, Request $request)
     {
 
-        $proveedor = App\Proveedor::with(['localidad.proveedores', 'condicion_iva.proveedores','categorias.proveedores'])->findOrFail($id);
+        $proveedor = App\Proveedor::with(['localidad.provincia', 'condicion_iva.proveedores','categorias.proveedores'])->findOrFail($id);
 
         if($request->ajax()){
             return response()->json($proveedor);
@@ -177,7 +177,7 @@ class ProveedorControler extends Controller
      */
     public function destroy($id)
     {
-        //
+        /* DB::table('users')->where('votes', '>', 100)->delete(); */
     }
 
     protected function validateProveedor(Request $request)

@@ -16,8 +16,8 @@ class CreateLocalidadesTable extends Migration
         Schema::create('localidades', function (Blueprint $table) 
         {
             $table->bigIncrements('id');
-            $table->integer('cod_postal');
-            $table->string('localidad');
+            $table->integer('cod_postal')->nullable();
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -30,7 +30,7 @@ class CreateLocalidadesTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('localidades');
+            Schema::dropIfExists('localidades');
         Schema::enableForeignKeyConstraints();
     }
 }

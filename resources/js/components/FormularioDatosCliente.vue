@@ -119,12 +119,25 @@
                 </div>
             </div>
             <div class="col-6">
+                <div class="form-group">
+                    <label>Provincia</label>
+                    <select class="form-control" v-model="provincia">
+                        <option selected :value="provincia"
+                        v-if="cliente.localidad && cliente.id != null">{{provincia.iso_nombre}}</option>
+                        <option v-for="(provincia, index) in provincias" :key="index" :value="provincia">
+                            {{provincia.nombre}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6" v-if="cliente.localidad">
                 <label>Localidad</label>
                 <select class="form-control" v-model="cliente.localidad_id" type="number">
                     <option selected :value="cliente.localidad_id" 
-                    v-if="cliente.localidad_id === cliente.localidad.id && cliente.id != null">{{cliente.localidad.cod_postal}}-{{cliente.localidad.localidad}}</option>
-                    <option v-for="(localidad, index) in localidades" :key="index" :value="localidad.id">
-                        {{localidad.cod_postal}} - {{localidad.localidad}}
+                    v-if="cliente.localidad_id === cliente.localidad.id && cliente.id != null">{{cliente.localidad.nombre}}</option>
+                    <option v-for="(localidad, index) in provincia.localidades"
+                        :key="index" :value="localidad.id">
+                        {{localidad.nombre}}
                     </option>
                     {{localidadC}}
                 </select>
@@ -145,12 +158,15 @@ import {mapActions, mapState} from 'vuex'
         data() {
             return {
                 locAc: 0,
+                proAc: 0,
                 fNombre: "form-control",
                 fDireccion: "form-control",
                 fEmail: "form-control",
                 fCuit: "form-control",
                 formClass: "form-control",
                 iFormClass: "form-control is-invalid",
+                provincia:{iso_nombre: '', id: null},
+
             }
         },
         props:{
@@ -161,18 +177,22 @@ import {mapActions, mapState} from 'vuex'
         },
         methods: {
             ...mapActions('clientes',['getCategoriasCli']),
-            ...mapActions('localidades',['getLocalidades', 'getLocalidad']),
+            ...mapActions('localidades',['getLocalidades', 'getLocalidad', 'getProvincias']),
             ...mapActions('condicionIva',['getCondicionesIva'])
         },
         created() {
+            this.getProvincias()
             this.getCategoriasCli()
             this.getLocalidades()
             this.getCondicionesIva()
-            
+            if (this.cliente.id != null) {
+                this.provincia = this.cliente.localidad.provincia
+            }
+           
         },
         computed: {
             ...mapState('clientes', ['categoriasCli', 'errors']),
-            ...mapState('localidades', ['localidades','localidad']),
+            ...mapState('localidades', ['localidades','localidad', 'provincias']),
             ...mapState('condicionIva', ['condicionIva']),
             localidadC(){
                 if(this.cliente.localidad_id > 0 && this.cliente.localidad_id != this.locAc){
@@ -206,6 +226,6 @@ import {mapActions, mapState} from 'vuex'
                      this.fEmail = this.formClass
                 }
             }
-        }
+        },
     }
 </script>

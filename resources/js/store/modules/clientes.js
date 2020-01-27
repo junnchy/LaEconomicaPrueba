@@ -82,6 +82,7 @@ export default {
             })
             .catch(function (error) {
                 commit('setError',error.response.data.errors)
+                console.log(error.response.data)
             });
         },
         resetResp({commit}, resp){

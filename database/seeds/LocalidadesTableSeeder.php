@@ -12,29 +12,15 @@ class LocalidadesTableSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-        Localidad::truncate();
-        $tabla = DB::table('localidades');
-        Localidad::insert(
-            ['cod_postal' => 2000,
-            'localidad' => 'Rosario',
-            'provincia_id' => 82]);
-        Localidad::insert(
-            ['cod_postal' => 2124,
-            'localidad' => 'Villa Gobernador Galvez',
-            'provincia_id' => 82]);
-        Localidad::insert(
-            ['cod_postal' => 2126,
-            'localidad' => 'Alvear',
-            'provincia_id' => 82]);
-        Localidad::insert(
-            ['cod_postal' => 2126,
-            'localidad' => 'Pueblo Esther',
-            'provincia_id' => 82]);
-        Localidad::insert(
-            ['cod_postal' => 2132,
-            'localidad' => 'Funes',
-            'provincia_id' => 82]);    
-        Schema::enableForeignKeyConstraints();
+        DB::table('localidades')->delete();
+        $json = File::get('database\seeds\localidades2.json');
+        $data = json_decode($json);
+        foreach ($data as $obj){
+            Localidad::create(array(
+                "id" => $obj->id,
+                "nombre" => $obj->nombre,
+                "provincia_id" => $obj->provincia->id,
+            ));
+        }
     }
 }

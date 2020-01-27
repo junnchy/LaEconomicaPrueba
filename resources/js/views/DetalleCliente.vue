@@ -20,7 +20,7 @@
         <ul class="list-group mt-3">
             <li class="list-group-item"><strong><h3>{{cliente.nombre}}</h3></strong></li>
             <li class="list-group-item"><strong>Codigo: </strong> {{cliente.id}}</li>
-            <li class="list-group-item" v-if="cliente.localidad"><strong>Direccion: </strong> {{cliente.direccion}} - {{cliente.localidad.localidad}}, {{cliente.localidad.provincia.iso_nombre}}</li>
+            <li class="list-group-item" v-if="cliente.localidad"><strong>Direccion: </strong> {{cliente.direccion}} - {{cliente.localidad.nombre}}, {{cliente.localidad.provincia.iso_nombre}}</li>
             <li class="list-group-item"><strong>Telefono: </strong>{{cliente.telefono}} </li>
             <li class="list-group-item"><strong>Celular: </strong> {{cliente.celular}}</li>
             <li class="list-group-item"><strong>Email: </strong> {{cliente.email}}</li>

@@ -59,7 +59,7 @@ export default {
         buscar(){
             if (this.cliente.localidad.id > 0 && this.cliente.direccion != '') {
                 if (this.cliente.localidad.id != this.localidadActual || this.cliente.direccion != this.direccionActual){
-                   let cad = `${this.cliente.direccion} ${this.cliente.localidad.localidad} ${this.cliente.localidad.provincia.iso_nombre}`
+                   let cad = `${this.cliente.direccion} ${this.cliente.localidad.nombre} ${this.cliente.localidad.provincia.iso_nombre}`
                     console.log(cad)
                     this.getDireccion(cad)
                     this.posicion.lat = this.latlog.lat

@@ -50,7 +50,7 @@ export default {
                 id: null,
                 nombre:'', cuit:'', telefono:'', celular:'', email:'', direccion:'', 
                 localidad_id: 0, cat_clientes_id: 0, condicion_iva_id: 0,
-                localidad:{localidad: '', cod_postal: '', provincia: {iso_nombre: ''}},
+                localidad:{nombre: '', cod_postal: ''},
                 categoria:{denominacion: ''},
                 condicion_iva:{denominacion: ''}
             }

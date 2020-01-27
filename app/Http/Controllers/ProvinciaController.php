@@ -15,7 +15,9 @@ class ProvinciaController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $provincias = Provincia::all();
+            $provincias = Provincia::with('localidades')
+            ->orderBy('iso_nombre')
+            ->get();
             return response()->json($provincias);
         }
     }
@@ -47,9 +49,12 @@ class ProvinciaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $provincia = Provincia::with('localidades')->findOrFail($id);
+            return response()->json($provincia);
+        }
     }
 
     /**

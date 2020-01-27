@@ -12,8 +12,8 @@
             <tbody>
                 <tr v-for="(localidad, index) in localidades" :key="index">
                     <th scope="row">{{localidad.id}}</th>
-                    <td>{{localidad.localidad}}, {{localidad.provincia.iso_nombre}} </td>
-                    <td>{{localidad.cod_postal}}</td>
+                    <td>{{localidad.nombre}}, {{localidad.provincia.iso_nombre}} </td>
+                    <td></td>
                     <td>
                         <button class="btn btn-warning btn-sm">
                             Editar

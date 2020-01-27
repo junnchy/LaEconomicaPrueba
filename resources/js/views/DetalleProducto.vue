@@ -42,7 +42,7 @@
                 <img :src="producto.imagen" class="img-thumbnail" alt="Example" width="330px">
             </div>
             <div class="container mt-4">
-                <h3>Descripcion</h3>
+                <h3> <i class="fas fa-info-circle"></i> Descripcion</h3>
                 <div class="shadow-sm p-3 mb-5 bg-white rounded" v-html="producto.descripcion">
                 </div>
             </div>

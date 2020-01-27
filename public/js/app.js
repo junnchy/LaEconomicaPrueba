@@ -2866,17 +2866,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       locAc: 0,
+      proAc: 0,
       fNombre: "form-control",
       fDireccion: "form-control",
       fEmail: "form-control",
       fCuit: "form-control",
       formClass: "form-control",
-      iFormClass: "form-control is-invalid"
+      iFormClass: "form-control is-invalid",
+      provincia: {
+        iso_nombre: '',
+        id: null
+      }
     };
   },
   props: {
@@ -2885,13 +2903,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     }
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getCategoriasCli']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['getLocalidades', 'getLocalidad']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('condicionIva', ['getCondicionesIva'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getCategoriasCli']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['getLocalidades', 'getLocalidad', 'getProvincias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('condicionIva', ['getCondicionesIva'])),
   created: function created() {
+    this.getProvincias();
     this.getCategoriasCli();
     this.getLocalidades();
     this.getCondicionesIva();
+
+    if (this.cliente.id != null) {
+      this.provincia = this.cliente.localidad.provincia;
+    }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['categoriasCli', 'errors']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades', 'localidad']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('condicionIva', ['condicionIva']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['categoriasCli', 'errors']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades', 'localidad', 'provincias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('condicionIva', ['condicionIva']), {
     localidadC: function localidadC() {
       if (this.cliente.localidad_id > 0 && this.cliente.localidad_id != this.locAc) {
         this.getLocalidad(this.cliente.localidad_id);
@@ -3170,6 +3193,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3179,7 +3211,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       fEmail: "form-control",
       fCuit: "form-control",
       formClass: "form-control",
-      iFormClass: "form-control is-invalid"
+      iFormClass: "form-control is-invalid",
+      provincia: {}
     };
   },
   props: {
@@ -3188,12 +3221,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     }
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['getLocalidades']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('condicionIva', ['getCondicionesIva']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['resetError'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['getLocalidades', 'getProvincias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('condicionIva', ['getCondicionesIva']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['resetError'])),
   created: function created() {
     this.getLocalidades();
     this.getCondicionesIva();
+    this.getProvincias();
+
+    if (this.proveedor.id != null) {
+      this.provincia = this.proveedor.localidad.provincia;
+    }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['errors']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('condicionIva', ['condicionIva']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades', 'provincias']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['errors']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('condicionIva', ['condicionIva']), {
     validar: function validar() {
       if (this.errors.nombre != '') {
         this.fNombre = this.iFormClass;
@@ -3869,7 +3907,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     buscar: function buscar() {
       if (this.cliente.localidad.id > 0 && this.cliente.direccion != '') {
         if (this.cliente.localidad.id != this.localidadActual || this.cliente.direccion != this.direccionActual) {
-          var cad = "".concat(this.cliente.direccion, " ").concat(this.cliente.localidad.localidad, " ").concat(this.cliente.localidad.provincia.iso_nombre);
+          var cad = "".concat(this.cliente.direccion, " ").concat(this.cliente.localidad.nombre, " ").concat(this.cliente.localidad.provincia.iso_nombre);
           console.log(cad);
           this.getDireccion(cad);
           this.posicion.lat = this.latlog.lat;
@@ -43012,80 +43050,139 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-6" }, [
-        _c("label", [_vm._v("Localidad")]),
-        _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cliente.localidad_id,
-                expression: "cliente.localidad_id"
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Provincia")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.provincia,
+                  expression: "provincia"
+                }
+              ],
+              staticClass: "form-control",
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.provincia = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                }
               }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "number" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.$set(
-                  _vm.cliente,
-                  "localidad_id",
-                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                )
-              }
-            }
-          },
-          [
-            _vm.cliente.localidad_id === _vm.cliente.localidad.id &&
-            _vm.cliente.id != null
-              ? _c(
+            },
+            [
+              _vm.cliente.localidad && _vm.cliente.id != null
+                ? _c(
+                    "option",
+                    {
+                      attrs: { selected: "" },
+                      domProps: { value: _vm.provincia }
+                    },
+                    [_vm._v(_vm._s(_vm.provincia.iso_nombre))]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.provincias, function(provincia, index) {
+                return _c(
                   "option",
-                  {
-                    attrs: { selected: "" },
-                    domProps: { value: _vm.cliente.localidad_id }
-                  },
+                  { key: index, domProps: { value: provincia } },
                   [
                     _vm._v(
-                      _vm._s(_vm.cliente.localidad.cod_postal) +
-                        "-" +
-                        _vm._s(_vm.cliente.localidad.localidad)
+                      "\n                        " +
+                        _vm._s(provincia.nombre) +
+                        "\n                    "
                     )
                   ]
                 )
-              : _vm._e(),
+              })
+            ],
+            2
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm.cliente.localidad
+        ? _c("div", { staticClass: "col-6" }, [
+            _c("label", [_vm._v("Localidad")]),
             _vm._v(" "),
-            _vm._l(_vm.localidades, function(localidad, index) {
-              return _c(
-                "option",
-                { key: index, domProps: { value: localidad.id } },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(localidad.cod_postal) +
-                      " - " +
-                      _vm._s(localidad.localidad) +
-                      "\n                "
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cliente.localidad_id,
+                    expression: "cliente.localidad_id"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.cliente,
+                      "localidad_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              [
+                _vm.cliente.localidad_id === _vm.cliente.localidad.id &&
+                _vm.cliente.id != null
+                  ? _c(
+                      "option",
+                      {
+                        attrs: { selected: "" },
+                        domProps: { value: _vm.cliente.localidad_id }
+                      },
+                      [_vm._v(_vm._s(_vm.cliente.localidad.nombre))]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.provincia.localidades, function(localidad, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: localidad.id } },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(localidad.nombre) +
+                          "\n                "
+                      )
+                    ]
                   )
-                ]
-              )
-            }),
-            _vm._v(
-              "\n                " + _vm._s(_vm.localidadC) + "\n            "
+                }),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.localidadC) +
+                    "\n            "
+                )
+              ],
+              2
             )
-          ],
-          2
-        )
-      ])
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row text-center my-4" }, [
@@ -43454,192 +43551,6 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "col-6" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Telefono")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.telefono,
-                  expression: "proveedor.telefono"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              domProps: { value: _vm.proveedor.telefono },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "telefono", $event.target.value)
-                }
-              }
-            })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-8" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Email")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.email,
-                  expression: "proveedor.email"
-                }
-              ],
-              class: _vm.fEmail,
-              attrs: { type: "text" },
-              domProps: { value: _vm.proveedor.email },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "email", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.errors.nombre != ""
-              ? _c(
-                  "span",
-                  { staticClass: "invalid-feedback", attrs: { role: "alert" } },
-                  [_c("strong", [_vm._v(_vm._s(_vm.errors.email[0]))])]
-                )
-              : _vm._e()
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("Dirección")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.direccion,
-                  expression: "proveedor.direccion"
-                }
-              ],
-              class: _vm.fDireccion,
-              attrs: {
-                type: "text",
-                name: "direccion",
-                placeholder: "Dirección"
-              },
-              domProps: { value: _vm.proveedor.direccion },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.proveedor, "direccion", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.errors.nombre != ""
-              ? _c(
-                  "span",
-                  { staticClass: "invalid-feedback", attrs: { role: "alert" } },
-                  [_c("strong", [_vm._v(_vm._s(_vm.errors.direccion[0]))])]
-                )
-              : _vm._e()
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-6" }, [
-          _c("label", [_vm._v("Localidad")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.proveedor.localidad_id,
-                  expression: "proveedor.localidad_id"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.proveedor,
-                    "localidad_id",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                }
-              }
-            },
-            [
-              _vm.proveedor.localidad_id === _vm.proveedor.localidad.id
-                ? _c(
-                    "option",
-                    {
-                      attrs: { selected: "" },
-                      domProps: { value: _vm.proveedor.localidad_id }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.proveedor.localidad.cod_postal) +
-                          "-" +
-                          _vm._s(_vm.proveedor.localidad.localidad)
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.localidades, function(localidad, index) {
-                return _c(
-                  "option",
-                  { key: index, domProps: { value: localidad.id } },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(localidad.cod_postal) +
-                        " - " +
-                        _vm._s(localidad.localidad) +
-                        ", " +
-                        _vm._s(localidad.provincia.iso_nombre) +
-                        "\n                    "
-                    )
-                  ]
-                )
-              })
-            ],
-            2
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6" }, [
-          _c("div", { staticClass: "form-group" }, [
             _c("label", [_vm._v("Condición de IVA")]),
             _vm._v(" "),
             _c(
@@ -43702,9 +43613,246 @@ var render = function() {
               2
             )
           ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Email")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.proveedor.email,
+                  expression: "proveedor.email"
+                }
+              ],
+              class: _vm.fEmail,
+              attrs: { type: "text" },
+              domProps: { value: _vm.proveedor.email },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.proveedor, "email", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.nombre != ""
+              ? _c(
+                  "span",
+                  { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+                  [_c("strong", [_vm._v(_vm._s(_vm.errors.email[0]))])]
+                )
+              : _vm._e()
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6" })
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Telefono")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.proveedor.telefono,
+                  expression: "proveedor.telefono"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number" },
+              domProps: { value: _vm.proveedor.telefono },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.proveedor, "telefono", $event.target.value)
+                }
+              }
+            })
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-9" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Dirección")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.proveedor.direccion,
+                  expression: "proveedor.direccion"
+                }
+              ],
+              class: _vm.fDireccion,
+              attrs: {
+                type: "text",
+                name: "direccion",
+                placeholder: "Dirección"
+              },
+              domProps: { value: _vm.proveedor.direccion },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.proveedor, "direccion", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.errors.nombre != ""
+              ? _c(
+                  "span",
+                  { staticClass: "invalid-feedback", attrs: { role: "alert" } },
+                  [_c("strong", [_vm._v(_vm._s(_vm.errors.direccion[0]))])]
+                )
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-3" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("Provincia")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.provincia,
+                    expression: "provincia"
+                  }
+                ],
+                staticClass: "form-control",
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.provincia = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _vm.proveedor.localidad && _vm.proveedor.id != null
+                  ? _c(
+                      "option",
+                      {
+                        attrs: { selected: "" },
+                        domProps: { value: _vm.provincia }
+                      },
+                      [_vm._v(_vm._s(_vm.provincia.iso_nombre))]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.provincias, function(provincia, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: provincia } },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(provincia.nombre) +
+                          "\n                        "
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c("label", [_vm._v("Localidad")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.proveedor.localidad_id,
+                  expression: "proveedor.localidad_id"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "number" },
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.proveedor,
+                    "localidad_id",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                  )
+                }
+              }
+            },
+            [
+              _vm.proveedor.localidad_id === _vm.proveedor.localidad.id
+                ? _c(
+                    "option",
+                    {
+                      attrs: { selected: "" },
+                      domProps: { value: _vm.proveedor.localidad_id }
+                    },
+                    [_vm._v(_vm._s(_vm.proveedor.localidad.nombre))]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.provincia.localidades, function(localidad, index) {
+                return _c(
+                  "option",
+                  { key: index, domProps: { value: localidad.id } },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(localidad.nombre) +
+                        "\n                    "
+                    )
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
       ])
     ]),
     _vm._v("\n    " + _vm._s(_vm.validar) + "\n")
@@ -44215,14 +44363,14 @@ var render = function() {
             _vm._v(" "),
             _c("td", [
               _vm._v(
-                _vm._s(localidad.localidad) +
+                _vm._s(localidad.nombre) +
                   ", " +
                   _vm._s(localidad.provincia.iso_nombre) +
                   " "
               )
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(localidad.cod_postal))]),
+            _c("td"),
             _vm._v(" "),
             _vm._m(1, true)
           ])
@@ -64001,6 +64149,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormularioDatosProveedor_vue_vue_type_template_id_9769d640___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormularioDatosProveedor.vue?vue&type=template&id=9769d640& */ "./resources/js/components/FormularioDatosProveedor.vue?vue&type=template&id=9769d640&");
 /* harmony import */ var _FormularioDatosProveedor_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormularioDatosProveedor.vue?vue&type=script&lang=js& */ "./resources/js/components/FormularioDatosProveedor.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _FormularioDatosProveedor_vue_vue_type_custom_index_0_blockType_div_class_col_6__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FormularioDatosProveedor.vue?vue&type=custom&index=0&blockType=div&class=col-6 */ "./resources/js/components/FormularioDatosProveedor.vue?vue&type=custom&index=0&blockType=div&class=col-6");
+/* harmony import */ var _FormularioDatosProveedor_vue_vue_type_custom_index_0_blockType_div_class_col_6__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_FormularioDatosProveedor_vue_vue_type_custom_index_0_blockType_div_class_col_6__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _FormularioDatosProveedor_vue_vue_type_custom_index_1_blockType_div_class_col_6_v_if_cliente_localidad__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FormularioDatosProveedor.vue?vue&type=custom&index=1&blockType=div&class=col-6&v-if=cliente.localidad */ "./resources/js/components/FormularioDatosProveedor.vue?vue&type=custom&index=1&blockType=div&class=col-6&v-if=cliente.localidad");
+/* harmony import */ var _FormularioDatosProveedor_vue_vue_type_custom_index_1_blockType_div_class_col_6_v_if_cliente_localidad__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_FormularioDatosProveedor_vue_vue_type_custom_index_1_blockType_div_class_col_6_v_if_cliente_localidad__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
@@ -64019,10 +64171,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* custom blocks */
+
+if (typeof _FormularioDatosProveedor_vue_vue_type_custom_index_0_blockType_div_class_col_6__WEBPACK_IMPORTED_MODULE_3___default.a === 'function') _FormularioDatosProveedor_vue_vue_type_custom_index_0_blockType_div_class_col_6__WEBPACK_IMPORTED_MODULE_3___default()(component)
+
+if (typeof _FormularioDatosProveedor_vue_vue_type_custom_index_1_blockType_div_class_col_6_v_if_cliente_localidad__WEBPACK_IMPORTED_MODULE_4___default.a === 'function') _FormularioDatosProveedor_vue_vue_type_custom_index_1_blockType_div_class_col_6_v_if_cliente_localidad__WEBPACK_IMPORTED_MODULE_4___default()(component)
+
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/FormularioDatosProveedor.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioDatosProveedor.vue?vue&type=custom&index=0&blockType=div&class=col-6":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/FormularioDatosProveedor.vue?vue&type=custom&index=0&blockType=div&class=col-6 ***!
+  \****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FormularioDatosProveedor.vue?vue&type=custom&index=1&blockType=div&class=col-6&v-if=cliente.localidad":
+/*!***************************************************************************************************************************************!*\
+  !*** ./resources/js/components/FormularioDatosProveedor.vue?vue&type=custom&index=1&blockType=div&class=col-6&v-if=cliente.localidad ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 
@@ -65393,6 +65573,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         commit('setRespuestaServidor', response.data.message);
       })["catch"](function (error) {
         commit('setError', error.response.data.errors);
+        console.log(error.response.data);
       });
     },
     resetResp: function resetResp(_ref4, resp) {
@@ -65579,7 +65760,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     localidades: [],
     localidad: {},
     respuesta: null,
-    provincias: []
+    provincias: [],
+    provincia: {}
   },
   mutations: {
     setLocalidades: function setLocalidades(state, localidades) {
@@ -65593,6 +65775,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setProvincias: function setProvincias(state, provincias) {
       state.provincias = provincias;
+    },
+    setProvincia: function setProvincia(state, provincia) {
+      state.provincia = provincia;
     }
   },
   actions: {
@@ -65664,25 +65849,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   p.push(element);
                 });
                 console.log(p);
-                _context2.next = 13;
+                _context2.next = 14;
                 break;
 
               case 10:
                 _context2.prev = 10;
                 _context2.t0 = _context2["catch"](2);
                 console.log(_context2.t0);
+                console.log(_context2.t0.response.data);
 
-              case 13:
-                _context2.prev = 13;
+              case 14:
+                _context2.prev = 14;
                 commit('setProvincias', p);
-                return _context2.finish(13);
+                return _context2.finish(14);
 
-              case 16:
+              case 17:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[2, 10, 13, 16]]);
+        }, _callee2, null, [[2, 10, 14, 17]]);
       }));
 
       function getProvincias(_x2) {
@@ -65691,9 +65877,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getProvincias;
     }(),
-    agregarLocalidad: function agregarLocalidad(_ref3, localidad) {
-      var commit = _ref3.commit,
-          dispatch = _ref3.dispatch;
+    getProvincia: function () {
+      var _getProvincia = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref3, id) {
+        var commit, provincia;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref3.commit;
+                _context3.prev = 1;
+                _context3.next = 4;
+                return axios.get("http://127.0.0.1:8000/provincias/".concat(id));
+
+              case 4:
+                provincia = _context3.sent;
+                console.log(provincia.data);
+                commit('setProvincia', provincia.data);
+                _context3.next = 13;
+                break;
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](1);
+                console.log(_context3.t0);
+                console.log(_context3.t0.response.data);
+
+              case 13:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[1, 9]]);
+      }));
+
+      function getProvincia(_x3, _x4) {
+        return _getProvincia.apply(this, arguments);
+      }
+
+      return getProvincia;
+    }(),
+    agregarLocalidad: function agregarLocalidad(_ref4, localidad) {
+      var commit = _ref4.commit,
+          dispatch = _ref4.dispatch;
       console.log(localidad);
       axios.post('http://127.0.0.1:8000/localidades', localidad).then(function (response) {
         // dispatch('getCategoriasO')
@@ -65703,38 +65930,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error);
       });
     },
-    resetResp: function resetResp(_ref4, resp) {
-      var commit = _ref4.commit;
+    resetResp: function resetResp(_ref5, resp) {
+      var commit = _ref5.commit;
       commit('setRespuesta', resp);
     },
     getLocalidad: function () {
       var _getLocalidad = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref5, id) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(_ref6, id) {
         var commit, loc, localidad;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                commit = _ref5.commit;
-                _context3.next = 3;
+                commit = _ref6.commit;
+                _context4.next = 3;
                 return axios.get("http://127.0.0.1:8000/localidades/".concat(id)).then(function (response) {
                   loc = response.data;
                   commit('setLocalidad', loc);
                 });
 
               case 3:
-                localidad = _context3.sent;
+                localidad = _context4.sent;
 
               case 4:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }));
 
-      function getLocalidad(_x3, _x4) {
+      function getLocalidad(_x5, _x6) {
         return _getLocalidad.apply(this, arguments);
       }
 
@@ -66000,9 +66227,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     editarProducto: function editarProducto(_ref4, producto) {
       var commit = _ref4.commit;
       var id = producto.id;
+      console.log(producto);
       axios.put("http://127.0.0.1:8000/productos/".concat(id), producto).then(function (response) {
         commit('setRespuesta', response.data.message);
       })["catch"](function (error) {
+        console.log('algo va mal');
+        console.log(error.response.data);
         commit('setError', error.response.data.errors);
       });
     },

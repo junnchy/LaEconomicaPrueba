@@ -22,7 +22,6 @@ class AddForeignKeyClientesTable extends Migration
             $table->foreign('localidad_id')->references('id')->on('localidades');
         });
     }
-
     /**
      * Reverse the migrations.
      *

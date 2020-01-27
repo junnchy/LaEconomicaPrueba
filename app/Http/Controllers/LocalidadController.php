@@ -16,7 +16,9 @@ class LocalidadController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $localidades = Localidad::with('provincia')->get();
+            $localidades = Localidad::with('provincia')
+            ->orderBy('nombre')
+            ->get();
             return response()->json($localidades);
         }
     }
@@ -42,7 +44,7 @@ class LocalidadController extends Controller
         if($request->ajax()){
 
             $localidad = new Localidad;
-            $localidad->localidad = $request->localidad;
+            $localidad->nombre = $request->localidad;
             $localidad->provincia_id = $request->provincia_id;
             $localidad->cod_postal = $request->cod_postal;
             $localidad->save();

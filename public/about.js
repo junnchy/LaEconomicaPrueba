@@ -38,12 +38,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
-      editorData: '<p>Content of the editor.</p>',
       editorConfig: {// The configuration of the editor.
       }
     };
@@ -67,6 +72,9 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       console.log(this.producto);
+    },
+    borrarImagen: function borrarImagen() {
+      this.producto.imagen = "http://127.0.0.1:8000/assets/4fxp8923.bmp";
     }
   }
 });
@@ -216,11 +224,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cat_clientes_id: 0,
         condicion_iva_id: 0,
         localidad: {
-          localidad: '',
-          cod_postal: '',
-          provincia: {
-            iso_nombre: ''
-          }
+          nombre: '',
+          cod_postal: ''
         },
         categoria: {
           denominacion: ''
@@ -1598,10 +1603,10 @@ var render = function() {
     _c("div", { staticClass: "form-group" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-6" }, [
-          _c("h4", [_vm._v("Imagen de Producto")]),
+          _vm._m(0),
           _vm._v(" "),
           _c("input", {
-            staticClass: "form-control-file",
+            staticClass: "form-control-file mt-5",
             attrs: { type: "file" },
             on: { change: _vm.imageChanged }
           })
@@ -1611,7 +1616,26 @@ var render = function() {
           _c("img", {
             staticClass: "img-thumbnail",
             attrs: { src: _vm.producto.imagen, width: "250px" }
-          })
+          }),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-danger btn-sm mt-2",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.borrarImagen()
+                }
+              }
+            },
+            [
+              _vm._v("\n                    Borrar "),
+              _c("i", { staticClass: "fas fa-trash-alt" })
+            ]
+          )
         ])
       ])
     ]),
@@ -1620,7 +1644,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-group my-4" }, [
       _c("div", { staticClass: "row" }, [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c(
           "div",
@@ -1648,8 +1672,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("h4", [
+      _c("i", { staticClass: "fas fa-image" }),
+      _vm._v(" Imagen de Producto")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-12" }, [
-      _c("h4", [_vm._v("Detalles: ")])
+      _c("h4", [
+        _c("i", { staticClass: "fas fa-info-circle" }),
+        _vm._v("Detalles: ")
+      ])
     ])
   }
 ]
@@ -2283,7 +2319,7 @@ var render = function() {
               " " +
                 _vm._s(_vm.cliente.direccion) +
                 " - " +
-                _vm._s(_vm.cliente.localidad.localidad) +
+                _vm._s(_vm.cliente.localidad.nombre) +
                 ", " +
                 _vm._s(_vm.cliente.localidad.provincia.iso_nombre)
             )
@@ -2491,7 +2527,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "container mt-4" }, [
-        _c("h3", [_vm._v("Descripcion")]),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", {
           staticClass: "shadow-sm p-3 mb-5 bg-white rounded",
@@ -2508,6 +2544,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
       _c("h2", [_vm._v("Detalle de Producto ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h3", [
+      _c("i", { staticClass: "fas fa-info-circle" }),
+      _vm._v(" Descripcion")
     ])
   }
 ]
@@ -2588,12 +2633,10 @@ var render = function() {
             _vm._v(
               " " +
                 _vm._s(_vm.proveedor.direccion) +
-                " - (" +
-                _vm._s(_vm.proveedor.localidad.cod_postal) +
-                ") " +
-                _vm._s(_vm.proveedor.localidad.localidad) +
+                " - " +
+                _vm._s(_vm.proveedor.localidad.nombre) +
                 ", " +
-                _vm._s(_vm.proveedor.localidad.provincia)
+                _vm._s(_vm.proveedor.localidad.provincia.iso_nombre)
             )
           ])
         : _vm._e(),

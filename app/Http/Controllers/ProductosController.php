@@ -191,8 +191,11 @@ class ProductosController extends Controller
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
 
-            if ($request->imagen) {
-                $exploded = explode(',', $request->imagen);
+            if ($request->imagen != $producto->imagen) {
+                if ($request->imagen === 'http://127.0.0.1:8000/assets/4fxp8923.bmp') {
+                    $producto->imagen = 'http://127.0.0.1:8000/assets/4fxp8923.bmp';
+                }else {
+                    $exploded = explode(',', $request->imagen);
                 $decoded = base64_decode($exploded[1]);
                     
                 if(Str::contains($exploded[0], 'jpeg')){
@@ -208,7 +211,9 @@ class ProductosController extends Controller
                 file_put_contents($path, $decoded);
 
                 $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
+                }  
             }
+
             $producto->save();
 
             return response()->json([

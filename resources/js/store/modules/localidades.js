@@ -4,7 +4,8 @@ export default {
         localidades: [],
         localidad: {},
         respuesta: null,
-        provincias: []
+        provincias: [],
+        provincia: {}
     },
     mutations: {
         setLocalidades(state, localidades){
@@ -18,6 +19,9 @@ export default {
         },
         setProvincias(state, provincias){
             state.provincias = provincias
+        },
+        setProvincia(state, provincia){
+            state.provincia = provincia
         }
     },
     actions:{
@@ -45,9 +49,20 @@ export default {
                 console.log(p)
             } catch (error) {
                 console.log(error)
+                console.log(error.response.data)
             }
             finally{
                 commit('setProvincias', p)
+            }
+        },
+        async getProvincia({commit}, id){
+            try {
+                let provincia = await axios.get(`http://127.0.0.1:8000/provincias/${id}`)
+                console.log(provincia.data)
+                commit('setProvincia', provincia.data)
+            } catch (error) {
+                console.log(error)
+                console.log(error.response.data)
             }
         },
         agregarLocalidad({commit, dispatch}, localidad){

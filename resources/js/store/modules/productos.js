@@ -98,10 +98,13 @@ export default {
         },
         editarProducto({commit},producto){
           var id = producto.id
+          console.log(producto)
           axios.put(`http://127.0.0.1:8000/productos/${id}`, producto).then(function (response) {
             commit('setRespuesta', response.data.message)
           })
           .catch(function (error) {
+            console.log('algo va mal')
+            console.log(error.response.data)
             commit('setError',error.response.data.errors)
           });
         },

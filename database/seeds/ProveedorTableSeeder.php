@@ -21,7 +21,7 @@ class ProveedorTableSeeder extends Seeder
         $proveedor->direccion ='direccion 123';
         $proveedor->email ='holcim@gmail.com';
         $proveedor->condicion_iva_id = 1;
-        $proveedor->localidad_id =1;
+        $proveedor->localidad_id ="06410010003";
         $proveedor->save();
 
         $proveedor = new Proveedor();
@@ -31,7 +31,7 @@ class ProveedorTableSeeder extends Seeder
         $proveedor->direccion ='direccion 123';
         $proveedor->email ='benitez@gmail.com';
         $proveedor->condicion_iva_id = 1;
-        $proveedor->localidad_id =1;
+        $proveedor->localidad_id ="06410010003";
         $proveedor->save();
 
         $proveedor = new Proveedor();
@@ -41,7 +41,7 @@ class ProveedorTableSeeder extends Seeder
         $proveedor->direccion ='direccion 123';
         $proveedor->email ='cortines@gmail.com';
         $proveedor->condicion_iva_id = 1;
-        $proveedor->localidad_id =1;
+        $proveedor->localidad_id ="06410010003";
         $proveedor->save();
     }
 }

@@ -28,13 +28,13 @@ class AddForeignKeyProveedorsTable extends Migration
      */
     public function down()
     {
-       /*  Schema::disableForeignKeyConstraints();
+        Schema::disableForeignKeyConstraints();
         Schema::table('proveedors', function (Blueprint $table) {
             $table->dropForeign(['condicion_iva_id']);
             $table->dropColumn('condicion_iva_id');
             $table->dropForeign('localidad_id');
             $table->dropColumn('localidad_id');
         });
-        Schema::enableForeignKeyConstraints();  */
+        Schema::enableForeignKeyConstraints();
     }
 }
