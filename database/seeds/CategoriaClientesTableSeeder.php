@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\CategoriaClientes;
 
 class CategoriaClientesTableSeeder extends Seeder
@@ -21,5 +20,6 @@ class CategoriaClientesTableSeeder extends Seeder
         CategoriaClientes::insert(['denominacion'=>'Organización']);
         CategoriaClientes::insert(['denominacion'=>'Responsable Inscripto']);
         Schema::enableForeignKeyConstraints(); 
+
     }
 }

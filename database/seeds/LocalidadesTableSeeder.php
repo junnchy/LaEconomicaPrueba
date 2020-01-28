@@ -14,6 +14,7 @@ class LocalidadesTableSeeder extends Seeder
      */
     public function run()
     {
+
         DB::table('localidades')->delete();
         $json = File::get('database\seeds\localidades2.json');
         $data = json_decode($json);
@@ -24,5 +25,6 @@ class LocalidadesTableSeeder extends Seeder
                 "provincia_id" => $obj->provincia->id,
             ));
         }
+
     }
 }

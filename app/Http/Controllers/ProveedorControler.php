@@ -45,11 +45,12 @@ class ProveedorControler extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+  
+    public function store(CreateProveedorRequest $request)
     {
         if($request->ajax()){
 
-            $this->validateProveedor($request);
+            $validated = $request->validated();
 
             $proveedor = new Proveedor();
             $proveedor->nombre = $request->nombre;
@@ -119,12 +120,13 @@ class ProveedorControler extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+  public function update(UpdateProveedorRequest $request, $id)
     {
         if($request->ajax()){
-
-            $this->validateProveedor($request);
-            
+          
+            $validated = $request->validated();
+      
             $proveedor = App\Proveedor::findOrFail($id);
     
             $proveedor->nombre = $request->nombre;

@@ -70,6 +70,11 @@
                             </router-link>
                         </div>
                     </li>
+                    @auth
+                        @if (Auth::user()->hasRole('admin'))
+                            <a class="nav-link" href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
+                        @endif
+                    @endauth
                 </ul>
             </div>
 

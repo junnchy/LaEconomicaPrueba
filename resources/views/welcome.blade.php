@@ -24,6 +24,13 @@
                 <div class="col-md-3">
                     <a href="#" class="btn btn-primary btn-block" >BTN</a>
                 </div>
+                @auth
+                    @if(Auth::user()->hasRole('admin'))
+                        <div class="col-md-3">
+                            <a href="{{ route('homeUsers') }}" class="btn btn-primary btn-block">Perfiles de Usuario</a>                   
+                        </div>
+                    @endif
+                @endauth
             </div>
         </div>
     </div>

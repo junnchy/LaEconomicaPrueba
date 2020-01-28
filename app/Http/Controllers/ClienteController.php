@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateClienteRequest;
+use App\Http\Requests\UpdateClienteRequest;
 use App;
 use App\Cliente;
 use App\CategoriaClientes;
@@ -40,21 +42,21 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('clientes.home');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CreateClienteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateClienteRequest $request)
     {
 
         if($request->ajax()){
-
-            $this->validateCliente($request);
+            
+            $validated = $request->validated();
 
             $cliente = new Cliente();
             
@@ -130,15 +132,15 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UpdateClienteRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateClienteRequest $request, $id)
     {
         if ($request->ajax()) {
 
-            $this->validateCliente($request);
+            $validated = $request->validated();
             
             $cliente = Cliente::findOrFail($id);
             $cliente->nombre = $request->nombre;
