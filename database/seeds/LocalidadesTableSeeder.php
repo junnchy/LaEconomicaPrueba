@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 use App\Localidad;
 
 class LocalidadesTableSeeder extends Seeder
@@ -18,7 +20,7 @@ class LocalidadesTableSeeder extends Seeder
         foreach ($data as $obj){
             Localidad::create(array(
                 "id" => $obj->id,
-                "nombre" => $obj->nombre,
+                "nombre" => Str::title($obj->nombre),
                 "provincia_id" => $obj->provincia->id,
             ));
         }

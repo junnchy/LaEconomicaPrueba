@@ -37,7 +37,6 @@ class CategoriaController extends Controller
                     }
                 }
             }
-
             return response()->json($ordenadas);
         } else {
             $categorias = Categoria::all();

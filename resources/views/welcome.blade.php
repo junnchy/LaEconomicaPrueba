@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="container">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">La Economica</h1>
+                <p class="lead">Una empresa Rosarina dedicada a la venta de matriales para la construccion.</p>
+            </div>
+        </div>
+
         <h2 class="text-center">Menu de opciones</h2>
         <div class="container mt-4">
             <div class="row">

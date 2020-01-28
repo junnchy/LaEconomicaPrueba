@@ -64,7 +64,7 @@ export default {
             this.resetResp(null)
         }
     },
-    created() {
+    created(){
         this.cambiarEstado(3)
     },
     computed: {

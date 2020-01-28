@@ -70,7 +70,7 @@ class ClienteController extends Controller
             $cliente->save();
             
             return response()->json([
-                'producto' => $cliente,
+                'cliente' => $cliente,
                 'message' => 'Cliente Agregado'
             ], 200);
 

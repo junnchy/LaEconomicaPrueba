@@ -195,7 +195,7 @@ class ProductosController extends Controller
                 if ($request->imagen === 'http://127.0.0.1:8000/assets/4fxp8923.bmp') {
                     $producto->imagen = 'http://127.0.0.1:8000/assets/4fxp8923.bmp';
                 }else {
-                    $exploded = explode(',', $request->imagen);
+                $exploded = explode(',', $request->imagen);
                 $decoded = base64_decode($exploded[1]);
                     
                 if(Str::contains($exploded[0], 'jpeg')){

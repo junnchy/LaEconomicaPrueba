@@ -49,8 +49,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
-      editorConfig: {// The configuration of the editor.
-      }
+      editorConfig: {}
     };
   },
   props: {
