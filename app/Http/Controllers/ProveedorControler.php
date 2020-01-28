@@ -20,7 +20,7 @@ class ProveedorControler extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $proveedores = Proveedor::with('categorias.proveedores')->get();
+            $proveedores = Proveedor::with(['localidad.proveedores', 'condicion_iva.proveedores','categorias.proveedores'])->get();
             return response()->json($proveedores);
         } else {
             $proveedores = Proveedor::all();
@@ -45,16 +45,21 @@ class ProveedorControler extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+  
     public function store(CreateProveedorRequest $request)
     {
         if($request->ajax()){
-          
+
             $validated = $request->validated();
 
             $proveedor = new Proveedor();
             $proveedor->nombre = $request->nombre;
             $proveedor->cuit = $request->cuit;
             $proveedor->telefono = $request->telefono;
+            $proveedor->direccion = $request->direccion;
+            $proveedor->email = $request->email;
+            $proveedor->condicion_iva_id = $request->condicion_iva_id;
+            $proveedor->localidad_id = $request->localidad_id;
             $proveedor->save();
           
             return response()->json([
@@ -87,7 +92,7 @@ class ProveedorControler extends Controller
     public function show($id, Request $request)
     {
 
-        $proveedor = App\Proveedor::with('categorias.proveedores')->findOrFail($id);
+        $proveedor = App\Proveedor::with(['localidad.provincia', 'condicion_iva.proveedores','categorias.proveedores'])->findOrFail($id);
 
         if($request->ajax()){
             return response()->json($proveedor);
@@ -115,19 +120,23 @@ class ProveedorControler extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProveedorRequest $request, $id)
+
+  public function update(UpdateProveedorRequest $request, $id)
     {
         if($request->ajax()){
           
             $validated = $request->validated();
-            
+      
             $proveedor = App\Proveedor::findOrFail($id);
     
             $proveedor->nombre = $request->nombre;
             $proveedor->cuit = $request->cuit;
             $proveedor->telefono = $request->telefono;
-            if ($request->id_cat != null) {
-                
+            $proveedor->direccion = $request->direccion;
+            $proveedor->condicion_iva_id = $request->condicion_iva_id;
+            $proveedor->email = $request->email;
+            $proveedor->localidad_id = $request->localidad_id;
+            if($request->id_cat != null){
                 $categoria = Categoria::findOrFail($request->id_cat);
                 $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
             }
@@ -170,6 +179,18 @@ class ProveedorControler extends Controller
      */
     public function destroy($id)
     {
-        //
+        /* DB::table('users')->where('votes', '>', 100)->delete(); */
+    }
+
+    protected function validateProveedor(Request $request)
+    {
+        $this->validate($request, [
+            'nombre' => 'required',
+            'cuit' => 'required|min:7',
+            'email' => 'email',
+            'direccion' => 'required',
+            'condicion_iva_id' => 'required',
+            'localidad_id' => 'required'
+        ]);
     }
 }

@@ -39,7 +39,17 @@ class CategoriaClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            $categoriaCliente = new CategoriaClientes;
+            $categoriaCliente->denominacion = $request->denominacion;
+            $categoriaCliente->save();
+
+            return response()->json([
+                'producto' => $categoriaCliente,
+                'message' => 'Categoria Agregada'
+            ], 200);
+
+        }
     }
 
     /**

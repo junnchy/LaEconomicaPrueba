@@ -7,7 +7,7 @@
             <div class="col-4">
                 <router-link :to="{name: 'editarProducto', params:{id: producto.id}}">
                     <button class="btn btn-warning">
-                        Editar
+                        Editar <i class="fas fa-pen"></i>
                     </button>
                 </router-link>
                 <router-link :to="{name: 'MenuProductos'}">
@@ -17,29 +17,40 @@
                 </router-link>
             </div>
         </div>
-        <ul class="list-group mt-3">
-            <li class="list-group-item"><strong><h3>{{producto.nombre}}</h3></strong></li>
-            <li class="list-group-item"><strong>Codigo: </strong> {{producto.id}}</li>
-            <li class="list-group-item"><strong>Precio de Venta: </strong> 
-                <h5>${{producto.precioVenta}}</h5>
-            </li>
-            <li class="list-group-item"><strong>Proveedor: </strong> 
-                <router-link :to="{name: 'detalleProv', params:{id: producto.proveedor_id}}">
-                    <a>{{producto.proveedor.nombre}}</a>
-                </router-link>
-            </li>
-            <li class="list-group-item"><strong>Categoria: </strong> 
-                <router-link :to="{name: 'verEditarCategoria', params:{id: producto.categoria_id}}">
-                    <a>{{producto.categoria.nombre}}</a>
-                </router-link>
-            </li>
-            <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{producto.updated_at}}</li>
-        </ul>
+        <div class="row">
+            <div class="col-6"> 
+                <ul class="list-group mt-3">
+                    <li class="list-group-item"><strong><h3>{{producto.nombre}}</h3></strong></li>
+                    <li class="list-group-item"><strong>Codigo: </strong> {{producto.id}}</li>
+                    <li class="list-group-item"><strong>Precio de Venta: </strong> 
+                        <h5>${{producto.precioVenta}}</h5>
+                    </li>
+                    <li class="list-group-item" v-if="producto.proveedor"><strong>Proveedor: </strong> 
+                        <router-link :to="{name: 'detalleProv', params:{id: producto.proveedor_id}}">
+                            <a>{{producto.proveedor.nombre}}</a>
+                        </router-link>
+                    </li>
+                    <li class="list-group-item" v-if="producto.categoria"><strong>Categoria: </strong> 
+                        <router-link :to="{name: 'verEditarCategoria', params:{id: producto.categoria_id}}">
+                            <a>{{producto.categoria.nombre}}</a>
+                        </router-link>
+                    </li>
+                    <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{producto.updated_at}}</li>
+                </ul>
+            </div>
+            <div class="col-6 mt-3">
+                <img :src="producto.imagen" class="img-thumbnail" alt="Example" width="330px">
+            </div>
+            <div class="container mt-4">
+                <h3> <i class="fas fa-info-circle"></i> Descripcion</h3>
+                <div class="shadow-sm p-3 mb-5 bg-white rounded" v-html="producto.descripcion">
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-
 import {mapActions, mapState} from 'vuex'
 
 export default {
@@ -63,3 +74,6 @@ export default {
 
 }
 </script>
+
+<style lang="scss">
+</style> 

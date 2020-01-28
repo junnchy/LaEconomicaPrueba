@@ -16,4 +16,5 @@ class Producto extends Model
     public function proveedor(){
         return $this->belongsTo(Proveedor::class); // Muchos a muchos
     }
+   
 }

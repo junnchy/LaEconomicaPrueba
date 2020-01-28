@@ -56,8 +56,10 @@ class ClienteController extends Controller
 
         if($request->ajax()){
             
-          $validated = $request->validated();
+            $validated = $request->validated();
+
             $cliente = new Cliente();
+            
             $cliente->nombre = $request->nombre;
             $cliente->cuit = $request->cuit;
             $cliente->telefono = $request->telefono;
@@ -65,12 +67,12 @@ class ClienteController extends Controller
             $cliente->email = $request->email;
             $cliente->direccion = $request->direccion;
             $cliente->localidad_id = $request->localidad_id;
-            $cliente->cat_clientes_id = $request->categoria_id;
+            $cliente->cat_clientes_id = $request->cat_clientes_id;
             $cliente->condicion_iva_id = $request->condicion_iva_id;
             $cliente->save();
             
             return response()->json([
-                'producto' => $cliente,
+                'cliente' => $cliente,
                 'message' => 'Cliente Agregado'
             ], 200);
 
@@ -87,7 +89,7 @@ class ClienteController extends Controller
             $cliente->email = $request->email;
             $cliente->direccion = $request->direccion;
             $cliente->localidad_id = $request->localidad_id;
-            $cliente->cat_clientes_id = $request->categoria_id;
+            $cliente->cat_clientes_id = $request->cat_clientes_id;
             $cliente->condicion_iva_id = $request->condicion_iva_id;
             $cliente->save();
     
@@ -105,7 +107,7 @@ class ClienteController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $cliente = Cliente::findOrFail($id);
+            $cliente = App\Cliente::with(['localidad.provincia','categoria','condicion_iva'])->findOrFail($id);
             return response()->json($cliente);
         }else {
             $cliente = Cliente::findOrFail($id);
@@ -136,20 +138,49 @@ class ClienteController extends Controller
      */
     public function update(UpdateClienteRequest $request, $id)
     {
-        $validated = $request->validated();
-        $cliente = Cliente::findOrFail($id);
-        $cliente->nombre = $request->nombre;
-        $cliente->cuit = $request->cuit;
-        $cliente->telefono = $request->telefono;
-        $cliente->celular = $request->celular;
-        $cliente->email = $request->email;
-        $cliente->direccion = $request->direccion;
-        $cliente->localidad_id = $request->localidad_id;
-        $cliente->cat_clientes_id = $request->categoria_id;
-        $cliente->condicion_iva_id = $request->condicion_iva_id;
-        $cliente->save();
+        if ($request->ajax()) {
 
-        return back()->with('mensaje', 'Cliente Actualizado');
+            $validated = $request->validated();
+            
+            $cliente = Cliente::findOrFail($id);
+            $cliente->nombre = $request->nombre;
+            $cliente->cuit = $request->cuit;
+            $cliente->telefono = $request->telefono;
+            $cliente->celular = $request->celular;
+            $cliente->email = $request->email;
+            $cliente->direccion = $request->direccion;
+            $cliente->localidad_id = $request->localidad_id;
+            $cliente->cat_clientes_id = $request->cat_clientes_id;
+            $cliente->condicion_iva_id = $request->condicion_iva_id;
+            $cliente->save();
+            
+            return response()->json([
+                'producto' => $cliente,
+                'message' => 'Cliente Actualizado'
+            ], 200);
+
+        }else {
+            $validatedData = $request->validate([
+                'nombre' => 'required',
+                'cuit' => 'required'
+            ]);
+    
+            $cliente = App\Cliente::findOrFail($id);
+            
+            $cliente->nombre = $request->nombre;
+            $cliente->cuit = $request->cuit;
+            $cliente->telefono = $request->telefono;
+            $cliente->celular = $request->celular;
+            $cliente->email = $request->email;
+            $cliente->direccion = $request->direccion;
+            $cliente->localidad_id = $request->localidad_id;
+            $cliente->cat_clientes_id = $request->cat_clientes_id;
+            $cliente->condicion_iva_id = $request->condicion_iva_id;
+            $cliente->save();
+    
+            return back()->with('mensaje', 'Cliente Actualizado');
+        }
+        
     }
 
     /**
@@ -161,5 +192,18 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validateCliente(Request $request)
+    {
+        $this->validate($request, [
+            'nombre' => 'required',
+            'cuit' => 'required|min:7',
+            'email' => 'email',
+            'direccion' => 'required',
+            'cat_clientes_id' => 'required',
+            'condicion_iva_id' => 'required',
+            'localidad_id' => 'required'
+        ]);
     }
 }

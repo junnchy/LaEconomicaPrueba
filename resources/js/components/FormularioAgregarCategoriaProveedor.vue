@@ -1,11 +1,13 @@
 <template>
     <div class="container">
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar Categoria</button>
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#agregarCatProv" data-whatever="@mdo">
+            Agregar Categoria <i class="fas fa-plus-circle"></i>
+        </button>
+        <div class="modal fade" id="agregarCatProv" tabindex="-1" role="dialog" aria-labelledby="agregarCatProvLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agregar Categoria a Proveedor</h5>
+                        <h5 class="modal-title" id="agregarCatProvLabel">Agregar Categoria a Proveedor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="resetResp(null)">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -66,7 +68,7 @@ import {mapActions, mapState} from 'vuex'
         },
         computed: {
             ...mapState('categorias',['categorias']),
-            ...mapState('proveedores',['proveedores', 'respuesta']),
+            ...mapState('proveedores',['respuesta']),
             reset(){
                 if(this.$store.state.proveedores.respuesta != null){
                     this.descuento =0,

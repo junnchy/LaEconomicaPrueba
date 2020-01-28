@@ -7,6 +7,7 @@ import condicionIva from './modules/condiconIva'
 import proveedores from './modules/proveedores'
 import categorias from './modules/categorias'
 import productos from './modules/productos'
+import mapas from './modules/mapas'
 
 
 
@@ -19,15 +20,25 @@ export default new Vuex.Store({
     condicionIva,
     proveedores,
     categorias,
-    productos
+    productos,
+    mapas
   },
   state: {
+    actual: 0,
+    arregloPaginado: []
   },
   mutations: {
-    
+    setActual(state, nro){
+      state.actual = nro;
+    },
+    setArregloPaginado(state, arreglo){
+      state.arregloPaginado = arreglo
+    }
   },
   actions: {
-    
+    cambiarEstado({commit}, valor){
+      commit('setActual', valor)
+    }
   },
   getters:{
   }

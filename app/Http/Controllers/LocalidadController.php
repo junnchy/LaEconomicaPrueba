@@ -16,7 +16,9 @@ class LocalidadController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $localidades = Localidad::all();
+            $localidades = Localidad::with('provincia')
+            ->orderBy('nombre')
+            ->get();
             return response()->json($localidades);
         }
     }
@@ -39,7 +41,20 @@ class LocalidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+
+            $localidad = new Localidad;
+            $localidad->nombre = $request->localidad;
+            $localidad->provincia_id = $request->provincia_id;
+            $localidad->cod_postal = $request->cod_postal;
+            $localidad->save();
+
+            return response()->json([
+                'producto' => $localidad,
+                'message' => 'Localidad Agregada'
+            ], 200);
+
+        }
     }
 
     /**
@@ -48,10 +63,14 @@ class LocalidadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $localidad = Localidad::with('provincia')->findOrFail($id);
+            return response()->json($localidad);
+        }
     }
+
 
     /**
      * Show the form for editing the specified resource.

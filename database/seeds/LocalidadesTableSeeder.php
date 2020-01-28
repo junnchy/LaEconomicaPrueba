@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 use App\Localidad;
 
 class LocalidadesTableSeeder extends Seeder
@@ -13,29 +15,16 @@ class LocalidadesTableSeeder extends Seeder
     public function run()
     {
 
-        Schema::disableForeignKeyConstraints();
-        Localidad::truncate();
-        $tabla = DB::table('localidades');
-        Localidad::insert(
-            ['cod_postal' => 2000,
-            'localidad' => 'Rosario',
-            'provincia' => 'Santa Fe']);
-        Localidad::create(
-            ['cod_postal' => 2124,
-            'localidad' => 'Villa Gobernador Galvez',
-            'provincia' => 'Santa Fe']);
-        Localidad::create(
-            ['cod_postal' => 2126,
-            'localidad' => 'Alvear',
-            'provincia' => 'Santa Fe']);
-        Localidad::create(
-            ['cod_postal' => 2126,
-            'localidad' => 'Pueblo Esther',
-            'provincia' => 'Santa Fe']);
-        Localidad::create(
-            ['cod_postal' => 2132,
-            'localidad' => 'Funes',
-            'provincia' => 'Santa Fe']);    
-        Schema::enableForeignKeyConstraints();
+        DB::table('localidades')->delete();
+        $json = File::get('database\seeds\localidades2.json');
+        $data = json_decode($json);
+        foreach ($data as $obj){
+            Localidad::create(array(
+                "id" => $obj->id,
+                "nombre" => Str::title($obj->nombre),
+                "provincia_id" => $obj->provincia->id,
+            ));
+        }
+
     }
 }

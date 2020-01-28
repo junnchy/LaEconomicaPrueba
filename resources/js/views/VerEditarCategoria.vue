@@ -29,7 +29,7 @@
                 </div>               
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-success btn-block">Guardar Cambios</button>
+                <button type="submit" class="btn btn-warning btn-block">Guardar Cambios <i class="fas fa-save"></i></button>
             </div>
         </form>
         <h3 class="mt-5" v-if="categoria.cant_hijos > 0">SubCategorias</h3>

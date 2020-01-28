@@ -4,7 +4,14 @@
             <div class="col-8">
                 <div class="form-group">     
                     <label>Precio Base</label>
-                    <input type="number" step=0.01 v-model="producto.precioBase" class="form-control">
+                    <input 
+                    type="number" 
+                    step=0.01 
+                    v-model="producto.precioBase" 
+                    :class="fPBase">
+                    <span class="invalid-feedback" role="alert" v-if="errors.precioBase != ''"> 
+                        <strong>{{errors.precioBase[0]}}</strong>
+                    </span>
                 </div>
             </div>
             <div class="col-4">
@@ -37,18 +44,26 @@
                 <input type="number" step=0.01 v-model="producto.descuentoProducto[4]" class="form-control">
             </div>
             <div class="col-2">
-                <p>Dto Total</p>
-                <P v-if="producto.dre != 1">{{setDre[0] *100}}%</P>
+                 <div class="alert alert-dark" role="alert">
+                    <h6 class="text-center">Dto Total</h6>
+                    <h5 class="text-center" v-if="producto.dre != 1">{{setDre[0] *100}}%</h5>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="form-group">
+                <div 
+                class="form-group">
                     <label>IVA</label> 
-                    <select class="custom-select" v-model="producto.iva">
+                    <select 
+                    :class="fIva" 
+                    v-model="producto.iva">
                         <option :value=21>21%</option>
                         <option :value=10.5>10.5%</option>
                     </select>
+                    <span class="invalid-feedback" role="alert" v-if="errors.iva != ''"> 
+                        <strong>{{errors.iva[0]}}</strong>
+                    </span>
                 </div>
             </div>
             <div class="col-6">
@@ -58,6 +73,7 @@
                 </div>
             </div>
         </div>
+        {{validar}}
     </div>
 </template>
 
@@ -73,9 +89,14 @@ export default {
     data() {
         return {
             descuento: 0,
+            fPBase: "form-control",
+            fIva: "form-control",
+            formClass: "form-control",
+            iFormClass: "form-control is-invalid",
         }
     },
     computed: {
+        ...mapState('productos', ['errors']),
         setDre(){
             var p = 0
             var i = 0
@@ -88,7 +109,6 @@ export default {
                     }else{
                         i = p
                     }
-
                 }
             })
             this.producto.dre = (1 - i)
@@ -113,6 +133,18 @@ export default {
                 }
                 return [this.producto.dre, this.producto.precioCosto]
             }    
+        },
+        validar(){
+            if(this.errors.precioBase != ''){
+                this.fPBase = this.iFormClass
+            }else{
+                this.fPBase = this.formClass
+            }
+            if(this.errors.iva != ''){
+                this.fIva = this.iFormClass
+            }else{
+                this.fIva = this.formClass
+            }
         }
     },
 }

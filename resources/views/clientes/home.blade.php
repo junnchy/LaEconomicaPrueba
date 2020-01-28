@@ -3,6 +3,9 @@
 @section('content')
     <div class="container">
 
+        <componente-clinetes></componente-clinetes> 
+
+
         <div class="row">
             <div class="col-8">
                     <h1>Sección Clientes</h1>

@@ -12,7 +12,7 @@
                         </button>
                     </router-link>
                     <router-link :to="{name:'detalleProducto',params:{id: producto.id}}">
-                        <button class="btn btn-danger" v-if="respuesta === null">
+                        <button class="btn btn-danger" v-if="respuesta === null" @click="resetError()">
                             Cancelar
                         </button>
                     </router-link>
@@ -27,10 +27,13 @@
         </div>
         <ul class="nav nav-tabs mt-4">
             <li class="nav-item">
-                <a :class=this.ctab0 @click=" setTab(0)">Datos Generales</a>
+                <a :class="ctab0" @click=" setTab(0)">Datos Generales</a>
             </li>
             <li class="nav-item">
-                <a :class=this.ctab1 @click=" setTab(1)">Precios</a>
+                <a :class="ctab1" @click=" setTab(1)">Precios</a>
+            </li>
+            <li class="nav-item">
+                <a :class="ctab2" @click="setTab(2)">Descripcion</a>
             </li>
         </ul>
         <form @submit.prevent="editarProducto(producto)">
@@ -39,12 +42,15 @@
                 <componente-fcosto v-bind:producto="producto" v-if="tab === 1"></componente-fcosto>
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>
             </div>
-            <button type="submit" class="btn btn-warning btn-block" v-if="respuesta === null">Guardar Cambios</button>
+            <descripcionProducto v-bind:producto="producto" v-if="tab === 2"/>
+            <button type="submit" class="btn btn-warning btn-block sticky-button" v-if="respuesta === null">Guardar Cambios <i class="fas fa-save"></i></button>
+         
         </form>
     </div>
 </template>
 <script>
 import {mapActions, mapState} from 'vuex'
+import descripcionProducto from '../components/FormularioDescripcionProducto'
 export default {
     name: 'editarProducto', 
     data() {
@@ -53,22 +59,33 @@ export default {
             dre: 0,
             tab: 0,
             ctab0: 'nav-link active',
-            ctab1: 'nav-link'
+            ctab1: 'nav-link',
+            ctab2: 'nav-link',
         }
     },
+    components:{
+        descripcionProducto,
+    },
     methods: {
-        ...mapActions('productos',['getProducto','editarProducto']),
+        ...mapActions('productos',['getProducto','editarProducto','resetError']),
         ...mapActions('categorias',[ 'getCategoriasO']),
         ...mapActions('proveedores',['getProveedores']),
         setTab(nro){
             this.tab = nro
-            if (nro===0) {
+             if (this.tab===0) {
                 this.ctab0 ='nav-link active'
                 this.ctab1 ='nav-link'
+                this.ctab2 ='nav-link'
             }
-            if (nro===1) {
-                this.ctab1 ='nav-link active'
+            if (this.tab===1) {
                 this.ctab0 ='nav-link'
+                this.ctab1 ='nav-link active'
+                this.ctab2 ='nav-link'
+            }
+            if (this.tab===2) {
+                this.ctab0 ='nav-link'
+                this.ctab1 ='nav-link'
+                this.ctab2 ='nav-link active'
             }
         }
     },
@@ -85,3 +102,13 @@ export default {
     }
 }
 </script>
+<style>
+    .sticky-button {
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    bottom: 10px;
+    }
+</style>

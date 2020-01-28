@@ -20,7 +20,7 @@ export default {
         },
         SET_QUERY(state, query){
             state.filter.query = query;
-        },
+        }
     },
     actions:{
         async getCategorias({commit}){
@@ -38,44 +38,24 @@ export default {
             }
         },
         async getCategoriasO({commit}){
-        let cat = []
-        try {
-            let categorias = await axios.get('http://127.0.0.1:8000/categoria')
-            categorias.data.forEach(element => {
-                cat.push(element)
-            });
-            var aux = []
-            cat.forEach(h=>{
-            if (h.padre === null){
-                h.nro = 0
-                aux.push(h)
-                if (h.children != []) {
-                h.children.forEach(i=>{
-                    i.nro = 1
-                    aux.push(i)
-                    cat.forEach(j=>{
-                    if (j.categoria_id === i.id) {
-                        j.nro = 2
-                        aux.push(j)
-                    }
-                    })
-                })
-                }
+            let cat = []
+            try {
+                let categorias = await axios.get('http://127.0.0.1:8000/categoria')
+                categorias.data.forEach(element => {
+                    cat.push(element)
+                });
+            } catch (error) {
+                console.log(error)
             }
-            })
-        } catch (error) {
-            console.log(error)
-        }
-        finally{
-            commit('setCategorias', aux)
-        }
+            finally{
+                commit('setCategorias', cat)
+            }
         },
         async getCategoria({commit}, id){
         var cat
         let categoria = await axios.get(`http://127.0.0.1:8000/categoria/${id}`).then(response => {
             cat = response.data
             cat.cant_hijos = cat.children.length
-            console.log(cat)
             commit('setCategoria', cat)
         })
         },
@@ -97,7 +77,6 @@ export default {
         },
         agregarCategoria({commit, dispatch}, categoria){
             axios.post('http://127.0.0.1:8000/categoria', categoria).then(function (response) {
-                console.log(response);
                 dispatch('getCategoriasO')
                 commit('setRespuesta', response.data.message)
                 commit('SET_QUERY', '')

@@ -7,7 +7,7 @@
             <div class="col-4">
                 <router-link :to="{name: 'editarProveedor'}">
                     <button class="btn btn-warning">
-                        Editar
+                        Editar <i class="fas fa-pen"></i>
                     </button>
                 </router-link>
                 <router-link :to="{name: 'listadoProveedores'}">
@@ -22,15 +22,22 @@
             <li class="list-group-item"><strong>Codigo: </strong> {{proveedor.id}}</li>
             <li class="list-group-item"><strong>CUIT: </strong> {{proveedor.cuit}}</li>
             <li class="list-group-item"><strong>Telefono: </strong> {{proveedor.telefono}}</li>
+            <li class="list-group-item"><strong>Email: </strong> {{proveedor.email}}</li>
+            <li class="list-group-item" v-if="proveedor.localidad"><strong>Localidad: </strong> {{proveedor.direccion}} - {{proveedor.localidad.nombre}}, {{proveedor.localidad.provincia.iso_nombre}}</li>
+            <li class="list-group-item" v-if="proveedor.condicion_iva"><strong>Condicion de IVA: </strong> {{proveedor.condicion_iva.denominacion}}</li>
             <li class="list-group-item"><strong>Categorias: </strong> 
                 <div class="row">
                     <div class="col-md-8">
                         <ul>
                             <li v-for="(categoria, index) in proveedor.categorias" :key="index">
-                                {{categoria.nombre}}
+                                <router-link :to="{name: 'verEditarCategoria', params:{id: categoria.id}}">
+                                    <a href="#">{{categoria.nombre}}</a> ---
+                                </router-link>
+                                <i class="fas fa-times"></i>
                             </li>
                         </ul>
                     </div>
+                    
                     <div class="col-md-4">
                         <componente-facp :proveedor="proveedor"></componente-facp>
                     </div>

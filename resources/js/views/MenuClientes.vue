@@ -2,16 +2,18 @@
     <div>
         <div class="row">
             <div class="col-12">
-                    <h1 class="text-center">Clientes</h1>
+                    <h1>Clientes</h1>
             </div>
         </div>
-         <div class="row mt-5">
+         <div class="row">
             <div class="col-9">
-                    <input class="form-control my-3" type="search" placeholder="Buscar" aria-label="Search">
+                    <input class="form-control mt-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
             </div>
             <div class="col-3">
                 <router-link :to="{name:'agregarCliente'}">
-                    <button class="btn btn-success btn-block my-3"> Agregar Cliente</button>
+                    <button class="btn btn-outline-success btn-block my-3"> 
+                        Agregar Cliente <i class="fas fa-user-plus"></i>
+                    </button>
                 </router-link>
             </div>
         </div>
@@ -28,13 +30,26 @@ export default {
         }
     },
     methods: {
-        ...mapActions('clientes',['getClientes'])
+        ...mapActions('clientes',['getClientes']),
+        ...mapActions(['cambiarEstado'])
     },
     created() {
         this.getClientes()
+        this.cambiarEstado(4)
+    },
+    mounted(){
+        console.log(this.$userName)
     },
     computed: {
         ...mapState('clientes', ['clientes']),
+        search:{
+            get(){
+                return this.$store.state.clientes.filter.query;
+            },
+            set(val){
+                this.$store.commit('clientes/SET_QUERY', val)
+            }
+        },
     },
 }
 </script>

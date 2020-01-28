@@ -16,8 +16,11 @@ class CreateProveedorsTable extends Migration
         Schema::create('proveedors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre');
+            $table->string('email');
             $table->unsignedBigInteger('cuit')->unique();
             $table->string('telefono');
+            $table->string('direccion')->nullable();
+            // Agregar Localidad, condicion de iva, direccion, nro de ing brutos
             $table->timestamps();
         });
     }
@@ -29,6 +32,12 @@ class CreateProveedorsTable extends Migration
      */
     public function down()
     {
+        Schema::table('proveedors', function (Blueprint $table) {
+            $table->dropForeign(['condicion_iva_id']);
+            $table->dropColumn('condicion_iva_id'); 
+            $table->dropForeign(['localidad_id']);
+            $table->dropColumn('localidad_id');
+        });
         Schema::dropIfExists('proveedors');
     }
 }
