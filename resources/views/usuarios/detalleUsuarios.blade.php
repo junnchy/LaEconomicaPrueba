@@ -20,7 +20,8 @@
                     <th scope="col">Id</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Roles</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Permisos</th>
                     <th scope="col">Acción</th>
                   </tr>
                 </thead>
@@ -30,6 +31,9 @@
                         <td scope="mt-2">{{ $user->id }}</td>
                         <td class="mt-2">{{ $user->name }}</td>
                         <td class="mt-2">{{ $user->email }}</td>
+                        <td>
+                            {{ $user->getRoleNames()->implode(' - ') }}
+                        </td>
                         <td>
                             {{ $user->getPermissionsViaRoles()->pluck('name')->implode(' - ') }}
                         </td>
