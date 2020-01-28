@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateProveedorRequest;
-use App\Http\Requests\UpdateProveedorRequest;
 
 use App;
 
@@ -19,10 +17,16 @@ class ProveedorControler extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $proveedores = Proveedor::all();
-        return view('proveedores.home', compact('proveedores'));
+        if($request->ajax()){
+            $proveedores = Proveedor::with('categorias.proveedores')->get();
+            return response()->json($proveedores);
+        } else {
+            $proveedores = Proveedor::all();
+            return view('proveedores.home', compact('proveedores'));
+        }
+        
     }
 
     /**
@@ -38,19 +42,40 @@ class ProveedorControler extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\CreateProveedorRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateProveedorRequest $request)
     {
-        $validated = $request->validated();
-        $proveedor = new Proveedor();
-        $proveedor->nombre = $request->nombre;
-        $proveedor->cuit = $request->cuit;
-        $proveedor->telefono = $request->telefono;
-        $proveedor->save();
+        if($request->ajax()){
+          
+            $validated = $request->validated();
 
-        return back()->with('mensaje', 'Proveedor Agregado');
+            $proveedor = new Proveedor();
+            $proveedor->nombre = $request->nombre;
+            $proveedor->cuit = $request->cuit;
+            $proveedor->telefono = $request->telefono;
+            $proveedor->save();
+          
+            return response()->json([
+                'proveedor' => $proveedor,
+                'message' => 'Success'
+            ], 200);
+
+        } else {
+            $validatedData = $request->validate([
+                'nombre' => 'required',
+                'cuit' => 'required',
+            ]);
+
+            $proveedor = new Proveedor();
+            $proveedor->nombre = $request->nombre;
+            $proveedor->cuit = $request->cuit;
+            $proveedor->telefono = $request->telefono;
+            $proveedor->save();
+
+            return back()->with('mensaje', 'Proveedor Agregado');
+        }
     }
 
     /**
@@ -59,13 +84,17 @@ class ProveedorControler extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $proveedor = App\Proveedor::findOrFail($id);
-        $categorias = App\Categoria::all();
 
-        return view('proveedores.editar', compact('proveedor', 'categorias'));
+        $proveedor = App\Proveedor::with('categorias.proveedores')->findOrFail($id);
 
+        if($request->ajax()){
+            return response()->json($proveedor);
+        }
+        else {
+            return view('proveedores.editar', compact('proveedor', 'categorias'));
+        }
     }
 
     /**
@@ -82,26 +111,55 @@ class ProveedorControler extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UpdateProveedorRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateProveedorRequest $request, $id)
     {
-        $validated = $request->validated();
-        $proveedor = App\Proveedor::findOrFail($id);
-        $proveedor->nombre = $request->nombre;
-        $proveedor->telefono = $request->telefono;
-        $proveedor->save();
-
-        if ($request->id_cat != null) {
+        if($request->ajax()){
+          
+            $validated = $request->validated();
             
-            $categoria = Categoria::findOrFail($request->id_cat);
-            $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
+            $proveedor = App\Proveedor::findOrFail($id);
+    
+            $proveedor->nombre = $request->nombre;
+            $proveedor->cuit = $request->cuit;
+            $proveedor->telefono = $request->telefono;
+            if ($request->id_cat != null) {
+                
+                $categoria = Categoria::findOrFail($request->id_cat);
+                $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
+            }
+            $proveedor->save();
+
+            return response()->json([
+                'proveedor' => $proveedor,
+                'message' => 'Actualizado'
+            ], 200);
+
+
+        }else {
+            $validatedData = $request->validate([
+                'nombre' => 'required',
+            ]);
+    
+            $proveedor = App\Proveedor::findOrFail($id);
+    
+            $proveedor->nombre = $request->nombre;
+            $proveedor->telefono = $request->telefono;
+            $proveedor->save();
+    
+            if ($request->id_cat != null) {
+                
+                $categoria = Categoria::findOrFail($request->id_cat);
+                $proveedor->categorias()->attach($categoria, ['descuento'=> $request->descuento]);
+            }
+            
+    
+            return back()->with('mensaje', 'Proveedor Actualizado');
         }
         
-
-        return back()->with('mensaje', 'Proveedor Actualizado');
     }
 
     /**

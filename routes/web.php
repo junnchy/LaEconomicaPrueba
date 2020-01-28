@@ -36,3 +36,15 @@ Route::resource('/usuarios', 'UsersController')->middleware('auth');
 Route::resource('/vendedores', 'VendedoresController')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');
+
+Route::get('/productos/{any}', 'SpaController@productos')->where('any', '.*')->middleware('auth');
+
+Route::get('/clientes/{any}', 'SpaController@clientes')->where('any', '.*')->middleware('auth');
+
+Route::resource('/localidades', 'LocalidadController')->middleware('auth');
+Route::resource('/condicionIva', 'CondicionIvaController')->middleware('auth');
+Route::resource('/categoriaCliente', 'CategoriaClienteController')->middleware('auth');
+
+

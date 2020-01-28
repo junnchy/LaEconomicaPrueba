@@ -13,14 +13,18 @@ class CondicionIvaTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        Schema::disableForeignKeyConstraints();
+       
         CondicionIva::truncate();
-        CondicionIva::create(['denominacion'=>'Responsable Inscripto']);
-        CondicionIva::create(['denominacion'=>'Responsable No Inscripto']);
-        CondicionIva::create(['denominacion'=>'Consumidor Final']);
-        CondicionIva::create(['denominacion'=>'Exento']);
-        CondicionIva::create(['denominacion'=>'Monotributista']);
-        CondicionIva::create(['denominacion'=>'No Categorizado']);
+
+        CondicionIva::insert(['denominacion'=>'Responsable Inscripto']);
+        CondicionIva::insert(['denominacion'=>'Responsable No Inscripto']);
+        CondicionIva::insert(['denominacion'=>'Consumidor Final']);
+        CondicionIva::insert(['denominacion'=>'Exento']);
+        CondicionIva::insert(['denominacion'=>'Monotributista']);
+        CondicionIva::insert(['denominacion'=>'No Categorizado']);
+        Schema::enableForeignKeyConstraints();
+
         
     }
 }

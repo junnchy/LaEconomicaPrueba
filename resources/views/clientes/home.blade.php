@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+
         <div class="row">
             <div class="col-8">
                     <h1>Sección Clientes</h1>
@@ -173,5 +174,6 @@
                         </tbody>
                 </table>
         </div>
+
     </div>
 @endsection

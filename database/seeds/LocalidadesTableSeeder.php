@@ -12,8 +12,11 @@ class LocalidadesTableSeeder extends Seeder
      */
     public function run()
     {
+
+        Schema::disableForeignKeyConstraints();
         Localidad::truncate();
-        Localidad::create(
+        $tabla = DB::table('localidades');
+        Localidad::insert(
             ['cod_postal' => 2000,
             'localidad' => 'Rosario',
             'provincia' => 'Santa Fe']);
@@ -33,5 +36,6 @@ class LocalidadesTableSeeder extends Seeder
             ['cod_postal' => 2132,
             'localidad' => 'Funes',
             'provincia' => 'Santa Fe']);    
+        Schema::enableForeignKeyConstraints();
     }
 }
