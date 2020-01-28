@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\CondicionIva;
 
 
@@ -17,6 +16,7 @@ class CondicionIvaTableSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
        
         CondicionIva::truncate();
+
         CondicionIva::insert(['denominacion'=>'Responsable Inscripto']);
         CondicionIva::insert(['denominacion'=>'Responsable No Inscripto']);
         CondicionIva::insert(['denominacion'=>'Consumidor Final']);
@@ -24,6 +24,7 @@ class CondicionIvaTableSeeder extends Seeder
         CondicionIva::insert(['denominacion'=>'Monotributista']);
         CondicionIva::insert(['denominacion'=>'No Categorizado']);
         Schema::enableForeignKeyConstraints();
+
         
     }
 }

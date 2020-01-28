@@ -10,21 +10,25 @@
     <title>{{ config('app.name', 'La Economica') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!--<script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{asset('assets/Logo-Completo(1).png')}}" width="200" height="75">
+                    {{ config('app.name', 'La Economica') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -34,40 +38,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a class="nav-link" href="/proveedores/" class="">Proveedores</a>
-                        </li> 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Productos
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item" href="/productos/home">Productos</a>
-                                <router-link :to="{name:'agregarProducto'}">
-                                    <a class="dropdown-item" href="#">Agregar Producto</a>
-                                </router-link>
-                                <div class="dropdown-divider"></div>
-                                <router-link :to="{name: 'listadoCategorias'}" >
-                                    <a class="dropdown-item" href="#">Categorias</a>
-                                </router-link>
-                                <!-- <router-link :to="{name: 'listadoCategorias'}" >
-                                    <a class="dropdown-item" href="#">Agregar Categoria</a>
-                                </router-link> -->
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Clientes
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-                                <a class="dropdown-item" href="/clientes/">Listado Clientes</a>
-                                <router-link :to="{name: 'agregarCliente'}" >
-                                    <a class="dropdown-item" href="#">Agregar Cliente</a>
-                                </router-link>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </li>
+                            <a href="{{ route('proveedores.index') }}" class="">Proveedores</a>
+                            <a href="{{ route('productos.index') }}" class="">Productos</a>
+                            <a href="{{ route('clientes.index') }}" class="">Clientes</a> 
+                            @auth
+                                @if (Auth::user()->hasRole('admin'))
+                                    <a href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
+                                @endif
+                            @endauth
+                        </li> <!--Sacar es solo prueba-->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -112,3 +91,4 @@
     </div>
 </body>
 </html>
+
