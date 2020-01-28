@@ -2,7 +2,9 @@
     <div>
         <form @submit.prevent="agregarProveedor(proveedor)">
             <componente-fdatosprov v-bind:proveedor="proveedor"/>
-            <button type="submit" class="btn btn-success btn-block">Agregar</button>
+            <button type="submit" class="btn btn-success btn-block">
+                Agregar <i class="fas fa-check-circle"></i>
+            </button>
         </form>
     </div>
 </template>

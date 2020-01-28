@@ -13,10 +13,13 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         Role::truncate();
         DB::table('model_has_permissions')->truncate();
         DB::table('model_has_roles')->truncate();
         DB::table('role_has_permissions')->truncate();
+        Schema::enableForeignKeyConstraints();
+        
         $role = Role::create([
             'name' => 'admin']);
         $role->givePermissionTo(['crear-vendedor', 'editar-vendedor', 'editar-usuario']);

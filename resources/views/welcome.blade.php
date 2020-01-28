@@ -21,9 +21,6 @@
                 <div class="col-md-3">
                     <a href="/clientes/" class="btn btn-primary btn-block" >Clientes</a>
                 </div>
-                <div class="col-md-3">
-                    <a href="#" class="btn btn-primary btn-block" >BTN</a>
-                </div>
                 @auth
                     @if(Auth::user()->hasRole('admin'))
                         <div class="col-md-3">

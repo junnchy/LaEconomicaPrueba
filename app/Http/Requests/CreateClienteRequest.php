@@ -26,7 +26,11 @@ class CreateClienteRequest extends FormRequest
         return [
             'nombre' => 'required',
             'cuit' => 'required|unique:clientes,cuit',
-            'email' => 'nullable|email|unique:clientes,email'
+            'email' => 'nullable|email|unique:clientes,email',
+            'direccion' => 'required',
+            'cat_clientes_id' => 'required',
+            'condicion_iva_id' => 'required',
+            'localidad_id' => 'required'
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+
 use App;
 use App\Cliente;
 use App\CategoriaClientes;
@@ -25,14 +26,14 @@ class ClienteController extends Controller
         if($request->ajax()){
             $clientes = Cliente::all();
             return response()->json($clientes);
+            
         } else {
             $clientes = Cliente::all();
             $categorias = CategoriaClientes::all();
             $condicionesIva = CondicionIva::all();
             $localidades = Localidad::all();
             return view('clientes.home', compact('clientes','categorias','condicionesIva','localidades'));
-        }
-        
+        }   
     }
 
     /**
@@ -185,7 +186,7 @@ class ClienteController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
+     *s
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -194,16 +195,4 @@ class ClienteController extends Controller
         //
     }
 
-    protected function validateCliente(Request $request)
-    {
-        $this->validate($request, [
-            'nombre' => 'required',
-            'cuit' => 'required|min:7',
-            'email' => 'email',
-            'direccion' => 'required',
-            'cat_clientes_id' => 'required',
-            'condicion_iva_id' => 'required',
-            'localidad_id' => 'required'
-        ]);
-    }
 }

@@ -415,6 +415,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'agregarProv',
@@ -2233,20 +2235,27 @@ var render = function() {
       [
         _c("componente-fdatosprov", { attrs: { proveedor: _vm.proveedor } }),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success btn-block",
-            attrs: { type: "submit" }
-          },
-          [_vm._v("Agregar")]
-        )
+        _vm._m(0)
       ],
       1
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-success btn-block", attrs: { type: "submit" } },
+      [
+        _vm._v("\n            Agregar "),
+        _c("i", { staticClass: "fas fa-check-circle" })
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 

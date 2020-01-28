@@ -25,8 +25,12 @@ class CreateProveedorRequest extends FormRequest
     {
         return [
             'nombre' => 'required',
-            'cuit' => 'required|unique:proveedors,cuit',
-            'telefono' => 'required'
+            'cuit' => 'required|min:7',
+            'email' => 'email',
+            'direccion' => 'required',
+            'condicion_iva_id' => 'required',
+            'localidad_id' => 'required'
         ];
     }
 }
+

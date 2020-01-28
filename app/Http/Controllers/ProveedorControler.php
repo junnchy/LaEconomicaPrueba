@@ -10,6 +10,10 @@ use App\Proveedor;
 
 use App\Categoria;
 
+use App\Http\Requests\CreateProveedorRequest;
+use App\Http\Requests\UpdateProveedorRequest;
+
+
 class ProveedorControler extends Controller
 {
     /**
@@ -182,15 +186,4 @@ class ProveedorControler extends Controller
         /* DB::table('users')->where('votes', '>', 100)->delete(); */
     }
 
-    protected function validateProveedor(Request $request)
-    {
-        $this->validate($request, [
-            'nombre' => 'required',
-            'cuit' => 'required|min:7',
-            'email' => 'email',
-            'direccion' => 'required',
-            'condicion_iva_id' => 'required',
-            'localidad_id' => 'required'
-        ]);
-    }
 }

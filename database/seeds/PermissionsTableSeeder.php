@@ -12,7 +12,12 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
+        
+
+        Schema::disableForeignKeyConstraints();
         Permission::truncate();
+        Schema::enableForeignKeyConstraints();
+
         Permission::create([
             'name' => 'crear-vendedor']);
         Permission::create([
