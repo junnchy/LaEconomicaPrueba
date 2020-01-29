@@ -64,6 +64,7 @@ Vue.component('componente-gmap', require('./components/PruebaGMap.vue').default)
 Vue.component('componente-leftbar', require('./components/LeftNavbar.vue').default);
 Vue.component('componente-filtroproductos', require('./components/ComponenteFiltrosDeProductos.vue').default);
 Vue.component('componente-LNBAddCliente', require('./components/LNBAddCliente.vue').default);
+Vue.component('componente-menuboton', require('../js/components/BotonMenu.vue').default);
 
 
 

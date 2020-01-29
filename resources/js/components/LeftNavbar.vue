@@ -15,6 +15,7 @@ import LeftNavbarVacio from './LeftNavbarVacio';
 import LNBMenuClientes from './LNBMenuClientes'
 
 export default {
+    name:'barraLateral',
     components: {
         LeftNavbarVacio,
         LNBMenuClientes

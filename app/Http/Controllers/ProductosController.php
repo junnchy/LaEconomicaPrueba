@@ -20,7 +20,9 @@ class ProductosController extends Controller
     public function index(Request $request)
     {    
         if($request->ajax()){
-            $productos = Producto::with(['proveedor','categoria'])->get();
+            $productos = Producto::with(['proveedor','categoria'])
+            ->orderBy('nombre')
+            ->get();
             return response()->json($productos);
         } else {
             $productos = Producto::all();

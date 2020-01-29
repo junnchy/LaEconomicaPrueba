@@ -112,20 +112,35 @@
             </ul>
         </header>
         <div class="container-fluid">
-            <div class="row flex-xl-nowrap">
-                <div class="col-12 col-md-3 col-xl-2 bg-light">
+            <div class="row flex-xl-nowrap justify-content-center">
+                <div class="col-12 col-md-3 col-xl-2 bg-light border-right collapse" id="MenuLateral">
                     <componente-leftbar/>
                 </div>
                 <main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content" role="main">
                     <main class="py-4">
                         @yield('content')
                     </main>
+                    <div class="sticky-button">
+                        <componente-menuboton/>
+                    </div>
                 </main>
             </div>
-            </div>
+        </div>
     </div>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/6876153f7d.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<style>
+    .sticky-button {
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    bottom: 10px;
+    }
+</style>
+

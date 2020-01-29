@@ -1,31 +1,33 @@
 <template>
     <div>
-        <table class="table table-hover">
-            <thead class="thead">
-                <tr>
-                    <th scope="col">#ID</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Cuit</th>
-                    <th scope="col">Telefono</th>
-                    <th scope="col">Botones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(proveedor, index) in arregloPaginado" :key="index">
-                    <th scope="row">{{proveedor.id}}</th>
-                    <td>{{proveedor.nombre}}</td>
-                    <td>{{proveedor.cuit}}</td>
-                    <td>{{proveedor.telefono}}</td>
-                    <td>
-                        <router-link :to="{name: 'detalleProv', params:{id: proveedor.id}}">
-                            <button  class="btn btn-warning btn-sm">
-                                Ver Mas <i class="fas fa-eye"></i>
-                            </button>
-                        </router-link>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            <table class="table table-hover">
+                <thead class="thead">
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Cuit</th>
+                        <th scope="col">Telefono</th>
+                        <th scope="col">Botones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(proveedor, index) in arregloPaginado" :key="index">
+                        <th scope="row">{{proveedor.id}}</th>
+                        <td>{{proveedor.nombre}}</td>
+                        <td>{{proveedor.cuit}}</td>
+                        <td>{{proveedor.telefono}}</td>
+                        <td>
+                            <router-link :to="{name: 'detalleProv', params:{id: proveedor.id}}">
+                                <button  class="btn btn-warning btn-sm">
+                                    Ver Mas <i class="fas fa-eye"></i>
+                                </button>
+                            </router-link>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <Paginacion v-bind:filtered="filtered_proveedores" v-bind:nro_filas="5"/>
     </div>
 </template>

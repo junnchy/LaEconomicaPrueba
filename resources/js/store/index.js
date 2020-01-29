@@ -25,7 +25,8 @@ export default new Vuex.Store({
   },
   state: {
     actual: 0,
-    arregloPaginado: []
+    arregloPaginado: [],
+    menu: false
   },
   mutations: {
     setActual(state, nro){
@@ -33,11 +34,17 @@ export default new Vuex.Store({
     },
     setArregloPaginado(state, arreglo){
       state.arregloPaginado = arreglo
+    },
+    setMenu(state){
+      state.menu = !state.menu
     }
   },
   actions: {
     cambiarEstado({commit}, valor){
       commit('setActual', valor)
+    },
+    cambiarMenu({commit}){
+      commit('setMenu')
     }
   },
   getters:{

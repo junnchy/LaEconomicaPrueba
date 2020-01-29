@@ -24,7 +24,9 @@ class ProveedorControler extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $proveedores = Proveedor::with(['localidad.proveedores', 'condicion_iva.proveedores','categorias.proveedores'])->get();
+            $proveedores = Proveedor::with(['localidad.proveedores', 'condicion_iva.proveedores','categorias.proveedores'])
+            ->orderBy('nombre')
+            ->get();
             return response()->json($proveedores);
         } else {
             $proveedores = Proveedor::all();
