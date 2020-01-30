@@ -1997,7 +1997,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Boton',
   data: function data() {
     return {
-      icono: '<i class="fas fa-ellipsis-v"></i>'
+      icono: '<i class="fas fa-angle-right"></i>'
     };
   }
 });
@@ -3669,6 +3669,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Paginacion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Paginacion */ "./resources/js/components/Paginacion.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3703,16 +3704,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ListadoLocalidades',
   data: function data() {
     return {};
   },
+  components: {
+    paginacion: _Paginacion__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('localidades', ['getLocalidades'])),
   created: function created() {
     this.getLocalidades();
+    this.$store.commit('setArregloPaginado', this.localidades);
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arregloPaginado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades'])),
+  mutations: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setArregloPaginado']))
 });
 
 /***/ }),
@@ -44421,36 +44428,46 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("table", { staticClass: "table" }, [
-      _vm._m(0),
+  return _c(
+    "div",
+    [
+      _c("table", { staticClass: "table" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.arregloPaginado, function(localidad, index) {
+            return _c("tr", { key: index }, [
+              _c("th", { attrs: { scope: "row" } }, [
+                _vm._v(_vm._s(localidad.id))
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  _vm._s(localidad.nombre) +
+                    ", " +
+                    _vm._s(localidad.provincia.iso_nombre) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td")
+            ])
+          }),
+          0
+        )
+      ]),
       _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.localidades, function(localidad, index) {
-          return _c("tr", { key: index }, [
-            _c("th", { attrs: { scope: "row" } }, [
-              _vm._v(_vm._s(localidad.id))
-            ]),
-            _vm._v(" "),
-            _c("td", [
-              _vm._v(
-                _vm._s(localidad.nombre) +
-                  ", " +
-                  _vm._s(localidad.provincia.iso_nombre) +
-                  " "
-              )
-            ]),
-            _vm._v(" "),
-            _c("td"),
-            _vm._v(" "),
-            _vm._m(1, true)
+      _vm.localidades.length < 4000
+        ? _c("div", { staticClass: "d-flex justify-content-center" }, [
+            _vm._m(1)
           ])
-        }),
-        0
-      )
-    ])
-  ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("paginacion", { attrs: { filtered: _vm.localidades, nro_filas: 15 } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -44463,9 +44480,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Localidad")]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo Postal")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo Postal")])
       ])
     ])
   },
@@ -44473,11 +44488,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-warning btn-sm" }, [
-        _vm._v("\n                        Editar\n                    ")
-      ])
-    ])
+    return _c(
+      "div",
+      { staticClass: "spinner-border", attrs: { role: "status" } },
+      [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
+    )
   }
 ]
 render._withStripped = true
@@ -44532,7 +44547,7 @@ var render = function() {
                   attrs: { href: "#" },
                   on: {
                     click: function($event) {
-                      return _vm.numero(index)
+                      return _vm.numero(item)
                     }
                   }
                 },
@@ -65944,32 +65959,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 l = [];
                 _context.prev = 2;
                 _context.next = 5;
-                return axios.get('http://127.0.0.1:8000/localidades');
+                return axios.get('http://127.0.0.1:8000/localidades', 2);
 
               case 5:
                 localidades = _context.sent;
                 localidades.data.forEach(function (element) {
                   l.push(element);
                 });
-                _context.next = 12;
+                _context.next = 13;
                 break;
 
               case 9:
                 _context.prev = 9;
                 _context.t0 = _context["catch"](2);
                 console.log(_context.t0);
+                console.log(_context.t0.response.data);
 
-              case 12:
-                _context.prev = 12;
+              case 13:
+                _context.prev = 13;
                 commit('setLocalidades', l);
-                return _context.finish(12);
+                return _context.finish(13);
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 9, 12, 15]]);
+        }, _callee, null, [[2, 9, 13, 16]]);
       }));
 
       function getLocalidades(_x) {

@@ -28,12 +28,13 @@ export default {
         async getLocalidades({commit}){
             let l = []
             try {
-                let localidades = await axios.get('http://127.0.0.1:8000/localidades')
+                let localidades = await axios.get('http://127.0.0.1:8000/localidades', 2)
                 localidades.data.forEach(element => {
                 l.push(element)
                 });
             } catch (error) {
                 console.log(error)
+                console.log(error.response.data)
             }
             finally{
                 commit('setLocalidades', l)

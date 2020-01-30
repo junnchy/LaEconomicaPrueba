@@ -1,0 +1,74 @@
+[
+    {
+        "id": "1",
+        "nombre": "Holcim",
+        "email": "holcim@gmail.com",
+        "cuit": "22342242",
+        "telefono": "213213123",
+        "direccion": "direccion 123",
+        "created_at": "2020-01-28 15:19:06",
+        "updated_at": "2020-01-28 15:19:06",
+        "condicion_iva_id": "1",
+        "localidad_id": "6410010003"
+    },
+    {
+        "id": "2",
+        "nombre": "Benitez",
+        "email": "benitez@gmail.com",
+        "cuit": "265456456",
+        "telefono": "34534532",
+        "direccion": "direccion 123",
+        "created_at": "2020-01-28 15:19:06",
+        "updated_at": "2020-01-28 15:19:06",
+        "condicion_iva_id": "1",
+        "localidad_id": "6410010003"
+    },
+    {
+        "id": "3",
+        "nombre": "Cortines",
+        "email": "cortines@gmail.com",
+        "cuit": "345435346",
+        "telefono": "433455654",
+        "direccion": "direccion 123",
+        "created_at": "2020-01-28 15:19:06",
+        "updated_at": "2020-01-28 15:19:06",
+        "condicion_iva_id": "1",
+        "localidad_id": "6410010003"
+    },
+    {
+        "id": "4",
+        "nombre": "Lourdes",
+        "email": "Lourdes@gmail.com",
+        "cuit": "234234324",
+        "telefono": "2312312",
+        "direccion": "Aluguna Direccion al 1800",
+        "created_at": "2020-01-28 15:35:21",
+        "updated_at": "2020-01-28 15:35:21",
+        "condicion_iva_id": "1",
+        "localidad_id": "82084270000"
+    },
+    {
+        "id": "5",
+        "nombre": "Cementos Avellaneda",
+        "email": "avellaneda@gmail.com",
+        "cuit": "213123213",
+        "telefono": "21231231231",
+        "direccion": "Aluguna Direccion al 1800",
+        "created_at": "2020-01-29 19:13:37",
+        "updated_at": "2020-01-29 19:13:37",
+        "condicion_iva_id": "1",
+        "localidad_id": "6420020001"
+    },
+    {
+        "id": "6",
+        "nombre": "Loma Negra CIA Industrial Argentina SA",
+        "email": "info@lomanegra.com.ar",
+        "cuit": "30500530851",
+        "telefono": "01143193000",
+        "direccion": "Cecilia Grierson 355",
+        "created_at": "2020-01-29 19:17:45",
+        "updated_at": "2020-01-29 19:17:45",
+        "condicion_iva_id": "1",
+        "localidad_id": "2000010000"
+    }
+]

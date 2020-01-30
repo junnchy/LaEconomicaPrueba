@@ -1,0 +1,65 @@
+[
+    {
+        "id": "1",
+        "nombre": "Aberturas",
+        "categoria_id": null,
+        "created_at": "2020-01-28 15:18:51",
+        "updated_at": "2020-01-28 15:18:51"
+    },
+    {
+        "id": "2",
+        "nombre": "Materiales de Construccion",
+        "categoria_id": null,
+        "created_at": "2020-01-28 15:18:51",
+        "updated_at": "2020-01-28 15:18:51"
+    },
+    {
+        "id": "3",
+        "nombre": "Revestimientos",
+        "categoria_id": null,
+        "created_at": "2020-01-28 15:18:51",
+        "updated_at": "2020-01-28 15:18:51"
+    },
+    {
+        "id": "4",
+        "nombre": "Ventanas",
+        "categoria_id": "1",
+        "created_at": "2020-01-28 15:18:51",
+        "updated_at": "2020-01-28 15:18:51"
+    },
+    {
+        "id": "5",
+        "nombre": "Aireadores",
+        "categoria_id": "1",
+        "created_at": "2020-01-28 15:18:51",
+        "updated_at": "2020-01-28 15:18:51"
+    },
+    {
+        "id": "6",
+        "nombre": "Cementos",
+        "categoria_id": "2",
+        "created_at": "2020-01-28 15:18:51",
+        "updated_at": "2020-01-28 15:18:51"
+    },
+    {
+        "id": "7",
+        "nombre": "Ceramicos",
+        "categoria_id": "3",
+        "created_at": "2020-01-29 19:09:45",
+        "updated_at": "2020-01-29 19:09:45"
+    },
+    {
+        "id": "8",
+        "nombre": "50*50",
+        "categoria_id": "7",
+        "created_at": "2020-01-29 19:10:02",
+        "updated_at": "2020-01-29 19:10:02"
+    },
+    {
+        "id": "9",
+        "nombre": "Cementos de Albañileria",
+        "categoria_id": "2",
+        "created_at": "2020-01-29 19:20:38",
+        "updated_at": "2020-01-29 19:20:38"
+    }
+]

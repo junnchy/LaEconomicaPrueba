@@ -36,7 +36,7 @@
                 </a>
                 </li>
                 <li class="page-item" v-for="(item, index) in count" :key="index">
-                    <a class="page-link" href="#" @click="numero(index)">{{item+1}}</a>
+                    <a class="page-link" href="#" @click="numero(item)">{{item+1}}</a>
                 </li>
                 <li :class="upType">
                 <a class="page-link" href="#" aria-label="Next" @click="changePageUp()">

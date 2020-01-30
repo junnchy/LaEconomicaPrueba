@@ -28,7 +28,7 @@
                 </tbody>
             </table>
         </div>
-        <Paginacion v-bind:filtered="filtered_proveedores" v-bind:nro_filas="5"/>
+        <Paginacion v-bind:filtered="filtered_proveedores" v-bind:nro_filas="7"/>
     </div>
 </template>
 

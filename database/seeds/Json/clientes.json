@@ -1,0 +1,44 @@
+[
+    {
+        "id": "1",
+        "nombre": "Nazarena Alesandroni",
+        "cuit": "23324324",
+        "telefono": "23123123",
+        "celular": "213123",
+        "email": "nacha@gmail.com",
+        "direccion": "España 1447",
+        "created_at": "2020-01-28 15:33:23",
+        "updated_at": "2020-01-28 15:33:53",
+        "cat_clientes_id": "1",
+        "condicion_iva_id": "3",
+        "localidad_id": "82084270000"
+    },
+    {
+        "id": "2",
+        "nombre": "Sofia Canut",
+        "cuit": "324324324",
+        "telefono": "332432432",
+        "celular": "232432",
+        "email": "sofiacanut@gmail.com",
+        "direccion": "Doctor Illia 118",
+        "created_at": "2020-01-29 19:32:49",
+        "updated_at": "2020-01-29 19:32:49",
+        "cat_clientes_id": "1",
+        "condicion_iva_id": "3",
+        "localidad_id": "82119050000"
+    },
+    {
+        "id": "3",
+        "nombre": "Juan Fortuna - (Hijo)",
+        "cuit": "39246898",
+        "telefono": "32432432",
+        "celular": "324234234",
+        "email": "juanfortunajr@gmail.com",
+        "direccion": "Fornieles 449",
+        "created_at": "2020-01-29 19:33:53",
+        "updated_at": "2020-01-29 19:33:53",
+        "cat_clientes_id": "1",
+        "condicion_iva_id": "3",
+        "localidad_id": "82084310000"
+    }
+]

@@ -14,7 +14,7 @@ export default {
     name: 'Boton',
     data() {
         return {
-            icono: '<i class="fas fa-ellipsis-v"></i>'
+            icono: '<i class="fas fa-angle-right"></i>'
         }
     }
 }

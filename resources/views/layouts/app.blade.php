@@ -114,7 +114,7 @@
         <div class="container-fluid">
             <div class="row flex-xl-nowrap justify-content-center">
                 <div class="col-12 col-md-3 col-xl-2 bg-light border-right collapse" id="MenuLateral">
-                    <componente-leftbar/>
+                    <componente-leftbar class="sticky-top pt-5"/>
                 </div>
                 <main class="col-12 col-md-9 col-xl-10 py-md-3 pl-md-5 bd-content" role="main">
                     <main class="py-4">

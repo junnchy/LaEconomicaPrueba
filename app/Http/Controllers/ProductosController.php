@@ -81,22 +81,27 @@ class ProductosController extends Controller
             $producto->categoria_id = $request->categoria['id'];
 
             if ($request->imagen) {
-                $exploded = explode(',', $request->imagen);
-                $decoded = base64_decode($exploded[1]);
-                    
-                if(Str::contains($exploded[0], 'jpeg')){
-                    $extension = 'jpg';
+                if (Str::contains($request->imagen, 'http')){
+                    $producto->imagen = $request->imagen;
                 }else {
-                    $extension = 'png';
+                    $exploded = explode(',', $request->imagen);
+                    $decoded = base64_decode($exploded[1]);
+                        
+                    if(Str::contains($exploded[0], 'jpeg')){
+                        $extension = 'jpg';
+                    }else {
+                        $extension = 'png';
+                    }
+
+                    $fileName = Str::random(20).'.'.$extension;
+
+                    $path = public_path('assets/productos/').$fileName;
+
+                    file_put_contents($path, $decoded);
+
+                    $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
                 }
-
-                $fileName = Str::random(20).'.'.$extension;
-
-                $path = public_path('assets/productos/').$fileName;
-
-                file_put_contents($path, $decoded);
-
-                $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
+                
             }else {
                 $producto->imagen = "http://127.0.0.1:8000/assets/4fxp8923.bmp";
             }
@@ -254,4 +259,5 @@ class ProductosController extends Controller
         ]);
     }
 }
+
 

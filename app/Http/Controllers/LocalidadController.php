@@ -17,6 +17,7 @@ class LocalidadController extends Controller
     {
         if($request->ajax()){
             $localidades = Localidad::with('provincia')
+            ->orderBy('provincia_id')
             ->orderBy('nombre')
             ->get();
             return response()->json($localidades);

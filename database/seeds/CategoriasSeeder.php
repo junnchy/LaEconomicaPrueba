@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 use App\Categoria;
 use App\Proveedor;
 use App\Producto;
@@ -26,32 +28,15 @@ class CategoriasSeeder extends Seeder
 
         Schema::enableForeignKeyConstraints();
 
-        $categoria = new Categoria();
-        $categoria->nombre = 'Aberturas';
-        $categoria->save();
-
-        $categoria = new Categoria();
-        $categoria->nombre = 'Materiales de Construccion';
-        $categoria->save();
-
-        $categoria = new Categoria();
-        $categoria->nombre = 'Revestimientos';
-        $categoria->save();
-
-        $categoria = new Categoria();
-        $categoria->nombre = 'Ventanas';
-        $categoria->categoria_id = 1;
-        $categoria->save();
-
-        $categoria = new Categoria();
-        $categoria->nombre = 'Aireadores';
-        $categoria->categoria_id = 1;
-        $categoria->save();
-
-        $categoria = new Categoria();
-        $categoria->nombre = 'Cementos';
-        $categoria->categoria_id = 2;
-        $categoria->save();
+        $json = File::get('database\seeds\Json\categorias.json');
+        $data = json_decode($json);
+        foreach ($data as $obj){
+            Categoria::create(array(
+                "id" => $obj->id,
+                "nombre" => Str::title($obj->nombre),
+                "categoria_id" => $obj->categoria_id,
+            ));
+        }
         
     }
 }

@@ -13,7 +13,7 @@
             <tbody>
                 <tr v-for="producto in arregloPaginado" :key="producto.id">
                     <th scope="row">{{producto.id}}</th>
-                    <th><img :src="producto.imagen" width="50px" class="rounded-circle"></th>
+                    <th><img :src="producto.imagen" width="50px" class="border border-secondary"></th>
                     <td>{{producto.nombre}}</td>
                     <td>${{producto.precioVenta}}</td>
                     <td>
@@ -26,7 +26,7 @@
                 </tr>
             </tbody>
         </table>
-        <Paginacion v-bind:filtered="filtered_productos" v-bind:nro_filas="7"/>
+        <Paginacion v-bind:filtered="filtered_productos" v-bind:nro_filas="10"/>
     </div>
 </template>
 

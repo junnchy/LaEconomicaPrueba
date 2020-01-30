@@ -107,16 +107,25 @@
                             value="{{old('direccion')}}"
                         />
                     </div>
-                    <div class="form-group">
-                        <label>Localidad</label>
-                        <select class="form-control" 
-                            name="localidad_id" 
-                            type="number">
-                            <option>{{null}}</option>
-                            @foreach ($localidades as $loc)
-                                <option value="{{ $loc->id }}">{{$loc->cod_postal}} - {{$loc->localidad}}, {{$loc->provincia}}</option>
-                            @endforeach
-                        </select>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Provincia</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Localidad</label>
+                                <select class="form-control" 
+                                    name="localidad_id" 
+                                    type="number">
+                                    <option>{{null}}</option>
+                                    @foreach ($localidades as $loc)
+                                        <option value="{{ $loc->id }}">{{$loc->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>

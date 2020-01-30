@@ -1811,7 +1811,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("Paginacion", {
-        attrs: { filtered: _vm.filtered_proveedores, nro_filas: 5 }
+        attrs: { filtered: _vm.filtered_proveedores, nro_filas: 7 }
       })
     ],
     1
@@ -1874,7 +1874,7 @@ var render = function() {
               _vm._v(" "),
               _c("th", [
                 _c("img", {
-                  staticClass: "rounded-circle",
+                  staticClass: "border border-secondary",
                   attrs: { src: producto.imagen, width: "50px" }
                 })
               ]),
@@ -1913,7 +1913,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("Paginacion", {
-        attrs: { filtered: _vm.filtered_productos, nro_filas: 7 }
+        attrs: { filtered: _vm.filtered_productos, nro_filas: 10 }
       })
     ],
     1
