@@ -17,7 +17,7 @@
             <div class="col-4">
                 <div class="alert alert-dark" role="alert">
                     <h6 class="text-center">Precio de Costo</h6>
-                    <h3 class="text-center">${{setDre[1]}}</h3> 
+                    <h3 class="text-center">${{setDre[1].toFixed(3)}}</h3> 
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
             <div class="col-2">
                  <div class="alert alert-dark" role="alert">
                     <h6 class="text-center">Dto Total</h6>
-                    <h5 class="text-center" v-if="producto.dre != 1">{{setDre[0] *100}}%</h5>
+                    <h5 class="text-center" v-if="producto.dre != 1">{{(setDre[0] *100).toFixed(2)}}%</h5>
                 </div>
             </div>
         </div>

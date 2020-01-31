@@ -35,6 +35,11 @@
                             <a>{{producto.categoria.nombre}}</a>
                         </router-link>
                     </li>
+                    <li class="list-group-item">
+                        <strong>Estado:</strong>  
+                        <p class="text-success" v-if="producto.estado === 1">Activo <i class="fas fa-check-circle"></i></p>
+                        <p class="text-danger" v-if="producto.estado === 0">Inactivo <i class="fas fa-exclamation-circle"></i></p>
+                    </li>
                     <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{producto.updated_at}}</li>
                 </ul>
             </div>

@@ -79,6 +79,7 @@ class ProductosController extends Controller
             $producto->rentabilidad = $request->rentabilidad;
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
+            $producto->estado = $request->estado;
 
             if ($request->imagen) {
                 if (Str::contains($request->imagen, 'http')){
@@ -197,6 +198,7 @@ class ProductosController extends Controller
             $producto->rentabilidad = $request->rentabilidad;
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
+            $producto->estado = $request->estado;
 
             if ($request->imagen != $producto->imagen) {
                 if ($request->imagen === 'http://127.0.0.1:8000/assets/4fxp8923.bmp') {

@@ -60,20 +60,21 @@ export default {
         })
         },
         editarCategoria({commit},categoria){
-        var id = categoria.id
-        if (categoria.categoria_id != null) {
-            let catid = parseInt(categoria.categoria_id)
-            var cat = {id: categoria.id, nombre: categoria.nombre, categoria_id: catid}
-        }else{
-            var cat = {id: categoria.id, nombre: categoria.nombre, categoria_id: null}
-        }
-        console.log(cat)
-        axios.put(`http://127.0.0.1:8000/categoria/${id}`, cat).then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            var id = categoria.id
+            if (categoria.categoria_id != null) {
+                let catid = parseInt(categoria.categoria_id)
+                var cat = {id: categoria.id, nombre: categoria.nombre, categoria_id: catid}
+            }else{
+                var cat = {id: categoria.id, nombre: categoria.nombre, categoria_id: null}
+            }
+            console.log(cat)
+            axios.put(`http://127.0.0.1:8000/categoria/${id}`, cat).then(function (response) {
+                commit('setRespuesta', response.data.message)
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         },
         agregarCategoria({commit, dispatch}, categoria){
             axios.post('http://127.0.0.1:8000/categoria', categoria).then(function (response) {

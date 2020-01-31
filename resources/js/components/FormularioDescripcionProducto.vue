@@ -2,19 +2,45 @@
     <div>
         <div class="form-group">
             <div class="row">
-                <div class="col-6">
-                    <h4><i class="fas fa-image"></i> Imagen de Producto</h4>
-                    <input type="file" class="form-control-file mt-5" 
-                    @change="imageChanged">
+                <div class="col-6"> 
+                    <h4>Datos Cargados <i class="fas fa-check"></i></h4>
+                    <ul class="list-group mt-3">
+                        <li class="list-group-item"><strong><h3>{{producto.nombre}}</h3></strong></li>
+                        <li class="list-group-item"><strong>Codigo: </strong> {{producto.id}}</li>
+                        <li class="list-group-item"><strong>Precio de Venta: </strong> 
+                            <h5>${{producto.precioVenta}}</h5>
+                        </li>
+                        <li class="list-group-item" v-if="producto.proveedor"><strong>Proveedor: </strong> 
+                            <router-link :to="{name: 'detalleProv', params:{id: producto.proveedor_id}}">
+                                <a>{{producto.proveedor.nombre}}</a>
+                            </router-link>
+                        </li>
+                        <li class="list-group-item" v-if="producto.categoria"><strong>Categoria: </strong> 
+                            <router-link :to="{name: 'verEditarCategoria', params:{id: producto.categoria_id}}">
+                                <a>{{producto.categoria.nombre}}</a>
+                            </router-link>
+                        </li>
+                    </ul>
                 </div>
                 <div class="col-6">
-                    <img :src="producto.imagen" class="img-thumbnail" width="250px">
+                    <h4><i class="fas fa-image"></i> Imagen de Producto</h4>
+                    <img :src="producto.imagen" class="img-thumbnail" width="300px">
                     <br>
-                    <button class="btn btn-outline-danger btn-sm mt-2"
-                    type="button"
-                    @click="borrarImagen()">
-                        Borrar <i class="fas fa-trash-alt"></i>
-                    </button>
+                    <div class="d-flex flex-row mt-3">
+                        <div class="mr-2 p-2">
+                            <button class="btn btn-outline-danger btn-sm mt-2"
+                            type="button"
+                            @click="borrarImagen()">
+                                    Borrar <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                        <div class="ml-2 p-2">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="imagenProducto" @change="imageChanged">
+                                <label class="custom-file-label" for="imagenProducto">{{imageName}}</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +65,8 @@ export default {
         return {
             editor: ClassicEditor,
             editorConfig: {
-            }
+            },
+            imageName: 'Seleccionar Imagen'
         }
     },
     props:{
@@ -52,14 +79,15 @@ export default {
         imageChanged(e){
             var fileReader = new FileReader()
             fileReader.readAsDataURL(e.target.files[0])
+            this.imageName = e.target.files[0].name
             fileReader.onload = (e) =>{
-                this.imagen = e.target.result
                 this.producto.imagen = e.target.result
             }
             console.log(this.producto)
         },
         borrarImagen(){
             this.producto.imagen = "http://127.0.0.1:8000/assets/4fxp8923.bmp"
+            this.imageName = 'Seleccionar Imagen'
         }
     },
 }

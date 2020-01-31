@@ -156,7 +156,7 @@ class CategoriaController extends Controller
 
             return response()->json([
                 'categoria' => $categoria,
-                'message' => 'Actualizado'
+                'message' => 'Categoria Actualizada'
             ], 200);
         }        
     }

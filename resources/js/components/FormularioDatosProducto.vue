@@ -1,5 +1,29 @@
 <template>
-    <div>
+    <div class="mt-3">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label>Codigo de Producto</label>
+                    <input 
+                    disabled
+                    type="number" 
+                    v-model="producto.id" 
+                    class="form-control disabled">
+                </div> 
+            </div>
+            <div class="col-6">
+                <div class="custom-control custom-checkbox content-center mt-4">
+                    <input type="checkbox" v-model="producto.estado" class="custom-control-input" id="estadoProducto">
+                    <label class="custom-control-label" for="estadoProducto">Estado de Producto:</label>
+                    <p class="text-success" v-if="producto.estado === true ||  producto.estado === 1">
+                        Activo <i class="fas fa-check-circle"></i>
+                    </p>
+                    <p class="text-danger" v-if="producto.estado === false ||  producto.estado === 0">
+                        Inactivo <i class="fas fa-exclamation-circle"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <label>Nombre Producto</label>
             <input 

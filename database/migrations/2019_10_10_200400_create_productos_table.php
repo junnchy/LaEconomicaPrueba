@@ -33,6 +33,7 @@ class CreateProductosTable extends Migration
             $table->float('iva');
             $table->float('flete');
             $table->string('imagen')->nullable();
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }

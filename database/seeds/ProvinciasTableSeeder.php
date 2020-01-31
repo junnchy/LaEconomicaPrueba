@@ -13,7 +13,7 @@ class ProvinciasTableSeeder extends Seeder
     public function run()
     {
         DB::table('provincias')->delete();
-        $json = File::get('database\seeds\provincias.json');
+        $json = File::get('database\seeds\Json\provincias.json');
         $data = json_decode($json);
         foreach ($data as $obj){
             Provincia::create(array(

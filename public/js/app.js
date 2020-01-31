@@ -2078,6 +2078,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProductos'])),
@@ -2101,6 +2110,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       set: function set(val) {
         this.$store.commit('productos/SET_PROVEEDOR', val);
+      }
+    },
+    epro: {
+      get: function get() {
+        return this.$store.state.productos.filter.estado;
+      },
+      set: function set(val) {
+        this.$store.commit('productos/SET_ESTADO', val);
       }
     }
   })
@@ -3004,6 +3021,30 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -41260,6 +41301,49 @@ var render = function() {
           })
         ],
         2
+      ),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("label", [_vm._v("\n            Estado\n        ")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.epro,
+              expression: "epro"
+            }
+          ],
+          staticClass: "custom-select",
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.epro = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { domProps: { value: null } }, [_vm._v("Todos")]),
+          _vm._v(" "),
+          _c("option", { attrs: { selected: "" }, domProps: { value: 1 } }, [
+            _vm._v("Activos ")
+          ]),
+          _vm._v(" "),
+          _c("option", { domProps: { value: 0 } }, [_vm._v("Inactivos ")])
+        ]
       )
     ]),
     _vm._v(" "),
@@ -42520,7 +42604,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("h3", { staticClass: "text-center" }, [
-              _vm._v("$" + _vm._s(_vm.setDre[1]))
+              _vm._v("$" + _vm._s(_vm.setDre[1].toFixed(3)))
             ])
           ]
         )
@@ -42669,7 +42753,7 @@ var render = function() {
             _vm._v(" "),
             _vm.producto.dre != 1
               ? _c("h5", { staticClass: "text-center" }, [
-                  _vm._v(_vm._s(_vm.setDre[0] * 100) + "%")
+                  _vm._v(_vm._s((_vm.setDre[0] * 100).toFixed(2)) + "%")
                 ])
               : _vm._e()
           ]
@@ -43297,7 +43381,110 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "mt-3" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Codigo de Producto")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.producto.id,
+                expression: "producto.id"
+              }
+            ],
+            staticClass: "form-control disabled",
+            attrs: { disabled: "", type: "number" },
+            domProps: { value: _vm.producto.id },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.producto, "id", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "div",
+          { staticClass: "custom-control custom-checkbox content-center mt-4" },
+          [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.estado,
+                  expression: "producto.estado"
+                }
+              ],
+              staticClass: "custom-control-input",
+              attrs: { type: "checkbox", id: "estadoProducto" },
+              domProps: {
+                checked: Array.isArray(_vm.producto.estado)
+                  ? _vm._i(_vm.producto.estado, null) > -1
+                  : _vm.producto.estado
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.producto.estado,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.producto, "estado", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.producto,
+                          "estado",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.producto, "estado", $$c)
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "custom-control-label",
+                attrs: { for: "estadoProducto" }
+              },
+              [_vm._v("Estado de Producto:")]
+            ),
+            _vm._v(" "),
+            _vm.producto.estado === true || _vm.producto.estado === 1
+              ? _c("p", { staticClass: "text-success" }, [
+                  _vm._v("\n                    Activo "),
+                  _c("i", { staticClass: "fas fa-check-circle" })
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.producto.estado === false || _vm.producto.estado === 0
+              ? _c("p", { staticClass: "text-danger" }, [
+                  _vm._v("\n                    Inactivo "),
+                  _c("i", { staticClass: "fas fa-exclamation-circle" })
+                ])
+              : _vm._e()
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", [_vm._v("Nombre Producto")]),
       _vm._v(" "),
@@ -44016,7 +44203,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("h3", { staticClass: "text-center" }, [
-              _vm._v("$" + _vm._s(_vm.setPrecioDeVenta))
+              _vm._v("$" + _vm._s(_vm.setPrecioDeVenta.toFixed(3)))
             ])
           ]
         )
@@ -44256,7 +44443,7 @@ var render = function() {
       "div",
       { staticClass: "container mt-5" },
       [
-        _c("table", { staticClass: "table table-hover" }, [
+        _c("table", { staticClass: "table table-striped" }, [
           _vm._m(0),
           _vm._v(" "),
           _c(
@@ -44323,7 +44510,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", { staticClass: "thead-light" }, [
+    return _c("thead", { staticClass: "thead" }, [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Id")]),
         _vm._v(" "),
@@ -44431,7 +44618,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("table", { staticClass: "table" }, [
+      _c("table", { staticClass: "table table-striped" }, [
         _vm._m(0),
         _vm._v(" "),
         _c(
@@ -44527,14 +44714,14 @@ var render = function() {
               "a",
               {
                 staticClass: "page-link",
-                attrs: { href: "#", "aria-label": "Previous" },
+                attrs: { "aria-label": "Previous" },
                 on: {
                   click: function($event) {
                     return _vm.changePageDown()
                   }
                 }
               },
-              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")])]
+              [_c("i", { staticClass: "fas fa-backward" })]
             )
           ]),
           _vm._v(" "),
@@ -44544,7 +44731,6 @@ var render = function() {
                 "a",
                 {
                   staticClass: "page-link",
-                  attrs: { href: "#" },
                   on: {
                     click: function($event) {
                       return _vm.numero(item)
@@ -44561,14 +44747,14 @@ var render = function() {
               "a",
               {
                 staticClass: "page-link",
-                attrs: { href: "#", "aria-label": "Next" },
+                attrs: { "aria-label": "Next" },
                 on: {
                   click: function($event) {
                     return _vm.changePageUp()
                   }
                 }
               },
-              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")])]
+              [_c("i", { staticClass: "fas fa-forward" })]
             )
           ])
         ],
@@ -65533,6 +65719,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       console.log(cat);
       axios.put("http://127.0.0.1:8000/categoria/".concat(id), cat).then(function (response) {
+        commit('setRespuesta', response.data.message);
         console.log(response);
       })["catch"](function (error) {
         console.log(error);
@@ -66239,7 +66426,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     filter: {
       query: '',
       categoria: 0,
-      proveedor: 0
+      proveedor: 0,
+      estado: 1
     },
     errors: {
       nombre: '',
@@ -66268,6 +66456,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     SET_PROVEEDOR: function SET_PROVEEDOR(state, proveedor) {
       state.filter.proveedor = proveedor;
+    },
+    SET_ESTADO: function SET_ESTADO(state, estado) {
+      state.filter.estado = estado;
     }
   }, _defineProperty(_mutations, "SET_QUERY", function SET_QUERY(state, query) {
     state.filter.query = query;
@@ -66422,6 +66613,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   getters: {
     filtered_productos: function filtered_productos(state) {
       var pfil = state.productos;
+
+      if (state.filter.estado != null) {
+        pfil = pfil.filter(function (producto) {
+          return producto.estado === state.filter.estado;
+        });
+      }
 
       if (state.filter.categoria > 0) {
         pfil = pfil.filter(function (producto) {

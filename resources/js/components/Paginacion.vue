@@ -31,16 +31,16 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-end pagination-sm">
                 <li :class="downType">
-                <a class="page-link" href="#" aria-label="Previous"  @click="changePageDown()">
-                    <span aria-hidden="true">&laquo;</span>
+                <a class="page-link" aria-label="Previous"  @click="changePageDown()">
+                    <i class="fas fa-backward"></i>
                 </a>
                 </li>
                 <li class="page-item" v-for="(item, index) in count" :key="index">
-                    <a class="page-link" href="#" @click="numero(item)">{{item+1}}</a>
+                    <a class="page-link" @click="numero(item)">{{item+1}}</a>
                 </li>
                 <li :class="upType">
-                <a class="page-link" href="#" aria-label="Next" @click="changePageUp()">
-                    <span aria-hidden="true">&raquo;</span>
+                <a class="page-link" aria-label="Next" @click="changePageUp()">
+                    <i class="fas fa-forward"></i>
                 </a>
                 </li>
             </ul>

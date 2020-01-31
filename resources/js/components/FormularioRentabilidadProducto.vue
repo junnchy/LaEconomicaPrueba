@@ -17,7 +17,7 @@
             <div class="col-4">
                 <div class="alert alert-dark" role="alert">
                     <h6 class="text-center">Precio de Venta</h6>
-                    <h3 class="text-center">${{setPrecioDeVenta}}</h3>
+                    <h3 class="text-center">${{setPrecioDeVenta.toFixed(3)}}</h3>
                 </div>
             </div>
         </div>

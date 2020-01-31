@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="container mt-5">
-            <table class="table table-hover">
-                <thead class="thead-light">
+            <table class="table table-striped">
+                <thead class="thead">
                     <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nombre y Apellido/Razón Social</th>

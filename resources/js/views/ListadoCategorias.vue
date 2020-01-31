@@ -36,7 +36,9 @@
                             <td v-if="categoria.nro === 0"> <strong>{{categoria.nombre}}</strong></td>
                             <td>
                                 <router-link :to="{name: 'verEditarCategoria', params:{id: categoria.id}}">
-                                    <button  class="btn btn-warning btn-sm">Ver / Editar</button>
+                                    <button  class="btn btn-warning btn-sm">
+                                        <i class="fas fa-eye"></i> / <i class="fas fa-edit"></i>
+                                    </button>
                                 </router-link>
                             </td>
                         </tr>

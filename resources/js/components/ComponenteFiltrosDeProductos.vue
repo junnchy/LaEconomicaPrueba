@@ -16,6 +16,15 @@
                 <option selected :value=0>Todos</option>
                 <option v-for="(proveedor, index) in proveedores" :key="index" :value='proveedor.id'>{{proveedor.id}} - {{proveedor.nombre}}</option>
             </select>
+            <hr/>
+            <label>
+                Estado
+            </label> 
+            <select class="custom-select" v-model="epro">
+                <option :value="null">Todos</option>
+                <option selected :value="1">Activos </option>
+                <option :value="0">Inactivos </option>
+            </select>
         </div>
         <hr/>
         <div class="container mt-4">
@@ -62,6 +71,14 @@ export default {
                 this.$store.commit('productos/SET_PROVEEDOR', val)
             }
         },
+        epro:{
+            get(){
+                return this.$store.state.productos.filter.estado;
+            },
+            set(val){
+                this.$store.commit('productos/SET_ESTADO', val)
+            }
+        }
     },
 }
 </script>

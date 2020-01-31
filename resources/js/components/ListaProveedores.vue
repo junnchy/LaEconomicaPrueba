@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <table class="table table-hover">
+            <table class="table table-striped">
                 <thead class="thead">
                     <tr>
                         <th scope="col">#ID</th>

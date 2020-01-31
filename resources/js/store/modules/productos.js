@@ -7,7 +7,8 @@ export default {
       filter: {
           query: '',
           categoria: 0,
-          proveedor: 0
+          proveedor: 0,
+          estado: 1
       },
       errors: {
         nombre:'',
@@ -32,10 +33,13 @@ export default {
             state.filter.query = query;
         },
         SET_CATEGORIA(state, categoria){
-        state.filter.categoria = categoria;
+          state.filter.categoria = categoria;
         },
         SET_PROVEEDOR(state, proveedor){
-        state.filter.proveedor = proveedor;
+          state.filter.proveedor = proveedor;
+        },
+        SET_ESTADO(state, estado){
+          state.filter.estado = estado;
         },
         SET_QUERY(state, query){
             state.filter.query = query;
@@ -126,6 +130,9 @@ export default {
     getters:{
         filtered_productos(state){
             let pfil = state.productos
+            if(state.filter.estado != null){
+              pfil = pfil.filter(producto => (producto.estado === state.filter.estado))
+            }
             if(state.filter.categoria > 0){
               pfil = pfil.filter(producto => (producto.categoria.categoria_id === state.filter.categoria || producto.categoria_id === state.filter.categoria))
             }

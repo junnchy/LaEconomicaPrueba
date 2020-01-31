@@ -1,6 +1,6 @@
 <template>
     <div>
-        <table class="table">
+        <table class="table table-striped">
             <thead class="thead-light">
                 <tr>
                     <th scope="col">#ID</th>
