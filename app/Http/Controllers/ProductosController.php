@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use Carbon\Carbon;
+
 use App\Proveedor;
 use App\Categoria;
 use App\Producto;
+use App\FichaDeStock;
 
 
 class ProductosController extends Controller
@@ -81,33 +84,11 @@ class ProductosController extends Controller
             $producto->categoria_id = $request->categoria['id'];
             $producto->estado = $request->estado;
 
-            if ($request->imagen) {
-                if (Str::contains($request->imagen, 'http')){
-                    $producto->imagen = $request->imagen;
-                }else {
-                    $exploded = explode(',', $request->imagen);
-                    $decoded = base64_decode($exploded[1]);
-                        
-                    if(Str::contains($exploded[0], 'jpeg')){
-                        $extension = 'jpg';
-                    }else {
-                        $extension = 'png';
-                    }
-
-                    $fileName = Str::random(20).'.'.$extension;
-
-                    $path = public_path('assets/productos/').$fileName;
-
-                    file_put_contents($path, $decoded);
-
-                    $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
-                }
-                
-            }else {
-                $producto->imagen = "http://127.0.0.1:8000/assets/4fxp8923.bmp";
-            }
+            $this->agregarImagen($request, $producto);
 
             $producto->save();
+
+            $this->agregarFichaStock($producto);
             
 
             return response()->json([
@@ -142,7 +123,7 @@ class ProductosController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $producto = Producto::with(['proveedor','categoria'])->findOrFail($id);
+            $producto = Producto::with(['proveedor','categoria', 'fichaStock'])->findOrFail($id);
             $producto->descuentoProducto = [
                 $producto->descuentoProducto_1, 
                 $producto->descuentoProducto_2, 
@@ -150,6 +131,8 @@ class ProductosController extends Controller
                 $producto->descuentoProducto_4,
                 $producto->descuentoProducto_5
             ];
+            $producto->ultStock = $producto->fichaStock->updated_at->diffForHumans(Carbon::now());
+            
             return response()->json($producto);
         }
         else {
@@ -200,28 +183,7 @@ class ProductosController extends Controller
             $producto->categoria_id = $request->categoria['id'];
             $producto->estado = $request->estado;
 
-            if ($request->imagen != $producto->imagen) {
-                if ($request->imagen === 'http://127.0.0.1:8000/assets/4fxp8923.bmp') {
-                    $producto->imagen = 'http://127.0.0.1:8000/assets/4fxp8923.bmp';
-                }else {
-                $exploded = explode(',', $request->imagen);
-                $decoded = base64_decode($exploded[1]);
-                    
-                if(Str::contains($exploded[0], 'jpeg')){
-                    $extension = 'jpg';
-                }else {
-                    $extension = 'png';
-                }
-
-                $fileName = Str::random(20).'.'.$extension;
-
-                $path = public_path('assets/productos/').$fileName;
-
-                file_put_contents($path, $decoded);
-
-                $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
-                }  
-            }
+            $this->agregarImagen($request, $producto);
 
             $producto->save();
 
@@ -259,6 +221,45 @@ class ProductosController extends Controller
             'categoria_id' => 'required',
             'categoria_id' => 'numeric|gt:0'
         ]);
+    }
+
+    protected function agregarImagen(Request $request, $producto)
+    {
+        if ($request->imagen) {
+            if (Str::contains($request->imagen, 'http')){
+                $producto->imagen = $request->imagen;
+            }else {
+                $exploded = explode(',', $request->imagen);
+                $decoded = base64_decode($exploded[1]);
+                    
+                if(Str::contains($exploded[0], 'jpeg')){
+                    $extension = 'jpg';
+                }else {
+                    $extension = 'png';
+                }
+
+                $fileName = Str::random(20).'.'.$extension;
+
+                $path = public_path('assets/productos/').$fileName;
+
+                file_put_contents($path, $decoded);
+
+                $producto->imagen = "http://127.0.0.1:8000/assets/productos/".$fileName;
+            }
+            
+        }else {
+            $producto->imagen = "http://127.0.0.1:8000/assets/4fxp8923.bmp";
+        }
+    }
+
+    protected function agregarFichaStock($producto){
+        $ficha = new FichaDeStock();
+        $ficha->deposito_id = 1;
+        $ficha->producto_id = $producto['id'];
+        $ficha->cantidadActual = 0;
+        $ficha->save();
+        $producto->fichaStock_id = $ficha->id;
+        $producto->save();
     }
 }
 

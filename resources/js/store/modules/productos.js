@@ -8,7 +8,7 @@ export default {
           query: '',
           categoria: 0,
           proveedor: 0,
-          estado: 1
+          estado: null
       },
       errors: {
         nombre:'',
@@ -97,6 +97,7 @@ export default {
           var prod
           let producto = await axios.get(`http://127.0.0.1:8000/productos/${id}`).then(response => {
             prod = response.data
+            console.log(prod)
             commit('setProducto', prod)
           })
         },

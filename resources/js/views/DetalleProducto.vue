@@ -46,9 +46,36 @@
             <div class="col-6 mt-3">
                 <img :src="producto.imagen" class="img-thumbnail" alt="Example" width="330px">
             </div>
-            <div class="container mt-4">
-                <h3> <i class="fas fa-info-circle"></i> Descripcion</h3>
-                <div class="shadow-sm p-3 mb-5 bg-white rounded" v-html="producto.descripcion">
+        </div>
+        <div class="row mt-5" v-if="producto.ficha_stock">
+            <div class="col-12">
+                <div class="container">
+                   <h3><i class="fas fa-box-open"></i> Stock</h3>
+                   <div class="row">
+                       <div class="col-6">
+                           <div class="alert alert-info text-center" role="alert">
+                               <h4>Actual</h4>
+                               <h3>{{producto.ficha_stock.cantidadActual}}</h3>
+                           </div>
+                       </div>
+                       <div class="col-6">
+                           <div class="alert alert-secondary" role="alert">
+                               <strong>Ultimo movimiento: </strong> {{producto.ultStock}}
+                            </div>
+                            <button class="btn btn-outline-info btn-block">
+                                Ajustar Stock <i class="fas fa-wrench"></i>
+                            </button>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="container">
+                    <h3> <i class="fas fa-info-circle"></i> Descripcion</h3>
+                    <div class="shadow-sm p-3 mb-5 bg-white rounded" v-html="producto.descripcion">
+                    </div>
                 </div>
             </div>
         </div>

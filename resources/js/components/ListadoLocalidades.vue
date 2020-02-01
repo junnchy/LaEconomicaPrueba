@@ -21,12 +21,12 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <paginacion v-bind:filtered="localidades" v-bind:nro_filas="15"/>
+        <paginacion v-bind:filtered="filtered_localidades" v-bind:nro_filas="15"/>
     </div>
 </template>
 
 <script>
-import {mapState, mapActions, mapMutations} from 'vuex'
+import {mapState, mapActions, mapMutations, mapGetters} from 'vuex'
 import paginacion from './Paginacion'
 export default {
     name: 'ListadoLocalidades',
@@ -48,6 +48,7 @@ export default {
     computed: {
         ...mapState(['arregloPaginado']),
         ...mapState('localidades', ['localidades']),
+        ...mapGetters('localidades', ['filtered_localidades'])
     },
     mutations:{
         ...mapMutations(['setArregloPaginado']),

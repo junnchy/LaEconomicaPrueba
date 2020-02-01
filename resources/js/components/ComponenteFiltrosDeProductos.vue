@@ -21,8 +21,8 @@
                 Estado
             </label> 
             <select class="custom-select" v-model="epro">
-                <option :value="null">Todos</option>
-                <option selected :value="1">Activos </option>
+                <option selected :value="null">Todos</option>
+                <option :value="1">Activos </option>
                 <option :value="0">Inactivos </option>
             </select>
         </div>

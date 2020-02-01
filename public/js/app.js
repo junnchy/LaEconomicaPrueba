@@ -1999,6 +1999,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       icono: '<i class="fas fa-angle-right"></i>'
     };
+  },
+  methods: {
+    LNB: function LNB() {
+      $('#MenuLateral').collapse('show');
+    }
   }
 });
 
@@ -2274,6 +2279,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2288,7 +2299,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     console.log('component mounted');
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria', 'resetResp'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO', 'agregarCategoria', 'resetResp']), {
+    LNB: function LNB() {
+      $('#MenuLateral').collapse('show');
+    }
+  }),
   created: function created() {
     this.getCategoriasO();
   },
@@ -3759,7 +3774,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getLocalidades();
     this.$store.commit('setArregloPaginado', this.localidades);
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arregloPaginado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arregloPaginado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('localidades', ['localidades']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('localidades', ['filtered_localidades'])),
   mutations: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setArregloPaginado']))
 });
 
@@ -3841,6 +3856,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       cantidadDeLineas: 0,
       linePerPage: this.nro_filas,
       nro: 0,
+      ult: 0,
       paginas: [],
       act: 1,
       nroItems: 3,
@@ -3869,11 +3885,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } else {
         this.downType = "page-item";
       }
+
+      if (this.act === this.ult) {
+        this.upType = "page-item disabled";
+      } else {
+        this.upType = "page-item";
+      }
     },
     changePageDown: function changePageDown() {
       this.act--;
       this.pDesde -= this.nroItems;
       this.PHasta -= this.nroItems;
+
+      if (this.act === 1) {
+        this.downType = "page-item disabled";
+      } else {
+        this.downType = "page-item";
+      }
+
+      if (this.act === this.ult) {
+        this.upType = "page-item disabled";
+      } else {
+        this.upType = "page-item";
+      }
     },
     numero: function numero(n) {
       this.nro = n;
@@ -3891,6 +3925,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.paginas.push(index);
       }
 
+      this.ult = Math.ceil(this.paginas.length / this.nroItems);
       return this.paginas.slice(this.pDesde, this.PHasta);
     },
     paginado: function paginado() {
@@ -41148,7 +41183,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-outline-dark",
+        staticClass: "btn btn-outline-dark btn-sm",
         attrs: {
           type: "button",
           "data-toggle": "collapse",
@@ -41336,11 +41371,11 @@ var render = function() {
           }
         },
         [
-          _c("option", { domProps: { value: null } }, [_vm._v("Todos")]),
-          _vm._v(" "),
-          _c("option", { attrs: { selected: "" }, domProps: { value: 1 } }, [
-            _vm._v("Activos ")
+          _c("option", { attrs: { selected: "" }, domProps: { value: null } }, [
+            _vm._v("Todos")
           ]),
+          _vm._v(" "),
+          _c("option", { domProps: { value: 1 } }, [_vm._v("Activos ")]),
           _vm._v(" "),
           _c("option", { domProps: { value: 0 } }, [_vm._v("Inactivos ")])
         ]
@@ -41482,17 +41517,37 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm._m(0),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-success btn-block",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#agregarCategoria",
+          "data-whatever": "@mdo"
+        },
+        on: {
+          click: function($event) {
+            return _vm.LNB()
+          }
+        }
+      },
+      [
+        _vm._v("\n         Agregar Categoria "),
+        _c("i", { staticClass: "fas fa-plus-circle" })
+      ]
+    ),
     _vm._v(" "),
     _c(
       "div",
       {
         staticClass: "modal fade",
         attrs: {
-          id: "exampleModal",
+          id: "agregarCategoria",
           tabindex: "-1",
           role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
+          "aria-labelledby": "agregarCategoriaLabel",
           "aria-hidden": "true"
         }
       },
@@ -41507,7 +41562,7 @@ var render = function() {
                   "h5",
                   {
                     staticClass: "modal-title",
-                    attrs: { id: "exampleModalLabel" }
+                    attrs: { id: "agregarCategoriaLabel" }
                   },
                   [_vm._v("Agregar Categoria")]
                 ),
@@ -41560,7 +41615,7 @@ var render = function() {
                                 _vm._s(_vm.respuesta) +
                                 " \n                             "
                             ),
-                            _vm._m(1)
+                            _vm._m(0)
                           ]
                         )
                       : _vm._e(),
@@ -41679,7 +41734,7 @@ var render = function() {
                         [_vm._v("Cerrar")]
                       ),
                       _vm._v(" "),
-                      _vm._m(2)
+                      _vm._m(1)
                     ])
                   ]
                 )
@@ -41692,27 +41747,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-outline-success btn-block",
-        attrs: {
-          type: "button",
-          "data-toggle": "modal",
-          "data-target": "#exampleModal",
-          "data-whatever": "@mdo"
-        }
-      },
-      [
-        _vm._v("\n         Agregar Categoria "),
-        _c("i", { staticClass: "fas fa-plus-circle" })
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -44651,7 +44685,9 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("paginacion", { attrs: { filtered: _vm.localidades, nro_filas: 15 } })
+      _c("paginacion", {
+        attrs: { filtered: _vm.filtered_localidades, nro_filas: 15 }
+      })
     ],
     1
   )
@@ -65445,6 +65481,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/TablasDatosClientes.vue */ "./resources/js/views/TablasDatosClientes.vue"));
   }
+}, {
+  path: '/nuevaFichaStock',
+  name: 'nuevaFichaStock',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/NuevaFichaStock.vue */ "./resources/js/views/NuevaFichaStock.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -66113,7 +66155,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     localidad: {},
     respuesta: null,
     provincias: [],
-    provincia: {}
+    provincia: {},
+    filter: {
+      provinciaId: null
+    }
   },
   mutations: {
     setLocalidades: function setLocalidades(state, localidades) {
@@ -66130,6 +66175,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setProvincia: function setProvincia(state, provincia) {
       state.provincia = provincia;
+    },
+    SET_PROVINCIA: function SET_PROVINCIA(state, provincia) {
+      state.filter.provinciaId = provincia;
     }
   },
   actions: {
@@ -66320,6 +66368,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getLocalidad;
     }()
+  },
+  getters: {
+    filtered_localidades: function filtered_localidades(state) {
+      var loc = state.localidades;
+
+      if (state.filter.provinciaId != null) {
+        loc = loc.filter(function (localidad) {
+          return localidad.provincia_id === state.filter.provinciaId;
+        });
+      }
+
+      return loc;
+    }
   }
 });
 
@@ -66427,7 +66488,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       query: '',
       categoria: 0,
       proveedor: 0,
-      estado: 1
+      estado: null
     },
     errors: {
       nombre: '',
@@ -66561,6 +66622,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _context2.next = 3;
                 return axios.get("http://127.0.0.1:8000/productos/".concat(id)).then(function (response) {
                   prod = response.data;
+                  console.log(prod);
                   commit('setProducto', prod);
                 });
 

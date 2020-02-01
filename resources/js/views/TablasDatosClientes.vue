@@ -15,11 +15,15 @@
         <!--Localidades-->
         <div :class="containers" v-if="tab === 0">
             <div class="row">
-                <div class="col-8">
-                    <h3>Localidades</h3>
+                <div class="col-8 text-center border-right">
+                    <h3 class="mt-3">Localidades</h3>
                 </div>
                 <div class="col-4">
-                    <componente-fagregarlocalidad/>
+                    <label for="filtro_provincias">Provincia</label>
+                    <select id="filtro_provincias" class="form-control" v-model="fprov">
+                        <option selected :value="null">Todas</option>
+                        <option v-for="(provincia, index) in provincias" :key="index" :value='provincia.id'>{{provincia.iso_nombre}}</option>
+                    </select>
                 </div>
             </div>
             <div class="container mt-4">
@@ -51,6 +55,7 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
     data() {
         return {
@@ -61,7 +66,11 @@ export default {
             containers: 'container mt-4'
         }
     },
+    created(){
+        this.getProvincias()
+    },
     methods:{
+        ...mapActions('localidades', ['getProvincias']),
         setTab(nro){
             this.tab = nro
             if (this.tab===0) {
@@ -80,7 +89,19 @@ export default {
                 this.ctab2 ='nav-link active'
             }
         }
-    }
+    },
+    computed: {
+        ...mapState('localidades',['provincias']),
+        ...mapGetters('localidades', ['filtered_localidades']),
+        fprov:{
+            get(){
+                return this.$store.state.localidades.filter.provinciaID;
+            },
+            set(val){
+                this.$store.commit('localidades/SET_PROVINCIA', val)
+            }
+        },
+    },
     
 }
 </script>

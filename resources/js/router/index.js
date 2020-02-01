@@ -79,6 +79,11 @@ const routes = [
       name: 'tablaDatosCliente',
       component: () => import(/* webpackChunkName: "about" */ '../views/TablasDatosClientes.vue')
     },
+    {
+      path: '/nuevaFichaStock',
+      name: 'nuevaFichaStock',
+      component: () => import(/* webpackChunkName: "about" */ '../views/NuevaFichaStock.vue')
+    },
 ]
 
 

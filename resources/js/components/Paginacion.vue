@@ -60,6 +60,7 @@ export default {
             cantidadDeLineas: 0,
             linePerPage: this.nro_filas,
             nro: 0,
+            ult: 0,
             paginas: [],
             act: 1,
             nroItems: 3,
@@ -87,11 +88,28 @@ export default {
             }else{
                 this.downType = "page-item"
             }
+
+            if (this.act === this.ult) {
+                this.upType = "page-item disabled"
+            }else{
+                this.upType = "page-item"
+            }
         },
         changePageDown(){
             this.act--
             this.pDesde -= this.nroItems
             this.PHasta -= this.nroItems
+            if (this.act === 1) {
+                this.downType = "page-item disabled"
+            }else{
+                this.downType = "page-item"
+            }
+            
+            if (this.act === this.ult) {
+                this.upType = "page-item disabled"
+            }else{
+                this.upType = "page-item"
+            }
         },
         numero(n){
             this.nro = n
@@ -110,6 +128,7 @@ export default {
             for (let index = 0; index < aux; index++) {
                 this.paginas.push(index)
             }
+            this.ult = Math.ceil(this.paginas.length / this.nroItems)
             return this.paginas.slice(this.pDesde, this.PHasta) 
         },
         paginado(){

@@ -5,7 +5,10 @@ export default {
         localidad: {},
         respuesta: null,
         provincias: [],
-        provincia: {}
+        provincia: {},
+        filter: {
+            provinciaId: null,
+        },
     },
     mutations: {
         setLocalidades(state, localidades){
@@ -22,6 +25,9 @@ export default {
         },
         setProvincia(state, provincia){
             state.provincia = provincia
+        },
+        SET_PROVINCIA(state, provincia){
+            state.filter.provinciaId = provincia
         }
     },
     actions:{
@@ -89,4 +95,14 @@ export default {
             })
         }
     }, 
+    getters:{
+        filtered_localidades(state){
+            let loc = state.localidades
+            if (state.filter.provinciaId != null) {
+                loc = loc.filter(localidad=>(localidad.provincia_id === state.filter.provinciaId))
+            }
+            return loc  
+        }
+    }
 }
+

@@ -1,0 +1,38 @@
+[
+    {
+ 
+        "cantidadActual": "0",
+        "producto_id": "1",
+        "deposito_id": "1"
+    },
+    {
+        "cantidadActual": "0",
+        "producto_id": "2",
+        "deposito_id": "1"
+    },
+    {
+        "cantidadActual": "0",
+        "producto_id": "3",
+        "deposito_id": "1"
+    },
+    {
+        "cantidadActual": "0",
+        "producto_id": "4",
+        "deposito_id": "1"
+    },
+    {
+        "cantidadActual": "0",
+        "producto_id": "5",
+        "deposito_id": "1"
+    },
+    {
+        "cantidadActual": "0",
+        "producto_id": "6",
+        "deposito_id": "1"
+    },
+    {
+        "cantidadActual": "0",
+        "producto_id": "7",
+        "deposito_id": "1"
+    }
+]
