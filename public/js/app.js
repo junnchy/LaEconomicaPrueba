@@ -65482,10 +65482,10 @@ var routes = [{
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/TablasDatosClientes.vue */ "./resources/js/views/TablasDatosClientes.vue"));
   }
 }, {
-  path: '/nuevaFichaStock',
-  name: 'nuevaFichaStock',
+  path: '/FichaStock/:id',
+  name: 'fichaStock',
   component: function component() {
-    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/NuevaFichaStock.vue */ "./resources/js/views/NuevaFichaStock.vue"));
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/FichaDeStock.vue */ "./resources/js/views/FichaDeStock.vue"));
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -65518,6 +65518,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_categorias__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/categorias */ "./resources/js/store/modules/categorias.js");
 /* harmony import */ var _modules_productos__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/productos */ "./resources/js/store/modules/productos.js");
 /* harmony import */ var _modules_mapas__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/mapas */ "./resources/js/store/modules/mapas.js");
+/* harmony import */ var _modules_stock__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/stock */ "./resources/js/store/modules/stock.js");
+
 
 
 
@@ -65537,6 +65539,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     proveedores: _modules_proveedores__WEBPACK_IMPORTED_MODULE_6__["default"],
     categorias: _modules_categorias__WEBPACK_IMPORTED_MODULE_7__["default"],
     productos: _modules_productos__WEBPACK_IMPORTED_MODULE_8__["default"],
+    stock: _modules_stock__WEBPACK_IMPORTED_MODULE_10__["default"],
     mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   state: {
@@ -66624,6 +66627,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   prod = response.data;
                   console.log(prod);
                   commit('setProducto', prod);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
                 });
 
               case 3:
@@ -66945,6 +66951,123 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         return state.proveedores;
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/stock.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/modules/stock.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    depositos: [],
+    fichasDeStock: [],
+    respuesta: null,
+    fichaDeStock: {
+      cantidadActual: 0
+    }
+  },
+  mutations: {
+    setDepositos: function setDepositos(state, depositos) {
+      state.depositos = depositos;
+    },
+    setFichasDeStock: function setFichasDeStock(state, fichas) {
+      state.fichasDeStock = fichas;
+    },
+    setRespuesta: function setRespuesta(state, respuesta) {
+      state.respuesta = respuesta;
+    },
+    setFichaStock: function setFichaStock(state, ficha) {
+      state.fichaDeStock = ficha;
+    }
+  },
+  actions: {
+    agregarDeposito: function agregarDeposito(_ref) {
+      var commit = _ref.commit;
+      axios.post('http://127.0.0.1:8000/depositos').then(function (response) {
+        commit('setRespuesta', response.data.message);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    resetResp: function resetResp(_ref2, resp) {
+      var commit = _ref2.commit;
+      commit('setRespuesta', resp);
+    },
+    agregarLinea: function agregarLinea(_ref3, linea) {
+      var commit = _ref3.commit;
+      axios.post('http://127.0.0.1:8000/lineaFichaStock', linea).then(function (response) {
+        commit('setRespuesta', response.data.message);
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+        console.log(error.response.data);
+      });
+    },
+    getFichaStock: function () {
+      var _getFichaStock = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref4, id) {
+        var commit, ficha;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref4.commit;
+                _context.next = 3;
+                return axios.get("http://127.0.0.1:8000/fichaStock/".concat(id)).then(function (response) {
+                  console.log(response.data);
+                  commit('setFichaStock', response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
+                });
+
+              case 3:
+                ficha = _context.sent;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function getFichaStock(_x, _x2) {
+        return _getFichaStock.apply(this, arguments);
+      }
+
+      return getFichaStock;
+    }(),
+    ajustarStock: function ajustarStock(_ref5, linea) {
+      var commit = _ref5.commit,
+          dispatch = _ref5.dispatch;
+      var id = linea.ficha_id;
+      axios.put("http://127.0.0.1:8000/fichaStock/".concat(id), linea).then(function (response) {
+        console.log(response.data.message);
+        dispatch('getFichaStock', id);
+      })["catch"](function (error) {
+        console.log('algo va mal');
+        console.log(error.response.data);
+      });
     }
   }
 });

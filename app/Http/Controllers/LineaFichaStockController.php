@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\FichaDeStock;
+use App\LineaFichaStock;
+
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 
 class LineaFichaStockController extends Controller
@@ -34,7 +39,22 @@ class LineaFichaStockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            
+            $linea = new LineaFichaStock();
+            $linea->usuario = $request->usuario;
+            $linea->ficha_id = $request->ficha_id;
+            $linea->cantidad = $request->cantidad;
+            $linea->tipo = $request->tipo;
+            $linea->save();
+        
+
+            return response()->json([
+                'linea' => $linea,
+                'message' => 'Stock Actualizado'
+            ], 200);
+
+        }
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\FichaDeStock;
+
 use Illuminate\Http\Request;
 
 class FichaDeStockController extends Controller
@@ -46,7 +48,8 @@ class FichaDeStockController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $ficha = FichaDeStock::findOrFail($id);
+            $ficha = FichaDeStock::with('lineas')
+            ->findOrFail($id);
             return response()->json($ficha);
         }
     }
@@ -71,7 +74,15 @@ class FichaDeStockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $ficha = FichaDeStock::findOrFail($id);
+            $ficha->cantidadActual = $ficha->cantidadActual + $request->cantidad;
+            $ficha->save();
+
+            return response()->json([
+                'message' => 'Cantidad Actualizada'
+            ], 200);
+        }
     }
 
     /**

@@ -100,6 +100,10 @@ export default {
             console.log(prod)
             commit('setProducto', prod)
           })
+          .catch(function (error) {
+            console.log('algo va mal')
+            console.log(error.response.data)
+          });
         },
         editarProducto({commit},producto){
           var id = producto.id

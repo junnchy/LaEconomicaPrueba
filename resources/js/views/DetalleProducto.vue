@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6"> 
+            <div class="col-8"> 
                 <ul class="list-group mt-3">
                     <li class="list-group-item"><strong><h3>{{producto.nombre}}</h3></strong></li>
                     <li class="list-group-item"><strong>Codigo: </strong> {{producto.id}}</li>
@@ -43,7 +43,7 @@
                     <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{producto.updated_at}}</li>
                 </ul>
             </div>
-            <div class="col-6 mt-3">
+            <div class="col-4 mt-3">
                 <img :src="producto.imagen" class="img-thumbnail" alt="Example" width="330px">
             </div>
         </div>
@@ -62,9 +62,18 @@
                            <div class="alert alert-secondary" role="alert">
                                <strong>Ultimo movimiento: </strong> {{producto.ultStock}}
                             </div>
-                            <button class="btn btn-outline-info btn-block">
-                                Ajustar Stock <i class="fas fa-wrench"></i>
-                            </button>
+                            <div class="row">
+                                <div class="col-6">
+                                    <ajustemanualstock v-bind:nFicha="producto.ficha_stock.id" v-bind:cantAct="producto.ficha_stock.cantidadActual"/>
+                                </div>
+                                <div class="col-6">
+                                    <router-link :to="{name: 'fichaStock', params:{id: producto.ficha_stock.id}}">
+                                        <button class="btn btn-warning btn-block">
+                                            Ver ficha <i class="fas fa-eye"></i>
+                                        </button>
+                                    </router-link>
+                                </div>
+                            </div>
                        </div>
                    </div>
                 </div>
@@ -84,16 +93,20 @@
 
 <script>
 import {mapActions, mapState} from 'vuex'
-
+import ajustemanualstock from '../components/AjusteManualStock'
 export default {
     name:'DetalleProdoucto',
+    components:{
+        ajustemanualstock
+    },
     data() {
         return {
             id: this.$route.params.id,
         }
     },
     methods: {
-        ...mapActions('productos',['getProducto'])
+        ...mapActions('productos',['getProducto']),
+        ...mapActions('stock', ['getFichaStock'])
     },
     created() {
         this.getProducto(this.id)
@@ -101,7 +114,8 @@ export default {
     computed: {
         ...mapState('productos',['producto']),
         ...mapState('proveedores',['proveedor']),
-        ...mapState('categorias',['categoria'])
+        ...mapState('categorias',['categoria']),
+        ...mapState('stock', ['fichaDeStock'])
     },
 
 }

@@ -8,6 +8,7 @@ import proveedores from './modules/proveedores'
 import categorias from './modules/categorias'
 import productos from './modules/productos'
 import mapas from './modules/mapas'
+import stock from './modules/stock'
 
 
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     proveedores,
     categorias,
     productos,
+    stock,
     mapas
   },
   state: {

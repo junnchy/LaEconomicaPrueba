@@ -23,7 +23,7 @@ class ProductosController extends Controller
     public function index(Request $request)
     {    
         if($request->ajax()){
-            $productos = Producto::with(['proveedor','categoria'])
+            $productos = Producto::with(['proveedor','categoria', 'fichaStock'])
             ->orderBy('nombre')
             ->get();
             return response()->json($productos);
@@ -123,7 +123,8 @@ class ProductosController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $producto = Producto::with(['proveedor','categoria', 'fichaStock'])->findOrFail($id);
+            $producto = Producto::with(['proveedor','categoria', 'fichaStock.lineas'])
+            ->findOrFail($id);
             $producto->descuentoProducto = [
                 $producto->descuentoProducto_1, 
                 $producto->descuentoProducto_2, 
@@ -132,7 +133,8 @@ class ProductosController extends Controller
                 $producto->descuentoProducto_5
             ];
             $producto->ultStock = $producto->fichaStock->updated_at->diffForHumans(Carbon::now());
-            
+            $lineas = $producto->fichaStock->lineas;
+            $producto->totalLineas = count($lineas);
             return response()->json($producto);
         }
         else {

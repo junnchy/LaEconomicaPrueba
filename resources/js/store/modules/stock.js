@@ -4,7 +4,7 @@ export default {
         depositos: [],
         fichasDeStock:[],
         respuesta: null,
-        fichaDeStock:{}
+        fichaDeStock:{cantidadActual: 0}
     },
     mutations: {
         setDepositos(state, depositos){
@@ -16,6 +16,9 @@ export default {
         setRespuesta(state, respuesta){
             state.respuesta = respuesta
         },
+        setFichaStock(state, ficha){
+            state.fichaDeStock = ficha
+        }
     },
     actions:{
         agregarDeposito({commit}){
@@ -29,5 +32,36 @@ export default {
         resetResp({commit}, resp){
             commit('setRespuesta', resp)
         },
+        agregarLinea({commit}, linea){
+            axios.post('http://127.0.0.1:8000/lineaFichaStock', linea).then(function (response) {
+                commit('setRespuesta', response.data.message)
+                console.log(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+                console.log(error.response.data)
+            });
+        }, 
+        async getFichaStock({commit}, id){
+            let ficha = await axios.get(`http://127.0.0.1:8000/fichaStock/${id}`).then(response => {
+            console.log(response.data)
+            commit('setFichaStock', response.data)
+          })
+          .catch(function (error) {
+            console.log('algo va mal')
+            console.log(error.response.data)
+          });
+        },
+        ajustarStock({commit, dispatch}, linea){
+            let id = linea.ficha_id
+            axios.put(`http://127.0.0.1:8000/fichaStock/${id}`, linea).then(function (response) {
+            console.log( response.data.message)
+            dispatch('getFichaStock', id)
+          })
+          .catch(function (error) {
+            console.log('algo va mal')
+            console.log(error.response.data)
+          });
+        }
     }, 
 }

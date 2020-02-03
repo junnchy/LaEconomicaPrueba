@@ -15,7 +15,8 @@ class CreateLineaFichaStocksTable extends Migration
     {
         Schema::create('linea_ficha_stocks', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamp('fecha')->nullable();
+            $table->integer('cantidad');
+            $table->string('tipo');
             $table->string('usuario')->nullable();
             $table->unsignedBigInteger('ficha_id')->nullable();
             $table->foreign('ficha_id')->references('id')->on('ficha_de_stocks');

@@ -20,11 +20,33 @@
                     <td v-if="producto.estado === 0"><p class="text-danger"><i class="fas fa-exclamation-circle"></i></p></td>
                     <td>${{producto.precioVenta}}</td>
                     <td>
-                        <router-link :to="{name:'detalleProducto',params:{id: producto.id}}">
-                            <button class="btn btn-warning btn-sm">
-                                Ver <i class="fas fa-eye"></i>
-                            </button>
-                        </router-link>
+                        <div class="row">
+                            <div class="col-6">
+                                <router-link :to="{name:'detalleProducto',params:{id: producto.id}}">
+                                    <button class="btn btn-warning btn-sm">
+                                        Ver <i class="fas fa-eye"></i>
+                                    </button>
+                                </router-link>
+                            </div>
+                            <div class="col-6">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark border-0 dropdown-toggle" type="button" id="subMenuProducto" 
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="subMenuProducto">
+                                        <a class="dropdown-item" href="#">
+                                            <router-link :to="{name: 'fichaStock', params:{id: producto.ficha_stock.id}}">
+                                                <button class="btn btn-outline-dark btn-block">
+                                                    Ficha de Stock
+                                                </button>
+                                            </router-link>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>

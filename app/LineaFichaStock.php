@@ -9,6 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class LineaFichaStock extends Model
 {
     public function ficha(){
-        return $this->belongsTo(FichaDeStock::class); // Muchos a muchos
+        return $this->belongsTo(FichaDeStock::class, 'ficha_id'); // Muchos a muchos
     }
 }
