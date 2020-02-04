@@ -6,7 +6,9 @@
                     <h1 class="text-center">Categorias</h1>
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-danger" @click="$router.go(-1)">Volver</button>
+                    <button class="btn btn-outline-danger" @click="$router.go(-1)">
+                        Volver <i class="fas fa-arrow-alt-circle-left"></i>
+                    </button>
                 </div>
             </div>
             <form class="my-4">

@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-8">
-                <h2>Detalle de Cliente </h2>
+                <h2><i class="fas fa-id-card"></i> Detalle de Cliente </h2>
             </div>
             <div class="col-4">
                 <router-link :to="{name: 'editarCliente', params:{id: cliente.id}}">
@@ -10,11 +10,9 @@
                         Editar <i class="fas fa-pen"></i>
                     </button>
                 </router-link>
-                <router-link :to="{name: 'menuClientes'}">
-                    <button class="btn btn-danger">
-                        Volver
-                    </button>
-                </router-link>
+                <button class="btn btn-outline-danger" @click="$router.go(-1)">
+                    Volver <i class="fas fa-arrow-alt-circle-left"></i>
+                </button>
             </div>
         </div>
         <ul class="list-group mt-3">

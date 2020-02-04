@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-8">
-                <h2>Detalle de Producto </h2>
+                <h2> <i class="fas fa-box"></i> Detalle de Producto </h2>
             </div>
             <div class="col-4">
                 <router-link :to="{name: 'editarProducto', params:{id: producto.id}}">
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-6">
                                     <router-link :to="{name: 'fichaStock', params:{id: producto.ficha_stock.id}}">
-                                        <button class="btn btn-outline-dark btn-block">
+                                        <button class="btn btn-primary btn-block">
                                             Ver ficha <i class="fas fa-book-open"></i>
                                         </button>
                                     </router-link>

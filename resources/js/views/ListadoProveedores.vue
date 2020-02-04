@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Proveedores</h1>
+        <h1> <i class="fas fa-users"></i> Proveedores</h1>
         <form class="my-4">     
             <div class="row mt-3">
                 <div class="col-8">

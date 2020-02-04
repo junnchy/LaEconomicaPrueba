@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <h1 >Productos</h1>
+            <h1> <i class="fas fa-boxes"></i> Productos</h1>
         </div>
         <div class="container"> 
             <div class="row">

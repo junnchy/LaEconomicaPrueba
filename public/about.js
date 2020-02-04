@@ -765,8 +765,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DetalleCliente',
@@ -957,8 +955,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -1393,6 +1389,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -2068,7 +2066,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-outline-info btn-block",
+        staticClass: "btn btn-outline-primary btn-block",
         attrs: {
           type: "button",
           "data-toggle": "modal",
@@ -3303,11 +3301,21 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("router-link", { attrs: { to: { name: "menuClientes" } } }, [
-            _c("button", { staticClass: "btn btn-danger" }, [
-              _vm._v("\n                    Volver\n                ")
-            ])
-          ])
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-danger",
+              on: {
+                click: function($event) {
+                  return _vm.$router.go(-1)
+                }
+              }
+            },
+            [
+              _vm._v("\n                Volver "),
+              _c("i", { staticClass: "fas fa-arrow-alt-circle-left" })
+            ]
+          )
         ],
         1
       )
@@ -3390,7 +3398,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
-      _c("h2", [_vm._v("Detalle de Cliente ")])
+      _c("h2", [
+        _c("i", { staticClass: "fas fa-id-card" }),
+        _vm._v(" Detalle de Cliente ")
+      ])
     ])
   },
   function() {
@@ -3631,7 +3642,7 @@ var render = function() {
                           [
                             _c(
                               "button",
-                              { staticClass: "btn btn-outline-dark btn-block" },
+                              { staticClass: "btn btn-primary btn-block" },
                               [
                                 _vm._v(
                                   "\n                                        Ver ficha "
@@ -3672,7 +3683,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
-      _c("h2", [_vm._v("Detalle de Producto ")])
+      _c("h2", [
+        _c("i", { staticClass: "fas fa-box" }),
+        _vm._v(" Detalle de Producto ")
+      ])
     ])
   },
   function() {
@@ -3730,11 +3744,21 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("router-link", { attrs: { to: { name: "listadoProveedores" } } }, [
-            _c("button", { staticClass: "btn btn-danger" }, [
-              _vm._v("\n                    Volver\n                ")
-            ])
-          ])
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-danger",
+              on: {
+                click: function($event) {
+                  return _vm.$router.go(-1)
+                }
+              }
+            },
+            [
+              _vm._v("\n                Volver "),
+              _c("i", { staticClass: "fas fa-arrow-alt-circle-left" })
+            ]
+          )
         ],
         1
       )
@@ -3842,7 +3866,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
-      _c("h2", [_vm._v("Detalle Proveedor: ")])
+      _c("h2", [
+        _c("i", { staticClass: "fas fa-id-card" }),
+        _vm._v(" Detalle Proveedor: ")
+      ])
     ])
   }
 ]
@@ -4463,14 +4490,17 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-danger",
+              staticClass: "btn btn-outline-danger",
               on: {
                 click: function($event) {
                   return _vm.$router.go(-1)
                 }
               }
             },
-            [_vm._v("Volver")]
+            [
+              _vm._v("\n                    Volver "),
+              _c("i", { staticClass: "fas fa-arrow-alt-circle-left" })
+            ]
           )
         ])
       ]),
@@ -4632,7 +4662,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h1", [_vm._v("Proveedores")]),
+      _vm._m(0),
       _vm._v(" "),
       _c("form", { staticClass: "my-4" }, [
         _c("div", { staticClass: "row mt-3" }, [
@@ -4689,7 +4719,17 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h1", [
+      _c("i", { staticClass: "fas fa-users" }),
+      _vm._v(" Proveedores")
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -4775,7 +4815,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [_c("h1", [_vm._v("Clientes")])])
+      _c("div", { staticClass: "col-12" }, [
+        _c("h1", [
+          _c("i", { staticClass: "fas fa-users" }),
+          _vm._v(" Clientes")
+        ])
+      ])
     ])
   }
 ]
@@ -4871,7 +4916,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("Productos")])
+      _c("h1", [_c("i", { staticClass: "fas fa-boxes" }), _vm._v(" Productos")])
     ])
   }
 ]

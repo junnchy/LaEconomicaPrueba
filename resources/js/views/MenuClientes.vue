@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-12">
-                    <h1>Clientes</h1>
+                    <h1> <i class="fas fa-users"></i> Clientes</h1>
             </div>
         </div>
          <div class="row">

@@ -2,7 +2,7 @@
    <div class="container">
         <button type="button" 
         @click="LNB()"
-        class="btn btn-outline-info btn-block" 
+        class="btn btn-outline-primary btn-block" 
         data-toggle="modal" 
         data-target="#AjustarStockManual" 
         data-whatever="@mdo"
