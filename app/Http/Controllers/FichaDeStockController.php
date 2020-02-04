@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\FichaDeStock;
+use App\Producto;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -48,8 +50,9 @@ class FichaDeStockController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $ficha = FichaDeStock::with('lineas')
+            $ficha = FichaDeStock::with('lineas', 'producto')
             ->findOrFail($id);
+            $ficha->ultStock = $ficha->updated_at->diffForHumans(Carbon::now());
             return response()->json($ficha);
         }
     }
@@ -77,6 +80,12 @@ class FichaDeStockController extends Controller
         if($request->ajax()){
             $ficha = FichaDeStock::findOrFail($id);
             $ficha->cantidadActual = $ficha->cantidadActual + $request->cantidad;
+            if ($ficha->cantidadActual <= 0) {
+                $producto = Producto::findOrFail($request->idProducto);
+                $producto->estado = false;
+                $producto->save();
+            }
+
             $ficha->save();
 
             return response()->json([

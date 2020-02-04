@@ -61,7 +61,8 @@ import {mapActions, mapState} from 'vuex'
                     cantidad: 0, 
                     ficha_id: 0, 
                     usuario: this.$userName,
-                    tipo: 'Manual'
+                    tipo: 'Manual',
+                    idProducto: 0
                 },
                 cEC: 'alert alert-info text-center',
                 estado: false,
@@ -77,6 +78,10 @@ import {mapActions, mapState} from 'vuex'
                 type: Number,
                 required: true
             },
+            producto_id:{
+                type: Number,
+                required: true
+            }
         },
         methods: {
             ...mapActions('stock', ['agregarLinea', 'resetResp', 'ajustarStock']),
@@ -84,6 +89,7 @@ import {mapActions, mapState} from 'vuex'
                 $('#MenuLateral').collapse('show')
             },
             procesar(){
+                this.nLDS.idProducto = this.producto_id,
                 this.agregarLinea(this.nLDS),
                 this.ajustarStock(this.nLDS),
                 this.estado = false
@@ -91,7 +97,6 @@ import {mapActions, mapState} from 'vuex'
         },
         created() {
             this.nLDS.ficha_id = this.nFicha;
-            console.log(this.$userName)
         },
         computed: {
             ...mapState('stock',['respuesta']),

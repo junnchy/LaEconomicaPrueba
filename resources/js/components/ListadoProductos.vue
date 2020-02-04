@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="dropdown">
-                                    <button class="btn btn-outline-dark border-0 dropdown-toggle" type="button" id="subMenuProducto" 
+                                    <button class="btn btn-outline-dark border-0 " type="button" id="subMenuProducto" 
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>

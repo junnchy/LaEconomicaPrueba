@@ -4,7 +4,7 @@ export default {
         depositos: [],
         fichasDeStock:[],
         respuesta: null,
-        fichaDeStock:{cantidadActual: 0}
+        fichaDeStock:{producto_id: 0, cantidadActual: 0}
     },
     mutations: {
         setDepositos(state, depositos){

@@ -134,7 +134,6 @@ class ProductosController extends Controller
             ];
             $producto->ultStock = $producto->fichaStock->updated_at->diffForHumans(Carbon::now());
             $lineas = $producto->fichaStock->lineas;
-            $producto->totalLineas = count($lineas);
             return response()->json($producto);
         }
         else {

@@ -78,7 +78,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cantidad: 0,
         ficha_id: 0,
         usuario: this.$userName,
-        tipo: 'Manual'
+        tipo: 'Manual',
+        idProducto: 0
       },
       cEC: 'alert alert-info text-center',
       estado: false,
@@ -93,6 +94,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     cantAct: {
       type: Number,
       required: true
+    },
+    producto_id: {
+      type: Number,
+      required: true
     }
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('stock', ['agregarLinea', 'resetResp', 'ajustarStock']), {
@@ -100,12 +105,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       $('#MenuLateral').collapse('show');
     },
     procesar: function procesar() {
-      this.agregarLinea(this.nLDS), this.ajustarStock(this.nLDS), this.estado = false;
+      this.nLDS.idProducto = this.producto_id, this.agregarLinea(this.nLDS), this.ajustarStock(this.nLDS), this.estado = false;
     }
   }),
   created: function created() {
     this.nLDS.ficha_id = this.nFicha;
-    console.log(this.$userName);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('stock', ['respuesta']), {
     cantFinal: function cantFinal() {
@@ -894,6 +898,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -903,14 +912,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      cEC: 'alert alert-info text-center'
     };
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProducto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('stock', ['getFichaStock'])),
   created: function created() {
     this.getProducto(this.id);
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['producto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('stock', ['fichaDeStock']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['producto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('stock', ['fichaDeStock']), {
+    etiquetaCantidad: function etiquetaCantidad() {
+      if (this.producto.ficha_stock.cantidadActual === 0) {
+        this.cEC = 'alert alert-warning text-center';
+      }
+
+      if (this.producto.ficha_stock.cantidadActual > 0) {
+        this.cEC = 'alert alert-success text-center';
+      }
+
+      if (this.producto.ficha_stock.cantidadActual < 0) {
+        this.cEC = 'alert alert-danger text-center';
+      }
+
+      return this.cEC;
+    }
+  })
 });
 
 /***/ }),
@@ -1299,6 +1325,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1314,8 +1354,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getFichaStock(this.id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('stock', ['getFichaStock'])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('stock', ['fichaDeStock']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('stock', ['getFichaStock']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProducto'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('stock', ['fichaDeStock']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['producto']), {
     etiquetaCantidad: function etiquetaCantidad() {
       if (this.fichaDeStock.cantidadActual === 0) {
         this.cEC = 'alert alert-warning text-center';
@@ -2737,7 +2777,7 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "btn btn-outline-dark border-0 dropdown-toggle",
+        staticClass: "btn btn-outline-dark border-0 ",
         attrs: {
           type: "button",
           id: "subMenuProducto",
@@ -3502,8 +3542,10 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("li", { staticClass: "list-group-item" }, [
+            _c("i", { staticClass: "fas fa-clock" }),
+            _vm._v(" "),
             _c("strong", [_vm._v("Ultima Actualizacion: ")]),
-            _vm._v(" " + _vm._s(_vm.producto.updated_at))
+            _vm._v(" " + _vm._s(_vm.producto.updated_at) + "\n                ")
           ])
         ])
       ]),
@@ -3526,12 +3568,9 @@ var render = function() {
                 _c("div", { staticClass: "col-6" }, [
                   _c(
                     "div",
-                    {
-                      staticClass: "alert alert-info text-center",
-                      attrs: { role: "alert" }
-                    },
+                    { class: _vm.etiquetaCantidad, attrs: { role: "alert" } },
                     [
-                      _c("h4", [_vm._v("Actual")]),
+                      _c("h4", [_vm._v("Cantidad Actual")]),
                       _vm._v(" "),
                       _c("h3", [
                         _vm._v(_vm._s(_vm.producto.ficha_stock.cantidadActual))
@@ -3548,6 +3587,8 @@ var render = function() {
                       attrs: { role: "alert" }
                     },
                     [
+                      _c("i", { staticClass: "fas fa-clock" }),
+                      _vm._v(" "),
                       _c("strong", [_vm._v("Ultimo movimiento: ")]),
                       _vm._v(
                         " " +
@@ -3565,7 +3606,8 @@ var render = function() {
                         _c("ajustemanualstock", {
                           attrs: {
                             nFicha: _vm.producto.ficha_stock.id,
-                            cantAct: _vm.producto.ficha_stock.cantidadActual
+                            cantAct: _vm.producto.ficha_stock.cantidadActual,
+                            producto_id: _vm.producto.ficha_stock.producto_id
                           }
                         })
                       ],
@@ -3589,12 +3631,12 @@ var render = function() {
                           [
                             _c(
                               "button",
-                              { staticClass: "btn btn-warning btn-block" },
+                              { staticClass: "btn btn-outline-dark btn-block" },
                               [
                                 _vm._v(
                                   "\n                                        Ver ficha "
                                 ),
-                                _c("i", { staticClass: "fas fa-eye" })
+                                _c("i", { staticClass: "fas fa-book-open" })
                               ]
                             )
                           ]
@@ -4251,20 +4293,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "row shadow-sm p-3 text-white bg-dark rounded" }, [
       _c(
         "div",
-        { staticClass: "col-8" },
+        { staticClass: "col-10" },
         [
-          _c("H1", [
-            _vm._v("Ficha de Stock "),
-            _c("i", { staticClass: "fas fa-box-open" })
-          ])
+          _vm.fichaDeStock.producto.nombre
+            ? _c("H1", [
+                _c("i", { staticClass: "fas fa-box-open" }),
+                _vm._v(
+                  " Ficha de Stock: " + _vm._s(_vm.fichaDeStock.producto.nombre)
+                )
+              ])
+            : _vm._e()
         ],
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-4" })
+      _c("div", { staticClass: "col-2" }, [
+        _c("img", {
+          staticClass: "rounded",
+          attrs: { src: _vm.fichaDeStock.producto.imagen, width: "100px" }
+        })
+      ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row mt-4" }, [
@@ -4276,27 +4327,55 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-6" },
-        [
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "div",
+          { staticClass: "alert alert-secondary", attrs: { role: "alert" } },
+          [
+            _c("i", { staticClass: "fas fa-clock" }),
+            _vm._v(" "),
+            _c("strong", [_vm._v("Ultimo movimiento: ")]),
+            _vm._v(" " + _vm._s(_vm.fichaDeStock.ultStock) + "\n            ")
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
           _c(
             "div",
-            { staticClass: "alert alert-secondary", attrs: { role: "alert" } },
+            { staticClass: "col-9" },
             [
-              _c("strong", [_vm._v("Ultimo movimiento: ")]),
-              _vm._v(
-                " " + _vm._s(_vm.fichaDeStock.updated_at) + "\n            "
-              )
-            ]
+              _vm.fichaDeStock
+                ? _c("ajustemanualstock", {
+                    attrs: {
+                      nFicha: _vm.id,
+                      cantAct: _vm.fichaDeStock.cantidadActual,
+                      producto_id: _vm.fichaDeStock.producto_id
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
           ),
           _vm._v(" "),
-          _c("ajustemanualstock", {
-            attrs: { nFicha: _vm.id, cantAct: _vm.fichaDeStock.cantidadActual }
-          })
-        ],
-        1
-      )
+          _c("div", { staticClass: "col-3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-danger",
+                on: {
+                  click: function($event) {
+                    return _vm.$router.go(-1)
+                  }
+                }
+              },
+              [
+                _vm._v("\n                        Volver "),
+                _c("i", { staticClass: "fas fa-arrow-alt-circle-left" })
+              ]
+            )
+          ])
+        ])
+      ])
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table table-striped m-4" }, [

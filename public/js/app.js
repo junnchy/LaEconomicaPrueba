@@ -66981,6 +66981,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     fichasDeStock: [],
     respuesta: null,
     fichaDeStock: {
+      producto_id: 0,
       cantidadActual: 0
     }
   },
