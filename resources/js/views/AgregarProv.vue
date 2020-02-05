@@ -1,5 +1,17 @@
 <template>
     <div>
+        <div class="row">
+            <div class="col-8">
+                <h3> <i class="fas fa-user-plus"></i> Ingreso de Nuevo Proveedor</h3>
+            </div>
+            <div class="col-4">
+                <router-link :to="{name:'listadoProveedores'}">
+                    <button class="btn btn-danger" @click="resetError()">
+                        Cancelar
+                    </button>
+                </router-link>
+            </div>
+        </div>
         <form @submit.prevent="agregarProveedor(proveedor)">
             <componente-fdatosprov v-bind:proveedor="proveedor"/>
             <button type="submit" class="btn btn-success btn-block">

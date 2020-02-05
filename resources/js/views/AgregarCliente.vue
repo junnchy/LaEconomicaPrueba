@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-8">
-                <h3>Ingreso de Nuevo Cliente</h3>
+                <h3> <i class="fas fa-address-card"></i> Ingreso de Nuevo Cliente</h3>
             </div>
             <div class="col-4">
                 <router-link :to="{name:'menuClientes'}">

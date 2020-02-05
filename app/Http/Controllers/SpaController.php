@@ -20,4 +20,9 @@ class SpaController extends Controller
     {
         return view('clientes.home');
     }
+
+    public function comercial()
+    {
+        return view('comercial.home');
+    }
 }

@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div class="col-8">
-                <h3>Editar Cliente</h3>
+                <h3><i class="fas fa-user-edit"></i> Editar Cliente</h3>
             </div>
             <div class="col-4">
                 <router-link :to="{name:'menuClientes'}">

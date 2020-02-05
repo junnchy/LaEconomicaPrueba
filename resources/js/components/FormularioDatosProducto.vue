@@ -42,7 +42,7 @@
                     :class="fPro" 
                     v-model="producto.proveedor">
                         <option selected :value="producto.proveedor" v-if="producto.id != null">{{producto.proveedor.id}}-{{producto.proveedor.nombre}}</option>
-                        <option v-for="proveedor in this.$store.state.proveedores.proveedores" :key="proveedor.id" :value='proveedor'>{{proveedor.id}} - {{proveedor.nombre}}</option>
+                        <option v-for="proveedor in this.$store.state.proveedores.proveedores" :key="proveedor.id" :value='proveedor'>{{proveedor.nombre}}</option>
                     </select>
                     <span class="invalid-feedback" role="alert" v-if="errors.proveedor_id != ''"> 
                         <strong>{{errors.proveedor_id[0]}}</strong>
@@ -61,7 +61,7 @@
             :class="fCat" 
             v-model="producto.categoria">
                 <option selected :value="producto.categoria" v-if="producto.proveedor_id === producto.proveedor.id">{{producto.categoria.id}}-{{producto.categoria.nombre}}</option>
-                <option v-for="(cate, index) in producto.proveedor.categorias" :key="index" :value='cate'>{{cate.id}} - {{cate.nombre}}</option>
+                <option v-for="(cate, index) in producto.proveedor.categorias" :key="index" :value='cate'>{{cate.nombre}}</option>
                 <span class="invalid-feedback" role="alert" v-if="errors.categoria_id != ''"> 
                     <strong>{{errors.categoria_id[0]}}</strong>
                 </span>

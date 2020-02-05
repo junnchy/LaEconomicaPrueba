@@ -4,23 +4,23 @@
             <label>
                 Categoria 
             </label> 
-            <select class="custom-select" v-model="fcat">
+            <select class="form-control" v-model="fcat">
                 <option selected :value=0>Todos</option>
-                <option v-for="(categoria, index) in categorias" :key="index" :value='categoria.id'>{{categoria.id}} - {{categoria.nombre}}</option>
+                <option v-for="(categoria, index) in categorias" :key="index" :value='categoria.id'>{{categoria.nombre}}</option>
             </select>
             <hr/>
             <label>
                 Proveedor 
             </label> 
-            <select class="custom-select" v-model="fpro">
+            <select class="form-control" v-model="fpro">
                 <option selected :value=0>Todos</option>
-                <option v-for="(proveedor, index) in proveedores" :key="index" :value='proveedor.id'>{{proveedor.id}} - {{proveedor.nombre}}</option>
+                <option v-for="(proveedor, index) in proveedores" :key="index" :value='proveedor.id'>{{proveedor.nombre}}</option>
             </select>
             <hr/>
             <label>
                 Estado
             </label> 
-            <select class="custom-select" v-model="epro">
+            <select class="form-control" v-model="epro">
                 <option selected :value="null">Todos</option>
                 <option :value="1">Activos </option>
                 <option :value="0">Inactivos </option>

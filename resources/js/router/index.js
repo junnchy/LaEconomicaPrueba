@@ -84,6 +84,11 @@ const routes = [
       name: 'fichaStock',
       component: () => import(/* webpackChunkName: "about" */ '../views/FichaDeStock.vue')
     },
+    {
+      path: '/comercial/menu',
+      name: 'menuComercial',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuComercial.vue')
+    },
 ]
 
 

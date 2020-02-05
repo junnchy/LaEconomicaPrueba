@@ -51,7 +51,7 @@
                 </tr>
             </tbody>
         </table>
-        <Paginacion v-bind:filtered="filtered_productos" v-bind:nro_filas="10"/>
+        <Paginacion v-bind:filtered="filtered_productos" v-bind:nro_filas="7"/>
     </div>
 </template>
 

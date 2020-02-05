@@ -3,8 +3,10 @@ import router from './router/index.js'
 import store from './store'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import * as VueGoogleMaps from 'vue2-google-maps' 
+import VueGoogleCharts from 'vue-google-charts'
 
 Vue.use( CKEditor );
+Vue.use(VueGoogleCharts);
 
 // import vuetify from './plugins/vuetify'
 
@@ -47,6 +49,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('componente-prueba', require('./components/ComponentePrueba.vue').default);
 Vue.component('componente-productos', require('./components/ComponenteProductos.vue').default);
 Vue.component('componente-clinetes', require('./components/ComponenteClientes.vue').default);
+Vue.component('componente-comercial', require('./components/ComponenteComercial.vue').default);
 Vue.component('componente-facp', require('./components/FormularioAgregarCategoriaProveedor.vue').default);
 Vue.component('componente-fcosto', require('./components/FormularioCostoProducto.vue').default);
 Vue.component('componente-frentabilidad', require('./components/FormularioRentabilidadProducto.vue').default);
