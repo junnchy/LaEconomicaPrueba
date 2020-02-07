@@ -31,6 +31,8 @@ Route::resource('/productos', 'ProductosController')->middleware('auth');
 
 Route::resource('/categoria', 'CategoriaController')->middleware('auth');
 
+Route::resource('/datosDeEmpresa', 'DatosEmpresaContoller')->middleware('auth');
+
 Route::resource('/clientes', 'ClienteController')->middleware('auth');
 
 Route::resource('/usuarios', 'UsersController')->middleware('auth');

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row shadow-sm p-3 text-white bg-dark rounded">
+        <div class="row shadow-sm p-3 text-white bg-secondary rounded">
             <div class="col-10">
                 <H1 v-if="fichaDeStock.producto.nombre">
                 <i class="fas fa-box-open"></i> Ficha de Stock: {{fichaDeStock.producto.nombre}}</H1> 

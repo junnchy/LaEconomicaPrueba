@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-8">
-                    <h3>Editar Producto</h3>
+                    <h3><i class="fas fa-edit"></i> Editar Producto</h3>
                 </div>
                 <div class="col-4">
                     <router-link :to="{name:'MenuProductos'}">
@@ -43,7 +43,9 @@
                 <componente-frentabilidad v-bind:producto="producto" v-if="tab === 1"></componente-frentabilidad>
             </div>
             <descripcionProducto v-bind:producto="producto" v-if="tab === 2"/>
-            <button type="submit" class="btn btn-warning btn-block sticky-button" v-if="respuesta === null">Guardar Cambios <i class="fas fa-save"></i></button>
+            <button type="submit" class="btn btn-warning btn-block sticky-button" v-if="respuesta === null">
+                Guardar Cambios <i class="fas fa-save"></i>
+            </button>
          
         </form>
     </div>

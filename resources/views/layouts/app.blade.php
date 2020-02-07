@@ -20,6 +20,7 @@
 
     @if(Auth::check())
         <meta name="user-name" content="{{Auth::user()->name}}">
+        <meta name="user-id" content="{{Auth::user()->id}}">
     @endif
 
 </head>
@@ -35,6 +36,25 @@
             <div class="navbar-nav-scroll" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Empresa 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <router-link :to="{name: 'datosEmpresa'}">
+                                <a class="dropdown-item" href="#">Datos de la Empresa</a>
+                            </router-link> 
+                            @auth
+                                @if (Auth::user()->hasRole('admin'))
+                                    <a class="dropdown-item" href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
+                                @endif
+                            @endauth
+                            <div class="dropdown-divider"></div>
+                            <router-link :to="{name: 'tablaDatosCliente'}" >
+                                <a class="dropdown-item" href="#">Tablas de Datos</a>
+                            </router-link>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Comercial 
@@ -72,17 +92,8 @@
                             <router-link :to="{name: 'agregarCliente'}" >
                                 <a class="dropdown-item" href="#">Agregar Cliente</a>
                             </router-link>
-                            <div class="dropdown-divider"></div>
-                            <router-link :to="{name: 'tablaDatosCliente'}" >
-                                <a class="dropdown-item" href="#">Tablas de Datos</a>
-                            </router-link>
                         </div>
                     </li>
-                    @auth
-                        @if (Auth::user()->hasRole('admin'))
-                            <a class="nav-link" href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
-                        @endif
-                    @endauth
                 </ul>
             </div>
 
@@ -99,12 +110,21 @@
                         </li>
                     @endif
                 @else
+                    <li class="nav-item dropdown mt-1">
+                        <!-- Hacerlo componente -->
+                        <componente-notificacionesnavbar/>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <img src="http://127.0.0.1:8000/assets/users/juanjr.jpg" alt="..." width="35px" class="rounded-circle">
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <!-- Ojo ver aca el tema de usuario y vendedor -->
+                            <a class="dropdown-item" href="{{route('vendedores.show', Auth::user()->id - 1)}}">
+                                Datos
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">

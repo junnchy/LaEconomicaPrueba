@@ -89,6 +89,16 @@ const routes = [
       name: 'menuComercial',
       component: () => import(/* webpackChunkName: "about" */ '../views/MenuComercial.vue')
     },
+    {
+      path: '/nuevoPrespuesto',
+      name: 'nuevoPrespuesto',
+      component: () => import(/* webpackChunkName: "about" */ '../views/NuevoPresupuesto.vue')
+    },
+    {
+      path: '/datosEmpresa',
+      name: 'datosEmpresa',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DatosEmpresa.vue')
+    },
 ]
 
 

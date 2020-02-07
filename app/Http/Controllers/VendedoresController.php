@@ -79,11 +79,17 @@ class VendedoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $vendedor = Vendedor::findOrFail($id);
-        $localidades = Localidad::all();
-        return view('vendedores.editar', compact('vendedor', 'localidades'));
+        if($request->ajax()){
+            $user = App\Vendedor::findOrFail($id);
+            return response()->json($user);
+        }else {
+            $vendedor = Vendedor::findOrFail($id);
+            $localidades = Localidad::all();
+            return view('vendedores.editar', compact('vendedor', 'localidades'));
+        }
+        
     }
 
     /**

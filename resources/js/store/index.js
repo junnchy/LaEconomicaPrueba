@@ -9,6 +9,8 @@ import categorias from './modules/categorias'
 import productos from './modules/productos'
 import mapas from './modules/mapas'
 import stock from './modules/stock'
+import usuarios from './modules/usuarios'
+import datos from './modules/comercial/empresa'
 
 
 
@@ -23,6 +25,8 @@ export default new Vuex.Store({
     categorias,
     productos,
     stock,
+    usuarios,
+    datos,
     mapas
   },
   state: {

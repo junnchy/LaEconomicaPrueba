@@ -1,20 +1,18 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-8">
+            <div class="col-9">
                 <h2> <i class="fas fa-box"></i> Detalle de Producto </h2>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <router-link :to="{name: 'editarProducto', params:{id: producto.id}}">
                     <button class="btn btn-warning">
                         Editar <i class="fas fa-pen"></i>
                     </button>
                 </router-link>
-                <router-link :to="{name: 'MenuProductos'}">
-                    <button class="btn btn-danger">
-                        Volver
-                    </button>
-                </router-link>
+                <button class="btn btn-outline-danger" @click="$router.go(-1)">
+                    Volver <i class="fas fa-arrow-alt-circle-left"></i>
+                </button>
             </div>
         </div>
         <div class="row">
@@ -64,21 +62,11 @@
                            <div class="alert alert-secondary" role="alert">
                                <i class="fas fa-clock"></i> <strong>Ultimo movimiento: </strong> {{producto.ultStock}}
                             </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <ajustemanualstock 
-                                    v-bind:nFicha="producto.ficha_stock.id" 
-                                    v-bind:cantAct="producto.ficha_stock.cantidadActual"
-                                    v-bind:producto_id="producto.ficha_stock.producto_id"/>
-                                </div>
-                                <div class="col-6">
-                                    <router-link :to="{name: 'fichaStock', params:{id: producto.ficha_stock.id}}">
-                                        <button class="btn btn-primary btn-block">
-                                            Ver ficha <i class="fas fa-book-open"></i>
-                                        </button>
-                                    </router-link>
-                                </div>
-                            </div>
+                            <router-link :to="{name: 'fichaStock', params:{id: producto.ficha_stock.id}}">
+                                <button class="btn btn-outline-primary btn-block">
+                                    Ver ficha <i class="fas fa-book-open"></i>
+                                </button>
+                            </router-link>
                        </div>
                    </div>
                 </div>
@@ -98,12 +86,8 @@
 
 <script>
 import {mapActions, mapState} from 'vuex'
-import ajustemanualstock from '../components/AjusteManualStock'
 export default {
     name:'DetalleProdoucto',
-    components:{
-        ajustemanualstock
-    },
     data() {
         return {
             id: this.$route.params.id,

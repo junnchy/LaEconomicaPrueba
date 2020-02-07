@@ -39,6 +39,7 @@ Vue.use(VueGoogleMaps, {
 // MAPS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 Vue.prototype.$userName = document.querySelector("meta[name='user-name']").getAttribute('content');
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 require('./bootstrap');
 
@@ -68,8 +69,7 @@ Vue.component('componente-leftbar', require('./components/LeftNavbar.vue').defau
 Vue.component('componente-filtroproductos', require('./components/ComponenteFiltrosDeProductos.vue').default);
 Vue.component('componente-LNBAddCliente', require('./components/LNBAddCliente.vue').default);
 Vue.component('componente-menuboton', require('../js/components/BotonMenu.vue').default);
-
-
+Vue.component('componente-notificacionesnavbar', require('../js/components/NavBarNotificaciones.vue').default);
 
 const app = new Vue({
     router,

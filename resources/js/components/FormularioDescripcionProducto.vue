@@ -28,7 +28,7 @@
                     <br>
                     <div class="d-flex flex-row mt-3">
                         <div class="mr-2 p-2">
-                            <button class="btn btn-outline-danger btn-sm mt-2"
+                            <button class="btn btn-outline-danger btn-sm "
                             type="button"
                             @click="borrarImagen()">
                                     Borrar <i class="fas fa-trash-alt"></i>
@@ -36,8 +36,8 @@
                         </div>
                         <div class="ml-2 p-2">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="imagenProducto" @change="imageChanged">
-                                <label class="custom-file-label" for="imagenProducto">{{imageName}}</label>
+                                <input type="file" class="custom-file-input form-control-sm" id="imagenProducto" @change="imageChanged">
+                                <label class="custom-file-label col-form-label-sm" for="imagenProducto">{{imageName}}</label>
                             </div>
                         </div>
                     </div>

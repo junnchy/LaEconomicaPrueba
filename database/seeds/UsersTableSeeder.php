@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
         $user->name = 'Administrador';
         $user->email = 'admin@gmail.com';
         $user->password = '12345678';
+        $user->imagen = 'http://127.0.0.1:8000/assets/users/juanjr.jpg';
         $user->save();
         $user->assignRole(Role::where('name', 'admin')->first());
     }

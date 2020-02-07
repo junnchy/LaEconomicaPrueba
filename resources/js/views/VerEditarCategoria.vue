@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-8">
-                    <h3>Editar Categoria</h3>
+                    <h3><i class="fas fa-edit"></i> Editar Categoria</h3>
                 </div>
                 <div class="col-4">
                     <router-link :to="{name:'listadoCategorias'}">
@@ -45,7 +45,9 @@
                 <button type="submit" class="btn btn-warning btn-block">Guardar Cambios <i class="fas fa-save"></i></button>
             </div>
         </form>
-        <h3 class="mt-5" v-if="categoria.cant_hijos > 0">SubCategorias</h3>
+        <h3 class="mt-5" v-if="categoria.cant_hijos > 0">
+            <i class="fas fa-sitemap"></i> SubCategorias
+        </h3>
         <div class="list-group mt-3">
             <button type="button"  @click="getCategoria(cat.id)" class="list-group-item list-group-item-action" 
             v-for="(cat, index) in categoria.children" :key="index">
