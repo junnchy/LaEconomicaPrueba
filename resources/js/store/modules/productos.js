@@ -85,12 +85,17 @@ export default {
           console.log(producto)
           axios.post('http://127.0.0.1:8000/productos', producto).then(function (response) {
             commit('setRespuesta', response.data.message)
+            Vue.$toast.open(response.data.message);
             console.log(response.data)
           })
           .catch(function (error) {
             console.log('algo va mal')
             console.log(error.response.data)
             commit('setError',error.response.data.errors)
+            Vue.$toast.open({
+                message: 'Upp! Hay Algun Error',
+                type: 'error',
+            });
           });
         },
         async getProducto({commit}, id){
@@ -110,11 +115,16 @@ export default {
           console.log(producto)
           axios.put(`http://127.0.0.1:8000/productos/${id}`, producto).then(function (response) {
             commit('setRespuesta', response.data.message)
+            Vue.$toast.open(response.data.message);
           })
           .catch(function (error) {
             console.log('algo va mal')
             console.log(error.response.data)
             commit('setError',error.response.data.errors)
+            Vue.$toast.open({
+                message: 'Upp! Hay Algun Error',
+                type: 'error',
+            });
           });
         },
         resetResp({commit}, resp){

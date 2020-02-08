@@ -26,7 +26,7 @@
         <div class="container mt-5">
             <form @submit.prevent="editarCliente(cliente)">
                 <componente-fdatoscliente v-bind:cliente="cliente"/>
-                <button type="submit" class="btn btn-warning btn-block sticky-button" v-if="respuestaS === null">
+                <button type="submit" class="btn btn-warning btn-block sticky-button">
                     Guardar Cambios <i class="fas fa-save"></i>
                 </button>
             </form>
@@ -52,6 +52,10 @@ export default {
     },
     created() {
         this.getCliente(this.id)
+    },
+    destroyed(){
+        this.resetError()
+        this.resetResp(null)
     },
     computed: {
         ...mapState('clientes', ['respuestaS', 'cliente']),    

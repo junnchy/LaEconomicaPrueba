@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Nuevo Presupuesto</h1>
-        <encabezado/>
+        <encabezado v-bind:npresupuesto="npre"/>
     </div>
 </template>
 
@@ -11,7 +11,7 @@ export default {
     data() {
         return {
             npre:{
-
+                cliente: null
             }
         }
     },

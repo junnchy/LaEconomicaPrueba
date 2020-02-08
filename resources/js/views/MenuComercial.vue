@@ -40,7 +40,10 @@
                         <estadisticaproducto/>
                     </div>
                     <div class="col-6">
-
+                        <h4 class="my-2">
+                            <i class="fas fa-boxes"></i> Tipo de Producto
+                        </h4>
+                        <estadisticalinea/>
                     </div>
                 </div>
             </div>
@@ -49,11 +52,13 @@
 <script>
 import estadisticaventas from '../components/EstadisticaVentas'
 import estadisticaproducto from '../components/EstadisticaTipoDeProductos'
+import estadisticalinea from '../components/Estadistica-Linea'
 import { mapActions, mapState } from 'vuex'
 export default {
     components:{
         estadisticaventas,
-        estadisticaproducto
+        estadisticaproducto,
+        estadisticalinea
     }, 
     created(){
         console.log(this.$userId)

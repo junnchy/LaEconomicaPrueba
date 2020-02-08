@@ -26,7 +26,7 @@ class DatosEmpresaTableSeeder extends Seeder
         $datos->logo = 'http://127.0.0.1:8000/assets/Logo-Completo(1).png';
         $datos->nroIgBrutos = 212944431;
         $datos->condicion_iva_id = 1;
-        $datos->inicio_actividades='2001-09-01';
+        $datos->inicio_actividades='2000-09-01';
         $datos->telefono= '4927575';
         $datos->direccion= 'Av. Soldado Aguirre 2895';
         $datos->localidad_id="82084310000";

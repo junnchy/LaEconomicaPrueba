@@ -3,8 +3,8 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">#ID</th>
-                    <th scope="col">IMG</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Imagen</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Precio</th>

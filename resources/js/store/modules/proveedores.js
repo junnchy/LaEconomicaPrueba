@@ -70,18 +70,28 @@ export default {
         axios.post('http://127.0.0.1:8000/proveedores', proveedor).then(function (response) {
           router.push({name: 'listadoProveedores'})
           commit('setRespuesta', response.data.message)
+          Vue.$toast.open(response.data.message);
         })
         .catch(function (error) {
           commit('setError',error.response.data.errors)
+          Vue.$toast.open({
+              message: 'Upp! Hay Algun Error',
+              type: 'error',
+          });
         });
       },
       editarProveedor({commit},proveedor){
         let id = proveedor.id
         axios.put(`http://127.0.0.1:8000/proveedores/${id}`, proveedor).then(function (response) {
           router.push({name: 'detalleProv', params:{id: proveedor.id}})
+          Vue.$toast.open(response.data.message);
         })
         .catch(function (error) {
           commit('setError',error.response.data.errors)
+          Vue.$toast.open({
+              message: 'Upp! Hay Algun Error',
+              type: 'error',
+          });
         });
       },
       agregarCategoriaProveedor({commit, dispatch},[categoria, proveedor, descuento]){

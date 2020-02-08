@@ -4,7 +4,14 @@ import store from './store'
 import CKEditor from '@ckeditor/ckeditor5-vue'
 import * as VueGoogleMaps from 'vue2-google-maps' 
 import VueGoogleCharts from 'vue-google-charts'
+import 'vue-select/dist/vue-select.css';
+import vSelect from 'vue-select'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/index.css';
 
+
+
+Vue.use(VueToast);
 Vue.use( CKEditor );
 Vue.use(VueGoogleCharts);
 
@@ -46,6 +53,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+Vue.component('v-select', vSelect)
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('componente-prueba', require('./components/ComponentePrueba.vue').default);
 Vue.component('componente-productos', require('./components/ComponenteProductos.vue').default);
@@ -70,6 +78,7 @@ Vue.component('componente-filtroproductos', require('./components/ComponenteFilt
 Vue.component('componente-LNBAddCliente', require('./components/LNBAddCliente.vue').default);
 Vue.component('componente-menuboton', require('../js/components/BotonMenu.vue').default);
 Vue.component('componente-notificacionesnavbar', require('../js/components/NavBarNotificaciones.vue').default);
+
 
 const app = new Vue({
     router,

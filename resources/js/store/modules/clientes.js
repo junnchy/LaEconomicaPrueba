@@ -78,11 +78,18 @@ export default {
         },
         agregarCliente({commit}, cliente){
             axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
+                console.log(response.data.cliente)
                 commit('setRespuestaServidor', response.data.message)
+                commit('setCliente', response.data.cliente)
+                Vue.$toast.open(response.data.message);
             })
             .catch(function (error) {
                 commit('setError',error.response.data.errors)
                 console.log(error.response.data)
+                Vue.$toast.open({
+                    message: 'Upp! Hay Algun Error',
+                    type: 'error',
+                });
             });
         },
         resetResp({commit}, resp){
@@ -97,6 +104,7 @@ export default {
             let id = cliente.id
             axios.put(`http://127.0.0.1:8000/clientes/${id}`, cliente).then(function (response) {
               commit('setRespuestaServidor', response.data.message)
+              Vue.$toast.open(response.data.message);
             })
             .catch(function (error) {
                 commit('setError',error.response.data.errors)

@@ -13,7 +13,6 @@ import usuarios from './modules/usuarios'
 import datos from './modules/comercial/empresa'
 
 
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({

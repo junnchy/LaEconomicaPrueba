@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="row shadow-sm p-3 text-center text-white bg-secondary rounded">
+    <div class="py-3 border border-secondary rounded">
+        <div class="row shadow-sm p-3 text-center  bg-ecogray border border-secondary rounded">
             <div class="col-12">
                 <h2>Datos de La Empresa <i class="fas fa-building"></i></h2> 
             </div>
@@ -48,3 +48,9 @@ export default {
     
 }
 </script>
+
+<style >
+.bg-ecogray{
+  background-color: #E9ECEF !important;
+}
+</style>

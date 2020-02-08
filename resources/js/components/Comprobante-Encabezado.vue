@@ -5,19 +5,12 @@
                 <div class="col-9">
                     <div class="row">
                         <div class="col-6">
-                            <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">  
-                                <form class="px-4 py-2">
-                                    <input class="form-control mt-3" type="search" :placeholder="place" aria-label="Search" v-model="search">
-                                </form>
-                                <option v-for="(cliente, index) in filtered_clientes" :key="index">{{cliente.nombre}}</option>
-                            </select>
-
-                            <div id="myDropdown" class="dropdown-content">
-                                <input class="form-control mt-3" type="search" :placeholder="place" aria-label="Search" v-model="search">
-                                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
-                                    <option v-for="(cliente, index) in filtered_clientes" :key="index">{{cliente.nombre}}</option>
-                                </select>
-                            </div>
+                            <v-select 
+                                label="nombre"
+                                @input="setCliente"
+                                :options="clientes"
+                                :value="npresupuesto.cliente"
+                            ></v-select>
                         </div>
                         <div class="col-6">
                             <label>Razon Social</label>
@@ -49,6 +42,13 @@ export default {
      data() {
         return {
             place: 'Cliente',
+            cliente: null
+        }
+    },
+    props:{
+        npresupuesto:{
+            type:Object,
+            required: true
         }
     },
     created(){
@@ -57,7 +57,10 @@ export default {
     },
     methods:{
         ...mapActions('datos', ['getDatos']),
-        ...mapActions('clientes', ['getClientes'])
+        ...mapActions('clientes', ['getClientes']),
+        setCliente(val){
+            this.npresupuesto.cliente = val
+        }
     },
     computed:{
         ...mapState('datos', ['datos']),
