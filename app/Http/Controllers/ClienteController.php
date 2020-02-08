@@ -24,7 +24,7 @@ class ClienteController extends Controller
     {
 
         if($request->ajax()){
-            $clientes = Cliente::all();
+            $clientes = Cliente::with('localidad.provincia', 'condicion_iva')->get();
             return response()->json($clientes);
             
         } else {

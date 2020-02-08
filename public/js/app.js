@@ -4038,7 +4038,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
@@ -67645,11 +67644,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    usuarioActual: {}
+    usuarioActual: {},
+    vendedorActual: {}
   },
   mutations: {
     setUsuario: function setUsuario(state, usuario) {
       state.usuarioActual = usuario;
+    },
+    setVendedor: function setVendedor(state, vendedor) {
+      state.vendedorActual = vendedor;
     }
   },
   actions: {
@@ -67688,6 +67691,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getUsuarioActual;
+    }(),
+    getVendedorActual: function () {
+      var _getVendedorActual = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2, id) {
+        var commit, usuario;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref2.commit;
+                _context2.next = 3;
+                return axios.get("http://127.0.0.1:8000/vendedores/".concat(id)).then(function (response) {
+                  console.log(response);
+                  commit('setVendedor', response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response);
+                });
+
+              case 3:
+                usuario = _context2.sent;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function getVendedorActual(_x3, _x4) {
+        return _getVendedorActual.apply(this, arguments);
+      }
+
+      return getVendedorActual;
     }()
   }
 });

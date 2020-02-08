@@ -23,6 +23,7 @@ class CreateVendedoresTable extends Migration
             $table->string('celular')->nullable();
             $table->string('email')->nullable();
             $table->string('direccion')->nullable();
+            $table->string('puesto');
             $table->unsignedBigInteger('localidad_id')->nullable();
             $table->foreign('localidad_id')->references('id')->on('localidades');
             $table->unsignedBigInteger('user_id')->nullable();

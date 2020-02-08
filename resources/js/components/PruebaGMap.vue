@@ -4,8 +4,7 @@
     :center="latlog"
     :zoom="15"
     map-type-id="roadmap"
-    style="width: block; height: 300px"
-    >
+    style="width: block; height: 300px">
         <GmapMarker
             key=1
             :position="latlog"

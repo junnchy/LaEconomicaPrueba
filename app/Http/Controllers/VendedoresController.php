@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateVendedorRequest;
 use App\Vendedor;
 use App\Localidad;
 use App\User;
+
 use Spatie\Permission\Models\Role;
 
 
@@ -57,8 +58,10 @@ class VendedoresController extends Controller
         $user->password = $request->password;
         $user->save();
         $user->assignRole(Role::where('name','vend')->first());
-        $vendedor = new Vendedor();
+        $vendedor = new App\Vendedor();
+        $vendedor->id = $user->id;
         $vendedor->user_id = $user->id;
+        $vendedor->puesto = $request->puesto;
         $vendedor->nombre = $request->nombre;
         $vendedor->cuil = $request->cuil;
         $vendedor->dni = $request->dni;
@@ -82,7 +85,7 @@ class VendedoresController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $user = App\Vendedor::findOrFail($id);
+            $user = Vendedor::findOrFail($id);
             return response()->json($user);
         }else {
             $vendedor = Vendedor::findOrFail($id);

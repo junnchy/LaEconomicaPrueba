@@ -1,6 +1,6 @@
 <template>
     <div class="py-3 border border-secondary rounded">
-        <div class="row shadow-sm p-3 text-center  bg-ecogray border border-secondary rounded">
+        <div class="row shadow-sm p-3 text-center bg-ecogray border border-secondary rounded">
             <div class="col-12">
                 <h2>Datos de La Empresa <i class="fas fa-building"></i></h2> 
             </div>

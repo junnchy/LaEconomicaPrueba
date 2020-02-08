@@ -48,6 +48,16 @@
                         />
                     </div>
                     <div class="form-group">
+                        <label>Puesto</label>
+                        <input 
+                            type="number"
+                            class="form-control"
+                            name="puesto"
+                            placeholder="N Puesto"
+                            value="{{old('puesto')}}"
+                        />
+                    </div>
+                    <div class="form-group">
                         <label>DNI</label>
                         <input 
                             type="number"

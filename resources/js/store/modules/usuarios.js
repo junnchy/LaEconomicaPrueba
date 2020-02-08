@@ -2,10 +2,14 @@ export default {
     namespaced: true,
     state:{
         usuarioActual:{},
+        vendedorActual:{}
     },
     mutations: {
         setUsuario(state, usuario){
             state.usuarioActual = usuario
+        },
+        setVendedor(state, vendedor){
+            state.vendedorActual = vendedor
         }
     },
     actions:{
@@ -13,6 +17,16 @@ export default {
             let usuario = await axios.get(`http://127.0.0.1:8000/usuarios/${id}`).then(response => {
                 console.log(response)
                 commit('setUsuario', response.data)
+            })
+            .catch(function (error) {
+                console.log('algo va mal')
+                console.log(error.response)
+            });
+        },
+        async getVendedorActual({commit}, id){
+            let usuario = await axios.get(`http://127.0.0.1:8000/vendedores/${id}`).then(response => {
+                console.log(response)
+                commit('setVendedor', response.data)
             })
             .catch(function (error) {
                 console.log('algo va mal')
