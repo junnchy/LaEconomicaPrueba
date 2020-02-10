@@ -93,7 +93,7 @@ import {mapActions, mapState} from 'vuex'
                 this.agregarLinea(this.nLDS),
                 this.ajustarStock(this.nLDS),
                 this.estado = false
-            }
+            },            
         },
         created() {
             this.nLDS.ficha_id = this.nFicha;

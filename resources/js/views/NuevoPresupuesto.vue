@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import {mapActions, mapState, mapGetters} from 'vuex'
 import encabezado from '../components/Comprobante-Encabezado'
 import productos from '../components/Comprobrante-Productos'
 export default {
@@ -26,11 +27,13 @@ export default {
                     }
                 },
                 fecha: '',
-                vendedor_id: null
+                vendedor_id: null,
+                lineas:[]
             }
         }
     },
     methods:{
+        ...mapActions(['cambiarEstado']),
         getSetFechaActual(){
             var today = new Date();
             var dd = String(today.getDate());
@@ -43,6 +46,7 @@ export default {
     },
     created(){
         this.getSetFechaActual()
+        this.cambiarEstado(5)
     },
     components:{
         encabezado,

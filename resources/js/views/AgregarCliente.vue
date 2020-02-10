@@ -1,7 +1,6 @@
 <template>
     <div>
         <div class="row">
-
             <div class="col-8">
                 <h3> <i class="fas fa-address-card"></i> Ingreso de Nuevo Cliente</h3>
             </div>
