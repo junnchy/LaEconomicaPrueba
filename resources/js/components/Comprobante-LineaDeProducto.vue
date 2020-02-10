@@ -5,6 +5,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Descripcion</th>
+                    <th scope="col">Disponibles</th>
                     <th scope="col" class="w-10">Cantidad</th>
                     <th scope="col">Precio unidad</th>
                     <th scope="col">Subtotal</th>
@@ -14,27 +15,33 @@
                 <tr v-for="(linea, index) in npresupuesto.lineas" :key="index">
                     <th scope="row">{{linea.producto.id}}</th>
                     <td>{{linea.producto.nombre}}</td>
+                    <td>{{linea.producto.ficha_stock.cantidadActual}}</td>
                     <td class="w-10">
                         <input type="numer" class="form-control" v-model="linea.cantidad">
                     </td>
-                    <td>{{linea.producto.precioVenta}}</td>
-                    <td>{{subtotal(linea)}}</td>
+                    <td>${{linea.producto.precioVenta}}</td>
+                    <td>${{subtotal(linea)}}</td>
                     <td>
                         <button class="btn btn-outline-danger border-0" @click="deleteLinea(index)">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">{{total}}</th>
-                    <th scope="col"></th>
-                </tr>
             </tbody>
         </table>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-3">
+                <div class="alert alert-info">
+                    <p>Total</p>
+                    <h3>
+                        ${{total}}
+                    </h3>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>

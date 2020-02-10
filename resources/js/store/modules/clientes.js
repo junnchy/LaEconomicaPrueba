@@ -76,11 +76,12 @@ export default {
                 commit('setCategoriasCli', c)
             }
         },
-        agregarCliente({commit}, cliente){
+        agregarCliente({commit, dispatch}, cliente){
             axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
                 console.log(response.data.cliente)
                 commit('setRespuestaServidor', response.data.message)
                 commit('setCliente', response.data.cliente)
+                dispatch('getClientes')
                 Vue.$toast.open(response.data.message);
             })
             .catch(function (error) {

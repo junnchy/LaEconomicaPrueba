@@ -45085,44 +45085,40 @@ var render = function() {
                   : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "container mt-5" }, [
-                  _vm.respuestaS === null
-                    ? _c(
-                        "form",
-                        {
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.agregarCliente(_vm.ncliente)
-                            }
-                          }
-                        },
-                        [
-                          _c("componente-fdatoscliente", {
-                            attrs: { cliente: _vm.ncliente }
-                          }),
-                          _vm._v(" "),
-                          _vm.respuestaS === null
-                            ? _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-success btn-block sticky-button",
-                                  attrs: { type: "submit" }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                 Agregar Cliente "
-                                  ),
-                                  _c("i", {
-                                    staticClass: "fas fa-check-circle"
-                                  })
-                                ]
-                              )
-                            : _vm._e()
-                        ],
-                        1
-                      )
-                    : _vm._e()
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.agregarCliente(_vm.ncliente)
+                        }
+                      }
+                    },
+                    [
+                      _c("componente-fdatoscliente", {
+                        attrs: { cliente: _vm.ncliente }
+                      }),
+                      _vm._v(" "),
+                      _vm.respuestaS === null
+                        ? _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-success btn-block sticky-button",
+                              attrs: { type: "submit" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                 Agregar Cliente "
+                              ),
+                              _c("i", { staticClass: "fas fa-check-circle" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
                 ])
               ])
             ])
@@ -66879,11 +66875,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return getCategoriasCli;
     }(),
     agregarCliente: function agregarCliente(_ref3, cliente) {
-      var commit = _ref3.commit;
+      var commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
       axios.post('http://127.0.0.1:8000/clientes', cliente).then(function (response) {
         console.log(response.data.cliente);
         commit('setRespuestaServidor', response.data.message);
         commit('setCliente', response.data.cliente);
+        dispatch('getClientes');
         Vue.$toast.open(response.data.message);
       })["catch"](function (error) {
         commit('setError', error.response.data.errors);

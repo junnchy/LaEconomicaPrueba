@@ -308,6 +308,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     npresupuesto: {
@@ -3684,76 +3691,86 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        [
-          _vm._l(_vm.npresupuesto.lineas, function(linea, index) {
-            return _c("tr", { key: index }, [
-              _c("th", { attrs: { scope: "row" } }, [
-                _vm._v(_vm._s(linea.producto.id))
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(linea.producto.nombre))]),
-              _vm._v(" "),
-              _c("td", { staticClass: "w-10" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: linea.cantidad,
-                      expression: "linea.cantidad"
+        _vm._l(_vm.npresupuesto.lineas, function(linea, index) {
+          return _c("tr", { key: index }, [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(linea.producto.id))
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(linea.producto.nombre))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(linea.producto.ficha_stock.cantidadActual))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticClass: "w-10" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: linea.cantidad,
+                    expression: "linea.cantidad"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "numer" },
+                domProps: { value: linea.cantidad },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "numer" },
-                  domProps: { value: linea.cantidad },
+                    _vm.$set(linea, "cantidad", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v("$" + _vm._s(linea.producto.precioVenta))]),
+            _vm._v(" "),
+            _c("td", [_vm._v("$" + _vm._s(_vm.subtotal(linea)))]),
+            _vm._v(" "),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-danger border-0",
                   on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(linea, "cantidad", $event.target.value)
+                    click: function($event) {
+                      return _vm.deleteLinea(index)
                     }
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(linea.producto.precioVenta))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(_vm.subtotal(linea)))]),
-              _vm._v(" "),
-              _c("td", [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-danger border-0",
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteLinea(index)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "fas fa-trash" })]
-                )
-              ])
+                },
+                [_c("i", { staticClass: "fas fa-trash" })]
+              )
             ])
-          }),
-          _vm._v(" "),
-          _c("tr", [
-            _c("th", { attrs: { scope: "col" } }),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } }, [_vm._v(_vm._s(_vm.total))]),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } })
           ])
-        ],
-        2
+        }),
+        0
       )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-3" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-3" }, [
+        _c("div", { staticClass: "alert alert-info" }, [
+          _c("p", [_vm._v("Total")]),
+          _vm._v(" "),
+          _c("h3", [
+            _vm._v(
+              "\n                    $" +
+                _vm._s(_vm.total) +
+                "\n                "
+            )
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -3767,6 +3784,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripcion")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Disponibles")]),
         _vm._v(" "),
         _c("th", { staticClass: "w-10", attrs: { scope: "col" } }, [
           _vm._v("Cantidad")
