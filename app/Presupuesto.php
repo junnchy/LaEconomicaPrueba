@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\LineaPrespuesto;
+use App\LineaPresupuesto;
 use App\Cliente;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ class Presupuesto extends Model
 {
     public function lineas()
     {
-        return $this->hasMany(LineaPrespuesto::class);
+        return $this->hasMany(LineaPresupuesto::class, 'prespuesto_id', 'id');
     }
 
     public function cliente()

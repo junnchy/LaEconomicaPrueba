@@ -1550,6 +1550,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DetalleCliente',
@@ -3807,7 +3814,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-3 " }, [
-        _c("div", { staticClass: "alert alert-info" }, [
+        _c("div", { staticClass: "alert alert-primary" }, [
           _c("p", [_vm._v("Total")]),
           _vm._v(" "),
           _c("h3", [
@@ -6115,17 +6122,32 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("li", { staticClass: "list-group-item" }, [
-        _vm.cliente.categoria != undefined
-          ? _c("strong", [_vm._v("Tipo de Cliente: ")])
-          : _vm._e(),
-        _vm._v(" " + _vm._s(_vm.cliente.categoria.denominacion))
-      ]),
+      _vm.cliente.categoria
+        ? _c("li", { staticClass: "list-group-item" }, [
+            _c("strong", [_vm._v("Tipo de Cliente: ")]),
+            _vm._v(" " + _vm._s(_vm.cliente.categoria.denominacion))
+          ])
+        : _vm._e(),
       _vm._v(" "),
       _c("li", { staticClass: "list-group-item" }, [
         _c("strong", [_vm._v("Ultima Actualizacion: ")]),
         _vm._v(" " + _vm._s(_vm.cliente.updated_at))
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container mt-5" }, [
+      _c(
+        "ul",
+        { staticClass: "list-group mt-3" },
+        _vm._l(_vm.cliente.presupuestos, function(presupuesto, index) {
+          return _c("li", { key: index, staticClass: "list-group-item" }, [
+            _vm._v(
+              "\n                " + _vm._s(presupuesto) + "\n            "
+            )
+          ])
+        }),
+        0
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -7956,12 +7978,12 @@ var staticRenderFns = [
         _c(
           "button",
           {
-            staticClass: "btn btn-success btn-block w-75",
+            staticClass: "btn btn-warning btn-block w-75",
             attrs: { type: "submit" }
           },
           [
             _vm._v("\n                Grabar Prespuesto "),
-            _c("i", { staticClass: "fas fa-check-circle" })
+            _c("i", { staticClass: "fas fa-save" })
           ]
         )
       ]

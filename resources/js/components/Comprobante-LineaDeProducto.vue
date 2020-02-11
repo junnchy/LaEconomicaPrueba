@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-3 ">
-                <div class="alert alert-info">
+                <div class="alert alert-primary">
                     <p>Total</p>
                     <h3>
                         ${{total}}

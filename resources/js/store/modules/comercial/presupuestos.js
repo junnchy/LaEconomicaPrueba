@@ -12,7 +12,7 @@ export default {
     actions:{
         agregarPresupuesto({commit}, presupuesto){
             console.log(presupuesto)
-            var dd = presupuesto.fecha.getDate();
+            var dd = presupuesto.fecha.getDay();
             var mm = presupuesto.fecha.getMonth(); //January is 0!
             var yyyy = presupuesto.fecha.getFullYear();
             presupuesto.fecha = (yyyy+'-'+mm+'-'+dd);

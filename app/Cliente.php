@@ -34,6 +34,6 @@ class Cliente extends Model
 
     public function presupuestos()
     {
-        return $this->hasMany(Prespuesto::class, 'cliente_id', 'id');
+        return $this->hasMany('App\Presupuesto', 'cliente_id', 'id');
     }
 }

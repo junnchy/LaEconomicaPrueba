@@ -23,9 +23,16 @@
             <li class="list-group-item"><strong>Celular: </strong> {{cliente.celular}}</li>
             <li class="list-group-item"><strong>Email: </strong> {{cliente.email}}</li>
             <li class="list-group-item" v-if="cliente.condicion_iva"><strong>Condicon de Iva: </strong> {{cliente.condicion_iva.denominacion}}</li>
-            <li class="list-group-item"><strong v-if="cliente.categoria != undefined">Tipo de Cliente: </strong> {{cliente.categoria.denominacion}}</li>
+            <li class="list-group-item" v-if="cliente.categoria"><strong>Tipo de Cliente: </strong> {{cliente.categoria.denominacion}}</li>
             <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{cliente.updated_at}}</li>
         </ul>
+        <div class="container mt-5">
+            <ul class="list-group mt-3">
+                <li class="list-group-item" v-for="(presupuesto, index) in cliente.presupuestos" :key="index">
+                    {{presupuesto}}
+                </li>
+            </ul>
+        </div>
         <div class="container mt-5">
             <h3><i class="fas fa-map-marker-alt"></i> Ubicacion en Mapa: </h3>
             <componente-gmap v-bind:cliente="cliente"/>

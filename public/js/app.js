@@ -45071,7 +45071,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "alert alert-success alert-dismissible fade show mt-4"
+                          "alert alert-success alert-dismissible fade show"
                       },
                       [
                         _vm._v(
@@ -45084,7 +45084,7 @@ var render = function() {
                     )
                   : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "container mt-5" }, [
+                _c("div", { staticClass: "container" }, [
                   _c(
                     "form",
                     {
@@ -45329,32 +45329,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "GmapMap",
-        {
-          staticStyle: { width: "block", height: "300px" },
-          attrs: { center: _vm.latlog, zoom: 15, "map-type-id": "roadmap" }
-        },
+  return _vm.cliente.localidad
+    ? _c(
+        "div",
         [
-          _c("GmapMarker", {
-            key: "1",
-            attrs: { position: _vm.latlog, clickable: true, draggable: true },
-            on: {
-              click: function($event) {
-                _vm.center = _vm.buscar
-              }
-            }
-          })
+          _c(
+            "GmapMap",
+            {
+              staticStyle: { width: "block", height: "300px" },
+              attrs: { center: _vm.latlog, zoom: 15, "map-type-id": "roadmap" }
+            },
+            [
+              _c("GmapMarker", {
+                key: "1",
+                attrs: {
+                  position: _vm.latlog,
+                  clickable: true,
+                  draggable: true
+                },
+                on: {
+                  click: function($event) {
+                    _vm.center = _vm.buscar
+                  }
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v("\r\n    " + _vm._s(_vm.buscar) + "\r\n")
         ],
         1
-      ),
-      _vm._v("\r\n    " + _vm._s(_vm.buscar) + "\r\n")
-    ],
-    1
-  )
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -67096,7 +67102,7 @@ __webpack_require__.r(__webpack_exports__);
     agregarPresupuesto: function agregarPresupuesto(_ref, presupuesto) {
       var commit = _ref.commit;
       console.log(presupuesto);
-      var dd = presupuesto.fecha.getDate();
+      var dd = presupuesto.fecha.getDay();
       var mm = presupuesto.fecha.getMonth(); //January is 0!
 
       var yyyy = presupuesto.fecha.getFullYear();

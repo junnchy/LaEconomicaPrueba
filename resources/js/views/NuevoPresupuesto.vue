@@ -9,8 +9,8 @@
             <encabezado v-bind:npresupuesto="npre"/>
             <productos v-bind:npresupuesto="npre"/>
             <div class="d-flex justify-content-center sticky-button">
-                <button type="submit" class="btn btn-success btn-block w-75">
-                    Grabar Prespuesto <i class="fas fa-check-circle"></i>
+                <button type="submit" class="btn btn-warning btn-block w-75">
+                    Grabar Prespuesto <i class="fas fa-save"></i>
                 </button>
             </div>
         </form>

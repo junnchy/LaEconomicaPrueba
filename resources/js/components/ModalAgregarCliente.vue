@@ -21,13 +21,13 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                         <div class="alert alert-success alert-dismissible fade show mt-4" v-if="respuestaS != null">
+                         <div class="alert alert-success alert-dismissible fade show" v-if="respuestaS != null">
                             {{respuestaS}} 
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="container mt-5">
+                        <div class="container">
                             <form @submit.prevent="agregarCliente(ncliente)">
                                 <componente-fdatoscliente v-bind:cliente="ncliente"/>
                                 <button type="submit" class="btn btn-success btn-block sticky-button" v-if="respuestaS === null">

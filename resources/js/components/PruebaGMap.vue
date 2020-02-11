@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if="cliente.localidad">
     <GmapMap
     :center="latlog"
     :zoom="15"
