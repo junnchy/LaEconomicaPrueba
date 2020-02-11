@@ -43,6 +43,10 @@ Route::resource('/depositos', 'DepositoController')->middleware('auth');
 
 Route::resource('/fichaStock', 'FichaDeStockController')->middleware('auth');
 
+Route::resource('/presupuestos', 'PresupuestoController')->middleware('auth');
+
+Route::resource('/lineaPresupuesto', 'LineaPresupuestoController')->middleware('auth');
+
 Route::resource('/lineaFichaStock', 'LineaFichaStockController')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -29,11 +29,17 @@
                 </tr>
             </tbody>
         </table>
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-3"></div>
-            <div class="col-3"></div>
-            <div class="col-3">
+        <hr>
+        <div class="row mt-2">
+            <div class="col-9">
+                <div class="form-group text-left">
+                    <textarea class="form-control" 
+                    placeholder="Detalles del Prespuesto" 
+                    id="detalle_presupuesto" v-model="npresupuesto.detalles" 
+                    rows="3"></textarea>
+                </div>
+            </div>
+            <div class="col-3 ">
                 <div class="alert alert-info">
                     <p>Total</p>
                     <h3>
@@ -59,6 +65,10 @@ export default {
         },
         deleteLinea(index){
             this.npresupuesto.lineas.splice(index, 1);
+            Vue.$toast.open({
+                    message: 'Producto Borrado',
+                    type: 'error',
+                });
         }
     },
     computed: {
@@ -67,6 +77,7 @@ export default {
             this.npresupuesto.lineas.forEach(linea => {
                aux += parseInt(linea.cantidad) * linea.producto.precioVenta
             });
+            this.npresupuesto.total = aux
             return aux
         }
     },

@@ -6,6 +6,7 @@ use App\CategoriaClientes;
 use App\CondicionIva;
 use App\Localidad;
 use App\Provincia;
+use App\Presupuesto;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,5 +30,10 @@ class Cliente extends Model
     public function provincia()
     {
         return $this->belongsTo(Provincia::class);
+    }
+
+    public function presupuestos()
+    {
+        return $this->hasMany(Prespuesto::class, 'cliente_id', 'id');
     }
 }

@@ -315,6 +315,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     npresupuesto: {
@@ -329,6 +335,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteLinea: function deleteLinea(index) {
       this.npresupuesto.lineas.splice(index, 1);
+      Vue.$toast.open({
+        message: 'Producto Borrado',
+        type: 'error'
+      });
     }
   },
   computed: {
@@ -337,6 +347,7 @@ __webpack_require__.r(__webpack_exports__);
       this.npresupuesto.lineas.forEach(function (linea) {
         aux += parseInt(linea.cantidad) * linea.producto.precioVenta;
       });
+      this.npresupuesto.total = aux;
       return aux;
     }
   }
@@ -485,6 +496,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProductos']), {
     setProducto: function setProducto(val) {
+      Vue.$toast.open('Producto Agregado');
       var li = {
         producto: val,
         cantidad: 1
@@ -2583,6 +2595,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2600,12 +2620,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         fecha: '',
+        detalles: '',
+        total: 0,
         vendedor_id: null,
         lineas: []
       }
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['agregarPresupuesto']), {
     getSetFechaActual: function getSetFechaActual() {
       var today = new Date();
       var dd = String(today.getDate());
@@ -2952,7 +2974,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.bg-ecogray{\r\n  background-color: #E9ECEF !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.bg-ecogray{\nbackground-color: #E9ECEF !important;\n}\n.sticky-button {\nposition: sticky;\nposition: -webkit-sticky;\nposition: -moz-sticky;\nposition: -ms-sticky;\nposition: -o-sticky;\nbottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -3751,14 +3773,40 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-3" }),
+    _c("hr"),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mt-2" }, [
+      _c("div", { staticClass: "col-9" }, [
+        _c("div", { staticClass: "form-group text-left" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.npresupuesto.detalles,
+                expression: "npresupuesto.detalles"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              placeholder: "Detalles del Prespuesto",
+              id: "detalle_presupuesto",
+              rows: "3"
+            },
+            domProps: { value: _vm.npresupuesto.detalles },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.npresupuesto, "detalles", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-3" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "col-3 " }, [
         _c("div", { staticClass: "alert alert-info" }, [
           _c("p", [_vm._v("Total")]),
           _vm._v(" "),
@@ -7852,18 +7900,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "py-3 border border-secondary rounded" },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("encabezado", { attrs: { npresupuesto: _vm.npre } }),
-      _vm._v(" "),
-      _c("productos", { attrs: { npresupuesto: _vm.npre } })
-    ],
-    1
-  )
+  return _c("div", { staticClass: "py-3 border border-secondary rounded" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.agregarPresupuesto(_vm.npre)
+          }
+        }
+      },
+      [
+        _c("encabezado", { attrs: { npresupuesto: _vm.npre } }),
+        _vm._v(" "),
+        _c("productos", { attrs: { npresupuesto: _vm.npre } }),
+        _vm._v(" "),
+        _vm._m(1)
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -7883,6 +7942,28 @@ var staticRenderFns = [
             _c("i", { staticClass: "fas fa-file-alt" })
           ])
         ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "d-flex justify-content-center sticky-button" },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success btn-block w-75",
+            attrs: { type: "submit" }
+          },
+          [
+            _vm._v("\n                Grabar Prespuesto "),
+            _c("i", { staticClass: "fas fa-check-circle" })
+          ]
+        )
       ]
     )
   }

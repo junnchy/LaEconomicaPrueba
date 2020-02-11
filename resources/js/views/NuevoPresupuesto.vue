@@ -5,8 +5,16 @@
                 <h1>Nuevo Presupuesto <i class="fas fa-file-alt"></i></h1>
             </div>
         </div>
-        <encabezado v-bind:npresupuesto="npre"/>
-        <productos v-bind:npresupuesto="npre"/>
+        <form @submit.prevent="agregarPresupuesto(npre)">
+            <encabezado v-bind:npresupuesto="npre"/>
+            <productos v-bind:npresupuesto="npre"/>
+            <div class="d-flex justify-content-center sticky-button">
+                <button type="submit" class="btn btn-success btn-block w-75">
+                    Grabar Prespuesto <i class="fas fa-check-circle"></i>
+                </button>
+            </div>
+        </form>
+        
 
     </div>
 </template>
@@ -19,7 +27,7 @@ export default {
     data() {
         return {
             npre:{
-                cliente: {
+                cliente:{
                     id: null, nombre:'Cliente',
                     direccion: '', localidad: '', 
                     condicion_iva:{ 
@@ -27,6 +35,8 @@ export default {
                     }
                 },
                 fecha: '',
+                detalles: '',
+                total: 0,
                 vendedor_id: null,
                 lineas:[]
             }
@@ -34,6 +44,7 @@ export default {
     },
     methods:{
         ...mapActions(['cambiarEstado']),
+        ...mapActions('presupuestos',['agregarPresupuesto']),
         getSetFechaActual(){
             var today = new Date();
             var dd = String(today.getDate());
@@ -56,7 +67,15 @@ export default {
 </script>
 
 <style >
-.bg-ecogray{
-  background-color: #E9ECEF !important;
-}
+    .bg-ecogray{
+    background-color: #E9ECEF !important;
+    }
+    .sticky-button {
+    position: sticky;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    bottom: 10px;
+    }
 </style>

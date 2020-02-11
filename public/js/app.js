@@ -66425,6 +66425,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_stock__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/stock */ "./resources/js/store/modules/stock.js");
 /* harmony import */ var _modules_usuarios__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/usuarios */ "./resources/js/store/modules/usuarios.js");
 /* harmony import */ var _modules_comercial_empresa__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/comercial/empresa */ "./resources/js/store/modules/comercial/empresa.js");
+/* harmony import */ var _modules_comercial_presupuestos__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/comercial/presupuestos */ "./resources/js/store/modules/comercial/presupuestos.js");
+
 
 
 
@@ -66450,6 +66452,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     stock: _modules_stock__WEBPACK_IMPORTED_MODULE_10__["default"],
     usuarios: _modules_usuarios__WEBPACK_IMPORTED_MODULE_11__["default"],
     datos: _modules_comercial_empresa__WEBPACK_IMPORTED_MODULE_12__["default"],
+    presupuestos: _modules_comercial_presupuestos__WEBPACK_IMPORTED_MODULE_13__["default"],
     mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
   state: {
@@ -67062,6 +67065,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     resetResp: function resetResp(_ref3, resp) {
       var commit = _ref3.commit;
+      commit('setRespuesta', resp);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/comercial/presupuestos.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/store/modules/comercial/presupuestos.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    presupuesto: {},
+    respuesta: null
+  },
+  mutations: {
+    setRespuesta: function setRespuesta(state, respuesta) {
+      state.respuesta = respuesta;
+    }
+  },
+  actions: {
+    agregarPresupuesto: function agregarPresupuesto(_ref, presupuesto) {
+      var commit = _ref.commit;
+      console.log(presupuesto);
+      var dd = presupuesto.fecha.getDate();
+      var mm = presupuesto.fecha.getMonth(); //January is 0!
+
+      var yyyy = presupuesto.fecha.getFullYear();
+      presupuesto.fecha = yyyy + '-' + mm + '-' + dd;
+      console.log(presupuesto.fecha);
+      axios.post('http://127.0.0.1:8000/presupuestos', presupuesto).then(function (response) {
+        commit('setRespuesta', response.data.message);
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        console.log('algo va mal');
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    },
+    resetResp: function resetResp(_ref2, resp) {
+      var commit = _ref2.commit;
       commit('setRespuesta', resp);
     }
   }

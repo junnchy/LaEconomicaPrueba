@@ -129,7 +129,7 @@ export default {
         },
         resetResp({commit}, resp){
           commit('setRespuesta', resp)
-      },
+        },
       resetError({commit}){
         let error = {
           nombre:'',

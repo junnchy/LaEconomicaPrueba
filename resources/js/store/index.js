@@ -11,6 +11,7 @@ import mapas from './modules/mapas'
 import stock from './modules/stock'
 import usuarios from './modules/usuarios'
 import datos from './modules/comercial/empresa'
+import presupuestos from './modules/comercial/presupuestos'
 
 
 Vue.use(Vuex)
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     stock,
     usuarios,
     datos,
+    presupuestos,
     mapas
   },
   state: {

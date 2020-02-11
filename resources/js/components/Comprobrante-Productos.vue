@@ -47,6 +47,7 @@ export default {
     methods:{
         ...mapActions('productos', ['getProductos']), 
         setProducto(val){
+            Vue.$toast.open('Producto Agregado');
             let li = {
                 producto: val,
                 cantidad: 1
