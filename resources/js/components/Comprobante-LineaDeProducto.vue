@@ -34,7 +34,7 @@
             <div class="col-9">
                 <div class="form-group text-left">
                     <textarea class="form-control" 
-                    placeholder="Detalles del Prespuesto" 
+                    placeholder="Detalles del Presupuesto" 
                     id="detalle_presupuesto" v-model="npresupuesto.detalles" 
                     rows="3"></textarea>
                 </div>
@@ -61,7 +61,7 @@ export default {
     methods:{
         subtotal(linea){
             linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta
-            return linea.subtotal
+            return linea.subtotal.toFixed(2)
         },
         deleteLinea(index){
             this.npresupuesto.lineas.splice(index, 1);
@@ -78,7 +78,7 @@ export default {
                aux += parseInt(linea.cantidad) * linea.producto.precioVenta
             });
             this.npresupuesto.total = aux
-            return aux
+            return aux.toFixed(2)
         }
     },
 }

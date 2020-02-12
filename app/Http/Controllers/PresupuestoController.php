@@ -14,9 +14,12 @@ class PresupuestoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax()){
+            $presupuestos = Presupuesto::with('vendedor', 'cliente')->get();
+            return response()->json($presupuestos);
+        }
     }
 
     /**
@@ -72,9 +75,12 @@ class PresupuestoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor')->findOrFail($id);
+            return response()->json($presupuesto);
+        }
     }
 
     /**

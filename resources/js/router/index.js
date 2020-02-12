@@ -99,6 +99,21 @@ const routes = [
       name: 'datosEmpresa',
       component: () => import(/* webpackChunkName: "about" */ '../views/DatosEmpresa.vue')
     },
+    {
+      path: '/listadoPresupuestosCliente/:id',
+      name: 'listadoPresupuestosCliente',
+      component: () => import(/* webpackChunkName: "about" */ '../views/ListadoPresupuestosCliente.vue')
+    },
+    {
+      path: '/detallePresupuesto/:id',
+      name: 'detallePresupuesto',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DetallePresupuesto.vue')
+    },
+    {
+      path: '/listadoPresupuestos',
+      name: 'listadoPresupuestos',
+      component: () => import(/* webpackChunkName: "about" */ '../views/ListadoPresupuestos.vue')
+    },
 ]
 
 

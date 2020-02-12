@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-2">
-        <div class="row my-3">
+        <div class="row my-3" v-if="npresupuesto.id === null">
             <div class="col-3 ml-3 alert alert-primary text-center">
                 <h5>
                     <i class="fas fa-box"></i> Ingreso de Productos <i class="fas fa-hand-point-right"></i> 

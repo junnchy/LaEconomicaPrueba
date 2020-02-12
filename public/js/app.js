@@ -3681,6 +3681,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -44755,35 +44772,80 @@ var render = function() {
                   _vm._v(_vm._s(cliente.cuit))
                 ]),
                 _vm._v(" "),
-                _c(
-                  "td",
-                  [
+                _c("td", [
+                  _c("div", { staticClass: "d-flex flex-row" }, [
                     _c(
-                      "router-link",
-                      {
-                        attrs: {
-                          to: {
-                            name: "detalleCliente",
-                            params: { id: cliente.id }
-                          }
-                        }
-                      },
+                      "div",
+                      { staticClass: "mr-3" },
                       [
                         _c(
-                          "button",
-                          { staticClass: "btn btn-warning btn-sm" },
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "detalleCliente",
+                                params: { id: cliente.id }
+                              }
+                            }
+                          },
                           [
-                            _vm._v(
-                              "\n                                Ver Mas "
-                            ),
-                            _c("i", { staticClass: "fas fa-eye" })
+                            _c(
+                              "button",
+                              { staticClass: "btn btn-warning btn-sm" },
+                              [
+                                _vm._v(
+                                  "\n                                        Ver Mas "
+                                ),
+                                _c("i", { staticClass: "fas fa-eye" })
+                              ]
+                            )
                           ]
                         )
-                      ]
-                    )
-                  ],
-                  1
-                )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown" }, [
+                      _vm._m(1, true),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "dropdown-menu",
+                          attrs: { "aria-labelledby": "subMenuProducto" }
+                        },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "listadoPresupuestosCliente",
+                                  params: { id: cliente.id }
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "dropdown-item",
+                                  attrs: { href: "#" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            Presupuestos de Cliente\n                                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                ])
               ])
             }),
             0
@@ -44816,6 +44878,25 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Opciones")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-dark border-0 ",
+        attrs: {
+          type: "button",
+          id: "subMenuProducto",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
   }
 ]
 render._withStripped = true
@@ -66397,6 +66478,24 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/DatosEmpresa.vue */ "./resources/js/views/DatosEmpresa.vue"));
   }
+}, {
+  path: '/listadoPresupuestosCliente/:id',
+  name: 'listadoPresupuestosCliente',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/ListadoPresupuestosCliente.vue */ "./resources/js/views/ListadoPresupuestosCliente.vue"));
+  }
+}, {
+  path: '/detallePresupuesto/:id',
+  name: 'detallePresupuesto',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/DetallePresupuesto.vue */ "./resources/js/views/DetallePresupuesto.vue"));
+  }
+}, {
+  path: '/listadoPresupuestos',
+  name: 'listadoPresupuestos',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/ListadoPresupuestos.vue */ "./resources/js/views/ListadoPresupuestos.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -67087,13 +67186,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
     presupuesto: {},
-    respuesta: null
+    respuesta: null,
+    presupuestos: []
   },
   mutations: {
+    setPresupuestos: function setPresupuestos(state, presupuestos) {
+      state.presupuestos = presupuestos;
+    },
+    setPresupuesto: function setPresupuesto(state, presupuesto) {
+      state.presupuesto = presupuesto;
+    },
     setRespuesta: function setRespuesta(state, respuesta) {
       state.respuesta = respuesta;
     }
@@ -67120,8 +67234,80 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    resetResp: function resetResp(_ref2, resp) {
-      var commit = _ref2.commit;
+    getPresupuesto: function () {
+      var _getPresupuesto = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref2, id) {
+        var commit, prespuesto;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref2.commit;
+                _context.next = 3;
+                return axios.get("http://127.0.0.1:8000/presupuestos/".concat(id)).then(function (response) {
+                  commit('setPresupuesto', response.data);
+                  console.log(response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
+                });
+
+              case 3:
+                prespuesto = _context.sent;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function getPresupuesto(_x, _x2) {
+        return _getPresupuesto.apply(this, arguments);
+      }
+
+      return getPresupuesto;
+    }(),
+    getPresupuestos: function () {
+      var _getPresupuestos = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3) {
+        var commit, prespuesto;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref3.commit;
+                _context2.next = 3;
+                return axios.get('http://127.0.0.1:8000/presupuestos').then(function (response) {
+                  commit('setPresupuestos', response.data);
+                  console.log(response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
+                });
+
+              case 3:
+                prespuesto = _context2.sent;
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function getPresupuestos(_x3) {
+        return _getPresupuestos.apply(this, arguments);
+      }
+
+      return getPresupuestos;
+    }(),
+    resetResp: function resetResp(_ref4, resp) {
+      var commit = _ref4.commit;
       commit('setRespuesta', resp);
     }
   }

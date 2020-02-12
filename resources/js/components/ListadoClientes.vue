@@ -16,11 +16,28 @@
                         <td class="mt-2">{{cliente.nombre}}</td>
                         <td class="mt-2">{{cliente.cuit}}</td>
                         <td>
-                            <router-link :to="{name: 'detalleCliente', params:{id: cliente.id}}">
-                                <button  class="btn btn-warning btn-sm">
-                                    Ver Mas <i class="fas fa-eye"></i>
-                                </button>
-                            </router-link>
+                            <div class="d-flex flex-row">
+                                <div class="mr-3">
+                                    <router-link :to="{name: 'detalleCliente', params:{id: cliente.id}}">
+                                        <button  class="btn btn-warning btn-sm">
+                                            Ver Mas <i class="fas fa-eye"></i>
+                                        </button>
+                                    </router-link>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-dark border-0 " type="button" id="subMenuProducto" 
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="subMenuProducto">
+                                        <router-link :to="{name: 'listadoPresupuestosCliente', params:{id: cliente.id}}">
+                                            <a class="dropdown-item" href="#">
+                                                Presupuestos de Cliente
+                                            </a>
+                                        </router-link>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

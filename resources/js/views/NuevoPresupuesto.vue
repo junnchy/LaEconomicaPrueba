@@ -14,8 +14,7 @@
                 </button>
             </div>
         </form>
-        
-
+        {{vendedorC}}
     </div>
 </template>
 
@@ -34,17 +33,22 @@ export default {
                         denominacion: ''
                     }
                 },
+                vendedor:{
+
+                },
                 fecha: '',
                 detalles: '',
                 total: 0,
                 vendedor_id: null,
-                lineas:[]
+                lineas:[],
+                id: null
             }
         }
     },
     methods:{
         ...mapActions(['cambiarEstado']),
         ...mapActions('presupuestos',['agregarPresupuesto']),
+        ...mapActions('usuarios', ['getVendedorActual']),
         getSetFechaActual(){
             var today = new Date();
             var dd = String(today.getDate());
@@ -56,8 +60,16 @@ export default {
         }
     },
     created(){
+        this.getVendedorActual(this.$userId)
         this.getSetFechaActual()
         this.cambiarEstado(5)
+        this.npre.vendedor_id = this.$userId
+    },
+    computed:{
+        ...mapState('usuarios', ['vendedorActual']),
+        vendedorC(){
+            this.npre.vendedor = this.vendedorActual
+        },
     },
     components:{
         encabezado,

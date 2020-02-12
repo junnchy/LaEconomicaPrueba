@@ -40,5 +40,61 @@
         "cat_clientes_id": "1",
         "condicion_iva_id": "3",
         "localidad_id": "82084310000"
+    },
+    {
+        "id": "4",
+        "nombre": "Mauricio Di Tullio",
+        "cuit": "39855545",
+        "telefono": "3172046",
+        "celular": "156528805",
+        "email": "mauriditullio.010796@gmail.com",
+        "direccion": "levalle 1287",
+        "created_at": "2020-02-10 14:29:44",
+        "updated_at": "2020-02-10 14:29:44",
+        "cat_clientes_id": "1",
+        "condicion_iva_id": "3",
+        "localidad_id": "82084310000"
+    },
+    {
+        "id": "5",
+        "nombre": "Barbara Mintzias",
+        "cuit": "23423543",
+        "telefono": "67897634",
+        "celular": "234324829",
+        "email": "barbilomas@gmail.com.ar",
+        "direccion": "San Martin 555",
+        "created_at": "2020-02-10 14:33:15",
+        "updated_at": "2020-02-10 14:33:15",
+        "cat_clientes_id": "1",
+        "condicion_iva_id": "1",
+        "localidad_id": "82084270000"
+    },
+   {
+        "id": "6",
+        "nombre": "Juan Fortuna",
+        "cuit": "09809809",
+        "telefono": "2342343254",
+        "celular": "464758765",
+        "email": "juanfortunajr@laeconomica.com.ar",
+        "direccion": "Zeballos 537",
+        "created_at": "2020-02-10 14:35:48",
+        "updated_at": "2020-02-10 14:35:48",
+        "cat_clientes_id": "1",
+        "condicion_iva_id": "1",
+        "localidad_id": "82084270000"
+    },
+    {
+        "id": "7",
+        "nombre": "Martinez Fiorella",
+        "cuit": "37577207",
+        "telefono": "3415442146",
+        "celular": null,
+        "email": "fiopy_95@hotmail.com",
+        "direccion": "caminito 3871",
+        "created_at": "2020-02-10 14:43:58",
+        "updated_at": "2020-02-10 14:43:58",
+        "cat_clientes_id": "1",
+        "condicion_iva_id": "3",
+        "localidad_id": "82084270000"
     }
 ]

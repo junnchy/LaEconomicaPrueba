@@ -17,6 +17,11 @@
                                 Nuevo Presupuesto <i class="fas fa-plus-circle"></i>
                             </button> 
                         </router-link> 
+                        <router-link :to="{name:'listadoPresupuestos'}">
+                            <button class="btn btn-outline-primary">
+                                Listado Presupuestos
+                            </button> 
+                        </router-link>
                     </div>
                 </div>
             </div>

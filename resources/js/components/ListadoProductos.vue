@@ -43,8 +43,7 @@
                                             </router-link>
                                         </a>
                                     </div>
-                                </div>
-                                
+                                </div> 
                             </div>
                         </div>
                     </td>

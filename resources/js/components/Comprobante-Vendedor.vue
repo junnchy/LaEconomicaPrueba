@@ -5,7 +5,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="puesto">N Puesto</span>
                 </div>
-                <input type="text" v-model="vendedorActual.puesto" disabled
+                <input type="text" v-model="npresupuesto.vendedor.puesto" disabled
                 class="form-control" aria-label="puesto" aria-describedby="puesto">   
             </div>
         </div>
@@ -14,7 +14,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="name">Vendedor</span>
                 </div>
-                <input type="text" v-model="vendedorActual.nombre" disabled
+                <input type="text" v-model="npresupuesto.vendedor.nombre" disabled
                 class="form-control" aria-label="name" aria-describedby="name">   
             </div>
         </div>
@@ -48,11 +48,8 @@ export default {
         }
     },
     created(){
-        this.getVendedorActual(this.$userId)
-        this.npresupuesto.vendedor_id = this.$userId
     },
     methods:{
-        ...mapActions('usuarios', ['getVendedorActual']),
     },
     computed:{
         ...mapState('usuarios', ['vendedorActual']),

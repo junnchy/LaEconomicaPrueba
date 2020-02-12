@@ -17,7 +17,7 @@
         </div>
         <ul class="list-group mt-3">
             <li class="list-group-item"><strong><h3>{{cliente.nombre}}</h3></strong></li>
-            <li class="list-group-item"><strong>Codigo: </strong> {{cliente.id}}</li>
+            <li class="list-group-item"><strong>Codigo de Cliente: </strong> {{cliente.id}}</li>
             <li class="list-group-item" v-if="cliente.localidad"><strong>Direccion: </strong> {{cliente.direccion}} - {{cliente.localidad.nombre}}, {{cliente.localidad.provincia.iso_nombre}}</li>
             <li class="list-group-item"><strong>Telefono: </strong>{{cliente.telefono}} </li>
             <li class="list-group-item"><strong>Celular: </strong> {{cliente.celular}}</li>
@@ -25,14 +25,18 @@
             <li class="list-group-item" v-if="cliente.condicion_iva"><strong>Condicon de Iva: </strong> {{cliente.condicion_iva.denominacion}}</li>
             <li class="list-group-item" v-if="cliente.categoria"><strong>Tipo de Cliente: </strong> {{cliente.categoria.denominacion}}</li>
             <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{cliente.updated_at}}</li>
+            <li class="list-group-item">
+                <div class="d-flex flex-row">
+                    <div>
+                        <router-link :to="{name: 'listadoPresupuestosCliente', params:{id: cliente.id}}">
+                            <button class="btn btn-outline-primary btn-sm">
+                                Presupuestos <i class="fas fa-file-alt"></i>
+                            </button>
+                        </router-link>
+                    </div>
+                </div>
+            </li>
         </ul>
-        <div class="container mt-5">
-            <ul class="list-group mt-3">
-                <li class="list-group-item" v-for="(presupuesto, index) in cliente.presupuestos" :key="index">
-                    {{presupuesto}}
-                </li>
-            </ul>
-        </div>
         <div class="container mt-5">
             <h3><i class="fas fa-map-marker-alt"></i> Ubicacion en Mapa: </h3>
             <componente-gmap v-bind:cliente="cliente"/>
@@ -48,11 +52,6 @@ export default {
     name:'DetalleCliente',
     data() {
         return {
-            data() {
-                return {
-     
-                }
-            },
             id: this.$route.params.id,
         }
     },
