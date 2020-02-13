@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Presupuesto;
 use App\LineaPresupuesto;
+use App\DatosEmpresa;
 
 use Illuminate\Http\Request;
 
@@ -63,7 +64,7 @@ class PresupuestoController extends Controller
             }
 
             return response()->json([
-                'prespuesto' => $presupuesto,
+                'presupuesto' => $presupuesto,
                 'message' => 'Presupuesto Guardado'
             ], 200);
         }
@@ -116,4 +117,17 @@ class PresupuestoController extends Controller
     {
         //
     }
+
+    public function imprimir($id)
+    {
+        $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor')->findOrFail($id);
+
+        $datosEmpresa = DatosEmpresa::findOrFail(1);
+     
+        $pdf = \PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('comercial.comprobantes.impresupuesto', compact('presupuesto', 'datosEmpresa'))->setPaper('a4');
+
+        return $pdf->download('archivo.pdf');
+    }
 }
+
+/* return view('vendedores.editar', compact('vendedor', 'localidades', 'provincias') */

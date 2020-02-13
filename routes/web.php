@@ -59,6 +59,8 @@ Route::get('/clientes/{any}', 'SpaController@clientes')->where('any', '.*')->mid
 
 Route::get('/comercial/{any}', 'SpaController@comercial')->where('any', '.*')->middleware('auth');
 
+Route::get('/imprimirPresupuesto/{id}', 'PresupuestoController@imprimir')->where('id', '[0-9]+');
+
 Route::resource('/localidades', 'LocalidadController')->middleware('auth');
 Route::resource('/condicionIva', 'CondicionIvaController')->middleware('auth');
 Route::resource('/categoriaCliente', 'CategoriaClienteController')->middleware('auth');

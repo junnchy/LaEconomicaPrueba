@@ -1,8 +1,13 @@
 <template>
     <div class="py-3 border border-secondary rounded">
         <div class="row shadow-sm p-3 text-center bg-ecogray border border-secondary rounded">
-            <div class="col-11">
+            <div class="col-10">
                 <h1>Presupuesto <i class="fas fa-file-alt"></i></h1>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-outline-primary btn-sm" @click="imprimirPrespuesto(presupuesto.id)">
+                    Imprimir <i class="fas fa-print"></i>
+                </button> 
             </div>
             <div class="col-1">
                 <button class="btn btn-outline-danger btn-sm" @click="$router.go(-1)">
@@ -32,7 +37,7 @@ export default {
             this.getPresupuesto(this.id)
         },
     methods:{
-        ...mapActions('presupuestos', ['getPresupuesto']),
+        ...mapActions('presupuestos', ['getPresupuesto', 'imprimirPrespuesto']),
         getSetFechaActual(){
             var today = new Date();
             var dd = String(today.getDate());

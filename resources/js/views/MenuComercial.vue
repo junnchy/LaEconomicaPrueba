@@ -3,12 +3,6 @@
         <h1>
             <i class="fas fa-handshake"></i> Seccion Comercial
         </h1>
-        <div class="alert alert-primary alert-dismissible fade show text-center" role="alert">
-            <h4>Bienvenido {{usuarioActual.name}}</h4>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
             <div class="container shadow-sm mt-3 p-3 bg-white rounded">
                 <div class="row">
                     <div class="col-12">
@@ -19,7 +13,7 @@
                         </router-link> 
                         <router-link :to="{name:'listadoPresupuestos'}">
                             <button class="btn btn-outline-primary">
-                                Listado Presupuestos
+                                Listado Presupuestos <i class="fas fa-list-alt"></i>
                             </button> 
                         </router-link>
                     </div>
@@ -70,7 +64,8 @@ export default {
         this.getUsuarioActual(this.$userId)
     },
     methods:{
-        ...mapActions('usuarios', ['getUsuarioActual'])
+        ...mapActions('usuarios', ['getUsuarioActual']),
+        ...mapActions('presupuestos',['imprimirPrespuesto'])
     },
     computed: {
         ...mapState('usuarios', ['usuarioActual'])

@@ -51,7 +51,6 @@
 import {mapState, mapActions, mapGetters, mapMutations} from 'vuex'
 import Paginacion from '../components/Paginacion'
 export default {
-    name: 'MenuClientes',
     data() {
         return {
         }

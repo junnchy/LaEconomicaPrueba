@@ -1613,6 +1613,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -1625,7 +1630,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getPresupuesto(this.id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuesto']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuesto', 'imprimirPrespuesto']), {
     getSetFechaActual: function getSetFechaActual() {
       var today = new Date();
       var dd = String(today.getDate());
@@ -2395,6 +2400,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2403,7 +2417,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getPresupuestos();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuestos'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuestos', 'imprimirPrespuesto'])),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('presupuestos', ['presupuestos']))
 });
 
@@ -2465,6 +2479,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2475,7 +2498,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getCliente(this.id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getCliente'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getCliente']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuestos', 'imprimirPrespuesto'])),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['cliente']))
 });
 
@@ -2673,12 +2696,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2693,7 +2710,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log(this.$userId);
     this.getUsuarioActual(this.$userId);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])('usuarios', ['getUsuarioActual'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])('usuarios', ['getUsuarioActual']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])('presupuestos', ['imprimirPrespuesto'])),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('usuarios', ['usuarioActual']))
 });
 
@@ -2823,6 +2840,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2849,7 +2872,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['agregarPresupuesto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('usuarios', ['getVendedorActual']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['agregarPresupuesto', 'resetStatus', 'resetResp', 'imprimirPrespuesto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('usuarios', ['getVendedorActual']), {
     getSetFechaActual: function getSetFechaActual() {
       var today = new Date();
       var dd = String(today.getDate());
@@ -2867,7 +2890,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.cambiarEstado(5);
     this.npre.vendedor_id = this.$userId;
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usuarios', ['vendedorActual']), {
+  destroyed: function destroyed() {
+    this.resetStatus();
+    this.resetResp(null);
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usuarios', ['vendedorActual']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('presupuestos', ['presupuesto']), {
     vendedorC: function vendedorC() {
       this.npre.vendedor = this.vendedorActual;
     }
@@ -6512,6 +6539,24 @@ var render = function() {
             _c(
               "button",
               {
+                staticClass: "btn btn-outline-primary btn-sm",
+                on: {
+                  click: function($event) {
+                    return _vm.imprimirPrespuesto(_vm.presupuesto.id)
+                  }
+                }
+              },
+              [
+                _vm._v("\n                Imprimir "),
+                _c("i", { staticClass: "fas fa-print" })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-1" }, [
+            _c(
+              "button",
+              {
                 staticClass: "btn btn-outline-danger btn-sm",
                 on: {
                   click: function($event) {
@@ -6540,7 +6585,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-11" }, [
+    return _c("div", { staticClass: "col-10" }, [
       _c("h1", [
         _vm._v("Presupuesto "),
         _c("i", { staticClass: "fas fa-file-alt" })
@@ -7870,35 +7915,54 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    [
+                  _c("td", [
+                    _c("div", { staticClass: "d-flex flex-row" }, [
                       _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: {
-                              name: "detallePresupuesto",
-                              params: { id: presupuesto.id }
-                            }
-                          }
-                        },
+                        "div",
                         [
                           _c(
-                            "button",
-                            { staticClass: "btn btn-warning btn-sm" },
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
+                                  name: "detallePresupuesto",
+                                  params: { id: presupuesto.id }
+                                }
+                              }
+                            },
                             [
-                              _vm._v(
-                                "\n                                        Ver Mas "
-                              ),
-                              _c("i", { staticClass: "fas fa-eye" })
+                              _c(
+                                "button",
+                                { staticClass: "btn btn-warning btn-sm mr-1" },
+                                [
+                                  _vm._v(
+                                    "\n                                                Ver Mas "
+                                  ),
+                                  _c("i", { staticClass: "fas fa-eye" })
+                                ]
+                              )
                             ]
                           )
-                        ]
-                      )
-                    ],
-                    1
-                  )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("div", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-primary btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.imprimirPrespuesto(presupuesto.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-print" })]
+                        )
+                      ])
+                    ])
+                  ])
                 ])
               }),
               0
@@ -8001,35 +8065,60 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "td",
-                            [
+                          _c("td", [
+                            _c("div", { staticClass: "d-flex flex-row" }, [
                               _c(
-                                "router-link",
-                                {
-                                  attrs: {
-                                    to: {
-                                      name: "detallePresupuesto",
-                                      params: { id: presupuesto.id }
-                                    }
-                                  }
-                                },
+                                "div",
                                 [
                                   _c(
-                                    "button",
-                                    { staticClass: "btn btn-warning btn-sm" },
+                                    "router-link",
+                                    {
+                                      attrs: {
+                                        to: {
+                                          name: "detallePresupuesto",
+                                          params: { id: presupuesto.id }
+                                        }
+                                      }
+                                    },
                                     [
-                                      _vm._v(
-                                        "\n                                        Ver Mas "
-                                      ),
-                                      _c("i", { staticClass: "fas fa-eye" })
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "btn btn-warning btn-sm mr-1"
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                Ver Mas "
+                                          ),
+                                          _c("i", { staticClass: "fas fa-eye" })
+                                        ]
+                                      )
                                     ]
                                   )
-                                ]
-                              )
-                            ],
-                            1
-                          )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("div", [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-primary btn-sm",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.imprimirPrespuesto(
+                                          presupuesto.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "fas fa-print" })]
+                                )
+                              ])
+                            ])
+                          ])
                         ])
                       }),
                       0
@@ -8290,20 +8379,6 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      {
-        staticClass:
-          "alert alert-primary alert-dismissible fade show text-center",
-        attrs: { role: "alert" }
-      },
-      [
-        _c("h4", [_vm._v("Bienvenido " + _vm._s(_vm.usuarioActual.name))]),
-        _vm._v(" "),
-        _vm._m(1)
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
       { staticClass: "container shadow-sm mt-3 p-3 bg-white rounded" },
       [
         _c("div", { staticClass: "row" }, [
@@ -8328,8 +8403,9 @@ var render = function() {
                 [
                   _c("button", { staticClass: "btn btn-outline-primary" }, [
                     _vm._v(
-                      "\n                            Listado Presupuestos\n                        "
-                    )
+                      "\n                            Listado Presupuestos "
+                    ),
+                    _c("i", { staticClass: "fas fa-list-alt" })
                   ])
                 ]
               )
@@ -8347,13 +8423,13 @@ var render = function() {
           "container shadow-sm mt-3 p-3 text-white bg-secondary rounded"
       },
       [
-        _vm._m(2),
+        _vm._m(1),
         _vm._v(" "),
         _c("div", { staticClass: "row mt-2" }, [
           _c(
             "div",
             { staticClass: "col-12 text-center" },
-            [_vm._m(3), _vm._v(" "), _c("estadisticaventas")],
+            [_vm._m(2), _vm._v(" "), _c("estadisticaventas")],
             1
           )
         ]),
@@ -8362,14 +8438,14 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-6" },
-            [_vm._m(4), _vm._v(" "), _c("estadisticaproducto")],
+            [_vm._m(3), _vm._v(" "), _c("estadisticaproducto")],
             1
           ),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: "col-6" },
-            [_vm._m(5), _vm._v(" "), _c("estadisticalinea")],
+            [_vm._m(4), _vm._v(" "), _c("estadisticalinea")],
             1
           )
         ])
@@ -8386,23 +8462,6 @@ var staticRenderFns = [
       _c("i", { staticClass: "fas fa-handshake" }),
       _vm._v(" Seccion Comercial\n    ")
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "alert",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
   },
   function() {
     var _vm = this
@@ -8576,7 +8635,44 @@ var render = function() {
         _vm._v(" "),
         _c("productos", { attrs: { npresupuesto: _vm.npre } }),
         _vm._v(" "),
-        _vm._m(1)
+        _c(
+          "div",
+          { staticClass: "d-flex justify-content-center sticky-button" },
+          [
+            _vm.$store.state.presupuestos.status != 200
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-warning btn-block w-75",
+                    attrs: { type: "submit" }
+                  },
+                  [
+                    _vm._v("\n                Grabar Prespuesto "),
+                    _c("i", { staticClass: "fas fa-save" })
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$store.state.presupuestos.status === 200
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-info btn-block w-75",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.imprimirPrespuesto(_vm.presupuesto.id)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v("\n                Imprimir Prespuesto "),
+                    _c("i", { staticClass: "fas fa-print" })
+                  ]
+                )
+              : _vm._e()
+          ]
+        )
       ],
       1
     ),
@@ -8601,28 +8697,6 @@ var staticRenderFns = [
             _c("i", { staticClass: "fas fa-file-alt" })
           ])
         ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex justify-content-center sticky-button" },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-warning btn-block w-75",
-            attrs: { type: "submit" }
-          },
-          [
-            _vm._v("\n                Grabar Prespuesto "),
-            _c("i", { staticClass: "fas fa-save" })
-          ]
-        )
       ]
     )
   }

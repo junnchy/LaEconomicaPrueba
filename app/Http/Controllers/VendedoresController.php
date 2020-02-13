@@ -7,6 +7,7 @@ use App\Http\Requests\CreateVendedorRequest;
 use App\Http\Requests\UpdateVendedorRequest;
 use App\Vendedor;
 use App\Localidad;
+use App\Provincia;
 use App\User;
 
 use Spatie\Permission\Models\Role;
@@ -29,9 +30,11 @@ class VendedoresController extends Controller
     public function index()
     {
         $vendedores = Vendedor::all();
-        $localidades = Localidad::all();
-        return view('vendedores.home', compact('vendedores','localidades'));
+        $localidades = Localidad::with('provincia')->orderBy('nombre')->get();
+        $provincias = Provincia::with('localidades')->get();
+        return view('vendedores.home', compact('vendedores','localidades', 'provincias'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -90,7 +93,8 @@ class VendedoresController extends Controller
         }else {
             $vendedor = Vendedor::findOrFail($id);
             $localidades = Localidad::all();
-            return view('vendedores.editar', compact('vendedor', 'localidades'));
+            $provincias = Provincia::with('localidades')->get();
+            return view('vendedores.editar', compact('vendedor', 'localidades', 'provincias'));
         }
         
     }

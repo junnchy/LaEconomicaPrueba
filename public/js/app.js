@@ -3701,7 +3701,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'MenuClientes',
   data: function data() {
     return {};
   },
@@ -43538,7 +43537,7 @@ var render = function() {
             ? _c(
                 "span",
                 { staticClass: "invalid-feedback", attrs: { role: "alert" } },
-                [_c("strong", [_vm._v(_vm._s(_vm.errors.email[0]))])]
+                [_c("strong", [_vm._v(_vm._s(_vm.errors.direccion[0]))])]
               )
             : _vm._e()
         ])
@@ -67199,7 +67198,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   state: {
     presupuesto: {},
     respuesta: null,
-    presupuestos: []
+    presupuestos: [],
+    status: 0
   },
   mutations: {
     setPresupuestos: function setPresupuestos(state, presupuestos) {
@@ -67210,6 +67210,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setRespuesta: function setRespuesta(state, respuesta) {
       state.respuesta = respuesta;
+    },
+    setStatus: function setStatus(state, status) {
+      state.status = status;
     }
   },
   actions: {
@@ -67224,6 +67227,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log(presupuesto.fecha);
       axios.post('http://127.0.0.1:8000/presupuestos', presupuesto).then(function (response) {
         commit('setRespuesta', response.data.message);
+        commit('setStatus', response.status);
+        commit('setPresupuesto', response.data.presupuesto);
         Vue.$toast.open(response.data.message);
       })["catch"](function (error) {
         console.log('algo va mal');
@@ -67306,9 +67311,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getPresupuestos;
     }(),
-    resetResp: function resetResp(_ref4, resp) {
+    imprimirPrespuesto: function imprimirPrespuesto(_ref4, id) {
       var commit = _ref4.commit;
+      Vue.$toast.open({
+        message: 'Imprimiendo... (aguarde)',
+        type: 'warning',
+        duration: '6000'
+      });
+      axios.get("http://127.0.0.1:8000/imprimirPresupuesto/".concat(id), {
+        responseType: 'blob'
+      }).then(function (response) {
+        var url = window.URL.createObjectURL(new Blob([response.data]));
+        var link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'presupuesto.pdf');
+        document.body.appendChild(link);
+        link.click();
+      })["catch"](function (error) {
+        console.log('algo va mal');
+        console.log(error.response.data);
+      });
+    },
+    resetResp: function resetResp(_ref5, resp) {
+      var commit = _ref5.commit;
       commit('setRespuesta', resp);
+    },
+    resetStatus: function resetStatus(_ref6) {
+      var commit = _ref6.commit;
+      commit('setStatus', 0);
     }
   }
 });

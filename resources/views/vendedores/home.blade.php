@@ -121,6 +121,14 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label>Provincia</label>
+                                <select class="form-control" 
+                                    name="provincia_id" 
+                                    type="number">
+                                    <option>{{null}}</option>
+                                    @foreach ($provincias as $pro)
+                                        <option value="{{ $pro->id }}">{{$pro->iso_nombre}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-6">

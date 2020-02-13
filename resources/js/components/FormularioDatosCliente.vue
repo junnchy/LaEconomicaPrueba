@@ -114,7 +114,7 @@
                     placeholder="Dirección" 
                     v-model="cliente.direccion"/>
                     <span class="invalid-feedback" role="alert" v-if="errors.direccion != ''"> 
-                        <strong>{{errors.email[0]}}</strong>
+                        <strong>{{errors.direccion[0]}}</strong>
                     </span>
                 </div>
             </div>

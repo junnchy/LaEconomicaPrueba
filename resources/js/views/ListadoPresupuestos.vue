@@ -23,11 +23,20 @@
                                     {{presupuesto.vendedor.puesto}} - {{presupuesto.vendedor.nombre}}
                                 </td>
                                 <td>
-                                    <router-link :to="{name:'detallePresupuesto', params:{id: presupuesto.id}}">
-                                        <button  class="btn btn-warning btn-sm">
-                                            Ver Mas <i class="fas fa-eye"></i>
-                                        </button>
-                                    </router-link>
+                                    <div class="d-flex flex-row">
+                                        <div>
+                                            <router-link :to="{name:'detallePresupuesto', params:{id: presupuesto.id}}">
+                                                <button  class="btn btn-warning btn-sm mr-1">
+                                                    Ver Mas <i class="fas fa-eye"></i>
+                                                </button>
+                                            </router-link>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-outline-primary btn-sm" @click="imprimirPrespuesto(presupuesto.id)">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -49,7 +58,7 @@ export default {
         this.getPresupuestos()
     },
     methods:{
-      ...mapActions('presupuestos', ['getPresupuestos'])
+      ...mapActions('presupuestos', ['getPresupuestos', 'imprimirPrespuesto'])
     },
     computed:{
       ...mapState('presupuestos', ['presupuestos'])

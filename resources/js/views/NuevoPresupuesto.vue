@@ -9,8 +9,14 @@
             <encabezado v-bind:npresupuesto="npre"/>
             <productos v-bind:npresupuesto="npre"/>
             <div class="d-flex justify-content-center sticky-button">
-                <button type="submit" class="btn btn-warning btn-block w-75">
+                <button type="submit" class="btn btn-warning btn-block w-75" v-if="$store.state.presupuestos.status != 200">
                     Grabar Prespuesto <i class="fas fa-save"></i>
+                </button>
+                <button type="button" 
+                @click="imprimirPrespuesto(presupuesto.id)"
+                class="btn btn-outline-info btn-block w-75" 
+                v-if="$store.state.presupuestos.status === 200">
+                    Imprimir Prespuesto <i class="fas fa-print"></i>
                 </button>
             </div>
         </form>
@@ -47,7 +53,7 @@ export default {
     },
     methods:{
         ...mapActions(['cambiarEstado']),
-        ...mapActions('presupuestos',['agregarPresupuesto']),
+        ...mapActions('presupuestos',['agregarPresupuesto','resetStatus', 'resetResp', 'imprimirPrespuesto']),
         ...mapActions('usuarios', ['getVendedorActual']),
         getSetFechaActual(){
             var today = new Date();
@@ -65,8 +71,13 @@ export default {
         this.cambiarEstado(5)
         this.npre.vendedor_id = this.$userId
     },
+    destroyed(){
+        this.resetStatus()
+        this.resetResp(null)
+    },
     computed:{
         ...mapState('usuarios', ['vendedorActual']),
+        ...mapState('presupuestos', ['presupuesto']),
         vendedorC(){
             this.npre.vendedor = this.vendedorActual
         },
