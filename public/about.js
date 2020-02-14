@@ -4063,6 +4063,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-outline-danger border-0",
+                  attrs: { type: "button" },
                   on: {
                     click: function($event) {
                       return _vm.deleteLinea(index)

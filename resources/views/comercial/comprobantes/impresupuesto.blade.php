@@ -22,7 +22,7 @@
                 <td>
                     <p class="h3"><strong>Presupuesto</strong></p>
                     <div class="t">
-                        <strong>Fecha:</strong> 
+                        <strong>Fecha:</strong> {{$presupuesto->fecha_emision}}
                         <br>
                         <strong>telefono:</strong> {{$datosEmpresa->telefono}}
                         <br>
@@ -78,23 +78,26 @@
         <tbody>
             <tr>
                 <td class="ml-2">
-                    <textarea class="form-control" 
-                    id="detalle_presupuesto" 
-                    rows="3">
-                        {{$presupuesto->detalles}}
-                    </textarea>
+                    <div class="p">
+                        <textarea 
+                        class="form-control" 
+                        id="detalle_presupuesto" 
+                        rows="3">
+                            {{$presupuesto->detalles}}
+                        </textarea>
+                    </div>
                 </td>
                 <td class="w-25">
                     <div class="alert alert-primary text-center">
-                        <p class="h5">Total</p>
-                        <p class="h3"><strong>${{$presupuesto->total}}</strong></p>
+                        <p>Total</p>
+                        <p class="h5"><strong>${{$presupuesto->total}}</strong></p>
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
     <div class="alert alert-dark text-center p">
-        <p>Comprobante no valido como factura</p>
+        <p><strong> Comprobante no valido como factura</strong> </p> 
     </div>
 </body>
 </html>
@@ -104,7 +107,7 @@
         font-size: 10px;
     }
     div.p{
-        font-size: 12px;
+        font-size: 11px;
     }    
 </style>
 

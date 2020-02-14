@@ -22,7 +22,7 @@
                     <td>${{linea.producto.precioVenta}}</td>
                     <td>${{subtotal(linea)}}</td>
                     <td>
-                        <button class="btn btn-outline-danger border-0" @click="deleteLinea(index)">
+                        <button type="button" class="btn btn-outline-danger border-0" @click="deleteLinea(index)">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
