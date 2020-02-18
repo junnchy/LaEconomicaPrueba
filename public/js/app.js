@@ -3135,6 +3135,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -42002,13 +42013,7 @@ var render = function() {
                             return _c(
                               "option",
                               { key: index, domProps: { value: categoria.id } },
-                              [
-                                _vm._v(
-                                  _vm._s(categoria.id) +
-                                    " - " +
-                                    _vm._s(categoria.nombre)
-                                )
-                              ]
+                              [_vm._v(_vm._s(categoria.nombre))]
                             )
                           })
                         ],
@@ -43943,72 +43948,105 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group my-4" }, [
-      _c("label", [_vm._v("Categoria:")]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          directives: [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6" }, [
+          _c("label", [_vm._v("Categoria:")]),
+          _vm._v(" "),
+          _c(
+            "select",
             {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.producto.categoria,
-              expression: "producto.categoria"
-            }
-          ],
-          class: _vm.fCat,
-          on: {
-            change: function($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function(o) {
-                  return o.selected
-                })
-                .map(function(o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.$set(
-                _vm.producto,
-                "categoria",
-                $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-              )
-            }
-          }
-        },
-        [
-          _vm.producto.proveedor_id === _vm.producto.proveedor.id
-            ? _c(
-                "option",
+              directives: [
                 {
-                  attrs: { selected: "" },
-                  domProps: { value: _vm.producto.categoria }
-                },
-                [
-                  _vm._v(
-                    _vm._s(_vm.producto.categoria.id) +
-                      "-" +
-                      _vm._s(_vm.producto.categoria.nombre)
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.producto.categoria,
+                  expression: "producto.categoria"
+                }
+              ],
+              class: _vm.fCat,
+              on: {
+                change: function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.$set(
+                    _vm.producto,
+                    "categoria",
+                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                   )
-                ]
-              )
-            : _vm._e(),
+                }
+              }
+            },
+            [
+              _vm.producto.proveedor_id === _vm.producto.proveedor.id
+                ? _c(
+                    "option",
+                    {
+                      attrs: { selected: "" },
+                      domProps: { value: _vm.producto.categoria }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.producto.categoria.id) +
+                          "-" +
+                          _vm._s(_vm.producto.categoria.nombre)
+                      )
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.producto.proveedor.categorias, function(cate, index) {
+                return _c("option", { key: index, domProps: { value: cate } }, [
+                  _vm._v(_vm._s(cate.nombre))
+                ])
+              }),
+              _vm._v(" "),
+              _vm.errors.categoria_id != ""
+                ? _c(
+                    "span",
+                    {
+                      staticClass: "invalid-feedback",
+                      attrs: { role: "alert" }
+                    },
+                    [_c("strong", [_vm._v(_vm._s(_vm.errors.categoria_id[0]))])]
+                  )
+                : _vm._e()
+            ],
+            2
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c("label", [_vm._v("Codigo de Proveedor")]),
           _vm._v(" "),
-          _vm._l(_vm.producto.proveedor.categorias, function(cate, index) {
-            return _c("option", { key: index, domProps: { value: cate } }, [
-              _vm._v(_vm._s(cate.nombre))
-            ])
-          }),
-          _vm._v(" "),
-          _vm.errors.categoria_id != ""
-            ? _c(
-                "span",
-                { staticClass: "invalid-feedback", attrs: { role: "alert" } },
-                [_c("strong", [_vm._v(_vm._s(_vm.errors.categoria_id[0]))])]
-              )
-            : _vm._e()
-        ],
-        2
-      )
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.producto.codigoProveedor,
+                expression: "producto.codigoProveedor"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text" },
+            domProps: { value: _vm.producto.codigoProveedor },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.producto, "codigoProveedor", $event.target.value)
+              }
+            }
+          })
+        ])
+      ])
     ]),
     _vm._v("\n    " + _vm._s(_vm.validar) + "\n")
   ])
@@ -67199,7 +67237,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     presupuesto: {},
     respuesta: null,
     presupuestos: [],
-    status: 0
+    filter: {
+      dates: [],
+      estado: null
+    },
+    status: 0,
+    estadosPresupuesto: []
   },
   mutations: {
     setPresupuestos: function setPresupuestos(state, presupuestos) {
@@ -67213,18 +67256,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setStatus: function setStatus(state, status) {
       state.status = status;
+    },
+    setEstadosPresupuestos: function setEstadosPresupuestos(state, estados) {
+      state.estadosPresupuesto = estados;
+    },
+    SET_DATE: function SET_DATE(state, val) {
+      state.filter.dates = val;
+    },
+    SET_ESTADO: function SET_ESTADO(state, val) {
+      state.filter.estado = val;
     }
   },
   actions: {
     agregarPresupuesto: function agregarPresupuesto(_ref, presupuesto) {
       var commit = _ref.commit;
       console.log(presupuesto);
-      var dd = presupuesto.fecha.getDay();
-      var mm = presupuesto.fecha.getMonth(); //January is 0!
+      var dd = presupuesto.fecha_emision.getDate();
+      var mm = presupuesto.fecha_emision.getMonth(); //January is 0!
 
-      var yyyy = presupuesto.fecha.getFullYear();
-      presupuesto.fecha = yyyy + '-' + mm + '-' + dd;
-      console.log(presupuesto.fecha);
+      var yyyy = presupuesto.fecha_emision.getFullYear();
+      presupuesto.fecha_emision = yyyy + '-' + mm + '-' + dd;
+      console.log(presupuesto.fecha_emision);
       axios.post('http://127.0.0.1:8000/presupuestos', presupuesto).then(function (response) {
         commit('setRespuesta', response.data.message);
         commit('setStatus', response.status);
@@ -67251,8 +67303,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 commit = _ref2.commit;
                 _context.next = 3;
                 return axios.get("http://127.0.0.1:8000/presupuestos/".concat(id)).then(function (response) {
+                  response.data.fecha_emision = new Date(response.data.fecha_emision.substring(0, 4), response.data.fecha_emision.substring(5, 7), response.data.fecha_emision.substring(8, 10));
                   commit('setPresupuesto', response.data);
-                  console.log(response.data);
                 })["catch"](function (error) {
                   console.log('algo va mal');
                   console.log(error.response.data);
@@ -67287,6 +67339,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 commit = _ref3.commit;
                 _context2.next = 3;
                 return axios.get('http://127.0.0.1:8000/presupuestos').then(function (response) {
+                  response.data.forEach(function (presupuesto) {
+                    var $date;
+                    $date = new Date(presupuesto.created_at);
+                    presupuesto.created_at = $date;
+                  });
                   commit('setPresupuestos', response.data);
                   console.log(response.data);
                 })["catch"](function (error) {
@@ -67311,12 +67368,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return getPresupuestos;
     }(),
-    imprimirPrespuesto: function imprimirPrespuesto(_ref4, id) {
+    cambiarEstadoPresupuesto: function cambiarEstadoPresupuesto(_ref4, presupuesto) {
       var commit = _ref4.commit;
+      axios.put("http://127.0.0.1:8000/presupuestos/".concat(presupuesto.id), presupuesto).then(function (response) {
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        console.log('algo va mal');
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    },
+    getEstadosPresupuesto: function () {
+      var _getEstadosPresupuesto = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref5) {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref5.commit;
+                _context3.next = 3;
+                return axios.get('http://127.0.0.1:8000/estadoPresupuesto').then(function (response) {
+                  commit('setEstadosPresupuestos', response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
+                });
+
+              case 3:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function getEstadosPresupuesto(_x4) {
+        return _getEstadosPresupuesto.apply(this, arguments);
+      }
+
+      return getEstadosPresupuesto;
+    }(),
+    imprimirPrespuesto: function imprimirPrespuesto(_ref6, id) {
+      var commit = _ref6.commit;
       Vue.$toast.open({
         message: 'Imprimiendo... (aguarde)',
         type: 'warning',
-        duration: '6000'
+        duration: 6000
       });
       axios.get("http://127.0.0.1:8000/imprimirPresupuesto/".concat(id), {
         responseType: 'blob'
@@ -67332,13 +67434,34 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         console.log(error.response.data);
       });
     },
-    resetResp: function resetResp(_ref5, resp) {
-      var commit = _ref5.commit;
+    resetResp: function resetResp(_ref7, resp) {
+      var commit = _ref7.commit;
       commit('setRespuesta', resp);
     },
-    resetStatus: function resetStatus(_ref6) {
-      var commit = _ref6.commit;
+    resetStatus: function resetStatus(_ref8) {
+      var commit = _ref8.commit;
       commit('setStatus', 0);
+    }
+  },
+  getters: {
+    filtered_presupuestos: function filtered_presupuestos(state) {
+      var pfil = state.presupuestos;
+
+      if (state.filter.estado != null) {
+        pfil = pfil.filter(function (presupuesto) {
+          return presupuesto.estadoPresupuesto_id === state.filter.estado;
+        });
+        return pfil;
+      }
+
+      if (state.filter.dates[0] != null) {
+        pfil = pfil.filter(function (presupuesto) {
+          return presupuesto.created_at >= state.filter.dates[0] && presupuesto.created_at <= state.filter.dates[1];
+        });
+        return pfil;
+      } else {
+        return pfil;
+      }
     }
   }
 });

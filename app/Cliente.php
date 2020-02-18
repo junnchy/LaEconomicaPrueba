@@ -7,6 +7,7 @@ use App\CondicionIva;
 use App\Localidad;
 use App\Provincia;
 use App\Presupuesto;
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,6 +35,11 @@ class Cliente extends Model
 
     public function presupuestos()
     {
-        return $this->hasMany('App\Presupuesto', 'cliente_id', 'id');
+        $presupuestos = $this->hasMany('App\Presupuesto', 'cliente_id', 'id')->orderBy('created_at', 'desc');
+        foreach ($presupuestos as $key => $presupuesto) {
+            $date = Carbon::createFromDate($presupuesto->fecha_emision);
+            $presupuesto->fecha_emision = $date->format('d-m-Y');
+        }
+        return $presupuestos;
     }
 }

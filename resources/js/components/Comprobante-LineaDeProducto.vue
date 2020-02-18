@@ -5,7 +5,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Disponibles</th>
+                    <th scope="col" v-if="npresupuesto.id === null">Disponibles</th>
                     <th scope="col" class="w-10">Cantidad</th>
                     <th scope="col">Precio unidad</th>
                     <th scope="col">Subtotal</th>
@@ -15,14 +15,16 @@
                 <tr v-for="(linea, index) in npresupuesto.lineas" :key="index">
                     <th scope="row">{{linea.producto.id}}</th>
                     <td>{{linea.producto.nombre}}</td>
-                    <td>{{linea.producto.ficha_stock.cantidadActual}}</td>
+                    <td v-if="npresupuesto.id === null">{{linea.producto.ficha_stock.cantidadActual}}</td>
                     <td class="w-10">
-                        <input type="numer" class="form-control" v-model="linea.cantidad">
+                        <input type="numer" class="form-control" v-model="linea.cantidad" :disabled="mostrar">
                     </td>
                     <td>${{linea.producto.precioVenta}}</td>
                     <td>${{subtotal(linea)}}</td>
                     <td>
-                        <button type="button" class="btn btn-outline-danger border-0" @click="deleteLinea(index)">
+                        <button type="button" class="btn btn-outline-danger border-0" 
+                        @click="deleteLinea(index)"
+                        v-if="npresupuesto.id === null">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
@@ -58,6 +60,14 @@ export default {
             required: true
         }
     },
+    data() {
+        return {
+            show: null
+        }
+    },
+    created(){
+        
+    },
     methods:{
         subtotal(linea){
             linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta
@@ -69,7 +79,7 @@ export default {
                     message: 'Producto Borrado',
                     type: 'error',
                 });
-        }
+        },
     },
     computed: {
         total(){
@@ -79,6 +89,14 @@ export default {
             });
             this.npresupuesto.total = aux
             return aux.toFixed(2)
+        },
+        mostrar(){
+            if(this.npresupuesto.id != null){
+                this.show = true
+            }else{
+                this.show = false
+            }
+            return this.show
         }
     },
 }

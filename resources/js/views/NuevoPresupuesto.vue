@@ -42,7 +42,7 @@ export default {
                 vendedor:{
 
                 },
-                fecha: '',
+                fecha_emision: '',
                 detalles: '',
                 total: 0,
                 vendedor_id: null,
@@ -62,7 +62,7 @@ export default {
             var yyyy = today.getFullYear();
             var aux = new Date(yyyy, mm, dd);
             console.log(aux)
-            this.npre.fecha = aux
+            this.npre.fecha_emision = aux
         }
     },
     created(){

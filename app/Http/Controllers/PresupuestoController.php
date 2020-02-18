@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Presupuesto;
 use App\LineaPresupuesto;
 use App\DatosEmpresa;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -18,7 +19,13 @@ class PresupuestoController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $presupuestos = Presupuesto::with('vendedor', 'cliente')->get();
+            $presupuestos = Presupuesto::with('vendedor', 'cliente', 'estado')
+            ->orderBy('created_at', 'desc')
+            ->get();
+            foreach ($presupuestos as $key => $presupuesto) {
+                $date = Carbon::createFromDate($presupuesto->fecha_emision);
+                $presupuesto->fecha_emision = $date->format('d-m-Y');
+            }
             return response()->json($presupuestos);
         }
     }
@@ -45,10 +52,11 @@ class PresupuestoController extends Controller
             $presupuesto = new Presupuesto();
             $presupuesto->vendedor_id = $request->vendedor_id;
             $presupuesto->cliente_id = $request->cliente['id'];
-            $presupuesto->fecha_emision = $request->fecha;
+            $presupuesto->fecha_emision = $request->fecha_emision;
             $presupuesto->total = $request->total;
             $presupuesto->codigo = '00000';
             $presupuesto->detalles = $request->detalles;
+            $presupuesto->estadoPresupuesto_id = 1;
             $presupuesto->save();
 
             
@@ -79,7 +87,7 @@ class PresupuestoController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor')->findOrFail($id);
+            $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor', 'estado')->findOrFail($id);
             return response()->json($presupuesto);
         }
     }
@@ -104,7 +112,18 @@ class PresupuestoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $presupuesto = Presupuesto::findOrFail($id);
+
+            $presupuesto->estadoPresupuesto_id = $request->estadoPresupuesto_id;
+            $presupuesto->detalles = $request->detalles;
+            $presupuesto->save();
+
+            return response()->json([
+                'presupuesto' => $presupuesto,
+                'message' => 'Presupuesto Actualizado'
+            ], 200);
+        }
     }
 
     /**

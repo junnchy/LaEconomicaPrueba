@@ -34,7 +34,7 @@
                                 <label for="recipient-name" class="col-form-label">Categoria Padre:</label>
                                 <select class="form-control" v-model="ncat.categoria_id" type="number" >
                                     <option selected  :value='null'>0 - Vacio</option>
-                                    <option v-for="(categoria, index) in categorias" :key="index" :value="categoria.id">{{categoria.id}} - {{categoria.nombre}}</option>
+                                    <option v-for="(categoria, index) in categorias" :key="index" :value="categoria.id">{{categoria.nombre}}</option>
                                 </select>
                             </div>
                             <div class="modal-footer">

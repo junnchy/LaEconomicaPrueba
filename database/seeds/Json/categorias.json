@@ -61,5 +61,12 @@
         "categoria_id": "2",
         "created_at": "2020-01-29 19:20:38",
         "updated_at": "2020-01-29 19:20:38"
+    },
+    {
+        "id": "10",
+        "nombre": "Vigas",
+        "categoria_id": "2",
+        "created_at": "2020-01-29 19:20:38",
+        "updated_at": "2020-01-29 19:20:38"
     }
 ]

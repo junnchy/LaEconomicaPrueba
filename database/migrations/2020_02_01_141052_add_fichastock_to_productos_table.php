@@ -27,10 +27,10 @@ class AddFichastockToProductosTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::table('productos', function (Blueprint $table) {
-            $table->dropForeign(['fichaStock_id']);
-            $table->dropColumn('fichaStock_id');
-        });
+            Schema::table('productos', function (Blueprint $table) {
+                $table->dropForeign(['fichaStock_id']);
+                $table->dropColumn('fichaStock_id');
+            });
         Schema::enableForeignKeyConstraints();
     }
 }

@@ -5,6 +5,7 @@ namespace App;
 use App\LineaPresupuesto;
 use App\Cliente;
 use App\Vendedor;
+use App\EstadoPresupuesto;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,5 +26,9 @@ class Presupuesto extends Model
         return $this->belongsTo(Vendedor::class);
     }
 
+    public function estado()
+    {
+        return $this->belongsTo(EstadoPresupuesto::class, 'estadoPresupuesto_id');
+    }
 
 }

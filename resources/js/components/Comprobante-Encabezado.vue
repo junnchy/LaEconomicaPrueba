@@ -23,7 +23,13 @@
                     </div>
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-outline-primary btn-block" type="button" data-toggle="collapse" data-target="#mapa" aria-expanded="false" aria-controls="mapa">
+                    <button class="btn btn-outline-primary btn-block" 
+                    type="button" 
+                    data-toggle="collapse" 
+                    data-target="#mapa" 
+                    aria-expanded="false" 
+                    aria-controls="mapa"
+                    v-if="npresupuesto.id === null">
                         Ver Mapa <i class="fas fa-map-marked-alt"></i>
                     </button>
                 </div>

@@ -146,11 +146,12 @@
         "descuentoProducto_5": "0.00",
         "rentabilidad": "36.00",
         "precioVenta": "712.67",
-        "fichaStock_id":"7",
+        "fichaStock_id": "7",
         "iva": "21.00",
         "flete": "0.00",
         "imagen": "http://127.0.0.1:8000/assets/productos/uqsiWd6LrTaSG5HurLxx.jpg",
         "created_at": "2020-01-29 19:30:30",
         "updated_at": "2020-01-29 19:30:30"
     }
+    
 ]

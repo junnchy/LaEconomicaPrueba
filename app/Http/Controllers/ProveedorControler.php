@@ -70,7 +70,7 @@ class ProveedorControler extends Controller
           
             return response()->json([
                 'proveedor' => $proveedor,
-                'message' => 'Success'
+                'message' => 'Proveedor Agregado'
             ], 200);
 
         } else {

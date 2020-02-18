@@ -228,6 +228,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -321,6 +327,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     npresupuesto: {
@@ -328,6 +336,12 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     }
   },
+  data: function data() {
+    return {
+      show: null
+    };
+  },
+  created: function created() {},
   methods: {
     subtotal: function subtotal(linea) {
       linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta;
@@ -349,6 +363,15 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.npresupuesto.total = aux;
       return aux.toFixed(2);
+    },
+    mostrar: function mostrar() {
+      if (this.npresupuesto.id != null) {
+        this.show = true;
+      } else {
+        this.show = false;
+      }
+
+      return this.show;
     }
   }
 });
@@ -409,6 +432,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -422,7 +446,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     }
   },
-  created: function created() {},
+  data: function data() {
+    return {
+      datepick: null
+    };
+  },
+  created: function created() {
+    if (this.npresupuesto.id != null) {
+      this.datepick = true;
+    } else {
+      this.datepick = false;
+    }
+  },
   methods: {},
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usuarios', ['vendedorActual']))
 });
@@ -1293,6 +1328,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       progress: "width: 30%",
       producto: {
         id: null,
+        codigoProveedor: '',
         nombre: '',
         descuentoProducto: [0, 0, 0, 0, 0],
         dre: 0,
@@ -1618,6 +1654,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1630,7 +1682,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getPresupuesto(this.id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuesto', 'imprimirPrespuesto']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuesto', 'imprimirPrespuesto', 'cambiarEstadoPresupuesto']), {
+    confirmar: function confirmar() {
+      this.presupuesto.estadoPresupuesto_id = 3;
+      this.cambiarEstadoPresupuesto(this.presupuesto);
+    },
+    rechazar: function rechazar() {
+      this.presupuesto.estadoPresupuesto_id = 4;
+      this.cambiarEstadoPresupuesto(this.presupuesto);
+    },
+    seguir: function seguir() {
+      this.presupuesto.estadoPresupuesto_id = 2;
+      this.cambiarEstadoPresupuesto(this.presupuesto);
+    },
     getSetFechaActual: function getSetFechaActual() {
       var today = new Date();
       var dd = String(today.getDate());
@@ -2355,6 +2419,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_Paginacion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Paginacion */ "./resources/js/components/Paginacion.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2409,16 +2477,71 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    DatePicker: vue2_datepicker__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Paginacion: _components_Paginacion__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
   data: function data() {
-    return {};
+    return {
+      estado: ''
+    };
   },
   created: function created() {
     this.getPresupuestos();
+    this.getEstadosPresupuesto();
+    this.$store.commit('setArregloPaginado', this.filtered_presupuestos);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuestos', 'imprimirPrespuesto'])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('presupuestos', ['presupuestos']))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('presupuestos', ['getPresupuestos', 'imprimirPrespuesto', 'getEstadosPresupuesto'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('presupuestos', ['presupuestos', 'estadosPresupuesto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('presupuestos', ['filtered_presupuestos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arregloPaginado']), {
+    search: {
+      get: function get() {
+        return this.$store.state.presupuestos.filter.dates;
+      },
+      set: function set(val) {
+        this.$store.commit('presupuestos/SET_DATE', val);
+      }
+    },
+    searchEstado: {
+      get: function get() {
+        return this.$store.state.presupuestos.filter.estado;
+      },
+      set: function set(val) {
+        this.$store.commit('presupuestos/SET_ESTADO', val);
+      }
+    }
+  }),
+  mutations: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setArregloPaginado']))
 });
 
 /***/ }),
@@ -2439,6 +2562,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -2863,7 +2990,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         },
         vendedor: {},
-        fecha: '',
+        fecha_emision: '',
         detalles: '',
         total: 0,
         vendedor_id: null,
@@ -2881,7 +3008,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var yyyy = today.getFullYear();
       var aux = new Date(yyyy, mm, dd);
       console.log(aux);
-      this.npre.fecha = aux;
+      this.npre.fecha_emision = aux;
     }
   }),
   created: function created() {
@@ -3778,7 +3905,27 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "col-2" }, [
+            _vm.npresupuesto.id === null
+              ? _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-outline-primary btn-block",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "collapse",
+                      "data-target": "#mapa",
+                      "aria-expanded": "false",
+                      "aria-controls": "mapa"
+                    }
+                  },
+                  [
+                    _vm._v("\n                    Ver Mapa "),
+                    _c("i", { staticClass: "fas fa-map-marked-alt" })
+                  ]
+                )
+              : _vm._e()
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row mb-3" }, [
@@ -3799,7 +3946,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-4" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -3836,7 +3983,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-4" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
-              _vm._m(3),
+              _vm._m(2),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -3873,7 +4020,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-4" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
-              _vm._m(4),
+              _vm._m(3),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -3927,30 +4074,6 @@ var staticRenderFns = [
         "span",
         { staticClass: "input-group-text", attrs: { id: "direccion" } },
         [_vm._v("Direccion")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-2" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-outline-primary btn-block",
-          attrs: {
-            type: "button",
-            "data-toggle": "collapse",
-            "data-target": "#mapa",
-            "aria-expanded": "false",
-            "aria-controls": "mapa"
-          }
-        },
-        [
-          _vm._v("\n                    Ver Mapa "),
-          _c("i", { staticClass: "fas fa-map-marked-alt" })
-        ]
       )
     ])
   },
@@ -4014,7 +4137,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-12 text-center" }, [
     _c("table", { staticClass: "table table-striped" }, [
-      _vm._m(0),
+      _c("thead", [
+        _c("tr", [
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripcion")]),
+          _vm._v(" "),
+          _vm.npresupuesto.id === null
+            ? _c("th", { attrs: { scope: "col" } }, [_vm._v("Disponibles")])
+            : _vm._e(),
+          _vm._v(" "),
+          _c("th", { staticClass: "w-10", attrs: { scope: "col" } }, [
+            _vm._v("Cantidad")
+          ]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio unidad")]),
+          _vm._v(" "),
+          _c("th", { attrs: { scope: "col" } }, [_vm._v("Subtotal")])
+        ])
+      ]),
       _vm._v(" "),
       _c(
         "tbody",
@@ -4026,9 +4167,11 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(linea.producto.nombre))]),
             _vm._v(" "),
-            _c("td", [
-              _vm._v(_vm._s(linea.producto.ficha_stock.cantidadActual))
-            ]),
+            _vm.npresupuesto.id === null
+              ? _c("td", [
+                  _vm._v(_vm._s(linea.producto.ficha_stock.cantidadActual))
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("td", { staticClass: "w-10" }, [
               _c("input", {
@@ -4041,7 +4184,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "numer" },
+                attrs: { type: "numer", disabled: _vm.mostrar },
                 domProps: { value: linea.cantidad },
                 on: {
                   input: function($event) {
@@ -4059,19 +4202,21 @@ var render = function() {
             _c("td", [_vm._v("$" + _vm._s(_vm.subtotal(linea)))]),
             _vm._v(" "),
             _c("td", [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-outline-danger border-0",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      return _vm.deleteLinea(index)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "fas fa-trash" })]
-              )
+              _vm.npresupuesto.id === null
+                ? _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-danger border-0",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteLinea(index)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-trash" })]
+                  )
+                : _vm._e()
             ])
           ])
         }),
@@ -4128,30 +4273,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descripcion")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Disponibles")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "w-10", attrs: { scope: "col" } }, [
-          _vm._v("Cantidad")
-        ]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio unidad")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Subtotal")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -4248,13 +4370,17 @@ var render = function() {
           _vm._m(2),
           _vm._v(" "),
           _c("date-picker", {
-            attrs: { format: "DD-MM-YYYY", type: "date" },
+            attrs: {
+              format: "DD-MM-YYYY",
+              type: "date",
+              disabled: _vm.datepick
+            },
             model: {
-              value: _vm.npresupuesto.fecha,
+              value: _vm.npresupuesto.fecha_emision,
               callback: function($$v) {
-                _vm.$set(_vm.npresupuesto, "fecha", $$v)
+                _vm.$set(_vm.npresupuesto, "fecha_emision", $$v)
               },
-              expression: "npresupuesto.fecha"
+              expression: "npresupuesto.fecha_emision"
             }
           })
         ],
@@ -6540,24 +6666,6 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-outline-primary btn-sm",
-                on: {
-                  click: function($event) {
-                    return _vm.imprimirPrespuesto(_vm.presupuesto.id)
-                  }
-                }
-              },
-              [
-                _vm._v("\n                Imprimir "),
-                _c("i", { staticClass: "fas fa-print" })
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-1" }, [
-            _c(
-              "button",
-              {
                 staticClass: "btn btn-outline-danger btn-sm",
                 on: {
                   click: function($event) {
@@ -6576,7 +6684,83 @@ var render = function() {
       _vm._v(" "),
       _c("encabezado", { attrs: { npresupuesto: _vm.presupuesto } }),
       _vm._v(" "),
-      _c("productos", { attrs: { npresupuesto: _vm.presupuesto } })
+      _c("productos", { attrs: { npresupuesto: _vm.presupuesto } }),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex flex-row-reverse p-2 my-2" }, [
+        _c("div", { staticClass: "mx-1" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-danger btn-sm",
+              on: {
+                click: function($event) {
+                  return _vm.rechazar()
+                }
+              }
+            },
+            [
+              _vm._v("\n                Rechazar "),
+              _c("i", { staticClass: "fas fa-ban" })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mx-1" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-success btn-sm",
+              on: {
+                click: function($event) {
+                  return _vm.confirmar()
+                }
+              }
+            },
+            [
+              _vm._v("\n                Confirmar "),
+              _c("i", { staticClass: "fas fa-check-circle" })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mx-1" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-warning btn-sm mr-1",
+              on: {
+                click: function($event) {
+                  return _vm.seguir()
+                }
+              }
+            },
+            [
+              _vm._v("\n                Seguimiento "),
+              _c("i", { staticClass: "fas fa-running" })
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mx-1" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-primary btn-sm",
+              on: {
+                click: function($event) {
+                  return _vm.imprimirPrespuesto(_vm.presupuesto.id)
+                }
+              }
+            },
+            [
+              _vm._v("\n                Imprimir "),
+              _c("i", { staticClass: "fas fa-print" })
+            ]
+          )
+        ])
+      ])
     ],
     1
   )
@@ -6586,7 +6770,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-10" }, [
+    return _c("div", { staticClass: "col-11" }, [
       _c("h1", [
         _vm._v("Presupuesto "),
         _c("i", { staticClass: "fas fa-file-alt" })
@@ -7888,88 +8072,190 @@ var render = function() {
   return _c("div", [
     _vm._m(0),
     _vm._v(" "),
-    _c("div", { staticClass: "container mt-5" }, [
+    _c("div", { staticClass: "container mt-3 border border-rounded p-3" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-12" }, [
-          _c("table", { staticClass: "table table-striped" }, [
+        _c(
+          "div",
+          { staticClass: "col-6" },
+          [
+            _c("date-picker", {
+              attrs: {
+                type: "date",
+                range: "",
+                placeholder: "Filtrar por Fecha"
+              },
+              model: {
+                value: _vm.search,
+                callback: function($$v) {
+                  _vm.search = $$v
+                },
+                expression: "search"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c("div", { staticClass: "input-group mb-3" }, [
             _vm._m(1),
             _vm._v(" "),
             _c(
-              "tbody",
-              _vm._l(_vm.presupuestos, function(presupuesto, index) {
-                return _c("tr", { key: index }, [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(presupuesto.created_at))
-                  ]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v(_vm._s(presupuesto.cliente.nombre))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(presupuesto.total))]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      "\n                                " +
-                        _vm._s(presupuesto.vendedor.puesto) +
-                        " - " +
-                        _vm._s(presupuesto.vendedor.nombre) +
-                        "\n                            "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("div", { staticClass: "d-flex flex-row" }, [
-                      _c(
-                        "div",
-                        [
-                          _c(
-                            "router-link",
-                            {
-                              attrs: {
-                                to: {
-                                  name: "detallePresupuesto",
-                                  params: { id: presupuesto.id }
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "button",
-                                { staticClass: "btn btn-warning btn-sm mr-1" },
-                                [
-                                  _vm._v(
-                                    "\n                                                Ver Mas "
-                                  ),
-                                  _c("i", { staticClass: "fas fa-eye" })
-                                ]
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("div", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-outline-primary btn-sm",
-                            on: {
-                              click: function($event) {
-                                return _vm.imprimirPrespuesto(presupuesto.id)
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fas fa-print" })]
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              }),
-              0
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.searchEstado,
+                    expression: "searchEstado"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.searchEstado = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { selected: "" }, domProps: { value: null } },
+                  [_vm._v("Todos")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.estadosPresupuesto, function(estado, index) {
+                  return _c(
+                    "option",
+                    { key: index, domProps: { value: estado.id } },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(estado.nombre) +
+                          "\n                        "
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
             )
           ])
         ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container mt-3" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c("table", { staticClass: "table table-striped" }, [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.filtered_presupuestos, function(presupuesto, index) {
+                  return _c("tr", { key: index }, [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v(_vm._s(presupuesto.fecha_emision))
+                    ]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v(_vm._s(presupuesto.cliente.nombre))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("$" + _vm._s(presupuesto.total))]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "\n                                " +
+                          _vm._s(presupuesto.vendedor.puesto) +
+                          " - " +
+                          _vm._s(presupuesto.vendedor.nombre) +
+                          "\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { class: presupuesto.estado.clase }, [
+                        _vm._v(_vm._s(presupuesto.estado.nombre))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("div", { staticClass: "d-flex flex-row" }, [
+                        _c(
+                          "div",
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                attrs: {
+                                  to: {
+                                    name: "detallePresupuesto",
+                                    params: { id: presupuesto.id }
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-warning btn-sm mr-1"
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                Ver Mas "
+                                    ),
+                                    _c("i", { staticClass: "fas fa-eye" })
+                                  ]
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-outline-primary btn-sm",
+                              on: {
+                                click: function($event) {
+                                  return _vm.imprimirPrespuesto(presupuesto.id)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-print" })]
+                          )
+                        ])
+                      ])
+                    ])
+                  ])
+                }),
+                0
+              )
+            ]),
+            _vm._v(" "),
+            _c("Paginacion", {
+              attrs: { filtered: _vm.filtered_presupuestos, nro_filas: 10 }
+            })
+          ],
+          1
+        )
       ])
     ])
   ])
@@ -7988,6 +8274,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("label", { staticClass: "input-group-text" }, [_vm._v("Estado:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
@@ -7997,6 +8291,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Vendedor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Estado")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
       ])
@@ -8051,7 +8347,7 @@ var render = function() {
                       ) {
                         return _c("tr", { key: index }, [
                           _c("th", { attrs: { scope: "row" } }, [
-                            _vm._v(_vm._s(presupuesto.created_at))
+                            _vm._v(_vm._s(presupuesto.fecha_emision))
                           ]),
                           _vm._v(" "),
                           _c("td", [_vm._v(_vm._s(presupuesto.total))]),
@@ -8064,6 +8360,12 @@ var render = function() {
                                 _vm._s(presupuesto.vendedor.nombre) +
                                 "\n                            "
                             )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("span", { class: presupuesto.estado.clase }, [
+                              _vm._v(_vm._s(presupuesto.estado.nombre))
+                            ])
                           ]),
                           _vm._v(" "),
                           _c("td", [
@@ -8162,6 +8464,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Monto")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Vendedor")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Estado")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
       ])

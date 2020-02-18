@@ -13,15 +13,19 @@
                                 <th scope="col">Fecha</th>
                                 <th scope="col">Monto</th>
                                 <th scope="col">Vendedor</th>
+                                <th scope="col">Estado</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(presupuesto, index) in cliente.presupuestos" :key="index">
-                                <th scope="row">{{presupuesto.created_at}}</th>
+                                <th scope="row">{{presupuesto.fecha_emision}}</th>
                                 <td>{{presupuesto.total}}</td>
                                 <td>
                                     {{presupuesto.vendedor.puesto}} - {{presupuesto.vendedor.nombre}}
+                                </td>
+                                <td>
+                                    <span :class="presupuesto.estado.clase">{{presupuesto.estado.nombre}}</span>
                                 </td>
                                 <td>
                                     <div class="d-flex flex-row">

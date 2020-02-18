@@ -56,16 +56,27 @@
             </div>
         </div>
         <div class="form-group my-4">
-            <label>Categoria:</label> 
-            <select 
-            :class="fCat" 
-            v-model="producto.categoria">
-                <option selected :value="producto.categoria" v-if="producto.proveedor_id === producto.proveedor.id">{{producto.categoria.id}}-{{producto.categoria.nombre}}</option>
-                <option v-for="(cate, index) in producto.proveedor.categorias" :key="index" :value='cate'>{{cate.nombre}}</option>
-                <span class="invalid-feedback" role="alert" v-if="errors.categoria_id != ''"> 
-                    <strong>{{errors.categoria_id[0]}}</strong>
-                </span>
-            </select>
+            <div class="row">
+                <div class="col-6">
+                    <label>Categoria:</label> 
+                    <select 
+                    :class="fCat" 
+                    v-model="producto.categoria">
+                        <option selected :value="producto.categoria" v-if="producto.proveedor_id === producto.proveedor.id">{{producto.categoria.id}}-{{producto.categoria.nombre}}</option>
+                        <option v-for="(cate, index) in producto.proveedor.categorias" :key="index" :value='cate'>{{cate.nombre}}</option>
+                        <span class="invalid-feedback" role="alert" v-if="errors.categoria_id != ''"> 
+                            <strong>{{errors.categoria_id[0]}}</strong>
+                        </span>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label>Codigo de Proveedor</label>
+                    <input 
+                    type="text" 
+                    v-model="producto.codigoProveedor" 
+                    class="form-control" >
+                </div>
+            </div>
         </div>
         {{validar}}
     </div>

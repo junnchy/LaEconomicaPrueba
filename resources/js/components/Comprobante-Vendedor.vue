@@ -24,9 +24,10 @@
                     <span class="input-group-text" id="inicioAct">Fecha</span>
                 </div>
                 <date-picker 
-                v-model="npresupuesto.fecha"
+                v-model="npresupuesto.fecha_emision"
                 format="DD-MM-YYYY"
                 type="date"
+                :disabled="datepick"
                 >
                 </date-picker>
             </div>
@@ -47,7 +48,17 @@ export default {
             required: true
         }
     },
+    data() {
+        return {
+            datepick: null
+        }
+    },
     created(){
+        if(this.npresupuesto.id != null){
+            this.datepick = true
+        }else{
+            this.datepick = false
+        }
     },
     methods:{
     },
