@@ -54,6 +54,8 @@ class PresupuestoController extends Controller
             $presupuesto->cliente_id = $request->cliente['id'];
             $presupuesto->fecha_emision = $request->fecha_emision;
             $presupuesto->total = $request->total;
+            $presupuesto->subtotal = $request->subtotal;
+            $presupuesto->iva = $request->iva;
             $presupuesto->codigo = '00000';
             $presupuesto->detalles = $request->detalles;
             $presupuesto->estadoPresupuesto_id = 1;
@@ -62,7 +64,11 @@ class PresupuestoController extends Controller
             
             foreach ($request->lineas as $linea){
                 $lp = new LineaPresupuesto();
-                $lp->precio = $linea['producto']['precioVenta'];
+                if($request['cliente']['condicion_iva_id'] != 1){
+                    $lp->precio = $linea['producto']['precioVenta'];
+                }else{
+                    $lp->precio = $linea['producto']['precioVentaSinIva'];
+                }
                 $lp->cantidad = $linea['cantidad'];
                 $lp->total_linea = $linea['subtotal'];
                 $lp->descuento = 0;

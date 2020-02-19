@@ -47,7 +47,9 @@ export default {
                 total: 0,
                 vendedor_id: null,
                 lineas:[],
-                id: null
+                id: null,
+                subtotal: 0, 
+                iva: 0
             }
         }
     },

@@ -18,6 +18,8 @@ class CreatePresupuestosTable extends Migration
             $table->date('fecha_emision');
             $table->string('codigo');
             $table->float('total');
+            $table->float('subtotal');
+            $table->float('iva');
             $table->text('detalles')->nullable();
             $table->unsignedBigInteger('cliente_id')->nullable();
             $table->foreign('cliente_id')->references('id')->on('clientes');

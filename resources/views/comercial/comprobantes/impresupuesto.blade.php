@@ -7,7 +7,7 @@
     <title>Presupuesto La Economica</title>
 </head>
 <body>
-    <table class="table border-bottom">
+    <table class="table table-sm border-bottom">
         <tbody> 
             <tr>
                 <td>
@@ -53,27 +53,64 @@
         </tbody>
     </table>
     <div class="p">
-        <table class="table table-striped" style="width:100%">
+        <table class="table table-striped table-sm" style="width:100%">
             <thead>
                 <tr>
                     <th scope="col">Producto</th>
-                    <th scope="col">Precio unitario</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Total de Linea</th>
+                    <th scope="col" class="w-20">Precio unitario</th>
+                    @if($presupuesto->cliente->condicion_iva_id === 1)
+                        <th scope="col" class="w-10">Iva</th>
+                    @endif
+                    <th scope="col" class="w-10">Cantidad</th>
+                    <th scope="col" class="w-20">Total de Linea</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($presupuesto->lineas as $linea)
                     <tr>
                         <td>{{$linea->producto->nombre}}</td>
-                        <td>${{$linea->precio}}</td>
-                        <td>{{$linea->cantidad}}</td>
-                        <td>${{$linea->total_linea}}</td>
+                        <td class="w-20">${{$linea->precio}}</td>
+                        @if($presupuesto->cliente->condicion_iva_id === 1)
+                            <td class="w-10">{{$linea->producto->iva}}%</td>
+                        @endif
+                        <td class="w-10">{{$linea->cantidad}}</td>
+                        <td class="w-20">${{$linea->total_linea}}</td>
                     </tr>
                 @endforeach
             <tbody>
         </table>
+        
+        @if($presupuesto->cliente->condicion_iva_id === 1)
+            <table class="table table-primary table-sm">
+                <tr>
+                    <td class="ml-2" colspan="2">
+                        <div class="p">
+                            <label>Detalles: </label>
+                            <textarea 
+                            class="form-control" 
+                            id="detalle_presupuesto" 
+                            rows="3">
+                                {{$presupuesto->detalles}}
+                            </textarea>
+                        </div>
+                    </td>
+                    <th scope="col" class="w-10 text-center">
+                        <p><strong>Subtotal</strong></p>
+                        <p class="border-dark"> ${{$presupuesto->subtotal}}</p>
+                    </th>
+                    <th scope="col" class="w-10 text-center">
+                        <p><strong>Iva</strong></p>
+                        <p class="border-dark"> ${{$presupuesto->iva}}</p>
+                    </th>
+                    <th scope="col" class="w-20 text-center">
+                        <p><strong>Total</strong> </p>
+                        <p class="border border-dark"> ${{$presupuesto->total}}</p>
+                    </th>
+                </tr>
+            </table>
+        @endif  
     </div>
+    @if($presupuesto->cliente->condicion_iva_id != 1)
     <table class="table mt-2">
         <tbody>
             <tr>
@@ -96,9 +133,14 @@
             </tr>
         </tbody>
     </table>
-    <div class="alert alert-dark text-center p">
-        <p><strong> Comprobante no valido como factura</strong> </p> 
-    </div>
+    @endif
+    <table class="table table-sm fixed-bottom2 text-center">
+        <td class="table-secondary">
+            <div class="p">
+                <p><strong> Comprobante no valido como factura </strong></p>
+            </div>
+        </td>
+    </table>
 </body>
 </html>
 
@@ -108,7 +150,20 @@
     }
     div.p{
         font-size: 11px;
+    }
+    .w-10 {
+        width: 10% !important;
     }    
+    .w-20 {
+        width: 20% !important;
+    }
+    .fixed-bottom2 {
+        position: fixed;
+        right: 0;
+        bottom: 20;
+        left: 0;
+        z-index: 1030;
+    }
 </style>
 
 

@@ -31,6 +31,7 @@ class ProductosTableSeeder extends Seeder
                 "descuentoProducto_3"=>$obj->descuentoProducto_3,
                 "descuentoProducto_4"=>$obj->descuentoProducto_4,
                 "descuentoProducto_5"=>$obj->descuentoProducto_5,
+                "precioVentaSinIva"=>$obj->precioVentaSinIva,
                 "rentabilidad"=>$obj->rentabilidad,
                 "precioVenta"=>$obj->precioVenta,
                 "iva"=>$obj->iva,

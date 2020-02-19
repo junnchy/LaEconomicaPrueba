@@ -70,7 +70,7 @@
                     </select>
                 </div>
                 <div class="col-6">
-                    <label>Codigo de Proveedor</label>
+                    <label>Codigo de Proveedor (SKU)</label>
                     <input 
                     type="text" 
                     v-model="producto.codigoProveedor" 

@@ -329,6 +329,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     npresupuesto: {
@@ -343,9 +356,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   methods: {
+    precio: function precio(linea) {
+      if (this.npresupuesto.cliente.condicion_iva_id != 1) {
+        return linea.producto.precioVenta;
+      } else {
+        return linea.producto.precioVentaSinIva;
+      }
+    },
     subtotal: function subtotal(linea) {
-      linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta;
-      return linea.subtotal.toFixed(2);
+      if (this.npresupuesto.cliente.condicion_iva_id != 1) {
+        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta;
+        return linea.subtotal.toFixed(2);
+      } else {
+        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+        return linea.subtotal.toFixed(2);
+      }
     },
     deleteLinea: function deleteLinea(index) {
       this.npresupuesto.lineas.splice(index, 1);
@@ -362,6 +387,22 @@ __webpack_require__.r(__webpack_exports__);
         aux += parseInt(linea.cantidad) * linea.producto.precioVenta;
       });
       this.npresupuesto.total = aux;
+      return aux.toFixed(2);
+    },
+    subTotal: function subTotal() {
+      var aux = 0;
+      this.npresupuesto.lineas.forEach(function (linea) {
+        aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+      });
+      this.npresupuesto.subtotal = aux;
+      return aux.toFixed(2);
+    },
+    iva: function iva() {
+      var aux = 0;
+      this.npresupuesto.lineas.forEach(function (linea) {
+        aux += parseInt(linea.cantidad) * (linea.producto.precioVenta - linea.producto.precioVenta / (1 + linea.producto.iva / 100));
+      });
+      this.npresupuesto.iva = aux;
       return aux.toFixed(2);
     },
     mostrar: function mostrar() {
@@ -2995,7 +3036,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         total: 0,
         vendedor_id: null,
         lineas: [],
-        id: null
+        id: null,
+        subtotal: 0,
+        iva: 0
       }
     };
   },
@@ -4153,6 +4196,10 @@ var render = function() {
           _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio unidad")]),
           _vm._v(" "),
+          _vm.npresupuesto.cliente.condicion_iva_id === 1
+            ? _c("th", { attrs: { scope: "col" } }, [_vm._v("Iva")])
+            : _vm._e(),
+          _vm._v(" "),
           _c("th", { attrs: { scope: "col" } }, [_vm._v("Subtotal")])
         ])
       ]),
@@ -4197,7 +4244,11 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("td", [_vm._v("$" + _vm._s(linea.producto.precioVenta))]),
+            _c("td", [_vm._v("$" + _vm._s(_vm.precio(linea)))]),
+            _vm._v(" "),
+            _vm.npresupuesto.cliente.condicion_iva_id === 1
+              ? _c("td", [_vm._v(_vm._s(linea.producto.iva) + "%")])
+              : _vm._e(),
             _vm._v(" "),
             _c("td", [_vm._v("$" + _vm._s(_vm.subtotal(linea)))]),
             _vm._v(" "),
@@ -4257,19 +4308,43 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-3 " }, [
-        _c("div", { staticClass: "alert alert-primary" }, [
-          _c("p", [_vm._v("Total")]),
-          _vm._v(" "),
-          _c("h3", [
-            _vm._v(
-              "\n                    $" +
-                _vm._s(_vm.total) +
-                "\n                "
-            )
+      _vm.npresupuesto.cliente.condicion_iva_id === 1
+        ? _c("div", { staticClass: "col-3" }, [
+            _c("div", { staticClass: "alert alert-primary" }, [
+              _c("p", [_vm._v("Subtotal $" + _vm._s(_vm.subTotal))]),
+              _vm._v(" "),
+              _c("p", [_vm._v("Iva $" + _vm._s(_vm.iva))]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _c("p", [_vm._v("Total")]),
+              _vm._v(" "),
+              _c("h3", [
+                _vm._v(
+                  "\n                    $" +
+                    _vm._s(_vm.total) +
+                    "\n                "
+                )
+              ])
+            ])
           ])
-        ])
-      ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.npresupuesto.cliente.condicion_iva_id != 1
+        ? _c("div", { staticClass: "col-3" }, [
+            _c("div", { staticClass: "alert alert-primary" }, [
+              _c("p", [_vm._v("Total")]),
+              _vm._v(" "),
+              _c("h3", [
+                _vm._v(
+                  "\n                    $" +
+                    _vm._s(_vm.total) +
+                    "\n                "
+                )
+              ])
+            ])
+          ])
+        : _vm._e()
     ])
   ])
 }

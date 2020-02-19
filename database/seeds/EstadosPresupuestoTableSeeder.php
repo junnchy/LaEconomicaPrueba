@@ -27,7 +27,7 @@ class EstadosPresupuestoTableSeeder extends Seeder
 
         $estado = new EstadoPresupuesto();
         $estado->id = 3;
-        $estado->nombre = 'confirmado';
+        $estado->nombre = 'Confirmado';
         $estado->clase = 'badge badge-success';
         $estado->save();
 

@@ -8,6 +8,7 @@
                     <th scope="col" v-if="npresupuesto.id === null">Disponibles</th>
                     <th scope="col" class="w-10">Cantidad</th>
                     <th scope="col">Precio unidad</th>
+                    <th scope="col" v-if="npresupuesto.cliente.condicion_iva_id === 1">Iva</th>
                     <th scope="col">Subtotal</th>
                 </tr>
             </thead>
@@ -19,7 +20,8 @@
                     <td class="w-10">
                         <input type="numer" class="form-control" v-model="linea.cantidad" :disabled="mostrar">
                     </td>
-                    <td>${{linea.producto.precioVenta}}</td>
+                    <td>${{precio(linea)}}</td>
+                    <td v-if="npresupuesto.cliente.condicion_iva_id === 1">{{linea.producto.iva}}%</td>
                     <td>${{subtotal(linea)}}</td>
                     <td>
                         <button type="button" class="btn btn-outline-danger border-0" 
@@ -41,7 +43,18 @@
                     rows="3"></textarea>
                 </div>
             </div>
-            <div class="col-3 ">
+            <div class="col-3" v-if="npresupuesto.cliente.condicion_iva_id === 1">
+                <div class="alert alert-primary">
+                    <p>Subtotal ${{subTotal}}</p>
+                    <p>Iva ${{iva}}</p>
+                    <hr>
+                    <p>Total</p>
+                    <h3>
+                        ${{total}}
+                    </h3>
+                </div>
+            </div>
+            <div class="col-3" v-if="npresupuesto.cliente.condicion_iva_id != 1">
                 <div class="alert alert-primary">
                     <p>Total</p>
                     <h3>
@@ -69,9 +82,22 @@ export default {
         
     },
     methods:{
+        precio(linea){
+            if(this.npresupuesto.cliente.condicion_iva_id != 1){
+                return linea.producto.precioVenta
+            }else{
+                return linea.producto.precioVentaSinIva
+            }
+        },
         subtotal(linea){
-            linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta
-            return linea.subtotal.toFixed(2)
+            if(this.npresupuesto.cliente.condicion_iva_id != 1){
+                linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta
+                return linea.subtotal.toFixed(2)
+            }else{
+                linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVentaSinIva
+                return linea.subtotal.toFixed(2)
+            }
+            
         },
         deleteLinea(index){
             this.npresupuesto.lineas.splice(index, 1);
@@ -88,6 +114,22 @@ export default {
                aux += parseInt(linea.cantidad) * linea.producto.precioVenta
             });
             this.npresupuesto.total = aux
+            return aux.toFixed(2)
+        },
+        subTotal(){
+            var aux = 0 
+            this.npresupuesto.lineas.forEach(linea => {
+               aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva
+            });
+            this.npresupuesto.subtotal = aux
+            return aux.toFixed(2)
+        },
+        iva(){
+            var aux = 0 
+            this.npresupuesto.lineas.forEach(linea => {
+               aux += parseInt(linea.cantidad) * (linea.producto.precioVenta - (linea.producto.precioVenta)/(1+(linea.producto.iva/100)))
+            });
+            this.npresupuesto.iva = aux
             return aux.toFixed(2)
         },
         mostrar(){

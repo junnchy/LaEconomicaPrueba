@@ -79,6 +79,7 @@ class ProductosController extends Controller
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
             $producto->precioVenta = $request->precioVenta;
+            $producto->precioVentaSinIva = $request->precioVenta / (($request->iva/100)+1);
             $producto->rentabilidad = $request->rentabilidad;
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
@@ -179,6 +180,7 @@ class ProductosController extends Controller
             $producto->flete = $request->flete;
             $producto->precioCosto = $request->precioCosto;
             $producto->precioVenta = $request->precioVenta;
+            $producto->precioVentaSinIva = $request->precioVenta / (($request->iva/100)+1);
             $producto->rentabilidad = $request->rentabilidad;
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
