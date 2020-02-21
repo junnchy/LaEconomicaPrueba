@@ -150,4 +150,31 @@ class VendedoresController extends Controller
     {
         //
     }
+
+    public function recuentoPresupuestos(Request $request, $id)
+    {   
+        if ($request->ajax()) {
+            $vendedor = Vendedor::with('presupuestos')->findOrFail($id);
+            $presupuestos['enEspera'] = 0;
+            $presupuestos['confirmados'] = 0;
+            $presupuestos['rechazados'] = 0;
+            $presupuestos['enSeguimiento'] = 0;
+            foreach ($vendedor->presupuestos as $key => $presupuesto) {
+                if($presupuesto['estadoPresupuesto_id'] === 1){
+                    $presupuestos['enEspera'] = $presupuestos['enEspera'] + 1;
+                }
+                if($presupuesto['estadoPresupuesto_id'] === 2){
+                    $presupuestos['enSeguimiento'] = $presupuestos['enSeguimiento'] + 1;
+                }
+                if($presupuesto['estadoPresupuesto_id'] === 3){
+                    $presupuestos['confirmados'] = $presupuestos['confirmados'] + 1;
+                }
+                if($presupuesto['estadoPresupuesto_id'] === 4){
+                    $presupuestos['rechazados']= $presupuestos['rechazados']+ 1;
+                }
+            }
+            return response()->json($presupuestos);
+        }
+    }
+    
 }

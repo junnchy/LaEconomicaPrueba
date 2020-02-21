@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(presupuesto, index) in filtered_presupuestos" :key="index">
+                            <tr v-for="(presupuesto, index) in arregloPaginado" :key="index">
                                 <th scope="row">{{presupuesto.fecha_emision}}</th>
                                 <th>{{presupuesto.cliente.nombre}}</th>
                                 <td>${{presupuesto.total}}</td>

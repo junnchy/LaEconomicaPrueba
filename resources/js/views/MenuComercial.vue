@@ -26,7 +26,7 @@
                 <div class="row mt-2">
                     <div class="col-12 text-center">
                         <h4 class="my-2">
-                            <i class="fas fa-chart-line"></i> Ventas
+                            <i class="fas fa-chart-line"></i> Presupuestos
                         </h4>
                         <estadisticaventas/>
                     </div>
@@ -34,13 +34,13 @@
                 <div class="row mt-2">
                     <div class="col-6">
                         <h4 class="my-2">
-                            <i class="fas fa-boxes"></i> Tipo de Producto
+                            <i class="fas fa-chart-pie"></i> Presupuestos
                         </h4>
                         <estadisticaproducto/>
                     </div>
                     <div class="col-6">
                         <h4 class="my-2">
-                            <i class="fas fa-boxes"></i> Tipo de Producto
+                            <i class="fas fa-chart-line"></i> Tipo de Producto
                         </h4>
                         <estadisticalinea/>
                     </div>
@@ -62,13 +62,14 @@ export default {
     created(){
         console.log(this.$userId)
         this.getUsuarioActual(this.$userId)
+        this.recuentoPresupuestos(this.$userId)
     },
     methods:{
-        ...mapActions('usuarios', ['getUsuarioActual']),
+        ...mapActions('usuarios', ['getUsuarioActual', 'recuentoPresupuestos']),
         ...mapActions('presupuestos',['imprimirPrespuesto'])
     },
     computed: {
-        ...mapState('usuarios', ['usuarioActual'])
+        ...mapState('usuarios', ['usuarioActual', 'contadoresPresupuestos'])
     },
 }
 </script>

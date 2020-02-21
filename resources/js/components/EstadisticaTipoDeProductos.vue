@@ -9,24 +9,32 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
-     data () {
-    return {
-      // Array will be automatically processed with visualization.arrayToDataTable function
-      chartData: [
-        ['Tipo', 'Cantidad'],
-        ['Materiales', 1000],
-        ['Sanitarios', 170],
-        ['Ceramicos', 660],
-        ['Ferreteria', 1030]
-      ],
-      chartOptions: {
-        chart: {
-          title: 'Productos La Economica',
-          subtitle: 'Tipo, Cantidad',
+    data (){
+      return {
+        // Array will be automatically processed with visualization.arrayToDataTable function
+        enEspera: 2,
+        chartData: this.$store.state.usuarios.datos,
+        chartOptions: {
+          chart: {
+            title: 'Presupuestos La Economica',
+            subtitle: 'Tipo, Cantidad',
+          },
+          pieHole: 0.4,
+          slices: {
+            0: { color: '#3366CC' },
+            1: { color: '#109618' },
+            2: { color: '#DC3912' },
+            3: { color: '#FF9900' },
+          }
         }
       }
-    }
+    },
+  created(){
+  },
+  computed:{
+    ...mapState('usuarios', ['contadoresPresupuestos'])
   }
 }
 </script>

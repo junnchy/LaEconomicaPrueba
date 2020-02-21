@@ -37,9 +37,7 @@
                                     <div class="dropdown-menu" aria-labelledby="subMenuProducto">
                                         <a class="dropdown-item" href="#">
                                             <router-link :to="{name: 'fichaStock', params:{id: producto.ficha_stock.id}}">
-                                                <button class="btn btn-outline-dark btn-block">
-                                                    Ficha de Stock
-                                                </button>
+                                                <a class="dropdown-item" href="#"> Ficha de Stock </a>
                                             </router-link>
                                         </a>
                                     </div>

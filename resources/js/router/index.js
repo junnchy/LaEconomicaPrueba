@@ -114,6 +114,11 @@ const routes = [
       name: 'listadoPresupuestos',
       component: () => import(/* webpackChunkName: "about" */ '../views/ListadoPresupuestos.vue')
     },
+    {
+      path: '/editarPresupuesto/:id',
+      name: 'editarPresupuesto',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EditarPresupuesto.vue')
+    },
 ]
 
 

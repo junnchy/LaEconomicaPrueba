@@ -8,6 +8,9 @@ export default {
         filter: {
             query: '',
         },
+        filterPresupuestos:{
+            estado: null
+        },
         errors: {
             nombre:'',
             cuit: '',
@@ -30,6 +33,9 @@ export default {
         },
         SET_QUERY(state, query){
             state.filter.query = query;
+        },
+        SET_ESTADOPRES(state, estado){
+            state.filterPresupuestos.estado = estado;
         },
         setError(state, error){
             if (error.nombre != undefined) {
@@ -137,6 +143,16 @@ export default {
             }else{
               return state.clientes
             }
+        },
+        filtered_presupuestos(state){
+            let pfil = state.cliente.presupuestos
+            if(state.filterPresupuestos.estado != null){
+                pfil = pfil.filter(presupuesto => (presupuesto.estadoPresupuesto_id === state.filterPresupuestos.estado))
+                return pfil
+            }
+            else{
+              return pfil
+            }   
         },
     }  
 }

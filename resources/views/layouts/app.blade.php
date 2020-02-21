@@ -44,6 +44,7 @@
                             <router-link :to="{name: 'datosEmpresa'}">
                                 <a class="dropdown-item" href="#">Datos de la Empresa</a>
                             </router-link> 
+                            <div class="dropdown-divider"></div>
                             @auth
                                 @if (Auth::user()->hasRole('admin'))
                                     <a class="dropdown-item" href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
@@ -61,6 +62,13 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/comercial/menu">Menu Comercial</a>
+                            <div class="dropdown-divider"></div>
+                            <router-link :to="{name:'nuevoPrespuesto'}">
+                                <a class="dropdown-item" href="#"> Nuevo Presupuesto </a> 
+                            </router-link> 
+                            <router-link :to="{name:'listadoPresupuestos'}">
+                                <a class="dropdown-item" href="#"> Listado Presupuestos </a>
+                            </router-link>
                         </div>
                     </li>
                     <li>

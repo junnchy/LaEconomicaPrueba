@@ -2,12 +2,12 @@
     <div class="py-3 border border-secondary rounded">
         <div class="row shadow-sm p-3 text-center bg-ecogray border border-secondary rounded">
             <div class="col-12">
-                <h1>Nuevo Presupuesto <i class="fas fa-file-alt"></i></h1>
+                <h1>Editar Presupuesto <i class="fas fa-file-alt"></i></h1>
             </div>
         </div>
-        <form @submit.prevent="agregarPresupuesto(npre)">
-            <encabezado v-bind:npresupuesto="npre"/>
-            <productos v-bind:npresupuesto="npre"/>
+        <form @submit.prevent="agregarPresupuesto(presupuesto)">
+            <encabezado v-bind:npresupuesto="presupuesto"/>
+            <productos v-bind:npresupuesto="presupuesto"/>
             <div class="d-flex justify-content-center sticky-button">
                 <button type="submit" class="btn btn-warning btn-block w-75" v-if="$store.state.presupuestos.status != 200">
                     Grabar Prespuesto <i class="fas fa-save"></i>
@@ -20,7 +20,7 @@
                 </button>
             </div>
         </form>
-        {{vendedorC}}
+        {{vendedorC}}{{preC}}
     </div>
 </template>
 
@@ -31,31 +31,12 @@ import productos from '../components/Comprobrante-Productos'
 export default {
     data() {
         return {
-            npre:{
-                cliente:{
-                    id: null, nombre:'Cliente',
-                    direccion: '', localidad: '', 
-                    condicion_iva:{ 
-                        denominacion: ''
-                    }
-                },
-                vendedor:{
-
-                },
-                fecha_emision: '',
-                detalles: '',
-                total: 0,
-                vendedor_id: null,
-                lineas:[],
-                id: null,
-                subtotal: 0, 
-                iva: 0
-            }
+            id: this.$route.params.id,
         }
     },
     methods:{
         ...mapActions(['cambiarEstado']),
-        ...mapActions('presupuestos',['agregarPresupuesto','resetStatus', 'resetResp', 'imprimirPrespuesto']),
+        ...mapActions('presupuestos',['agregarPresupuesto','resetStatus', 'resetResp', 'imprimirPrespuesto', 'getPresupuesto']),
         ...mapActions('usuarios', ['getVendedorActual']),
         getSetFechaActual(){
             var today = new Date();
@@ -64,14 +45,14 @@ export default {
             var yyyy = today.getFullYear();
             var aux = new Date(yyyy, mm, dd);
             console.log(aux)
-            this.npre.fecha_emision = aux
+            this.presupuesto.fecha_emision = aux
         }
     },
     created(){
+        this.getPresupuesto(this.id)
         this.getVendedorActual(this.$userId)
-        this.getSetFechaActual()
         this.cambiarEstado(5)
-        this.npre.vendedor_id = this.$userId
+        this.presupuesto.vendedor_id = this.$userId
     },
     destroyed(){
         this.resetStatus()
@@ -81,8 +62,14 @@ export default {
         ...mapState('usuarios', ['vendedorActual']),
         ...mapState('presupuestos', ['presupuesto']),
         vendedorC(){
-            this.npre.vendedor = this.vendedorActual
+            this.presupuesto.vendedor = this.vendedorActual
         },
+        preC(){
+            if(this.presupuesto.id != null){
+                this.getSetFechaActual()
+                this.presupuesto.id = null
+            }
+        }
     },
     components:{
         encabezado,

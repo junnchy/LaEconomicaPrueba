@@ -19,7 +19,12 @@ class PresupuestoController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
+            $today = new Carbon();
+            $today = Carbon::now();
+            $today->subMonth();
+
             $presupuestos = Presupuesto::with('vendedor', 'cliente', 'estado')
+            ->where('created_at', '>', $today)
             ->orderBy('created_at', 'desc')
             ->get();
             foreach ($presupuestos as $key => $presupuesto) {
@@ -93,6 +98,7 @@ class PresupuestoController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
+            
             $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor', 'estado')->findOrFail($id);
             return response()->json($presupuesto);
         }

@@ -14,7 +14,13 @@
         <productos v-bind:npresupuesto="presupuesto"/>
         <hr>
         <div class="d-flex flex-row-reverse p-2 my-2">
-            
+            <div class="mx-1">
+                <router-link :to="{name:'editarPresupuesto', params:{id: presupuesto.id}}">
+                    <button class="btn btn-outline-info btn-sm">
+                        Editar <i class="fas fa-pen"></i>
+                    </button>
+                </router-link> 
+            </div>
             <div class="mx-1">
                 <button class="btn btn-outline-danger btn-sm" @click="rechazar()">
                     Rechazar <i class="fas fa-ban"></i>
@@ -65,15 +71,6 @@ export default {
         seguir(){
             this.presupuesto.estadoPresupuesto_id = 2
             this.cambiarEstadoPresupuesto(this.presupuesto)
-        },
-        getSetFechaActual(){
-            var today = new Date();
-            var dd = String(today.getDate());
-            var mm = String(today.getMonth() + 1); //January is 0!
-            var yyyy = today.getFullYear();
-            var aux = new Date(yyyy, mm, dd);
-            console.log(aux)
-            this.npre.fecha = aux
         }
     },
     computed:{

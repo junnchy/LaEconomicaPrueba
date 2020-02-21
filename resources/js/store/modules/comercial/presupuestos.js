@@ -38,7 +38,7 @@ export default {
         agregarPresupuesto({commit}, presupuesto){
             console.log(presupuesto)
             var dd = presupuesto.fecha_emision.getDate();
-            var mm = presupuesto.fecha_emision.getMonth(); //January is 0!
+            var mm = presupuesto.fecha_emision.getMonth()+1; //January is 0!
             var yyyy = presupuesto.fecha_emision.getFullYear();
             presupuesto.fecha_emision = (yyyy+'-'+mm+'-'+dd);
             console.log(presupuesto.fecha_emision)
@@ -60,10 +60,11 @@ export default {
         async getPresupuesto({commit}, id){
             let prespuesto = await axios.get(`http://127.0.0.1:8000/presupuestos/${id}`).then(response => {    
             response.data.fecha_emision = new Date(
-                    response.data.fecha_emision.substring(0,4), 
-                    response.data.fecha_emision.substring(5,7),
-                    response.data.fecha_emision.substring(8,10)
-                );
+                response.data.fecha_emision.substring(0,4), 
+                parseInt(response.data.fecha_emision.substring(5,7)) - 1,
+                response.data.fecha_emision.substring(8,10)
+            );
+            console.log(response.data.fecha_emision)
             commit('setPresupuesto', response.data)
           })
           .catch(function (error) {

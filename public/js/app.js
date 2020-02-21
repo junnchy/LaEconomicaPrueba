@@ -66533,6 +66533,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/ListadoPresupuestos.vue */ "./resources/js/views/ListadoPresupuestos.vue"));
   }
+}, {
+  path: '/editarPresupuesto/:id',
+  name: 'editarPresupuesto',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/EditarPresupuesto.vue */ "./resources/js/views/EditarPresupuesto.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -66883,6 +66889,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     filter: {
       query: ''
     },
+    filterPresupuestos: {
+      estado: null
+    },
     errors: {
       nombre: '',
       cuit: '',
@@ -66905,6 +66914,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     SET_QUERY: function SET_QUERY(state, query) {
       state.filter.query = query;
+    },
+    SET_ESTADOPRES: function SET_ESTADOPRES(state, estado) {
+      state.filterPresupuestos.estado = estado;
     },
     setError: function setError(state, error) {
       if (error.nombre != undefined) {
@@ -67113,6 +67125,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         return state.clientes;
       }
+    },
+    filtered_presupuestos: function filtered_presupuestos(state) {
+      var pfil = state.cliente.presupuestos;
+
+      if (state.filterPresupuestos.estado != null) {
+        pfil = pfil.filter(function (presupuesto) {
+          return presupuesto.estadoPresupuesto_id === state.filterPresupuestos.estado;
+        });
+        return pfil;
+      } else {
+        return pfil;
+      }
     }
   }
 });
@@ -67272,7 +67296,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var commit = _ref.commit;
       console.log(presupuesto);
       var dd = presupuesto.fecha_emision.getDate();
-      var mm = presupuesto.fecha_emision.getMonth(); //January is 0!
+      var mm = presupuesto.fecha_emision.getMonth() + 1; //January is 0!
 
       var yyyy = presupuesto.fecha_emision.getFullYear();
       presupuesto.fecha_emision = yyyy + '-' + mm + '-' + dd;
@@ -67303,7 +67327,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 commit = _ref2.commit;
                 _context.next = 3;
                 return axios.get("http://127.0.0.1:8000/presupuestos/".concat(id)).then(function (response) {
-                  response.data.fecha_emision = new Date(response.data.fecha_emision.substring(0, 4), response.data.fecha_emision.substring(5, 7), response.data.fecha_emision.substring(8, 10));
+                  response.data.fecha_emision = new Date(response.data.fecha_emision.substring(0, 4), parseInt(response.data.fecha_emision.substring(5, 7)) - 1, response.data.fecha_emision.substring(8, 10));
+                  console.log(response.data.fecha_emision);
                   commit('setPresupuesto', response.data);
                 })["catch"](function (error) {
                   console.log('algo va mal');
@@ -68530,7 +68555,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   namespaced: true,
   state: {
     usuarioActual: {},
-    vendedorActual: {}
+    vendedorActual: {},
+    contadoresPresupuestos: {
+      enEspera: 0,
+      confirmados: 0,
+      rechazados: 0,
+      enSeguimiento: 0
+    },
+    datos: []
   },
   mutations: {
     setUsuario: function setUsuario(state, usuario) {
@@ -68538,6 +68570,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setVendedor: function setVendedor(state, vendedor) {
       state.vendedorActual = vendedor;
+    },
+    setContadoresPresupuestos: function setContadoresPresupuestos(state, respuesta) {
+      state.datos.splice(0, state.datos.length);
+      state.contadoresPresupuestos.enEspera = ['En espera', respuesta.enEspera];
+      state.contadoresPresupuestos.confirmados = ['Confirmados', respuesta.confirmados];
+      state.contadoresPresupuestos.rechazados = ['Rechazados', respuesta.rechazados];
+      state.contadoresPresupuestos.enSeguimiento = ['En seguimiento', respuesta.enSeguimiento];
+      state.datos.push(['Tipo', 'Cantidad']);
+      state.datos.push(state.contadoresPresupuestos.enEspera);
+      state.datos.push(state.contadoresPresupuestos.confirmados);
+      state.datos.push(state.contadoresPresupuestos.rechazados);
+      state.datos.push(state.contadoresPresupuestos.enSeguimiento);
     }
   },
   actions: {
@@ -68612,6 +68656,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getVendedorActual;
+    }(),
+    recuentoPresupuestos: function () {
+      var _recuentoPresupuestos = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(_ref3, id) {
+        var commit, presupuestos;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                commit = _ref3.commit;
+                _context3.next = 3;
+                return axios.get("http://127.0.0.1:8000/recuentoPresupuestos/".concat(id)).then(function (response) {
+                  console.log(response.data);
+                  commit('setContadoresPresupuestos', response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response);
+                });
+
+              case 3:
+                presupuestos = _context3.sent;
+
+              case 4:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function recuentoPresupuestos(_x5, _x6) {
+        return _recuentoPresupuestos.apply(this, arguments);
+      }
+
+      return recuentoPresupuestos;
     }()
   }
 });

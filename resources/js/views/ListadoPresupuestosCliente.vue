@@ -1,8 +1,27 @@
 <template>
     <div>
-        <h2><i class="fas fa-list-ul"></i> Listado de Presupuestos Cliente</h2>
         <div class="container mt-5">
-            <div class="row" v-if="cliente.presupuestos">
+            <div class="row">
+                <div class="col-8">
+                    <h2><i class="fas fa-list-ul"></i> Listado de Presupuestos Cliente</h2>
+                </div>
+                <div class="col-4">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Estado:</label>
+                        </div>
+                         <select class="form-control" v-model="searchEstado" type="number">
+                            <option selected :value="null">Todos</option>
+                            <option v-for="(estado, index) in estadosPresupuesto"
+                                :key="index" :value="estado.id">
+                                {{estado.nombre}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row mt-3" v-if="cliente.presupuestos">
                 <div class="col-12">
                     <div class="alert alert-warning alert-block mt-3" v-if="cliente.presupuestos.length === 0">
                         <h4>Sin Presupuestos <i class="fas fa-exclamation-triangle"></i></h4>
@@ -18,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(presupuesto, index) in cliente.presupuestos" :key="index">
+                            <tr v-for="(presupuesto, index) in filtered_presupuestos" :key="index">
                                 <th scope="row">{{presupuesto.fecha_emision}}</th>
                                 <td>{{presupuesto.total}}</td>
                                 <td>
@@ -52,7 +71,7 @@
     </div>
 </template>
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 export default {
     data() {
         return {
@@ -61,13 +80,24 @@ export default {
     },
     created(){
         this.getCliente(this.id)
+        this.getEstadosPresupuesto()
     },
     methods:{
         ...mapActions('clientes', ['getCliente']),
-        ...mapActions('presupuestos', ['getPresupuestos', 'imprimirPrespuesto'])
+        ...mapActions('presupuestos', ['getPresupuestos', 'imprimirPrespuesto', 'getEstadosPresupuesto'])
     },
     computed:{
-        ...mapState('clientes', ['cliente'])
+        ...mapState('presupuestos', ['estadosPresupuesto']),
+        ...mapState('clientes', ['cliente']),
+        ...mapGetters('clientes', ['filtered_presupuestos']),
+        searchEstado:{
+            get(){
+                return this.$store.state.clientes.filterPresupuestos.estado;
+            },
+            set(val){
+                this.$store.commit('clientes/SET_ESTADOPRES', val)
+            }
+        },
     }
     
 }

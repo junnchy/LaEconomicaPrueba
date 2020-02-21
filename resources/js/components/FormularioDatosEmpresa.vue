@@ -2,13 +2,20 @@
     <div>
          <div class="container">
             <div class="row my-3">
-                <div class="col-9 mt-5">
-                    <div class="input-group mb-3">
+                <div class="col-9">
+                    <div class="input-group mb-4">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="nombre">Nombre</span>
                         </div>
                         <input type="text" v-model="datos.nombre"
                         class="form-control" placeholder="nombre" aria-label="nombre" aria-describedby="nombre">   
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="RazonSocial">Razon Social</span>
+                        </div>
+                        <input type="text" disabled v-model="datos.razon_social"
+                        class="form-control" placeholder="Razon Social" aria-label="Razon Social" aria-describedby="RazonSocial">   
                     </div>
                 </div>
                 <div class="col-3">
@@ -18,17 +25,6 @@
                             <input type="file" class="custom-file-input form-control-sm" id="imagenProducto" @change="imageChanged">
                             <label class="custom-file-label col-form-label-sm" for="imagenProducto">{{imageName}}</label>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row my-3">
-                <div class="col-12">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="RazonSocial">Razon Social</span>
-                        </div>
-                        <input type="text" disabled v-model="datos.razon_social"
-                        class="form-control" placeholder="Razon Social" aria-label="Razon Social" aria-describedby="RazonSocial">   
                     </div>
                 </div>
             </div>
