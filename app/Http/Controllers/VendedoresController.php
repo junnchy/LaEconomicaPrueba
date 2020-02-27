@@ -25,11 +25,17 @@ class VendedoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $vendedores = Vendedor::all();
-        $localidades = Localidad::all();
-        return view('vendedores.home', compact('vendedores','localidades'));
+        if ($request->ajax()){
+            $vendedores = Vendedor::all();
+            return response()->json($vendedores);
+        }        
+        else{
+            $vendedores = Vendedor::all();
+            $localidades = Localidad::all();
+            return view('vendedores.home', compact('vendedores','localidades'));
+        }    
     }
 
     /**
@@ -50,24 +56,50 @@ class VendedoresController extends Controller
      */
     public function store(CreateVendedorRequest $request)
     {
-        $validated = $request->validated();
-        $user = new User();
-        $user->name = $request->nombre;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
-        $user->assignRole(Role::where('name','vend')->first());
-        $vendedor = new Vendedor();
-        $vendedor->user_id = $user->id;
-        $vendedor->nombre = $request->nombre;
-        $vendedor->cuil = $request->cuil;
-        $vendedor->dni = $request->dni;
-        $vendedor->telefono = $request->telefono;
-        $vendedor->celular = $request->celular;
-        $vendedor->email = $request->email;
-        $vendedor->direccion = $request->direccion;
-        $vendedor->localidad_id = $request->localidad_id;
-        $vendedor->save();
+        if ($request->ajax()){
+            $validated = $request->validated();
+            $user = new User();
+            $user->name = $request->nombre;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->save();
+            $user->assignRole(Role::where('name','vend')->first());
+            $vendedor = new Vendedor();
+            $vendedor->user_id = $user->id;
+            $vendedor->nombre = $request->nombre;
+            $vendedor->cuil = $request->cuil;
+            $vendedor->dni = $request->dni;
+            $vendedor->telefono = $request->telefono;
+            $vendedor->celular = $request->celular;
+            $vendedor->email = $request->email;
+            $vendedor->direccion = $request->direccion;
+            $vendedor->localidad_id = $request->localidad_id;
+            $vendedor->save();
+            return response()->json([
+                'vendedor' => $vendedor,
+                'message' => 'Vendedor Agregado'
+            ], 200);
+        }
+        else{
+            $validated = $request->validated();
+            $user = new User();
+            $user->name = $request->nombre;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->save();
+            $user->assignRole(Role::where('name','vend')->first());
+            $vendedor = new Vendedor();
+            $vendedor->user_id = $user->id;
+            $vendedor->nombre = $request->nombre;
+            $vendedor->cuil = $request->cuil;
+            $vendedor->dni = $request->dni;
+            $vendedor->telefono = $request->telefono;
+            $vendedor->celular = $request->celular;
+            $vendedor->email = $request->email;
+            $vendedor->direccion = $request->direccion;
+            $vendedor->localidad_id = $request->localidad_id;
+            $vendedor->save();
+        }
         
         return back()->with('mensaje', 'Vendedor Agregado');
         
@@ -79,11 +111,17 @@ class VendedoresController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $vendedor = Vendedor::findOrFail($id);
-        $localidades = Localidad::all();
-        return view('vendedores.editar', compact('vendedor', 'localidades'));
+        if ($request->ajax()){
+            $vendedor = Vendedor::with(['localidad.provincia'])->findOrFail($id);
+            return response()->json($cliente);
+        }
+        else {
+            $vendedor = Vendedor::findOrFail($id);
+            $localidades = Localidad::all();
+            return view('vendedores.editar', compact('vendedor', 'localidades'));
+        }
     }
 
     /**
@@ -106,25 +144,48 @@ class VendedoresController extends Controller
      */
     public function update(UpdateVendedorRequest $request, $id)
     {
-        $validated = $request->validated();
-        $vendedor = Vendedor::findOrFail($id);
-        $vendedor->nombre = $request->nombre;
-        $vendedor->cuil = $request->cuil;
-        $vendedor->dni = $request->dni;
-        $vendedor->telefono = $request->telefono;
-        $vendedor->celular = $request->celular;
-        $vendedor->email = $request->email;
-        $vendedor->direccion = $request->direccion;
-        $vendedor->localidad_id = $request->localidad_id;
-        $vendedor->save();
-        $user = User::findOrFail($vendedor->user_id);
-        $user->name = $request->nombre;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save(); 
-
-        return back()->with('mensaje', 'Vendedor Actualizado');
-
+        if ($request->ajax()){
+            $validated = $request->validated();
+            $vendedor = Vendedor::findOrFail($id);
+            $vendedor->nombre = $request->nombre;
+            $vendedor->cuil = $request->cuil;
+            $vendedor->dni = $request->dni;
+            $vendedor->telefono = $request->telefono;
+            $vendedor->celular = $request->celular;
+            $vendedor->email = $request->email;
+            $vendedor->direccion = $request->direccion;
+            $vendedor->localidad_id = $request->localidad_id;
+            $vendedor->save();
+            $user = User::findOrFail($vendedor->user_id);
+            $user->name = $request->nombre;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->save();
+            return response()->json([
+                'vendedor' => $vendedor,
+                'message' => 'Vendedor Actualizado'
+            ], 200);
+        }
+        else{
+            $validated = $request->validated();
+            $vendedor = Vendedor::findOrFail($id);
+            $vendedor->nombre = $request->nombre;
+            $vendedor->cuil = $request->cuil;
+            $vendedor->dni = $request->dni;
+            $vendedor->telefono = $request->telefono;
+            $vendedor->celular = $request->celular;
+            $vendedor->email = $request->email;
+            $vendedor->direccion = $request->direccion;
+            $vendedor->localidad_id = $request->localidad_id;
+            $vendedor->save();
+            $user = User::findOrFail($vendedor->user_id);
+            $user->name = $request->nombre;
+            $user->email = $request->email;
+            $user->password = $request->password;
+            $user->save(); 
+            return back()->with('mensaje', 'Vendedor Actualizado');        
+        }
+        
     }
 
     /**

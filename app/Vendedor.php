@@ -13,5 +13,9 @@ class Vendedor extends Model
         return $this->belongsToOne(User::class);
     }
 
+    public function localidad()
+    {
+        return $this->belongsTo(Localidad::class, 'localidad_id');
+    }
     
 }

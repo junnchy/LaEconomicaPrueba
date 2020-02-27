@@ -72,7 +72,7 @@
                     </li>
                     @auth
                         @if (Auth::user()->hasRole('admin'))
-                            <a class="nav-link" href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
+                            <a class="nav-link" href="{{ route('homeUsers') }}" class="">Perfiles</a>              
                         @endif
                     @endauth
                 </ul>
@@ -132,6 +132,13 @@
     <script src="https://kit.fontawesome.com/6876153f7d.js" crossorigin="anonymous"></script>
 </body>
 </html>
+
+<script type="text/javascript">
+    window.Laravel = {
+        csrfToken: "{{ csrf_token() }}",
+        jsPermissions: {!! auth()->check()?auth()->user()->jsPermissions():null !!}
+    }
+</script>
 
 <style>
     .sticky-button {

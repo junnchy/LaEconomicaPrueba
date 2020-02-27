@@ -67,6 +67,14 @@ Vue.component('componente-LNBAddCliente', require('./components/LNBAddCliente.vu
 Vue.component('componente-menuboton', require('../js/components/BotonMenu.vue').default);
 
 
+Vue.prototype.can = function(value){
+  return window.Laravel.jsPermissions.permissions.includes(value);
+}
+Vue.prototype.is = function(value){
+  return window.Laravel.jsPermissions.roles.includes(value);
+}
+
+
 
 const app = new Vue({
     router,

@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -43,4 +45,20 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function getAllPermissionsAttribute() 
+    {
+        $permisos = Auth::user()->getAllPermissions()->pluck('name')->toArray();
+        return $permisos;
+    }
+
+    public function jsPermissions()
+    {
+        return json_encode([
+                'roles' => Auth::user()->getRoleNames()->toArray(),
+                'permissions' => Auth::user()->getAllPermissions()->pluck('name')->toArray()
+            ]);
+    }
+
+ 
 }

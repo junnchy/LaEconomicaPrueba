@@ -78,10 +78,7 @@ class ClienteController extends Controller
             ], 200);
 
         } else {
-            $validatedData = $request->validate([
-                'nombre' => 'required',
-                'cuit' => 'required',
-            ]);
+            $validated = $request->validated();
             $cliente = new Cliente();
             $cliente->nombre = $request->nombre;
             $cliente->cuit = $request->cuit;
