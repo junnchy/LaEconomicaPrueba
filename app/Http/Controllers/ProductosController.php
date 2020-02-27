@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateProductoRequest;
 use Illuminate\Support\Str;
 
 use App\Proveedor;
@@ -45,15 +46,15 @@ class ProductosController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CreateProductoRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductoRequest $request)
     {
 
         if($request->ajax()){
             
-            $this->validateProducto($request);
+            $validated = $request->validated();
 
             $producto = new Producto();
 
@@ -166,15 +167,15 @@ class ProductosController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CreateProductoRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateProductoRequest $request, $id)
     {
         if($request->ajax()){
 
-            $this->validateProducto($request);
+            $validated = $request->validated();
 
             $producto = Producto::findOrFail($id);
             $producto->nombre = $request->nombre;
@@ -237,21 +238,5 @@ class ProductosController extends Controller
         //
     }
 
-    protected function validateProducto(Request $request)
-    {
-        $this->validate($request, [
-            'nombre' => 'required',
-            'precioBase' => 'required|numeric',
-            'precioBase' => 'numeric|gt:0',
-            'iva' => 'required|numeric',
-            'iva' => 'numeric|gt:0',
-            'rentabilidad' => 'required|numeric',
-            'rentabilidad' => 'numeric|gt:0',
-            'proveedor_id' => 'required',
-            'proveedor_id' => 'numeric|gt:0',
-            'categoria_id' => 'required',
-            'categoria_id' => 'numeric|gt:0'
-        ]);
-    }
 }
 
