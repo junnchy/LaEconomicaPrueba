@@ -2575,7 +2575,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
 /* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
 /* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_Paginacion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Paginacion */ "./resources/js/components/Paginacion.vue");
+/* harmony import */ var vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-datepicker/locale/Es */ "./node_modules/vue2-datepicker/locale/Es.js");
+/* harmony import */ var vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_Paginacion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Paginacion */ "./resources/js/components/Paginacion.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2656,6 +2658,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 
 
@@ -2663,7 +2667,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     DatePicker: vue2_datepicker__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Paginacion: _components_Paginacion__WEBPACK_IMPORTED_MODULE_3__["default"]
+    Paginacion: _components_Paginacion__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
@@ -2671,7 +2675,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   created: function created() {
-    this.getPresupuestos();
+    this.getPresupuestos(null);
     this.getEstadosPresupuesto();
     this.$store.commit('setArregloPaginado', this.filtered_presupuestos);
   },
@@ -2691,6 +2695,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       set: function set(val) {
         this.$store.commit('presupuestos/SET_ESTADO', val);
+      }
+    },
+    getPre: function getPre() {
+      if (this.$store.state.presupuestos.filter.dates[0] != null) {
+        var mm = ("0" + this.$store.state.presupuestos.filter.dates[0].getMonth() + 1).slice(-2);
+        var dd = ("0" + this.$store.state.presupuestos.filter.dates[0].getDate()).slice(-2);
+        var yyyy = this.$store.state.presupuestos.filter.dates[0].getFullYear();
+        var date = yyyy + ',' + mm + ',' + dd;
+        console.log(date);
+        this.getPresupuestos(date);
       }
     }
   }),
@@ -8640,7 +8654,8 @@ var render = function() {
             _vm._v(" "),
             _c("Paginacion", {
               attrs: { filtered: _vm.filtered_presupuestos, nro_filas: 10 }
-            })
+            }),
+            _vm._v("\n                " + _vm._s(_vm.getPre) + "\n            ")
           ],
           1
         )

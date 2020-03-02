@@ -72,8 +72,8 @@ export default {
             console.log(error.response.data)
           });
         },
-        async getPresupuestos({commit}){
-            let prespuesto = await axios.get('http://127.0.0.1:8000/presupuestos').then(response => {
+        async getPresupuestos({commit}, date){
+            let prespuesto = await axios.get('http://127.0.0.1:8000/presupuestos', { params: {fecha: date}}).then(response => {
             response.data.forEach(presupuesto => {
                 let $date
                 $date = new Date(presupuesto.created_at)

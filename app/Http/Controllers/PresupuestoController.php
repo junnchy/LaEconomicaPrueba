@@ -19,9 +19,18 @@ class PresupuestoController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
-            $today = new Carbon();
-            $today = Carbon::now();
-            $today->subMonth();
+            if($request->fecha != null){
+                $dd = substr($request->fecha,8,10);
+                $mm = substr($request->fecha,-5,-3);
+                $yyyy = substr($request->fecha,0,4);
+                $today = Carbon::create($yyyy, $mm, $dd);
+                
+            }else{
+                $today = new Carbon();
+                $today = Carbon::now();
+                $today->subMonth();
+            }
+            
 
             $presupuestos = Presupuesto::with('vendedor', 'cliente', 'estado')
             ->where('created_at', '>', $today)

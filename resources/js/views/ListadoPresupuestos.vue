@@ -67,6 +67,7 @@
                         </tbody>
                     </table>
                     <Paginacion v-bind:filtered="filtered_presupuestos" v-bind:nro_filas="10"/>
+                    {{getPre}}
                 </div>
             </div>
         </div>
@@ -76,6 +77,7 @@
 import { mapActions, mapState, mapGetters, mapMutations } from 'vuex'
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
+import 'vue2-datepicker/locale/Es';
 import Paginacion from '../components/Paginacion'
 
 export default {
@@ -89,7 +91,7 @@ export default {
         }
     },
     created(){
-        this.getPresupuestos()
+        this.getPresupuestos(null)
         this.getEstadosPresupuesto()
         this.$store.commit('setArregloPaginado', this.filtered_presupuestos)
     },
@@ -116,6 +118,17 @@ export default {
                 this.$store.commit('presupuestos/SET_ESTADO', val)
             }
         },
+        getPre(){
+            if(this.$store.state.presupuestos.filter.dates[0] != null) {
+                let mm = (("0" + ((this.$store.state.presupuestos.filter.dates[0]).getMonth()) + 1).slice(-2))
+                let dd = (("0" + (this.$store.state.presupuestos.filter.dates[0]).getDate()).slice(-2))
+                let yyyy = (this.$store.state.presupuestos.filter.dates[0]).getFullYear()
+                let date = (yyyy+','+mm+','+dd);
+                console.log(date)
+                this.getPresupuestos(date)
+            }
+        }
+        
     },
     mutations:{
         ...mapMutations(['setArregloPaginado']),

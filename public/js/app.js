@@ -67355,7 +67355,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getPresupuestos: function () {
       var _getPresupuestos = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, date) {
         var commit, prespuesto;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
@@ -67363,7 +67363,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 commit = _ref3.commit;
                 _context2.next = 3;
-                return axios.get('http://127.0.0.1:8000/presupuestos').then(function (response) {
+                return axios.get('http://127.0.0.1:8000/presupuestos', {
+                  params: {
+                    fecha: date
+                  }
+                }).then(function (response) {
                   response.data.forEach(function (presupuesto) {
                     var $date;
                     $date = new Date(presupuesto.created_at);
@@ -67387,7 +67391,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }));
 
-      function getPresupuestos(_x3) {
+      function getPresupuestos(_x3, _x4) {
         return _getPresupuestos.apply(this, arguments);
       }
 
@@ -67432,7 +67436,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3);
       }));
 
-      function getEstadosPresupuesto(_x4) {
+      function getEstadosPresupuesto(_x5) {
         return _getEstadosPresupuesto.apply(this, arguments);
       }
 
