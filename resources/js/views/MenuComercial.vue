@@ -37,6 +37,7 @@
                             <i class="fas fa-chart-pie"></i> Presupuestos
                         </h4>
                         <estadisticaproducto/>
+                        <p>*Un mes para atras</p>
                     </div>
                     <div class="col-6">
                         <h4 class="my-2">
@@ -63,8 +64,10 @@ export default {
         console.log(this.$userId)
         this.getUsuarioActual(this.$userId)
         this.recuentoPresupuestos(this.$userId)
+        this.cambiarEstado(6)
     },
     methods:{
+        ...mapActions(['cambiarEstado']),
         ...mapActions('usuarios', ['getUsuarioActual', 'recuentoPresupuestos']),
         ...mapActions('presupuestos',['imprimirPrespuesto'])
     },

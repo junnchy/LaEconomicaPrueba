@@ -16,13 +16,12 @@
                 <tr v-for="(linea, index) in npresupuesto.lineas" :key="index">
                     <th scope="row">{{linea.producto.id}}</th>
                     <td>{{linea.producto.nombre}}</td>
-                    <td v-if="npresupuesto.id === null">{{linea.producto.ficha_stock.cantidadActual}}</td>
                     <td class="w-10">
                         <input type="numer" class="form-control" v-model="linea.cantidad" :disabled="mostrar">
                     </td>
-                    <td>${{precio(linea)}}</td>
+                    <td>${{linea.precio}}</td>
                     <td v-if="npresupuesto.cliente.condicion_iva_id === 1">{{linea.producto.iva}}%</td>
-                    <td>${{subtotal(linea)}}</td>
+                    <td>${{linea.total_linea}}</td>
                     <td>
                         <button type="button" class="btn btn-outline-danger border-0" 
                         @click="deleteLinea(index)"
@@ -45,12 +44,12 @@
             </div>
             <div class="col-3" v-if="npresupuesto.cliente.condicion_iva_id === 1">
                 <div class="alert alert-primary">
-                    <p>Subtotal ${{subTotal}}</p>
-                    <p>Iva ${{iva}}</p>
+                    <p>Subtotal ${{npresupuesto.subtotal}}</p>
+                    <p>Iva ${{npresupuesto.iva}}</p>
                     <hr>
                     <p>Total</p>
                     <h3>
-                        ${{total}}
+                        ${{npresupuesto.total}}
                     </h3>
                 </div>
             </div>
@@ -58,7 +57,7 @@
                 <div class="alert alert-primary">
                     <p>Total</p>
                     <h3>
-                        ${{total}}
+                        ${{npresupuesto.total}}
                     </h3>
                 </div>
             </div>

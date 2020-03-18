@@ -68,6 +68,7 @@ class PresupuestoController extends Controller
             $presupuesto->cliente_id = $request->cliente['id'];
             $presupuesto->fecha_emision = $request->fecha_emision;
             $presupuesto->total = $request->total;
+            $presupuesto->formaDePago_id = $request->formaDePago['id'];
             $presupuesto->subtotal = $request->subtotal;
             $presupuesto->iva = $request->iva;
             $presupuesto->codigo = '00000';
@@ -77,6 +78,7 @@ class PresupuestoController extends Controller
 
             
             foreach ($request->lineas as $linea){
+                // Agregar que se guarde el iva
                 $lp = new LineaPresupuesto();
                 if($request['cliente']['condicion_iva_id'] != 1){
                     $lp->precio = $linea['producto']['precioVenta'];
@@ -108,7 +110,7 @@ class PresupuestoController extends Controller
     {
         if($request->ajax()){
             
-            $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor', 'estado')->findOrFail($id);
+            $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor', 'estado', 'formaDePago')->findOrFail($id);
             return response()->json($presupuesto);
         }
     }

@@ -64,7 +64,8 @@ export default {
                 parseInt(response.data.fecha_emision.substring(5,7)) - 1,
                 response.data.fecha_emision.substring(8,10)
             );
-            console.log(response.data.fecha_emision)
+            response.data.formaDePago = response.data.forma_de_pago
+            console.log(response.data)
             commit('setPresupuesto', response.data)
           })
           .catch(function (error) {

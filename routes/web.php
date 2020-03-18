@@ -51,6 +51,8 @@ Route::resource('/lineaFichaStock', 'LineaFichaStockController')->middleware('au
 
 Route::resource('/estadoPresupuesto', 'EstadoPresupuestoController')->middleware('auth');
 
+Route::resource('/formaDePago', 'FormaDePagoController')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');

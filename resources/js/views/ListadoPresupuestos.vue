@@ -120,10 +120,19 @@ export default {
         },
         getPre(){
             if(this.$store.state.presupuestos.filter.dates[0] != null) {
-                let mm = (("0" + ((this.$store.state.presupuestos.filter.dates[0]).getMonth()) + 1).slice(-2))
-                let dd = (("0" + (this.$store.state.presupuestos.filter.dates[0]).getDate()).slice(-2))
+                /* let mm = (("0" + ((this.$store.state.presupuestos.filter.dates[0]).getMonth()) + 1).slice(-2))
+                let dd = (("0" + (this.$store.state.presupuestos.filter.dates[0]).getDate()).slice(-2)) */
+                let mm = ((this.$store.state.presupuestos.filter.dates[0]).getMonth()) + 1
+                if(parseInt(mm) < 10){
+                    mm = '0' + mm
+                }
+                let dd = (this.$store.state.presupuestos.filter.dates[0]).getDate()
+                if(parseInt(dd) < 10){
+                    dd = '0' + dd
+                }
                 let yyyy = (this.$store.state.presupuestos.filter.dates[0]).getFullYear()
                 let date = (yyyy+','+mm+','+dd);
+
                 console.log(date)
                 this.getPresupuestos(date)
             }

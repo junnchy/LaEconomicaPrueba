@@ -48,7 +48,7 @@
 <script>
 import {mapActions, mapState, mapGetters} from 'vuex'
 import encabezado from '../components/Comprobante-Encabezado'
-import productos from '../components/Comprobrante-Productos'
+import productos from '../components/Comprobante-DetalleLineasProducto'
 export default {
     data() {
             return {

@@ -11,6 +11,7 @@
                         :value="npresupuesto.cliente"
                         maxHeight="200px"
                         placeholder="Cliente"
+                        :disabled="ingresoCliente"
                     ></v-select>
                 </div>
                 <div class="col-5">
@@ -70,6 +71,23 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-3 ml-3 alert alert-secondary text-center">
+                    <h5>
+                        <i class="fas fa-money-bill-wave-alt"></i> Forma de Pago:  
+                    </h5>
+                </div>
+                <div class="col-8 mt-2">
+                    <v-select
+                        label="descripcion"
+                        @input="setFDP"
+                        :options="formasDePago"
+                        :value="npresupuesto.formaDePago"
+                        maxHeight="200px"
+                        placeholder="Forma De Pago"
+                    ></v-select>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -86,7 +104,8 @@ export default {
     data() {
         return {
             place: 'Cliente',
-            cliente: null
+            cliente: null,
+            ingresoCliente: false
         }
     },
     props:{
@@ -98,17 +117,24 @@ export default {
     created(){
         this.getClientes()
         this.getDatos()
+        this.getFormasDePago()
     },
     methods:{
         ...mapActions('datos', ['getDatos']),
         ...mapActions('clientes', ['getClientes']),
+        ...mapActions('formasDePago', ['getFormasDePago']),
         setCliente(val){
+            this.ingresoCliente = true
             this.npresupuesto.cliente = val
+        },
+        setFDP(val){
+            this.npresupuesto.formaDePago = val
         }
     },
     computed:{
         ...mapState('datos', ['datos']),
         ...mapState('clientes', ['clientes']),
+        ...mapState('formasDePago', ['formasDePago']),
     }
 }
 </script>

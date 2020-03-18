@@ -21,6 +21,7 @@
             </div>
         </form>
         {{vendedorC}}
+        {{fdp}}
     </div>
 </template>
 
@@ -41,6 +42,9 @@ export default {
                 },
                 vendedor:{
 
+                },
+                formaDePago: {
+                    id: null
                 },
                 fecha_emision: '',
                 detalles: '',
@@ -83,6 +87,24 @@ export default {
         vendedorC(){
             this.npre.vendedor = this.vendedorActual
         },
+        fdp(){
+            if(this.npre.cliente.condicion_iva_id === 3){ /* Clientes Finales */
+                this.npre.lineas.forEach(linea => {
+                    linea.producto.precioVenta = linea.producto.precioVentaSinIva *  ((linea.producto.iva/100)+1)
+                    if(this.npre.formaDePago.id != 1 || this.npre.formaDePago.id != null ){
+                        linea.producto.precioVenta =  (linea.producto.precioVenta * this.npre.formaDePago.coeficiente).toFixed(2)
+                        
+                    }
+                });
+            }else{ /* Responsables Incriptos */
+                this.npre.lineas.forEach(linea => {
+                    linea.producto.precioVentaSinIva = linea.producto.precioVenta / ((linea.producto.iva/100)+1)
+                    if(this.npre.formaDePago.id != 1 || this.npre.formaDePago.id != null ){
+                        linea.producto.precioVentaSinIva =  (linea.producto.precioVentaSinIva * this.npre.formaDePago.coeficiente).toFixed(2)
+                    }
+                });
+            }
+        }
     },
     components:{
         encabezado,

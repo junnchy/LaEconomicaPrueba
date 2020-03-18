@@ -6,6 +6,7 @@ use App\LineaPresupuesto;
 use App\Cliente;
 use App\Vendedor;
 use App\EstadoPresupuesto;
+use App\FormaDePago;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,6 +30,11 @@ class Presupuesto extends Model
     public function estado()
     {
         return $this->belongsTo(EstadoPresupuesto::class, 'estadoPresupuesto_id');
+    }
+
+    public function formaDePago()
+    {
+        return $this->belongsTo(formaDePago::class, 'formaDePago_id');
     }
 
 }
