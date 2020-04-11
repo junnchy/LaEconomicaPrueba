@@ -4,7 +4,8 @@ export default {
     namespaced: true,
     state:{
         formasDePago : [],
-        respuestaS: null
+        respuestaS: null,
+        formaDePago: {id: null, descripcion: '', coeficiente: 0, recargo: 0, estado: 0}
     },
     mutations: {
         setFormasDePago(state, formas){
@@ -13,7 +14,9 @@ export default {
         setRespuestaServidor(state, respuesta){
             state.respuestaS = respuesta
         },
-        
+        setFormaDePago(state, fdp){
+            state.formaDePago = fdp
+        }
     },
     actions:{
         async getFormasDePago({commit}){
@@ -38,6 +41,31 @@ export default {
                     type: 'error',
                 });
             });
+        },
+        editarFormaDePago({commit, dispatch}, fdp){
+            let id = fdp.id
+            axios.put(`http://127.0.0.1:8000/formaDePago/${id}`, fdp).then(function (response) {
+                commit('setRespuestaServidor', response.data.message)
+                dispatch('getFormasDePago')
+                Vue.$toast.open(response.data.message);
+            })
+            .catch(function (error) {
+                commit('setError',error.response.data.errors)
+                Vue.$toast.open({
+                    message: 'Upp! Hay Algun Error',
+                    type: 'error',
+                });
+            });
+        },
+        async getFormaDePago({commit}, id){
+            console.log(id)
+            await axios.get(`http://127.0.0.1:8000/formaDePago/${id}`).then(response => {
+                commit('setFormaDePago', response.data)
+            })
+            .catch(function (error) {
+                console.log('algo va mal')
+                console.log(error.response.data)
+              }); 
         },
         resetResp({commit}, resp){
             commit('setRespuestaServidor', resp)

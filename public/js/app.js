@@ -67399,7 +67399,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   namespaced: true,
   state: {
     formasDePago: [],
-    respuestaS: null
+    respuestaS: null,
+    formaDePago: {
+      id: null,
+      descripcion: '',
+      coeficiente: 0,
+      recargo: 0,
+      estado: 0
+    }
   },
   mutations: {
     setFormasDePago: function setFormasDePago(state, formas) {
@@ -67407,6 +67414,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setRespuestaServidor: function setRespuestaServidor(state, respuesta) {
       state.respuestaS = respuesta;
+    },
+    setFormaDePago: function setFormaDePago(state, fdp) {
+      state.formaDePago = fdp;
     }
   },
   actions: {
@@ -67457,8 +67467,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         });
       });
     },
-    resetResp: function resetResp(_ref3, resp) {
-      var commit = _ref3.commit;
+    editarFormaDePago: function editarFormaDePago(_ref3, fdp) {
+      var commit = _ref3.commit,
+          dispatch = _ref3.dispatch;
+      var id = fdp.id;
+      axios.put("http://127.0.0.1:8000/formaDePago/".concat(id), fdp).then(function (response) {
+        commit('setRespuestaServidor', response.data.message);
+        dispatch('getFormasDePago');
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        commit('setError', error.response.data.errors);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    },
+    getFormaDePago: function () {
+      var _getFormaDePago = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref4, id) {
+        var commit;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref4.commit;
+                console.log(id);
+                _context2.next = 4;
+                return axios.get("http://127.0.0.1:8000/formaDePago/".concat(id)).then(function (response) {
+                  commit('setFormaDePago', response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
+                });
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function getFormaDePago(_x2, _x3) {
+        return _getFormaDePago.apply(this, arguments);
+      }
+
+      return getFormaDePago;
+    }(),
+    resetResp: function resetResp(_ref5, resp) {
+      var commit = _ref5.commit;
       commit('setRespuestaServidor', resp);
     }
   }

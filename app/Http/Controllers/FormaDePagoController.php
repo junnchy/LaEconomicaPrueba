@@ -47,6 +47,7 @@ class FormaDePagoController extends Controller
             $fdp->descripcion = $request->descripcion;
             $fdp->coeficiente = $request->coeficiente;
             $fdp->recargo = $request->recargo;
+            $fdp->estado = $request->estado;
 
             $fdp->save();
             
@@ -64,9 +65,12 @@ class FormaDePagoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $fdp = FormaDePago::findOrFail($id);
+            return response()->json($fdp);
+        }
     }
 
     /**
@@ -89,7 +93,21 @@ class FormaDePagoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $fdp = FormaDePago::findOrFail($id);
+
+            $fdp->descripcion = $request->descripcion;
+            $fdp->coeficiente = $request->coeficiente;
+            $fdp->recargo = $request->recargo;
+            $fdp->estado = $request->estado;
+
+            $fdp->save();
+            
+            return response()->json([
+                'formaDePago' => $fdp,
+                'message' => 'Forma de Pago Actualizada'
+            ], 200);
+        }
     }
 
     /**
