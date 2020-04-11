@@ -18,7 +18,10 @@
                     <td>{{fdp.recargo}}</td>
                     <td>
                         <button class="btn btn-warning btn-sm">
-                            Ver
+                            Ver <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-primary btn-sm">
+                            Editar <i class="fas fa-pencil-alt"></i>
                         </button>
                     </td>
                 </tr>

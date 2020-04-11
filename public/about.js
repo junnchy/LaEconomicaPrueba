@@ -141,6 +141,84 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ComponenteDatosFDP.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ComponenteDatosFDP.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {};
+  },
+  props: {
+    nfdp: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    calcularCoeficiente: function calcularCoeficiente() {
+      if (this.nfdp.recargo > 0) {
+        this.nfdp.coeficiente = this.nfdp.recargo / 100 + 1;
+      }
+
+      return this.nfdp.coeficiente;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comprobante-DetalleLineasProducto.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comprobante-DetalleLineasProducto.vue?vue&type=script&lang=js& ***!
@@ -751,6 +829,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -781,7 +865,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.npresupuesto.lineas.push(li);
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['productos']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['productos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('productos', ['filtered_productos']), {
+    epro: {
+      get: function get() {
+        return this.$store.state.productos.filter.estado;
+      },
+      set: function set(val) {
+        this.$store.commit('productos/SET_ESTADO', val);
+      }
+    }
+  })
 });
 
 /***/ }),
@@ -1279,6 +1372,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -1446,6 +1542,96 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.commit('setArregloPaginado', this.filtered_productos);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['productos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arregloPaginado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('productos', ['filtered_productos']))
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _ComponenteDatosFDP__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ComponenteDatosFDP */ "./resources/js/components/ComponenteDatosFDP.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      nfdp: {
+        id: null,
+        descripcion: '',
+        recargo: 0,
+        coeficiente: 0
+      }
+    };
+  },
+  components: {
+    componenteDatosFDP: _ComponenteDatosFDP__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('formasDePago', ['agregarFormaDePago', 'resetResp']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado']), {
+    LNB: function LNB() {
+      $('#MenuLateral').collapse('show');
+    }
+  }),
+  destroyed: function destroyed() {
+    this.resetResp(null);
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('formasDePago', ['respuestaS']))
 });
 
 /***/ }),
@@ -2725,10 +2911,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ListaFormasDePago__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ListaFormasDePago */ "./resources/js/components/ListaFormasDePago.vue");
-//
-//
-//
-//
+/* harmony import */ var _components_ModalAgregarFormaDePago__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ModalAgregarFormaDePago */ "./resources/js/components/ModalAgregarFormaDePago.vue");
 //
 //
 //
@@ -2745,9 +2928,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ListaFDP: _components_ListaFormasDePago__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ListaFDP: _components_ListaFormasDePago__WEBPACK_IMPORTED_MODULE_0__["default"],
+    modalAgregarFdp: _components_ModalAgregarFormaDePago__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
 
@@ -3330,6 +3515,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -3456,6 +3646,17 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4462,6 +4663,127 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Descripcion")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.nfdp.descripcion,
+                expression: "nfdp.descripcion"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "descripcion",
+              placeholder: "descripcion"
+            },
+            domProps: { value: _vm.nfdp.descripcion },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.nfdp, "descripcion", $event.target.value)
+              }
+            }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Recargo")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.nfdp.recargo,
+                expression: "nfdp.recargo"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", name: "recargo", placeholder: "Recargo" },
+            domProps: { value: _vm.nfdp.recargo },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.nfdp, "recargo", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Coeficiente")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.calcularCoeficiente,
+                expression: "calcularCoeficiente"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              name: "coeficiente",
+              placeholder: "coeficiente",
+              disabled: "true"
+            },
+            domProps: { value: _vm.calcularCoeficiente },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.calcularCoeficiente = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comprobante-DetalleLineasProducto.vue?vue&type=template&id=77b560a9&":
 /*!************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Comprobante-DetalleLineasProducto.vue?vue&type=template&id=77b560a9& ***!
@@ -5345,12 +5667,12 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "col-8 mt-2" },
+            { staticClass: "col-7 mt-2" },
             [
               _c("v-select", {
                 attrs: {
                   label: "nombre",
-                  options: _vm.productos,
+                  options: _vm.filtered_productos,
                   value: _vm.producto,
                   maxHeight: "200px",
                   placeholder: "Producto"
@@ -5359,7 +5681,59 @@ var render = function() {
               })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-2 mt-3" }, [
+            _c("div", { staticClass: "form-check" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.epro,
+                    expression: "epro"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: { type: "checkbox", id: "estadoProducto" },
+                domProps: {
+                  checked: Array.isArray(_vm.epro)
+                    ? _vm._i(_vm.epro, null) > -1
+                    : _vm.epro
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.epro,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.epro = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.epro = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.epro = $$c
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "estadoProducto" }
+                },
+                [_vm._v("Ver Inactivos")]
+              )
+            ])
+          ])
         ])
       : _vm._e(),
     _vm._v(" "),
@@ -5378,11 +5752,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "col-3 ml-3 alert alert-primary text-center" },
+      { staticClass: "col-2 ml-3 alert alert-primary text-center" },
       [
         _c("h5", [
-          _c("i", { staticClass: "fas fa-box" }),
-          _vm._v(" Ingreso de Productos "),
+          _vm._v("\n                Ingresar Producto "),
           _c("i", { staticClass: "fas fa-hand-point-right" })
         ])
       ]
@@ -6407,7 +6780,13 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("button", { staticClass: "btn btn-warning btn-sm" }, [
-        _vm._v("\n                        Ver\n                    ")
+        _vm._v("\n                        Ver "),
+        _c("i", { staticClass: "fas fa-eye" })
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+        _vm._v("\n                        Editar "),
+        _c("i", { staticClass: "fas fa-pencil-alt" })
       ])
     ])
   }
@@ -6715,6 +7094,187 @@ var staticRenderFns = [
         }
       },
       [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-success btn-block",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#AgregarFDP",
+          "data-whatever": "@mdo"
+        },
+        on: {
+          click: function($event) {
+            return _vm.LNB()
+          }
+        }
+      },
+      [
+        _vm._v("\n         Agregar Forma de Pago"),
+        _c("i", { staticClass: "fas fa-plus-circle" })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "AgregarFDP",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "AgregarFDPLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.resetResp(null)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm.respuestaS != null
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "alert alert-success alert-dismissible fade show"
+                      },
+                      [
+                        _vm._v(
+                          "\n                         " +
+                            _vm._s(_vm.respuestaS) +
+                            " \n                         "
+                        ),
+                        _vm._m(1)
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("div", { staticClass: "container" }, [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.agregarFormaDePago(_vm.nfdp)
+                        }
+                      }
+                    },
+                    [
+                      _c("componenteDatosFDP", { attrs: { nfdp: _vm.nfdp } }),
+                      _vm._v(" "),
+                      _vm.respuestaS === null
+                        ? _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn btn-success btn-block sticky-button",
+                              attrs: { type: "submit" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                 Agregar Forma de Pago "
+                              ),
+                              _c("i", { staticClass: "fas fa-check-circle" })
+                            ]
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h5",
+      { staticClass: "modal-title", attrs: { id: "AgregarFDPLabel" } },
+      [
+        _c("i", { staticClass: "fas fa-plus-circle" }),
+        _vm._v(" Agregar Forma de Pago\n                     ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   }
 ]
@@ -8987,23 +9547,7 @@ var render = function() {
       _c("div", { staticClass: "row mt-3" }, [
         _c("div", { staticClass: "col-8" }),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-4" },
-          [
-            _c("router-link", { attrs: { to: { name: "agregarProv" } } }, [
-              _c(
-                "button",
-                { staticClass: "btn btn-outline-success btn-block" },
-                [
-                  _vm._v("\n                    Agregar Forma de Pago "),
-                  _c("i", { staticClass: "fas fa-plus-circle" })
-                ]
-              )
-            ])
-          ],
-          1
-        )
+        _c("div", { staticClass: "col-4" }, [_c("modalAgregarFdp")], 1)
       ]),
       _vm._v(" "),
       _c("ListaFDP", { staticClass: "mt-3" })
@@ -9940,7 +10484,14 @@ var render = function() {
                     _c("i", { staticClass: "fas fa-list-alt" })
                   ])
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _c("router-link", { attrs: { to: { name: "formasDePago" } } }, [
+                _c("button", { staticClass: "btn btn-outline-primary" }, [
+                  _vm._v("\n                            Formas de Pago "),
+                  _c("i", { staticClass: "fas fa-money-bill-wave-alt" })
+                ])
+              ])
             ],
             1
           )
@@ -10178,35 +10729,54 @@ var render = function() {
           { staticClass: "d-flex justify-content-center sticky-button" },
           [
             _vm.$store.state.presupuestos.status != 200
-              ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning btn-block w-75",
-                    attrs: { type: "submit" }
-                  },
-                  [
-                    _vm._v("\n                Grabar Prespuesto "),
-                    _c("i", { staticClass: "fas fa-save" })
-                  ]
-                )
+              ? _c("div", { staticClass: "p-2  w-75" }, [_vm._m(1)])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$store.state.presupuestos.status === 200
+              ? _c("div", { staticClass: "p-2 w-75" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-secondary btn-block w-75",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.imprimirPrespuesto(_vm.presupuesto.id)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v("\n                    Imprimir Prespuesto "),
+                      _c("i", { staticClass: "fas fa-print" })
+                    ]
+                  )
+                ])
               : _vm._e(),
             _vm._v(" "),
             _vm.$store.state.presupuestos.status === 200
               ? _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-outline-info btn-block w-75",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.imprimirPrespuesto(_vm.presupuesto.id)
-                      }
-                    }
-                  },
+                  "div",
+                  { staticClass: "p-2" },
                   [
-                    _vm._v("\n                Imprimir Prespuesto "),
-                    _c("i", { staticClass: "fas fa-print" })
-                  ]
+                    _c(
+                      "router-link",
+                      { attrs: { to: { name: "listadoPresupuestos" } } },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-primary",
+                            attrs: { type: "button" }
+                          },
+                          [
+                            _vm._v("\n                        Finalizar "),
+                            _c("i", { staticClass: "fas fa-check-circle" })
+                          ]
+                        )
+                      ]
+                    )
+                  ],
+                  1
                 )
               : _vm._e()
           ]
@@ -10235,6 +10805,19 @@ var staticRenderFns = [
             _c("i", { staticClass: "fas fa-file-alt" })
           ])
         ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-warning btn-block", attrs: { type: "submit" } },
+      [
+        _vm._v("\n                    Grabar Prespuesto "),
+        _c("i", { staticClass: "fas fa-save" })
       ]
     )
   }
@@ -10810,6 +11393,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AjusteManualStock_vue_vue_type_template_id_4399c3bd___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AjusteManualStock_vue_vue_type_template_id_4399c3bd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ComponenteDatosFDP.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/ComponenteDatosFDP.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ComponenteDatosFDP_vue_vue_type_template_id_bd4929ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec& */ "./resources/js/components/ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec&");
+/* harmony import */ var _ComponenteDatosFDP_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ComponenteDatosFDP.vue?vue&type=script&lang=js& */ "./resources/js/components/ComponenteDatosFDP.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ComponenteDatosFDP_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ComponenteDatosFDP_vue_vue_type_template_id_bd4929ec___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ComponenteDatosFDP_vue_vue_type_template_id_bd4929ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ComponenteDatosFDP.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ComponenteDatosFDP.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/ComponenteDatosFDP.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComponenteDatosFDP_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ComponenteDatosFDP.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ComponenteDatosFDP.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ComponenteDatosFDP_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComponenteDatosFDP_vue_vue_type_template_id_bd4929ec___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ComponenteDatosFDP.vue?vue&type=template&id=bd4929ec&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComponenteDatosFDP_vue_vue_type_template_id_bd4929ec___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ComponenteDatosFDP_vue_vue_type_template_id_bd4929ec___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -11743,6 +12395,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListadoProductos_vue_vue_type_template_id_4d5f0f50___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ListadoProductos_vue_vue_type_template_id_4d5f0f50___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalAgregarFormaDePago.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/ModalAgregarFormaDePago.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalAgregarFormaDePago_vue_vue_type_template_id_21b73eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca& */ "./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca&");
+/* harmony import */ var _ModalAgregarFormaDePago_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalAgregarFormaDePago.vue?vue&type=script&lang=js& */ "./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ModalAgregarFormaDePago_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalAgregarFormaDePago_vue_vue_type_template_id_21b73eca___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalAgregarFormaDePago_vue_vue_type_template_id_21b73eca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ModalAgregarFormaDePago.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarFormaDePago_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalAgregarFormaDePago.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarFormaDePago_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarFormaDePago_vue_vue_type_template_id_21b73eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarFormaDePago.vue?vue&type=template&id=21b73eca&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarFormaDePago_vue_vue_type_template_id_21b73eca___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarFormaDePago_vue_vue_type_template_id_21b73eca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

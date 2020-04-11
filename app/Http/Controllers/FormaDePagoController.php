@@ -39,7 +39,23 @@ class FormaDePagoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            
+
+            $fdp = new FormaDePago();
+            
+            $fdp->descripcion = $request->descripcion;
+            $fdp->coeficiente = $request->coeficiente;
+            $fdp->recargo = $request->recargo;
+
+            $fdp->save();
+            
+            return response()->json([
+                'formaDePago' => $fdp,
+                'message' => 'Forma de Pago Agregada'
+            ], 200);
+
+        }
     }
 
     /**

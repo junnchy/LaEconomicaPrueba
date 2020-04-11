@@ -1,20 +1,26 @@
 <template>
     <div class="container mt-2">
         <div class="row my-3" v-if="npresupuesto.id === null">
-            <div class="col-3 ml-3 alert alert-primary text-center">
+            <div class="col-2 ml-3 alert alert-primary text-center">
                 <h5>
-                    <i class="fas fa-box"></i> Ingreso de Productos <i class="fas fa-hand-point-right"></i> 
+                    Ingresar Producto <i class="fas fa-hand-point-right"></i> 
                 </h5>
             </div>
-            <div class="col-8 mt-2">
+            <div class="col-7 mt-2">
                 <v-select
                     label="nombre"
                     @input="setProducto"
-                    :options="productos"
+                    :options="filtered_productos"
                     :value="producto"
                     maxHeight="200px"
                     placeholder="Producto"
                 ></v-select>
+            </div>
+            <div class="col-2 mt-3">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="estadoProducto" v-model="epro">
+                    <label class="form-check-label" for="estadoProducto">Ver Inactivos</label>
+                </div>
             </div>
         </div>
         <div class="row my-3">
@@ -24,12 +30,12 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters} from 'vuex'
 import listalineas from './Comprobante-LineaDeProducto'
 export default {
     data() {
         return {
-            producto: ''
+            producto: '',
         }
     },
     components:{
@@ -56,7 +62,16 @@ export default {
         }
     },
     computed:{
-        ...mapState('productos', ['productos'])
+        ...mapState('productos', ['productos']),
+        ...mapGetters('productos',['filtered_productos']),
+        epro:{
+            get(){
+                return this.$store.state.productos.filter.estado;
+            },
+            set(val){
+                this.$store.commit('productos/SET_ESTADO', val)
+            }
+        }
     }
 }
 </script>

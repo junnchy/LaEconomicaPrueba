@@ -146,6 +146,11 @@ export default {
         filtered_productos(state){
             let pfil = state.productos
             if(state.filter.estado != null){
+              if (state.filter.estado){
+                state.filter.estado = 0
+              }else{
+                state.filter.estado = 1
+              }
               pfil = pfil.filter(producto => (producto.estado === state.filter.estado))
             }
             if(state.filter.categoria > 0){

@@ -18,6 +18,7 @@ class CreateFormaDePagosTable extends Migration
             $table->string('descripcion');
             $table->float('coeficiente');
             $table->float('recargo');
+            $table->boolean('estado');
             $table->timestamps();
         });
     }

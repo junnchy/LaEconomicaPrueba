@@ -18,6 +18,7 @@ class FormasDePagoSeeder extends Seeder
         $fdp->descripcion ="Efectivo";
         $fdp->coeficiente = 1;
         $fdp->recargo = 0;
+        $fdp->estado = true;
         $fdp->save();
 
         $fdp = new FormaDePago();
@@ -25,6 +26,7 @@ class FormasDePagoSeeder extends Seeder
         $fdp->descripcion ="Tarjeta de Credito - 6 cuotas";
         $fdp->coeficiente = 1.25;
         $fdp->recargo = 25;
+        $fdp->estado = true;
         $fdp->save();
 
         $fdp = new FormaDePago();
@@ -32,6 +34,7 @@ class FormasDePagoSeeder extends Seeder
         $fdp->descripcion ="Tarjeta de Credito - 12 cuotas";
         $fdp->coeficiente = 1.30;
         $fdp->recargo = 30;
+        $fdp->estado = true;
         $fdp->save();
 
         $fdp = new FormaDePago();
@@ -39,6 +42,7 @@ class FormasDePagoSeeder extends Seeder
         $fdp->descripcion ="Tarjeta de Debito";
         $fdp->coeficiente = 1.02;
         $fdp->recargo = 2;
+        $fdp->estado = true;
         $fdp->save();
 
 

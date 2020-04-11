@@ -6,11 +6,7 @@
                 
             </div>
             <div class="col-4">
-                <router-link :to="{name: 'agregarProv'}">
-                    <button class="btn btn-outline-success btn-block">
-                        Agregar Forma de Pago <i class="fas fa-plus-circle"></i>
-                    </button>
-                </router-link>
+                <modalAgregarFdp/>
             </div>
         </div>
         <ListaFDP class="mt-3"/>
@@ -19,10 +15,11 @@
 
 <script>
 import ListaFDP from '../components/ListaFormasDePago'
+import modalAgregarFdp from '../components/ModalAgregarFormaDePago'
 export default {
     components:{
-        ListaFDP
+        ListaFDP,
+        modalAgregarFdp
     }
-    
 }
 </script>

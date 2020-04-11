@@ -67398,11 +67398,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    formasDePago: []
+    formasDePago: [],
+    respuestaS: null
   },
   mutations: {
     setFormasDePago: function setFormasDePago(state, formas) {
       state.formasDePago = formas;
+    },
+    setRespuestaServidor: function setRespuestaServidor(state, respuesta) {
+      state.respuestaS = respuesta;
     }
   },
   actions: {
@@ -67437,7 +67441,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getFormasDePago;
-    }()
+    }(),
+    agregarFormaDePago: function agregarFormaDePago(_ref2, fdp) {
+      var commit = _ref2.commit,
+          dispatch = _ref2.dispatch;
+      axios.post('http://127.0.0.1:8000/formaDePago', fdp).then(function (response) {
+        commit('setRespuestaServidor', response.data.message);
+        dispatch('getFormasDePago');
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    },
+    resetResp: function resetResp(_ref3, resp) {
+      var commit = _ref3.commit;
+      commit('setRespuestaServidor', resp);
+    }
   }
 });
 
@@ -68342,6 +68365,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var pfil = state.productos;
 
       if (state.filter.estado != null) {
+        if (state.filter.estado) {
+          state.filter.estado = 0;
+        } else {
+          state.filter.estado = 1;
+        }
+
         pfil = pfil.filter(function (producto) {
           return producto.estado === state.filter.estado;
         });
