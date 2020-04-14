@@ -2,12 +2,14 @@
    <div class="container">
         <button type="button" 
         @click="LNB()"
-        class="btn btn-outline-success btn-block" 
+        class="btn btn-outline-success btn-sm" 
         data-toggle="modal" 
         data-target="#AgregarClienteModal" 
         data-whatever="@mdo"
         >
-            Agregar Cliente <i class="fas fa-plus-circle"></i>
+            <a data-toggle="tooltip" data-placement="top" title="Agregar Nuevo Cliente">
+                <i class="fas fa-user-plus"></i>
+            </a>
         </button>
         <div class="modal fade" id="AgregarClienteModal" tabindex="-1" role="dialog" aria-labelledby="AgregarClienteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

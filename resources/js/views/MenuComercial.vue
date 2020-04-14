@@ -16,8 +16,9 @@
                                 Listado Presupuestos <i class="fas fa-list-alt"></i>
                             </button> 
                         </router-link>
+                        <i class="fas fa-grip-lines-vertical"></i>
                         <router-link :to="{name:'formasDePago'}">
-                            <button class="btn btn-outline-primary">
+                            <button class="btn btn-outline-dark">
                                 Formas de Pago <i class="fas fa-money-bill-wave-alt"></i>
                             </button> 
                         </router-link>

@@ -147,9 +147,9 @@ export default {
             let pfil = state.productos
             if(state.filter.estado != null){
               if (state.filter.estado){
-                state.filter.estado = 0
-              }else{
                 state.filter.estado = 1
+              }else{
+                state.filter.estado = 0
               }
               pfil = pfil.filter(producto => (producto.estado === state.filter.estado))
             }

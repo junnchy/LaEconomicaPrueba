@@ -3934,6 +3934,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -45179,7 +45181,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn btn-outline-success btn-block",
+        staticClass: "btn btn-outline-success btn-sm",
         attrs: {
           type: "button",
           "data-toggle": "modal",
@@ -45192,10 +45194,7 @@ var render = function() {
           }
         }
       },
-      [
-        _vm._v("\n         Agregar Cliente "),
-        _c("i", { staticClass: "fas fa-plus-circle" })
-      ]
+      [_vm._m(0)]
     ),
     _vm._v(" "),
     _c(
@@ -45217,7 +45216,7 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
-                _vm._m(0),
+                _vm._m(1),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -45256,7 +45255,7 @@ var render = function() {
                             _vm._s(_vm.respuestaS) +
                             " \n                         "
                         ),
-                        _vm._m(1)
+                        _vm._m(2)
                       ]
                     )
                   : _vm._e(),
@@ -45306,6 +45305,22 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        attrs: {
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Agregar Nuevo Cliente"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-user-plus" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -67406,6 +67421,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       coeficiente: 0,
       recargo: 0,
       estado: 0
+    },
+    filter: {
+      estado: null
     }
   },
   mutations: {
@@ -67519,6 +67537,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     resetResp: function resetResp(_ref5, resp) {
       var commit = _ref5.commit;
       commit('setRespuestaServidor', resp);
+    }
+  },
+  getters: {
+    filtered_fdp: function filtered_fdp(state) {
+      var fdpfil = state.formasDePago;
+
+      if (state.filter.estado != null) {
+        if (state.filter.estado) {
+          state.filter.estado = 0;
+        } else {
+          state.filter.estado = 1;
+        }
+
+        fdpfil = fdpfil.filter(function (fdp) {
+          return fdp.estado === state.filter.estado;
+        });
+      }
+
+      return fdpfil;
     }
   }
 });
@@ -68425,9 +68462,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (state.filter.estado != null) {
         if (state.filter.estado) {
-          state.filter.estado = 0;
-        } else {
           state.filter.estado = 1;
+        } else {
+          state.filter.estado = 0;
         }
 
         pfil = pfil.filter(function (producto) {

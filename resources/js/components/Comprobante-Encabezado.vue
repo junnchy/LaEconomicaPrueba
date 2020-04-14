@@ -14,6 +14,9 @@
                         :disabled="ingresoCliente"
                     ></v-select>
                 </div>
+                <div class="col-1 mt-1">
+                    <modaladdcliente/>
+                </div>
                 <div class="col-5">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -23,15 +26,17 @@
                         class="form-control" placeholder="direccion" aria-label="direccion" aria-describedby="direccion">   
                     </div>
                 </div>
-                <div class="col-2">
-                    <button class="btn btn-outline-primary btn-block" 
+                <div class="col-1 mt-1">
+                    <button class="btn btn-outline-primary btn-sm" 
                     type="button" 
                     data-toggle="collapse" 
                     data-target="#mapa" 
                     aria-expanded="false" 
                     aria-controls="mapa"
                     v-if="npresupuesto.id === null">
-                        Ver Mapa <i class="fas fa-map-marked-alt"></i>
+                        <a data-toggle="tooltip" data-placement="top" title="Ver Mapa">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </a>                        
                     </button>
                 </div>
             </div>
@@ -81,7 +86,7 @@
                     <v-select
                         label="descripcion"
                         @input="setFDP"
-                        :options="formasDePago"
+                        :options="filtered_fdp"
                         :value="npresupuesto.formaDePago"
                         maxHeight="200px"
                         placeholder="Forma De Pago"
@@ -95,11 +100,11 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 import datosvendedor from './Comprobante-Vendedor'
-
-
+import modaladdcliente from '../components/ModalAgregarCliente'
 export default {
     components: {
-        datosvendedor
+        datosvendedor,
+        modaladdcliente
     },
     data() {
         return {
@@ -118,6 +123,7 @@ export default {
         this.getClientes()
         this.getDatos()
         this.getFormasDePago()
+        this.filter.estado = 1
     },
     methods:{
         ...mapActions('datos', ['getDatos']),
@@ -134,7 +140,8 @@ export default {
     computed:{
         ...mapState('datos', ['datos']),
         ...mapState('clientes', ['clientes']),
-        ...mapState('formasDePago', ['formasDePago']),
+        ...mapState('formasDePago', ['formasDePago', 'filter']),
+        ...mapGetters('formasDePago', ['filtered_fdp'])
     }
 }
 </script>

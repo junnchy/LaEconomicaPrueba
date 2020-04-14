@@ -422,6 +422,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Comprobante_Vendedor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Comprobante-Vendedor */ "./resources/js/components/Comprobante-Vendedor.vue");
+/* harmony import */ var _components_ModalAgregarCliente__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/ModalAgregarCliente */ "./resources/js/components/ModalAgregarCliente.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -522,11 +523,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    datosvendedor: _Comprobante_Vendedor__WEBPACK_IMPORTED_MODULE_1__["default"]
+    datosvendedor: _Comprobante_Vendedor__WEBPACK_IMPORTED_MODULE_1__["default"],
+    modaladdcliente: _components_ModalAgregarCliente__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -545,6 +553,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getClientes();
     this.getDatos();
     this.getFormasDePago();
+    this.filter.estado = 1;
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('datos', ['getDatos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getClientes']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('formasDePago', ['getFormasDePago']), {
     setCliente: function setCliente(val) {
@@ -555,7 +564,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.npresupuesto.formaDePago = val;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('datos', ['datos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['clientes']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('formasDePago', ['formasDePago']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('datos', ['datos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('clientes', ['clientes']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('formasDePago', ['formasDePago', 'filter']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('formasDePago', ['filtered_fdp']))
 });
 
 /***/ }),
@@ -861,6 +870,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -880,6 +894,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   created: function created() {
     this.getProductos();
+    this.filter.estado = 1;
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProductos']), {
     setProducto: function setProducto(val) {
@@ -891,7 +906,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.npresupuesto.lineas.push(li);
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['productos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('productos', ['filtered_productos']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['productos', 'filter']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('productos', ['filtered_productos']), {
     epro: {
       get: function get() {
         return this.$store.state.productos.filter.estado;
@@ -3640,6 +3655,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -3850,7 +3866,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getVendedorActual(this.$userId);
     this.getSetFechaActual();
-    this.cambiarEstado(5);
+    this.cambiarEstado(0);
     this.npre.vendedor_id = this.$userId;
   },
   destroyed: function destroyed() {
@@ -5202,6 +5218,8 @@ var render = function() {
             1
           ),
           _vm._v(" "),
+          _c("div", { staticClass: "col-1 mt-1" }, [_c("modaladdcliente")], 1),
+          _vm._v(" "),
           _c("div", { staticClass: "col-5" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
               _vm._m(0),
@@ -5240,12 +5258,12 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-2" }, [
+          _c("div", { staticClass: "col-1 mt-1" }, [
             _vm.npresupuesto.id === null
               ? _c(
                   "button",
                   {
-                    staticClass: "btn btn-outline-primary btn-block",
+                    staticClass: "btn btn-outline-primary btn-sm",
                     attrs: {
                       type: "button",
                       "data-toggle": "collapse",
@@ -5254,10 +5272,7 @@ var render = function() {
                       "aria-controls": "mapa"
                     }
                   },
-                  [
-                    _vm._v("\n                    Ver Mapa "),
-                    _c("i", { staticClass: "fas fa-map-marked-alt" })
-                  ]
+                  [_vm._m(1)]
                 )
               : _vm._e()
           ])
@@ -5281,7 +5296,7 @@ var render = function() {
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-4" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -5318,7 +5333,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-4" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
-              _vm._m(2),
+              _vm._m(3),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -5355,7 +5370,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-4" }, [
             _c("div", { staticClass: "input-group mb-3" }, [
-              _vm._m(3),
+              _vm._m(4),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -5396,7 +5411,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _vm._m(4),
+          _vm._m(5),
           _vm._v(" "),
           _c(
             "div",
@@ -5405,7 +5420,7 @@ var render = function() {
               _c("v-select", {
                 attrs: {
                   label: "descripcion",
-                  options: _vm.formasDePago,
+                  options: _vm.filtered_fdp,
                   value: _vm.npresupuesto.formaDePago,
                   maxHeight: "200px",
                   placeholder: "Forma De Pago"
@@ -5433,6 +5448,22 @@ var staticRenderFns = [
         [_vm._v("Direccion")]
       )
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        attrs: {
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "Ver Mapa"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-map-marked-alt" })]
+    )
   },
   function() {
     var _vm = this
@@ -5912,14 +5943,27 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c(
-                "label",
-                {
-                  staticClass: "form-check-label",
-                  attrs: { for: "estadoProducto" }
-                },
-                [_vm._v("Ver Inactivos")]
-              )
+              _vm.filter.estado === 1
+                ? _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "estadoProducto" }
+                    },
+                    [_vm._m(1)]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.filter.estado === 0
+                ? _c(
+                    "label",
+                    {
+                      staticClass: "form-check-label",
+                      attrs: { for: "estadoProducto" }
+                    },
+                    [_vm._m(2)]
+                  )
+                : _vm._e()
             ])
           ])
         ])
@@ -5948,6 +5992,24 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-success" }, [
+      _c("i", { staticClass: "fas fa-box" }),
+      _vm._v(" Activos")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-danger" }, [
+      _c("i", { staticClass: "fas fa-box" }),
+      _vm._v(" Inactivos")
+    ])
   }
 ]
 render._withStripped = true
@@ -10863,8 +10925,10 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
+              _c("i", { staticClass: "fas fa-grip-lines-vertical" }),
+              _vm._v(" "),
               _c("router-link", { attrs: { to: { name: "formasDePago" } } }, [
-                _c("button", { staticClass: "btn btn-outline-primary" }, [
+                _c("button", { staticClass: "btn btn-outline-dark" }, [
                   _vm._v("\n                            Formas de Pago "),
                   _c("i", { staticClass: "fas fa-money-bill-wave-alt" })
                 ])

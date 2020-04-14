@@ -85,7 +85,7 @@ export default {
     created(){
         this.getVendedorActual(this.$userId)
         this.getSetFechaActual()
-        this.cambiarEstado(5)
+        this.cambiarEstado(0)
         this.npre.vendedor_id = this.$userId
     },
     destroyed(){

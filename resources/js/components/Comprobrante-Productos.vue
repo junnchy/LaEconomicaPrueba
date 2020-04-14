@@ -19,7 +19,12 @@
             <div class="col-2 mt-3">
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="estadoProducto" v-model="epro">
-                    <label class="form-check-label" for="estadoProducto">Ver Inactivos</label>
+                    <label class="form-check-label" for="estadoProducto" v-if="filter.estado === 1">
+                        <p class="text-success"><i class="fas fa-box"></i> Activos</p>
+                    </label>
+                    <label class="form-check-label" for="estadoProducto" v-if="filter.estado === 0">
+                        <p class="text-danger"><i class="fas fa-box"></i> Inactivos</p>
+                    </label>
                 </div>
             </div>
         </div>
@@ -49,6 +54,7 @@ export default {
     },
     created(){
         this.getProductos()
+        this.filter.estado = 1
     },
     methods:{
         ...mapActions('productos', ['getProductos']), 
@@ -62,7 +68,7 @@ export default {
         }
     },
     computed:{
-        ...mapState('productos', ['productos']),
+        ...mapState('productos', ['productos', 'filter']),
         ...mapGetters('productos',['filtered_productos']),
         epro:{
             get(){

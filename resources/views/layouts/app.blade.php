@@ -69,6 +69,10 @@
                             <router-link :to="{name:'listadoPresupuestos'}">
                                 <a class="dropdown-item" href="#"> Listado Presupuestos </a>
                             </router-link>
+                            <div class="dropdown-divider"></div>
+                            <router-link :to="{name:'formasDePago'}">
+                                <a class="dropdown-item" href="#">Formas de Pago </a>
+                            </router-link>
                         </div>
                     </li>
                     <li>
@@ -80,7 +84,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                            <a class="dropdown-item" href="/productos/home">Productos</a>
+                            <a class="dropdown-item" href="/productos/home">Listado de Productos</a>
                             <router-link :to="{name:'agregarProducto'}">
                                 <a class="dropdown-item" href="#">Agregar Producto</a>
                             </router-link>

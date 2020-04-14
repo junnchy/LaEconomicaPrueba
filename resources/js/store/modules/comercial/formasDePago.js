@@ -5,7 +5,16 @@ export default {
     state:{
         formasDePago : [],
         respuestaS: null,
-        formaDePago: {id: null, descripcion: '', coeficiente: 0, recargo: 0, estado: 0}
+        formaDePago: {
+            id: null, 
+            descripcion: '', 
+            coeficiente: 0, 
+            recargo: 0, 
+            estado: 0
+        },
+        filter:{
+            estado: null
+        }
     },
     mutations: {
         setFormasDePago(state, formas){
@@ -71,4 +80,18 @@ export default {
             commit('setRespuestaServidor', resp)
         },
     }, 
+    getters:{
+        filtered_fdp(state){
+            let fdpfil = state.formasDePago
+            if(state.filter.estado != null){
+                if (state.filter.estado){
+                    state.filter.estado = 0
+                }else{
+                    state.filter.estado = 1
+                }
+                fdpfil = fdpfil.filter(fdp => (fdp.estado === state.filter.estado))
+            }
+            return fdpfil
+        }
+    }
 }
