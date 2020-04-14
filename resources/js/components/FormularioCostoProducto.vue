@@ -7,7 +7,7 @@
                     <input 
                     type="number" 
                     step=0.01 
-                    v-model="producto.precioBase" 
+                    v-model="producto.precio.precioBase" 
                     :class="fPBase">
                     <span class="invalid-feedback" role="alert" v-if="errors.precioBase != ''"> 
                         <strong>{{errors.precioBase[0]}}</strong>
@@ -25,28 +25,28 @@
         <div class="row form-group">
             <div class="col-2">
                 <hr/>
-                <input type="number" step=0.01 v-model="producto.descuentoProducto[0]" class="form-control">
+                <input type="number" step=0.01 v-model="producto.precio.descuentoProducto[0]" class="form-control">
             </div>
             <div class="col-2">
                 <hr/>
-                <input type="number" step=0.01 v-model="producto.descuentoProducto[1]" class="form-control">
+                <input type="number" step=0.01 v-model="producto.precio.descuentoProducto[1]" class="form-control">
             </div>
             <div class="col-2">
                 <hr/>
-                <input type="number" step=0.01 v-model="producto.descuentoProducto[2]" class="form-control">
+                <input type="number" step=0.01 v-model="producto.precio.descuentoProducto[2]" class="form-control">
             </div>
             <div class="col-2">
                 <hr/>
-                <input type="number" step=0.01 v-model="producto.descuentoProducto[3]" class="form-control">
+                <input type="number" step=0.01 v-model="producto.precio.descuentoProducto[3]" class="form-control">
             </div>
             <div class="col-2">
                 <hr/>
-                <input type="number" step=0.01 v-model="producto.descuentoProducto[4]" class="form-control">
+                <input type="number" step=0.01 v-model="producto.precio.descuentoProducto[4]" class="form-control">
             </div>
             <div class="col-2">
                  <div class="alert alert-dark" role="alert">
                     <h6 class="text-center">Dto Total</h6>
-                    <h5 class="text-center" v-if="producto.dre != 1">{{(setDre[0] *100).toFixed(2)}}%</h5>
+                    <h5 class="text-center" v-if="producto.precio.dre != 1">{{(setDre[0] *100).toFixed(2)}}%</h5>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
                     <label>IVA</label> 
                     <select 
                     :class="fIva" 
-                    v-model="producto.iva">
+                    v-model="producto.precio.iva">
                         <option :value=21>21%</option>
                         <option :value=10.5>10.5%</option>
                     </select>
@@ -69,7 +69,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label>Flete</label> 
-                    <input type="number" step=0.01 v-model="producto.flete" class="form-control">
+                    <input type="number" step=0.01 v-model="producto.precio.flete" class="form-control">
                 </div>
             </div>
         </div>
@@ -100,8 +100,8 @@ export default {
         setDre(){
             var p = 0
             var i = 0
-            this.producto.precioBase = parseFloat(this.producto.precioBase)
-            this.producto.descuentoProducto.forEach(element => {
+            this.producto.precio.precioBase = parseFloat(this.producto.precio.precioBase)
+            this.producto.precio.descuentoProducto.forEach(element => {
                 if (element > 0) {                   
                     p = (1-(element/100))
                     if(i>0){
@@ -111,27 +111,27 @@ export default {
                     }
                 }
             })
-            this.producto.dre = (1 - i)
-            if (this.producto.dre != 1) {
-                this.producto.precioCosto = this.producto.precioBase - (this.producto.precioBase * this.producto.dre)
-                if(this.producto.iva != 0){
-                    this.producto.precioCosto = this.producto.precioCosto + (this.producto.precioCosto * (this.producto.iva/100))
+            this.producto.precio.dre = (1 - i)
+            if (this.producto.precio.dre != 1) {
+                this.producto.precio.precioCosto = this.producto.precio.precioBase - (this.producto.precio.precioBase * this.producto.precio.dre)
+                if(this.producto.precio.iva != 0){
+                    this.producto.precio.precioCosto = this.producto.precio.precioCosto + (this.producto.precio.precioCosto * (this.producto.precio.iva/100))
                 }
-                if(this.producto.flete != 0){
-                    this.producto.flete = parseFloat(this.producto.flete)
-                    this.producto.precioCosto = this.producto.precioCosto + this.producto.flete
+                if(this.producto.precio.flete != 0){
+                    this.producto.precio.flete = parseFloat(this.producto.precio.flete)
+                    this.producto.precio.precioCosto = this.producto.precio.precioCosto + this.producto.precio.flete
                 }
-                return [this.producto.dre, this.producto.precioCosto]
+                return [this.producto.precio.dre, this.producto.precio.precioCosto]
             }else{
-                this.producto.precioCosto = this.producto.precioBase
-                if(this.producto.iva != 0){
-                    this.producto.precioCosto = this.producto.precioCosto + (this.producto.precioCosto * (this.producto.iva/100))
+                this.producto.precio.precioCosto = this.producto.precio.precioBase
+                if(this.producto.precio.iva != 0){
+                    this.producto.precio.precioCosto = this.producto.precio.precioCosto + (this.producto.precio.precioCosto * (this.producto.precio.iva/100))
                 }
-                if(this.producto.flete != 0){
-                    this.producto.flete = parseFloat(this.producto.flete)
-                    this.producto.precioCosto = this.producto.precioCosto + this.producto.flete
+                if(this.producto.precio.flete != 0){
+                    this.producto.precio.flete = parseFloat(this.producto.precio.flete)
+                    this.producto.precio.precioCosto = this.producto.precio.precioCosto + this.producto.precio.flete
                 }
-                return [this.producto.dre, this.producto.precioCosto]
+                return [this.producto.precio.dre, this.producto.precio.precioCosto]
             }    
         },
         validar(){

@@ -2739,8 +2739,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setDre: function setDre() {
       var p = 0;
       var i = 0;
-      this.producto.precioBase = parseFloat(this.producto.precioBase);
-      this.producto.descuentoProducto.forEach(function (element) {
+      this.producto.precio.precioBase = parseFloat(this.producto.precio.precioBase);
+      this.producto.precio.descuentoProducto.forEach(function (element) {
         if (element > 0) {
           p = 1 - element / 100;
 
@@ -2751,34 +2751,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         }
       });
-      this.producto.dre = 1 - i;
+      this.producto.precio.dre = 1 - i;
 
-      if (this.producto.dre != 1) {
-        this.producto.precioCosto = this.producto.precioBase - this.producto.precioBase * this.producto.dre;
+      if (this.producto.precio.dre != 1) {
+        this.producto.precio.precioCosto = this.producto.precio.precioBase - this.producto.precio.precioBase * this.producto.precio.dre;
 
-        if (this.producto.iva != 0) {
-          this.producto.precioCosto = this.producto.precioCosto + this.producto.precioCosto * (this.producto.iva / 100);
+        if (this.producto.precio.iva != 0) {
+          this.producto.precio.precioCosto = this.producto.precio.precioCosto + this.producto.precio.precioCosto * (this.producto.precio.iva / 100);
         }
 
-        if (this.producto.flete != 0) {
-          this.producto.flete = parseFloat(this.producto.flete);
-          this.producto.precioCosto = this.producto.precioCosto + this.producto.flete;
+        if (this.producto.precio.flete != 0) {
+          this.producto.precio.flete = parseFloat(this.producto.precio.flete);
+          this.producto.precio.precioCosto = this.producto.precio.precioCosto + this.producto.precio.flete;
         }
 
-        return [this.producto.dre, this.producto.precioCosto];
+        return [this.producto.precio.dre, this.producto.precio.precioCosto];
       } else {
-        this.producto.precioCosto = this.producto.precioBase;
+        this.producto.precio.precioCosto = this.producto.precio.precioBase;
 
-        if (this.producto.iva != 0) {
-          this.producto.precioCosto = this.producto.precioCosto + this.producto.precioCosto * (this.producto.iva / 100);
+        if (this.producto.precio.iva != 0) {
+          this.producto.precio.precioCosto = this.producto.precio.precioCosto + this.producto.precio.precioCosto * (this.producto.precio.iva / 100);
         }
 
-        if (this.producto.flete != 0) {
-          this.producto.flete = parseFloat(this.producto.flete);
-          this.producto.precioCosto = this.producto.precioCosto + this.producto.flete;
+        if (this.producto.precio.flete != 0) {
+          this.producto.precio.flete = parseFloat(this.producto.precio.flete);
+          this.producto.precio.precioCosto = this.producto.precio.precioCosto + this.producto.precio.flete;
         }
 
-        return [this.producto.dre, this.producto.precioCosto];
+        return [this.producto.precio.dre, this.producto.precio.precioCosto];
       }
     },
     validar: function validar() {
@@ -3433,12 +3433,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['errors']), {
     setPrecioDeVenta: function setPrecioDeVenta() {
-      if (this.producto.precioCosto > 0) {
-        this.producto.precioVenta = this.producto.precioCosto + this.producto.precioCosto * (this.producto.rentabilidad / 100);
-        return this.producto.precioVenta;
+      if (this.producto.precio.precioCosto > 0) {
+        this.producto.precio.precioVenta = this.producto.precio.precioCosto + this.producto.precio.precioCosto * (this.producto.precio.rentabilidad / 100);
+        return this.producto.precio.precioVenta;
       } else {
-        this.producto.precioVenta = this.producto.precioCosto;
-        return this.producto.precioVenta;
+        this.producto.precio.precioVenta = this.producto.precio.precioCosto;
+        return this.producto.precio.precioVenta;
       }
     },
     validar: function validar() {
@@ -8801,6 +8801,25 @@ exports = module.exports = __webpack_require__(/*! ../../../css-loader/lib/css-b
 
 // module
 exports.push([module.i, "\n.vue-street-view-pano-container {\n  position: relative;\n}\n.vue-street-view-pano-container .vue-street-view-pano {\n  left: 0; right: 0; top: 0; bottom: 0;\n  position: absolute;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-md {\n    max-width: 50% !important;\n    margin: 30px auto;\n}\n", ""]);
 
 // exports
 
@@ -40450,6 +40469,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalAgregarCliente.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -42931,19 +42980,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.producto.precioBase,
-                expression: "producto.precioBase"
+                value: _vm.producto.precio.precioBase,
+                expression: "producto.precio.precioBase"
               }
             ],
             class: _vm.fPBase,
             attrs: { type: "number", step: "0.01" },
-            domProps: { value: _vm.producto.precioBase },
+            domProps: { value: _vm.producto.precio.precioBase },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.producto, "precioBase", $event.target.value)
+                _vm.$set(_vm.producto.precio, "precioBase", $event.target.value)
               }
             }
           }),
@@ -42986,19 +43035,23 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.producto.descuentoProducto[0],
-              expression: "producto.descuentoProducto[0]"
+              value: _vm.producto.precio.descuentoProducto[0],
+              expression: "producto.precio.descuentoProducto[0]"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "number", step: "0.01" },
-          domProps: { value: _vm.producto.descuentoProducto[0] },
+          domProps: { value: _vm.producto.precio.descuentoProducto[0] },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.producto.descuentoProducto, 0, $event.target.value)
+              _vm.$set(
+                _vm.producto.precio.descuentoProducto,
+                0,
+                $event.target.value
+              )
             }
           }
         })
@@ -43012,19 +43065,23 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.producto.descuentoProducto[1],
-              expression: "producto.descuentoProducto[1]"
+              value: _vm.producto.precio.descuentoProducto[1],
+              expression: "producto.precio.descuentoProducto[1]"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "number", step: "0.01" },
-          domProps: { value: _vm.producto.descuentoProducto[1] },
+          domProps: { value: _vm.producto.precio.descuentoProducto[1] },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.producto.descuentoProducto, 1, $event.target.value)
+              _vm.$set(
+                _vm.producto.precio.descuentoProducto,
+                1,
+                $event.target.value
+              )
             }
           }
         })
@@ -43038,19 +43095,23 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.producto.descuentoProducto[2],
-              expression: "producto.descuentoProducto[2]"
+              value: _vm.producto.precio.descuentoProducto[2],
+              expression: "producto.precio.descuentoProducto[2]"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "number", step: "0.01" },
-          domProps: { value: _vm.producto.descuentoProducto[2] },
+          domProps: { value: _vm.producto.precio.descuentoProducto[2] },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.producto.descuentoProducto, 2, $event.target.value)
+              _vm.$set(
+                _vm.producto.precio.descuentoProducto,
+                2,
+                $event.target.value
+              )
             }
           }
         })
@@ -43064,19 +43125,23 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.producto.descuentoProducto[3],
-              expression: "producto.descuentoProducto[3]"
+              value: _vm.producto.precio.descuentoProducto[3],
+              expression: "producto.precio.descuentoProducto[3]"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "number", step: "0.01" },
-          domProps: { value: _vm.producto.descuentoProducto[3] },
+          domProps: { value: _vm.producto.precio.descuentoProducto[3] },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.producto.descuentoProducto, 3, $event.target.value)
+              _vm.$set(
+                _vm.producto.precio.descuentoProducto,
+                3,
+                $event.target.value
+              )
             }
           }
         })
@@ -43090,19 +43155,23 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.producto.descuentoProducto[4],
-              expression: "producto.descuentoProducto[4]"
+              value: _vm.producto.precio.descuentoProducto[4],
+              expression: "producto.precio.descuentoProducto[4]"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "number", step: "0.01" },
-          domProps: { value: _vm.producto.descuentoProducto[4] },
+          domProps: { value: _vm.producto.precio.descuentoProducto[4] },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.producto.descuentoProducto, 4, $event.target.value)
+              _vm.$set(
+                _vm.producto.precio.descuentoProducto,
+                4,
+                $event.target.value
+              )
             }
           }
         })
@@ -43115,7 +43184,7 @@ var render = function() {
           [
             _c("h6", { staticClass: "text-center" }, [_vm._v("Dto Total")]),
             _vm._v(" "),
-            _vm.producto.dre != 1
+            _vm.producto.precio.dre != 1
               ? _c("h5", { staticClass: "text-center" }, [
                   _vm._v(_vm._s((_vm.setDre[0] * 100).toFixed(2)) + "%")
                 ])
@@ -43137,8 +43206,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.producto.iva,
-                  expression: "producto.iva"
+                  value: _vm.producto.precio.iva,
+                  expression: "producto.precio.iva"
                 }
               ],
               class: _vm.fIva,
@@ -43153,7 +43222,7 @@ var render = function() {
                       return val
                     })
                   _vm.$set(
-                    _vm.producto,
+                    _vm.producto.precio,
                     "iva",
                     $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                   )
@@ -43186,19 +43255,19 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.producto.flete,
-                expression: "producto.flete"
+                value: _vm.producto.precio.flete,
+                expression: "producto.precio.flete"
               }
             ],
             staticClass: "form-control",
             attrs: { type: "number", step: "0.01" },
-            domProps: { value: _vm.producto.flete },
+            domProps: { value: _vm.producto.precio.flete },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.producto, "flete", $event.target.value)
+                _vm.$set(_vm.producto.precio, "flete", $event.target.value)
               }
             }
           })
@@ -44513,19 +44582,23 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.producto.rentabilidad,
-                expression: "producto.rentabilidad"
+                value: _vm.producto.precio.rentabilidad,
+                expression: "producto.precio.rentabilidad"
               }
             ],
             class: _vm.fRent,
             attrs: { type: "number", step: "0.01" },
-            domProps: { value: _vm.producto.rentabilidad },
+            domProps: { value: _vm.producto.precio.rentabilidad },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.producto, "rentabilidad", $event.target.value)
+                _vm.$set(
+                  _vm.producto.precio,
+                  "rentabilidad",
+                  $event.target.value
+                )
               }
             }
           })
@@ -45212,7 +45285,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          { staticClass: "modal-dialog modal-md", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
@@ -66264,7 +66337,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalAgregarCliente_vue_vue_type_template_id_009d90e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalAgregarCliente.vue?vue&type=template&id=009d90e6& */ "./resources/js/components/ModalAgregarCliente.vue?vue&type=template&id=009d90e6&");
 /* harmony import */ var _ModalAgregarCliente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalAgregarCliente.vue?vue&type=script&lang=js& */ "./resources/js/components/ModalAgregarCliente.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _ModalAgregarCliente_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalAgregarCliente.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -66272,7 +66347,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _ModalAgregarCliente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ModalAgregarCliente_vue_vue_type_template_id_009d90e6___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ModalAgregarCliente_vue_vue_type_template_id_009d90e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -66301,6 +66376,22 @@ component.options.__file = "resources/js/components/ModalAgregarCliente.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalAgregarCliente.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarCliente.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalAgregarCliente.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalAgregarCliente.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalAgregarCliente_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 

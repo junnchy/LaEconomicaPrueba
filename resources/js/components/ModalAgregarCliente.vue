@@ -12,7 +12,7 @@
             </a>
         </button>
         <div class="modal fade" id="AgregarClienteModal" tabindex="-1" role="dialog" aria-labelledby="AgregarClienteModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-md" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="AgregarClienteModalLabel">
@@ -79,3 +79,10 @@ import {mapActions, mapState} from 'vuex'
         }
     }
 </script>
+
+<style>
+    .modal-md {
+        max-width: 50% !important;
+        margin: 30px auto;
+    }
+</style>

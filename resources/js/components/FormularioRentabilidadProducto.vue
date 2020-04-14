@@ -7,7 +7,7 @@
                     <input 
                     type="number" 
                     step=0.01 
-                    v-model="producto.rentabilidad" 
+                    v-model="producto.precio.rentabilidad" 
                     :class="fRent">
                 </div>
                 <span class="invalid-feedback" role="alert" v-if="errors.rentabilidad != ''"> 
@@ -44,12 +44,12 @@ export default {
     computed: {
         ...mapState('productos', ['errors']),
         setPrecioDeVenta(){
-            if (this.producto.precioCosto > 0) {
-                this.producto.precioVenta = this.producto.precioCosto + (this.producto.precioCosto * (this.producto.rentabilidad/100))
-                return  this.producto.precioVenta
+            if (this.producto.precio.precioCosto > 0) {
+                this.producto.precio.precioVenta = this.producto.precio.precioCosto + (this.producto.precio.precioCosto * (this.producto.precio.rentabilidad/100))
+                return  this.producto.precio.precioVenta
             }else{
-                this.producto.precioVenta = this.producto.precioCosto
-                return  this.producto.precioVenta
+                this.producto.precio.precioVenta = this.producto.precio.precioCosto
+                return  this.producto.precio.precioVenta
             }
         },
         validar(){

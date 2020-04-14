@@ -5,6 +5,7 @@ namespace App;
 use App\Categoria;
 use App\Proveedor;
 use App\FichaDeStock;
+use App\Precio;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,6 +22,16 @@ class Producto extends Model
     public function fichaStock()
     {
         return $this->hasOne(FichaDeStock::class);
+    }
+
+    public function precios()
+    {
+        return $this->hasMany(Precio::class)->orderBy('created_at', 'desc');
+    }
+
+    public function precio()
+    {
+        return $this->hasOne(Precio::class, 'id', 'precio_id');
     }
 
    

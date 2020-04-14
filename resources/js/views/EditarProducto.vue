@@ -46,7 +46,6 @@
             <button type="submit" class="btn btn-warning btn-block sticky-button" v-if="respuesta === null">
                 Guardar Cambios <i class="fas fa-save"></i>
             </button>
-         
         </form>
     </div>
 </template>

@@ -16,24 +16,12 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('codigoProveedor')->nullable();
-            $table->float('precioBase');
-            $table->float('precioCosto');
             $table->string('nombre');
             $table->text('descripcion');
             $table->unsignedBigInteger('proveedor_id');
             $table->foreign('proveedor_id')->references('id')->on('proveedors');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->float('descuentoProducto_1');
-            $table->float('descuentoProducto_2');
-            $table->float('descuentoProducto_3');
-            $table->float('descuentoProducto_4');
-            $table->float('descuentoProducto_5');
-            $table->float('rentabilidad');
-            $table->float('precioVenta');
-            $table->float('precioVentaSinIva');
-            $table->float('iva');
-            $table->float('flete');
             $table->string('imagen')->nullable();
             $table->boolean('estado')->default(true);
             $table->timestamps();

@@ -18,7 +18,7 @@
                     <td>{{producto.nombre}}</td>
                     <td v-if="producto.estado === 1"><p class="text-success"><i class="fas fa-check-circle"></i></p></td>
                     <td v-if="producto.estado === 0"><p class="text-danger"><i class="fas fa-exclamation-circle"></i></p></td>
-                    <td>${{producto.precioVenta}}</td>
+                    <td>${{producto.precio.precioVenta}}</td>
                     <td>
                         <div class="row">
                             <div class="col-6">

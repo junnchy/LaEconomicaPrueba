@@ -21,7 +21,7 @@
                         <input type="numer" class="form-control" v-model="linea.cantidad" :disabled="mostrar">
                     </td>
                     <td>${{precio(linea)}}</td>
-                    <td v-if="npresupuesto.cliente.condicion_iva_id === 1">{{linea.producto.iva}}%</td>
+                    <td v-if="npresupuesto.cliente.condicion_iva_id === 1">{{linea.producto.precio.iva}}%</td>
                     <td>${{subtotal(linea)}}</td>
                     <td>
                         <button type="button" class="btn btn-outline-danger border-0" 
@@ -83,20 +83,20 @@ export default {
     },
     methods:{
         precio(linea){
-            var precio = linea.producto.precioVenta
+            var precio = linea.producto.precio.precioVenta
             if(this.npresupuesto.cliente.condicion_iva_id != 1){
-                return linea.producto.precioVenta 
+                return linea.producto.precio.precioVenta 
                 
             }else{
-                return linea.producto.precioVentaSinIva
+                return linea.producto.precio.precioVentaSinIva
             }
         },
         subtotal(linea){
             if(this.npresupuesto.cliente.condicion_iva_id != 1){
-                linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta
+                linea.subtotal = parseInt(linea.cantidad) * linea.producto.precio.precioVenta
                 return linea.subtotal.toFixed(2)
             }else{
-                linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVentaSinIva
+                linea.subtotal = parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva
                 return linea.subtotal.toFixed(2)
             }
             
@@ -114,14 +114,14 @@ export default {
             var aux = 0 
             if(this.npresupuesto.cliente.condicion_iva_id === 1){
                 this.npresupuesto.lineas.forEach(linea => {
-                    aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva
+                    aux += parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva
                 });
                 this.npresupuesto.total = aux 
                 this.npresupuesto.total +=  this.npresupuesto.iva
                 aux += this.npresupuesto.iva
             }else{
                 this.npresupuesto.lineas.forEach(linea => {
-                    aux += parseInt(linea.cantidad) * linea.producto.precioVenta
+                    aux += parseInt(linea.cantidad) * linea.producto.precio.precioVenta
                 });
                 this.npresupuesto.total = aux   
             }
@@ -130,7 +130,7 @@ export default {
         subTotal(){
             var aux = 0 
             this.npresupuesto.lineas.forEach(linea => {
-               aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva
+               aux += parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva
             });
             this.npresupuesto.subtotal = aux
             return aux.toFixed(2)
@@ -138,7 +138,7 @@ export default {
         iva(){
             var aux = 0 
             this.npresupuesto.lineas.forEach(linea => {
-               aux += parseInt(linea.cantidad) * (linea.producto.precioVenta - (linea.producto.precioVenta)/(1+(linea.producto.iva/100)))
+               aux += parseInt(linea.cantidad) * (linea.producto.precio.precioVenta - (linea.producto.precio.precioVenta)/(1+(linea.producto.precio.iva/100)))
             });
             aux = aux * this.npresupuesto.formaDePago.coeficiente
             this.npresupuesto.iva = aux

@@ -37,6 +37,8 @@ Route::resource('/clientes', 'ClienteController')->middleware('auth');
 
 Route::resource('/usuarios', 'UsersController')->middleware('auth');
 
+Route::resource('/precios', 'PrecioController')->middleware('auth');
+
 Route::resource('/vendedores', 'VendedoresController')->middleware('auth');
 
 Route::resource('/depositos', 'DepositoController')->middleware('auth');
@@ -53,6 +55,12 @@ Route::resource('/estadoPresupuesto', 'EstadoPresupuestoController')->middleware
 
 Route::resource('/formaDePago', 'FormaDePagoController')->middleware('auth');
 
+Route::resource('/localidades', 'LocalidadController')->middleware('auth');
+
+Route::resource('/condicionIva', 'CondicionIvaController')->middleware('auth');
+
+Route::resource('/categoriaCliente', 'CategoriaClienteController')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');
@@ -67,8 +75,6 @@ Route::get('/imprimirPresupuesto/{id}', 'PresupuestoController@imprimir')->where
 
 Route::get('/recuentoPresupuestos/{id}', 'VendedoresController@recuentoPresupuestos')->where('id', '[0-9]+');
 
-Route::resource('/localidades', 'LocalidadController')->middleware('auth');
-Route::resource('/condicionIva', 'CondicionIvaController')->middleware('auth');
-Route::resource('/categoriaCliente', 'CategoriaClienteController')->middleware('auth');
+
 
 

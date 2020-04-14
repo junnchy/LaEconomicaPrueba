@@ -335,20 +335,20 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {},
   methods: {
     precio: function precio(linea) {
-      var precio = linea.producto.precioVenta;
+      var precio = linea.producto.precio.precioVenta;
 
       if (this.npresupuesto.cliente.condicion_iva_id != 1) {
-        return linea.producto.precioVenta;
+        return linea.producto.precio.precioVenta;
       } else {
-        return linea.producto.precioVentaSinIva;
+        return linea.producto.precio.precioVentaSinIva;
       }
     },
     subtotal: function subtotal(linea) {
       if (this.npresupuesto.cliente.condicion_iva_id != 1) {
-        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta;
+        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precio.precioVenta;
         return linea.subtotal.toFixed(2);
       } else {
-        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva;
         return linea.subtotal.toFixed(2);
       }
     },
@@ -366,14 +366,14 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.npresupuesto.cliente.condicion_iva_id === 1) {
         this.npresupuesto.lineas.forEach(function (linea) {
-          aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+          aux += parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva;
         });
         this.npresupuesto.total = aux;
         this.npresupuesto.total += this.npresupuesto.iva;
         aux += this.npresupuesto.iva;
       } else {
         this.npresupuesto.lineas.forEach(function (linea) {
-          aux += parseInt(linea.cantidad) * linea.producto.precioVenta;
+          aux += parseInt(linea.cantidad) * linea.producto.precio.precioVenta;
         });
         this.npresupuesto.total = aux;
       }
@@ -383,7 +383,7 @@ __webpack_require__.r(__webpack_exports__);
     subTotal: function subTotal() {
       var aux = 0;
       this.npresupuesto.lineas.forEach(function (linea) {
-        aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+        aux += parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva;
       });
       this.npresupuesto.subtotal = aux;
       return aux.toFixed(2);
@@ -391,7 +391,7 @@ __webpack_require__.r(__webpack_exports__);
     iva: function iva() {
       var aux = 0;
       this.npresupuesto.lineas.forEach(function (linea) {
-        aux += parseInt(linea.cantidad) * (linea.producto.precioVenta - linea.producto.precioVenta / (1 + linea.producto.iva / 100));
+        aux += parseInt(linea.cantidad) * (linea.producto.precio.precioVenta - linea.producto.precio.precioVenta / (1 + linea.producto.precio.iva / 100));
       });
       aux = aux * this.npresupuesto.formaDePago.coeficiente;
       this.npresupuesto.iva = aux;
@@ -660,20 +660,20 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {},
   methods: {
     precio: function precio(linea) {
-      var precio = linea.producto.precioVenta;
+      var precio = linea.producto.precio.precioVenta;
 
       if (this.npresupuesto.cliente.condicion_iva_id != 1) {
-        return linea.producto.precioVenta;
+        return linea.producto.precio.precioVenta;
       } else {
-        return linea.producto.precioVentaSinIva;
+        return linea.producto.precio.precioVentaSinIva;
       }
     },
     subtotal: function subtotal(linea) {
       if (this.npresupuesto.cliente.condicion_iva_id != 1) {
-        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVenta;
+        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precio.precioVenta;
         return linea.subtotal.toFixed(2);
       } else {
-        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+        linea.subtotal = parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva;
         return linea.subtotal.toFixed(2);
       }
     },
@@ -691,14 +691,14 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.npresupuesto.cliente.condicion_iva_id === 1) {
         this.npresupuesto.lineas.forEach(function (linea) {
-          aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+          aux += parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva;
         });
         this.npresupuesto.total = aux;
         this.npresupuesto.total += this.npresupuesto.iva;
         aux += this.npresupuesto.iva;
       } else {
         this.npresupuesto.lineas.forEach(function (linea) {
-          aux += parseInt(linea.cantidad) * linea.producto.precioVenta;
+          aux += parseInt(linea.cantidad) * linea.producto.precio.precioVenta;
         });
         this.npresupuesto.total = aux;
       }
@@ -708,7 +708,7 @@ __webpack_require__.r(__webpack_exports__);
     subTotal: function subTotal() {
       var aux = 0;
       this.npresupuesto.lineas.forEach(function (linea) {
-        aux += parseInt(linea.cantidad) * linea.producto.precioVentaSinIva;
+        aux += parseInt(linea.cantidad) * linea.producto.precio.precioVentaSinIva;
       });
       this.npresupuesto.subtotal = aux;
       return aux.toFixed(2);
@@ -716,7 +716,7 @@ __webpack_require__.r(__webpack_exports__);
     iva: function iva() {
       var aux = 0;
       this.npresupuesto.lineas.forEach(function (linea) {
-        aux += parseInt(linea.cantidad) * (linea.producto.precioVenta - linea.producto.precioVenta / (1 + linea.producto.iva / 100));
+        aux += parseInt(linea.cantidad) * (linea.producto.precio.precioVenta - linea.producto.precio.precioVenta / (1 + linea.producto.precio.iva / 100));
       });
       aux = aux * this.npresupuesto.formaDePago.coeficiente;
       this.npresupuesto.iva = aux;
@@ -1771,6 +1771,119 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TablaHistorialDePrecios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TablaHistorialDePrecios */ "./resources/js/components/TablaHistorialDePrecios.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    lista: _TablaHistorialDePrecios__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: {
+    datos: {
+      type: Object,
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    datos: {
+      type: Object,
+      required: true
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AgregarCliente.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AgregarCliente.vue?vue&type=script&lang=js& ***!
@@ -2365,6 +2478,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_ModalHistorialDePrecios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ModalHistorialDePrecios */ "./resources/js/components/ModalHistorialDePrecios.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2457,20 +2571,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'DetalleProdoucto',
   data: function data() {
     return {
       id: this.$route.params.id,
-      cEC: 'alert alert-info text-center'
+      cEC: 'alert alert-info text-center',
+      fdp: null
     };
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProducto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('stock', ['getFichaStock'])),
-  created: function created() {
-    this.getProducto(this.id);
+  components: {
+    modalhistorial: _components_ModalHistorialDePrecios__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['producto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('stock', ['fichaDeStock']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProducto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('stock', ['getFichaStock']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('formasDePago', ['getFormasDePago']), {
+    setFDP: function setFDP(val) {
+      this.fdp = val;
+    }
+  }),
+  created: function created() {
+    this.getProducto(this.id), this.getFormasDePago(), this.filter.estado = 1;
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['producto']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('proveedores', ['proveedor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('formasDePago', ['formasDePago', 'filter']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categoria']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('stock', ['fichaDeStock']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('formasDePago', ['filtered_fdp']), {
     etiquetaCantidad: function etiquetaCantidad() {
       if (this.producto.ficha_stock.cantidadActual === 0) {
         this.cEC = 'alert alert-warning text-center';
@@ -2485,6 +2635,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       return this.cEC;
+    },
+    preciofdp: function preciofdp() {
+      if (this.fdp != null) {
+        return (this.fdp.coeficiente * this.producto.precio.precioVenta).toFixed(2);
+      } else {
+        return this.producto.precio.precioVenta;
+      }
     }
   })
 });
@@ -2761,7 +2918,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -4163,6 +4319,44 @@ exports.push([module.i, "\n.w-10 {\nwidth: 10% !important;\n}  \n", ""]);
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-lg {\n    max-width: 80% !important;\n    margin: 30px auto;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-lg {\n    max-width: 80% !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/AgregarCliente.vue?vue&type=style&index=0&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/AgregarCliente.vue?vue&type=style&index=0&lang=css& ***!
@@ -4335,6 +4529,66 @@ if(false) {}
 
 
 var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Comprobante-LineaDeProducto.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Comprobante-LineaDeProducto.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -5066,7 +5320,7 @@ var render = function() {
             _c("td", [_vm._v("$" + _vm._s(linea.precio))]),
             _vm._v(" "),
             _vm.npresupuesto.cliente.condicion_iva_id === 1
-              ? _c("td", [_vm._v(_vm._s(linea.producto.iva) + "%")])
+              ? _c("td", [_vm._v(_vm._s(linea.producto.precio.iva) + "%")])
               : _vm._e(),
             _vm._v(" "),
             _c("td", [_vm._v("$" + _vm._s(linea.total_linea))]),
@@ -5607,7 +5861,7 @@ var render = function() {
             _c("td", [_vm._v("$" + _vm._s(_vm.precio(linea)))]),
             _vm._v(" "),
             _vm.npresupuesto.cliente.condicion_iva_id === 1
-              ? _c("td", [_vm._v(_vm._s(linea.producto.iva) + "%")])
+              ? _c("td", [_vm._v(_vm._s(linea.producto.precio.iva) + "%")])
               : _vm._e(),
             _vm._v(" "),
             _c("td", [_vm._v("$" + _vm._s(_vm.subtotal(linea)))]),
@@ -7200,7 +7454,7 @@ var render = function() {
               _vm._v(" "),
               producto.estado === 0 ? _c("td", [_vm._m(2, true)]) : _vm._e(),
               _vm._v(" "),
-              _c("td", [_vm._v("$" + _vm._s(producto.precioVenta))]),
+              _c("td", [_vm._v("$" + _vm._s(producto.precio.precioVenta))]),
               _vm._v(" "),
               _c("td", [
                 _c("div", { staticClass: "row" }, [
@@ -7715,6 +7969,226 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-secondary btn-sm",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#historialDePrecios",
+          "data-whatever": "@mdo"
+        },
+        on: {
+          click: function($event) {
+            return _vm.LNB()
+          }
+        }
+      },
+      [
+        _vm._v("\n        Historial de Precios "),
+        _c("i", { staticClass: "fas fa-stopwatch" })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "historialDePrecios",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "historialDePreciosLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close text-danger",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.resetResp(null)
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "container" },
+                  [_c("lista", { attrs: { datos: _vm.datos } })],
+                  1
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h5",
+      { staticClass: "modal-title", attrs: { id: "historialDePreciosLabel" } },
+      [
+        _c("i", { staticClass: "fas fa-stopwatch" }),
+        _vm._v(" Historial de Precios \n                    ")
+      ]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("table", { staticClass: "table table-striped" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.datos, function(dato, index) {
+          return _c("tr", { key: index }, [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(dato.created_at) +
+                  "\n                    "
+              ),
+              index === 0
+                ? _c("span", { staticClass: "badge badge-success" }, [
+                    _vm._v("Actual")
+                  ])
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(dato.precioBase))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._v(
+                "[" +
+                  _vm._s(dato.descuentoProducto_1) +
+                  ", " +
+                  _vm._s(dato.descuentoProducto_2) +
+                  ",  \n                    " +
+                  _vm._s(dato.descuentoProducto_3) +
+                  ", " +
+                  _vm._s(dato.descuentoProducto_4) +
+                  ", \n                    " +
+                  _vm._s(dato.descuentoProducto_5) +
+                  "]"
+              )
+            ]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(dato.flete))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(dato.iva))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(dato.precioCosto))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(dato.rentabilidad))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(dato.precioVenta))])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio Base")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Descuentos")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Flete")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Iva")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio Costo")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Rentabilidad")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio Venta")])
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -8835,14 +9309,32 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("li", { staticClass: "list-group-item" }, [
-            _c("strong", [_vm._v("Codigo: ")]),
-            _vm._v(" " + _vm._s(_vm.producto.id))
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-group-item" }, [
-            _c("strong", [_vm._v("Precio de Venta: ")]),
-            _vm._v(" "),
-            _c("h5", [_vm._v("$" + _vm._s(_vm.producto.precioVenta))])
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-6" }, [
+                _c("strong", [_vm._v("Codigo: ")]),
+                _vm._v(
+                  " " + _vm._s(_vm.producto.id) + "\n                        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-6" }, [
+                _c("strong", { staticClass: "d-inline" }, [_vm._v("Estado:")]),
+                _vm._v(" "),
+                _vm.producto.estado === 1
+                  ? _c("p", { staticClass: "text-success  d-inline" }, [
+                      _vm._v("Activo "),
+                      _c("i", { staticClass: "fas fa-check-circle" })
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.producto.estado === 0
+                  ? _c("p", { staticClass: "text-danger  d-inline" }, [
+                      _vm._v("Inactivo "),
+                      _c("i", { staticClass: "fas fa-exclamation-circle" })
+                    ])
+                  : _vm._e()
+              ])
+            ])
           ]),
           _vm._v(" "),
           _vm.producto.proveedor
@@ -8894,22 +9386,43 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("li", { staticClass: "list-group-item" }, [
-            _c("strong", [_vm._v("Estado:")]),
-            _vm._v(" "),
-            _vm.producto.estado === 1
-              ? _c("p", { staticClass: "text-success" }, [
-                  _vm._v("Activo "),
-                  _c("i", { staticClass: "fas fa-check-circle" })
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-4" }, [
+                _c("strong", [_vm._v("Precio de Venta: ")]),
+                _vm._v(" "),
+                _c("h5", { staticClass: "text-danger" }, [
+                  _vm._v("$" + _vm._s(_vm.preciofdp))
                 ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.producto.estado === 0
-              ? _c("p", { staticClass: "text-danger" }, [
-                  _vm._v("Inactivo "),
-                  _c("i", { staticClass: "fas fa-exclamation-circle" })
-                ])
-              : _vm._e()
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "col-6" },
+                [
+                  _c("v-select", {
+                    attrs: {
+                      label: "descripcion",
+                      options: _vm.filtered_fdp,
+                      value: _vm.fdp,
+                      maxHeight: "200px",
+                      placeholder: "Forma De Pago"
+                    },
+                    on: { input: _vm.setFDP }
+                  })
+                ],
+                1
+              )
+            ])
           ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            { staticClass: "list-group-item" },
+            [_c("modalhistorial", { attrs: { datos: _vm.producto.precios } })],
+            1
+          ),
           _vm._v(" "),
           _c("li", { staticClass: "list-group-item" }, [
             _c("i", { staticClass: "fas fa-clock" }),
@@ -8932,7 +9445,7 @@ var render = function() {
       ? _c("div", { staticClass: "row mt-5" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "container" }, [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-6" }, [
@@ -9006,7 +9519,7 @@ var render = function() {
     _c("div", { staticClass: "row mt-5" }, [
       _c("div", { staticClass: "col-12" }, [
         _c("div", { staticClass: "container" }, [
-          _vm._m(2),
+          _vm._m(3),
           _vm._v(" "),
           _c("div", {
             staticClass: "shadow-sm p-3 mb-5 bg-white rounded",
@@ -9027,6 +9540,14 @@ var staticRenderFns = [
         _c("i", { staticClass: "fas fa-box" }),
         _vm._v(" Detalle de Producto ")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-1" }, [
+      _c("i", { staticClass: "fas fa-grip-lines-vertical" })
     ])
   },
   function() {
@@ -12974,6 +13495,180 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalEditarFDP_vue_vue_type_template_id_9ac20096___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalEditarFDP_vue_vue_type_template_id_9ac20096___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalHistorialDePrecios.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/ModalHistorialDePrecios.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalHistorialDePrecios_vue_vue_type_template_id_d1bdc1a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2& */ "./resources/js/components/ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2&");
+/* harmony import */ var _ModalHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalHistorialDePrecios.vue?vue&type=script&lang=js& */ "./resources/js/components/ModalHistorialDePrecios.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ModalHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ModalHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalHistorialDePrecios_vue_vue_type_template_id_d1bdc1a2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalHistorialDePrecios_vue_vue_type_template_id_d1bdc1a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/ModalHistorialDePrecios.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalHistorialDePrecios.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/ModalHistorialDePrecios.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalHistorialDePrecios.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_template_id_d1bdc1a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ModalHistorialDePrecios.vue?vue&type=template&id=d1bdc1a2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_template_id_d1bdc1a2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalHistorialDePrecios_vue_vue_type_template_id_d1bdc1a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/TablaHistorialDePrecios.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/TablaHistorialDePrecios.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TablaHistorialDePrecios_vue_vue_type_template_id_abf606e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8& */ "./resources/js/components/TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8&");
+/* harmony import */ var _TablaHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TablaHistorialDePrecios.vue?vue&type=script&lang=js& */ "./resources/js/components/TablaHistorialDePrecios.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _TablaHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _TablaHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TablaHistorialDePrecios_vue_vue_type_template_id_abf606e8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TablaHistorialDePrecios_vue_vue_type_template_id_abf606e8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/TablaHistorialDePrecios.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/TablaHistorialDePrecios.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/TablaHistorialDePrecios.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./TablaHistorialDePrecios.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_template_id_abf606e8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/TablaHistorialDePrecios.vue?vue&type=template&id=abf606e8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_template_id_abf606e8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TablaHistorialDePrecios_vue_vue_type_template_id_abf606e8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
