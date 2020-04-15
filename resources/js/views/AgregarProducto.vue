@@ -71,10 +71,14 @@ export default {
             progress: "width: 30%" ,
             producto: {
                 id: null, codigoProveedor: '',
-                nombre: '', descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0, 
-                categoria: {}, proveedor: {nombre: ''}, precioCosto: 0, iva: 0, flete: 0,
-                precioVenta: 0, rentabilidad: 0, descripcion:'', imagen: 'http://127.0.0.1:8000/assets/4fxp8923.bmp', 
-                estado: true, 
+                nombre: '',categoria: {}, proveedor: {nombre: ''},
+                descripcion:'', imagen: 'http://127.0.0.1:8000/assets/4fxp8923.bmp', 
+                estado: true,
+                precio:{
+                    descuentoProducto: [0, 0, 0, 0, 0], dre: 0, precioBase: 0,
+                    precioCosto: 0, iva: 0, flete: 0,
+                    precioVenta: 0, rentabilidad: 0,
+                }  
             },
             tab: 0,
             ctab0: 'nav-link active',

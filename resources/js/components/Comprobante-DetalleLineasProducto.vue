@@ -1,3 +1,4 @@
+/* Para presupuestos ya realizados! Trae los datos almacenados*/
 <template>
     <div class="col-12 text-center">
         <table class="table table-striped">

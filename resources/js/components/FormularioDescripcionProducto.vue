@@ -8,7 +8,7 @@
                         <li class="list-group-item"><strong><h3>{{producto.nombre}}</h3></strong></li>
                         <li class="list-group-item"><strong>Codigo: </strong> {{producto.id}}</li>
                         <li class="list-group-item"><strong>Precio de Venta: </strong> 
-                            <h5>${{producto.precioVenta}}</h5>
+                            <h5>${{producto.precio.precioVenta}}</h5>
                         </li>
                         <li class="list-group-item" v-if="producto.proveedor"><strong>Proveedor: </strong> 
                             <router-link :to="{name: 'detalleProv', params:{id: producto.proveedor_id}}">

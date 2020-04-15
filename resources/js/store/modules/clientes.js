@@ -139,7 +139,8 @@ export default {
     getters:{
         filtered_clientes(state){
             if(state.filter.query.length >= 1){
-              return state.clientes.filter(cliente => cliente.nombre.toLowerCase().includes(state.filter.query))
+                return state.clientes.filter(cliente => cliente.nombre.toLowerCase().includes(state.filter.query) ||
+                cliente.cuit.includes(state.filter.query))    
             }else{
               return state.clientes
             }

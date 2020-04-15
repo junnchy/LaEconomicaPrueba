@@ -81,9 +81,9 @@ class PresupuestoController extends Controller
                 // Agregar que se guarde el iva
                 $lp = new LineaPresupuesto();
                 if($request['cliente']['condicion_iva_id'] != 1){
-                    $lp->precio = $linea['producto']['precioVenta'];
+                    $lp->precio = $linea['producto']['precio']['precioVenta'];
                 }else{
-                    $lp->precio = $linea['producto']['precioVentaSinIva'];
+                    $lp->precio = $linea['producto']['precio']['precioVentaSinIva'];
                 }
                 $lp->cantidad = $linea['cantidad'];
                 $lp->total_linea = $linea['subtotal'];
@@ -110,7 +110,7 @@ class PresupuestoController extends Controller
     {
         if($request->ajax()){
             
-            $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor', 'estado', 'formaDePago')->findOrFail($id);
+            $presupuesto = Presupuesto::with('lineas.producto.fichaStock','lineas.producto.precio','cliente.condicion_iva', 'vendedor', 'estado', 'formaDePago')->findOrFail($id);
             return response()->json($presupuesto);
         }
     }

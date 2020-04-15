@@ -101,17 +101,17 @@ export default {
         fdp(){
             if(this.npre.cliente.condicion_iva_id === 3){ /* Clientes Finales */
                 this.npre.lineas.forEach(linea => {
-                    linea.producto.precioVenta = linea.producto.precioVentaSinIva *  ((linea.producto.iva/100)+1)
+                    linea.producto.precio.precioVenta = linea.producto.precio.precioVentaSinIva *  ((linea.producto.precio.iva/100)+1)
                     if(this.npre.formaDePago.id != 1 || this.npre.formaDePago.id != null ){
-                        linea.producto.precioVenta =  (linea.producto.precioVenta * this.npre.formaDePago.coeficiente).toFixed(2)
+                        linea.producto.precio.precioVenta =  (linea.producto.precio.precioVenta * this.npre.formaDePago.coeficiente).toFixed(2)
                         
                     }
                 });
             }else{ /* Responsables Incriptos */
                 this.npre.lineas.forEach(linea => {
-                    linea.producto.precioVentaSinIva = linea.producto.precioVenta / ((linea.producto.iva/100)+1)
+                    linea.producto.precio.precioVentaSinIva = linea.producto.precio.precioVenta / ((linea.producto.precio.iva/100)+1)
                     if(this.npre.formaDePago.id != 1 || this.npre.formaDePago.id != null ){
-                        linea.producto.precioVentaSinIva =  (linea.producto.precioVentaSinIva * this.npre.formaDePago.coeficiente).toFixed(2)
+                        linea.producto.precio.precioVentaSinIva =  (linea.producto.precio.precioVentaSinIva * this.npre.formaDePago.coeficiente).toFixed(2)
                     }
                 });
             }

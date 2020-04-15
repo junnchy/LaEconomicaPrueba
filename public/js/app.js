@@ -3735,6 +3735,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -44940,6 +44952,38 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("td", { staticClass: "mt-2" }, [
+                  cliente.condicion_iva_id === 3
+                    ? _c("span", { staticClass: "badge badge-primary" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(cliente.condicion_iva.denominacion) +
+                            "\n                        "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  cliente.condicion_iva_id === 1
+                    ? _c("span", { staticClass: "badge badge-success" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(cliente.condicion_iva.denominacion) +
+                            "\n                        "
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  cliente.condicion_iva_id != 1 && cliente.condicion_iva_id != 3
+                    ? _c("span", { staticClass: "badge badge-secondary" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(cliente.condicion_iva.denominacion) +
+                            "\n                        "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "mt-2" }, [
                   _vm._v(_vm._s(cliente.cuit))
                 ]),
                 _vm._v(" "),
@@ -45043,6 +45087,8 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [
           _vm._v("Nombre y Apellido/Razón Social")
         ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Condicion de Iva")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("CUIT/CUIL")]),
         _vm._v(" "),
@@ -67363,7 +67409,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     filtered_clientes: function filtered_clientes(state) {
       if (state.filter.query.length >= 1) {
         return state.clientes.filter(function (cliente) {
-          return cliente.nombre.toLowerCase().includes(state.filter.query);
+          return cliente.nombre.toLowerCase().includes(state.filter.query) || cliente.cuit.includes(state.filter.query);
         });
       } else {
         return state.clientes;

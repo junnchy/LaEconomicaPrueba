@@ -320,6 +320,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     npresupuesto: {
@@ -2087,21 +2088,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: null,
         codigoProveedor: '',
         nombre: '',
-        descuentoProducto: [0, 0, 0, 0, 0],
-        dre: 0,
-        precioBase: 0,
         categoria: {},
         proveedor: {
           nombre: ''
         },
-        precioCosto: 0,
-        iva: 0,
-        flete: 0,
-        precioVenta: 0,
-        rentabilidad: 0,
         descripcion: '',
         imagen: 'http://127.0.0.1:8000/assets/4fxp8923.bmp',
-        estado: true
+        estado: true,
+        precio: {
+          descuentoProducto: [0, 0, 0, 0, 0],
+          dre: 0,
+          precioBase: 0,
+          precioCosto: 0,
+          iva: 0,
+          flete: 0,
+          precioVenta: 0,
+          rentabilidad: 0
+        }
       },
       tab: 0,
       ctab0: 'nav-link active',
@@ -4039,19 +4042,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.npre.cliente.condicion_iva_id === 3) {
         /* Clientes Finales */
         this.npre.lineas.forEach(function (linea) {
-          linea.producto.precioVenta = linea.producto.precioVentaSinIva * (linea.producto.iva / 100 + 1);
+          linea.producto.precio.precioVenta = linea.producto.precio.precioVentaSinIva * (linea.producto.precio.iva / 100 + 1);
 
           if (_this.npre.formaDePago.id != 1 || _this.npre.formaDePago.id != null) {
-            linea.producto.precioVenta = (linea.producto.precioVenta * _this.npre.formaDePago.coeficiente).toFixed(2);
+            linea.producto.precio.precioVenta = (linea.producto.precio.precioVenta * _this.npre.formaDePago.coeficiente).toFixed(2);
           }
         });
       } else {
         /* Responsables Incriptos */
         this.npre.lineas.forEach(function (linea) {
-          linea.producto.precioVentaSinIva = linea.producto.precioVenta / (linea.producto.iva / 100 + 1);
+          linea.producto.precio.precioVentaSinIva = linea.producto.precio.precioVenta / (linea.producto.precio.iva / 100 + 1);
 
           if (_this.npre.formaDePago.id != 1 || _this.npre.formaDePago.id != null) {
-            linea.producto.precioVentaSinIva = (linea.producto.precioVentaSinIva * _this.npre.formaDePago.coeficiente).toFixed(2);
+            linea.producto.precio.precioVentaSinIva = (linea.producto.precio.precioVentaSinIva * _this.npre.formaDePago.coeficiente).toFixed(2);
           }
         });
       }
@@ -7050,7 +7053,7 @@ var render = function() {
             _c("li", { staticClass: "list-group-item" }, [
               _c("strong", [_vm._v("Precio de Venta: ")]),
               _vm._v(" "),
-              _c("h5", [_vm._v("$" + _vm._s(_vm.producto.precioVenta))])
+              _c("h5", [_vm._v("$" + _vm._s(_vm.producto.precio.precioVenta))])
             ]),
             _vm._v(" "),
             _vm.producto.proveedor

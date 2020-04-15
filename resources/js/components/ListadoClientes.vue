@@ -6,6 +6,7 @@
                     <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Nombre y Apellido/Razón Social</th>
+                    <th scope="col">Condicion de Iva</th>   
                     <th scope="col">CUIT/CUIL</th>    
                     <th scope="col">Opciones</th>
                     </tr>
@@ -14,6 +15,17 @@
                     <tr v-for="cliente in arregloPaginado" :key="cliente.id">
                         <th scope="row">{{cliente.id}}</th>
                         <td class="mt-2">{{cliente.nombre}}</td>
+                        <td class="mt-2">
+                            <span class="badge badge-primary" v-if="cliente.condicion_iva_id === 3">
+                                {{cliente.condicion_iva.denominacion}}
+                            </span>
+                            <span class="badge badge-success" v-if="cliente.condicion_iva_id === 1">
+                                {{cliente.condicion_iva.denominacion}}
+                            </span>
+                            <span class="badge badge-secondary" v-if="cliente.condicion_iva_id != 1 &&  cliente.condicion_iva_id != 3">
+                                {{cliente.condicion_iva.denominacion}}
+                            </span>
+                        </td>
                         <td class="mt-2">{{cliente.cuit}}</td>
                         <td>
                             <div class="d-flex flex-row">

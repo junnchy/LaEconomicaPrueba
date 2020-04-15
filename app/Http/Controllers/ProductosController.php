@@ -65,23 +65,11 @@ class ProductosController extends Controller
                 $producto->id = $request->id;
             }
             $producto->nombre = $request->nombre;
-            $producto->precioBase = $request->precioBase;
-            $producto->descuentoProducto_1 = $request->descuentoProducto[0];
-            $producto->descuentoProducto_2 = $request->descuentoProducto[1];
-            $producto->descuentoProducto_3 = $request->descuentoProducto[2];
-            $producto->descuentoProducto_4 = $request->descuentoProducto[3];
-            $producto->descuentoProducto_5 = $request->descuentoProducto[4];
             if($request->descripcion != ""){
                 $producto->descripcion = $request->descripcion;
             }else {
                 $producto->descripcion = "<p> Sin Descripcion </p>";
             };
-            $producto->iva = $request->iva;
-            $producto->flete = $request->flete;
-            $producto->precioCosto = $request->precioCosto;
-            $producto->precioVenta = $request->precioVenta;
-            $producto->precioVentaSinIva = $request->precioVenta / (($request->iva/100)+1);
-            $producto->rentabilidad = $request->rentabilidad;
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
             $producto->estado = $request->estado;
@@ -252,19 +240,19 @@ class ProductosController extends Controller
     protected function agregarPrecio($producto, $request){
         $precio = new Precio();
         $precio->producto_id = $producto['id'];
-        $precio->producto_id = $request->producto_id;
-        $precio->precioBase = $request->precioBase;
-        $precio->descuentoProducto_1 = $request->descuentoPrecio[0];
-        $precio->descuentoProducto_2 = $request->descuentoPrecio[1];
-        $precio->descuentoProducto_3 = $request->descuentoPrecio[2];
-        $precio->descuentoProducto_4 = $request->descuentoPrecio[3];
-        $precio->descuentoProducto_5 = $request->descuentoPrecio[4];
-        $precio->iva = $request->iva;
-        $precio->flete = $request->flete;
-        $precio->precioCosto = $request->precioCosto;
-        $precio->precioVenta = $request->precioVenta;
-        $precio->precioVentaSinIva = $request->precioVenta / (($request->iva/100)+1);
-        $precio->rentabilidad = $request->rentabilidad;
+        $precio->precioBase = $request->precio['precioBase'];
+        $precio->descuentoProducto_1 = $request->precio['descuentoProducto'][0];
+        $precio->descuentoProducto_2 = $request->precio['descuentoProducto'][1];
+        $precio->descuentoProducto_3 = $request->precio['descuentoProducto'][2];
+        $precio->descuentoProducto_4 = $request->precio['descuentoProducto'][3];
+        $precio->descuentoProducto_5 = $request->precio['descuentoProducto'][4];
+        $precio->iva = $request->precio['iva'];
+        $precio->flete = $request->precio['flete'];
+        $precio->precioCosto = $request->precio['precioCosto'];
+        $precio->precioVenta = $request->precio['precioVenta'];
+        $iva = $request->precio['precioVenta'] / (($request->precio['iva']/100)+1);
+        $precio->precioVentaSinIva = $iva;
+        $precio->rentabilidad = $request->precio['rentabilidad'];
         $precio->save();
         $producto->precio_id = $precio->id;
         $producto->save();
