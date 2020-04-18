@@ -11,7 +11,7 @@
                     </button>
                 </router-link>
                 <router-link :to="{name:'menuClientes'}" v-if="respuestaS === null">
-                    <button class="btn btn-danger" @click="resetError()">
+                    <button class="btn btn-outline-danger" @click="resetError()">
                         Cancelar
                     </button>
                 </router-link>

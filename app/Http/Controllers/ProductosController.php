@@ -157,15 +157,16 @@ class ProductosController extends Controller
 
             $this->validateProducto($request);
 
-            $producto = Producto::findOrFail($id);
+            $producto = Producto::with('precio')->findOrFail($id);
             $producto->nombre = $request->nombre;
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
             $producto->estado = $request->estado;
 
             $this->agregarImagen($request, $producto);
-            $producto->precio_id = $this->actualizarPrecios($request, $producto);
-
+            if ($request->precio['precioVenta'] != $producto->precio['precioVenta']) {
+                $producto->precio_id = $this->actualizarPrecios($request, $producto);
+            }
             $producto->save();
 
             return response()->json([
@@ -246,6 +247,7 @@ class ProductosController extends Controller
         $precio->descuentoProducto_3 = $request->precio['descuentoProducto'][2];
         $precio->descuentoProducto_4 = $request->precio['descuentoProducto'][3];
         $precio->descuentoProducto_5 = $request->precio['descuentoProducto'][4];
+        $precio->dre = $request->precio['dre'];
         $precio->iva = $request->precio['iva'];
         $precio->flete = $request->precio['flete'];
         $precio->precioCosto = $request->precio['precioCosto'];
@@ -253,6 +255,7 @@ class ProductosController extends Controller
         $iva = $request->precio['precioVenta'] / (($request->precio['iva']/100)+1);
         $precio->precioVentaSinIva = $iva;
         $precio->rentabilidad = $request->precio['rentabilidad'];
+        $precio->tipo = "Manual";
         $precio->save();
         $producto->precio_id = $precio->id;
         $producto->save();
@@ -269,6 +272,7 @@ class ProductosController extends Controller
             $precio->descuentoProducto_3 = $request->precio['descuentoProducto'][2];
             $precio->descuentoProducto_4 = $request->precio['descuentoProducto'][3];
             $precio->descuentoProducto_5 = $request->precio['descuentoProducto'][4];
+            $precio->dre = $request->precio['dre'];
             $precio->iva = $request->precio['iva'];
             $precio->flete = $request->precio['flete'];
             $precio->precioCosto = $request->precio['precioCosto'];
@@ -276,6 +280,7 @@ class ProductosController extends Controller
             $iva = $request->precio['precioVenta'] / (($request->precio['iva']/100)+1);
             $precio->precioVentaSinIva = $iva;
             $precio->rentabilidad = $request->precio['rentabilidad'];
+            $precio->tipo = "Manual";
             $precio->save();
             return $precio->id;
         }else{

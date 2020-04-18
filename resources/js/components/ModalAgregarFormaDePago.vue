@@ -7,7 +7,7 @@
         data-target="#AgregarFDP" 
         data-whatever="@mdo"
         >
-            Agregar Forma de Pago<i class="fas fa-plus-circle"></i>
+            Agregar Forma de Pago <i class="fas fa-plus-circle"></i>
         </button>
         <div class="modal fade" id="AgregarFDP" tabindex="-1" role="dialog" aria-labelledby="AgregarFDPLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

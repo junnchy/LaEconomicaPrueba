@@ -8,7 +8,7 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Precio</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col" colspan="2">Acciones</th>
                 </tr>
             </thead>
             <tbody>

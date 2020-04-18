@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Precio;
+use App\Producto;
 
 class PrecioController extends Controller
 {
@@ -37,29 +38,63 @@ class PrecioController extends Controller
     {
         if($request->ajax()){
 
-            $precio = new Precio();
-            $precio->producto_id = $request->producto_id;
-            $precio->precioBase = $request->precioBase;
-            $precio->descuentoPrecio_1 = $request->descuentoPrecio[0];
-            $precio->descuentoPrecio_2 = $request->descuentoPrecio[1];
-            $precio->descuentoPrecio_3 = $request->descuentoPrecio[2];
-            $precio->descuentoPrecio_4 = $request->descuentoPrecio[3];
-            $precio->descuentoPrecio_5 = $request->descuentoPrecio[4];
-            $precio->iva = $request->iva;
-            $precio->flete = $request->flete;
-            $precio->precioCosto = $request->precioCosto;
-            $precio->precioVenta = $request->precioVenta;
-            $precio->precioVentaSinIva = $request->precioVenta / (($request->iva/100)+1);
-            $precio->rentabilidad = $request->rentabilidad;
-            $precio->save();
+            if($request->ajax()){
+                foreach ($request->productos as $p) {
+                    $producto = Producto::findOrFail($p['id']);
+                    $precioV = Precio::findOrFail($p['precio_id']);
+                    $precioN = new Precio();
+                    $precioN->producto_id = $producto->id;
+                    $precioN->precioBase = $precioV->precioBase;
+                    /* Flete */
+                    if($request->flete != $precioV->flete){
+                        $precioN->flete = $request->flete;
+                    }else{
+                        $precioN->flete = $precioV->flete;
+                    }
+                    /* Iva */
+                    if($request->iva != $precioV->iva){
+                        $precioN->iva = $request->iva;
+                    }else{
+                        $precioN->iva = $precioV->iva;
+                    }
+                    /* Rentabilidad */
+                    if($precioV->rentabilidad != $request->rentabilidad){
+                        $precioN->rentabilidad = $request->rentabilidad;
+                    }else{
+                        $precioN->rentabilidad = $precioV->rentabilidad;
+                    }
+                    /* Descuentos */
+                    if($request->ad){
+                        $precioN->descuentoProducto_1 = $request->descuentoProducto[0];
+                        $precioN->descuentoProducto_2 = $request->descuentoProducto[1];
+                        $precioN->descuentoProducto_3 = $request->descuentoProducto[2];
+                        $precioN->descuentoProducto_4 = $request->descuentoProducto[3];
+                        $precioN->descuentoProducto_5 = $request->descuentoProducto[4];
+                        $precioN->dre = $request->dre;
+                        
+                    }else{
+                        $precioN->descuentoProducto_1 = $precioV->descuentoProducto_1;
+                        $precioN->descuentoProducto_2 = $precioV->descuentoProducto_2;
+                        $precioN->descuentoProducto_3 = $precioV->descuentoProducto_3;
+                        $precioN->descuentoProducto_4 = $precioV->descuentoProducto_4;
+                        $precioN->descuentoProducto_5 = $precioV->descuentoProducto_5;
+                        $precioN->dre = $precioV->dre;
+                    }
+                    $precioN->precioCosto = ($precioN->precioBase / (1+$precioN->dre));
+                    $precioN->precioCosto = ($precioN->precioCosto * (($request->iva/100)+1));
+                    $precioN->precioCosto =  $precioN->precioCosto +  $precioN->flete;
+                    $precioN->precioVenta = ($precioN->precioCosto *(($precioN->rentabilidad/100)+1));
+                    $precioN->precioVentaSinIva =  $precioN->precioVenta / (($request->iva/100)+1);
+                    $precioN->tipo = "Proceso";
+                    $precioN->save();
+                    $producto->precio_id = $precioN->id;
+                    $producto->save();
+                }
 
-            
-
-            return response()->json([
-                'precio' => $precio,
-                'message' => 'Precio Agregado'
-            ], 200);
-
+                return response()->json([
+                    'message' => 'Precios Actualizados'
+                ], 200);
+            }
         }
     }
 
@@ -94,7 +129,7 @@ class PrecioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -118,5 +153,9 @@ class PrecioController extends Controller
             'rentabilidad' => 'required|numeric',
             'rentabilidad' => 'numeric|gt:0',
         ]);
+    }
+
+    protected function procesarPrecio($producto, $request){
+        
     }
 }

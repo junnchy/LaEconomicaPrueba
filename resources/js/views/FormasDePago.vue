@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1> <i class="fas fa-money-bill-wave-alt"></i> Formas de Pago</h1>  
+        <h2> <i class="fas fa-credit-card text-info"></i> Formas de Pago</h2>  
         <div class="row mt-3">
             <div class="col-8">
                 

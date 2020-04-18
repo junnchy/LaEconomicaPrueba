@@ -89,8 +89,12 @@
                                 <a class="dropdown-item" href="#">Agregar Producto</a>
                             </router-link>
                             <div class="dropdown-divider"></div>
-                            <router-link :to="{name: 'listadoCategorias'}" >
+                            <router-link :to="{name: 'listadoCategorias'}">
                                 <a class="dropdown-item" href="#">Categorias</a>
+                            </router-link>
+                            <div class="dropdown-divider"></div>
+                            <router-link :to="{name: 'actualizarPrecios'}">
+                                <a class="dropdown-item" href="#">Actualizar Precios</a>
                             </router-link>
                         </div>
                     </li>

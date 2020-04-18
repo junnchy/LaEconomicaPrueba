@@ -14,7 +14,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editarFDPLabel">
-                            <i class="fas fa-plus-circle"></i> Editar Forma de Pago
+                            <i class="fas fa-pen"></i>Editar Forma de Pago
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="resetResp(null)">
                         <span aria-hidden="true">&times;</span>

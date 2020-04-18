@@ -2118,6 +2118,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('categorias', ['getCategoriasO']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('proveedores', ['getProveedores']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProductos'])),
@@ -41640,6 +41652,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
     _c("div", { staticClass: "container" }, [
       _c("label", [_vm._v("\n            Categoria \n        ")]),
       _vm._v(" "),
@@ -41786,9 +41802,23 @@ var render = function() {
       { staticClass: "container mt-4" },
       [
         _c("router-link", { attrs: { to: { name: "listadoCategorias" } } }, [
-          _c("button", { staticClass: "btn btn-outline-info btn-block mt-2" }, [
+          _c("button", { staticClass: "btn btn-outline-dark btn-block mt-2" }, [
             _vm._v("\n            Categorias "),
-            _c("i", { staticClass: "fas fa-info" })
+            _c("i", { staticClass: "fas fa-info text-info" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: { name: "actualizarPrecios" } } }, [
+          _c("button", { staticClass: "btn btn-outline-dark btn-block mt-2" }, [
+            _vm._v("\n            Actualizar Precios "),
+            _c("i", { staticClass: "fas fa-wrench text-info" })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("router-link", { attrs: { to: { name: "compararProductos" } } }, [
+          _c("button", { staticClass: "btn btn-outline-dark btn-block mt-2" }, [
+            _vm._v("\n            Comparar Productos "),
+            _c("i", { staticClass: "fas fa-compress-alt text-info" })
           ])
         ])
       ],
@@ -41796,7 +41826,17 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h6", [
+      _vm._v("Filtros "),
+      _c("i", { staticClass: "fas fa-filter" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -66825,6 +66865,18 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/FormasDePago.vue */ "./resources/js/views/FormasDePago.vue"));
   }
+}, {
+  path: '/actualizarPrecios',
+  name: 'actualizarPrecios',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/ActualizacionDePrecios.vue */ "./resources/js/views/ActualizacionDePrecios.vue"));
+  }
+}, {
+  path: '/comparativaProductos',
+  name: 'compararProductos',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/ComprativaDeProductos.vue */ "./resources/js/views/ComprativaDeProductos.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -66861,6 +66913,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_comercial_empresa__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/comercial/empresa */ "./resources/js/store/modules/comercial/empresa.js");
 /* harmony import */ var _modules_comercial_presupuestos__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/comercial/presupuestos */ "./resources/js/store/modules/comercial/presupuestos.js");
 /* harmony import */ var _modules_comercial_formasDePago__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/comercial/formasDePago */ "./resources/js/store/modules/comercial/formasDePago.js");
+/* harmony import */ var _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/comercial/precios */ "./resources/js/store/modules/comercial/precios.js");
+
 
 
 
@@ -66890,7 +66944,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     datos: _modules_comercial_empresa__WEBPACK_IMPORTED_MODULE_12__["default"],
     presupuestos: _modules_comercial_presupuestos__WEBPACK_IMPORTED_MODULE_13__["default"],
     formasDePago: _modules_comercial_formasDePago__WEBPACK_IMPORTED_MODULE_14__["default"],
-    mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"]
+    mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"],
+    precios: _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__["default"]
   },
   state: {
     actual: 0,
@@ -67693,6 +67748,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return fdpfil;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/comercial/precios.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/store/modules/comercial/precios.js ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {},
+  mutations: {},
+  actions: {
+    actualizarPrecios: function actualizarPrecios(_ref, peticion) {
+      var commit = _ref.commit;
+      console.log(peticion);
+      axios.post('http://127.0.0.1:8000/precios', peticion).then(function (response) {
+        Vue.$toast.open(response.data.message);
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log('algo va mal');
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
     }
   }
 });

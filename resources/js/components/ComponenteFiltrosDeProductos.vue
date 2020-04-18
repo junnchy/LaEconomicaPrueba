@@ -1,5 +1,7 @@
 <template>
     <div>
+        <h6>Filtros <i class="fas fa-filter"></i></h6>
+        <hr>
         <div class="container">
             <label>
                 Categoria 
@@ -29,8 +31,18 @@
         <hr/>
         <div class="container mt-4">
          <router-link :to="{name: 'listadoCategorias'}" >
-            <button class="btn btn-outline-info btn-block mt-2">
-                Categorias <i class="fas fa-info"></i>
+            <button class="btn btn-outline-dark btn-block mt-2">
+                Categorias <i class="fas fa-info text-info"></i>
+            </button>
+        </router-link>
+        <router-link :to="{name: 'actualizarPrecios'}" >
+            <button class="btn btn-outline-dark btn-block mt-2">
+                Actualizar Precios <i class="fas fa-wrench text-info"></i>
+            </button>
+        </router-link>
+        <router-link :to="{name: 'compararProductos'}" >
+            <button class="btn btn-outline-dark btn-block mt-2">
+                Comparar Productos <i class="fas fa-compress-alt text-info"></i>
             </button>
         </router-link>
         </div>

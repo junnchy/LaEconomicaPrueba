@@ -71,7 +71,7 @@
                         <td>{{$linea->producto->nombre}}</td>
                         <td class="w-20">${{$linea->precio}}</td>
                         @if($presupuesto->cliente->condicion_iva_id === 1)
-                            <td class="w-10">{{$linea->producto->iva}}%</td>
+                            <td class="w-10">{{$linea->producto->precio->iva}}%</td>
                         @endif
                         <td class="w-10">{{$linea->cantidad}}</td>
                         <td class="w-20">${{$linea->total_linea}}</td>

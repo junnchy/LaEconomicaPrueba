@@ -11,6 +11,7 @@
                     <th scope="col">Precio Costo</th>
                     <th scope="col">Rentabilidad</th>
                     <th scope="col">Precio Venta</th>
+                    <th scope="col">Tipo</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,13 @@
                     <td>{{dato.precioCosto}}</td>
                     <td>{{dato.rentabilidad}}</td>
                     <td>{{dato.precioVenta}}</td>
+                    <td>
+                        <span class="badge badge-primary" v-if="dato.tipo ==='Manual'">{{dato.tipo}}</span>
+                        <span class="badge badge-warning" v-if="dato.tipo ==='Proceso'">{{dato.tipo}}</span>
+                        <span class="badge badge-secondary" v-if="dato.tipo !='Proceso' && dato.tipo !='Manual'">
+                            {{dato.tipo}}
+                        </span>
+                    </td>
                 </tr>
             </tbody>
         </table>

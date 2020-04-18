@@ -124,6 +124,16 @@ const routes = [
       name: 'formasDePago',
       component: () => import(/* webpackChunkName: "about" */ '../views/FormasDePago.vue')
     },
+    {
+      path: '/actualizarPrecios',
+      name: 'actualizarPrecios',
+      component: () => import(/* webpackChunkName: "about" */ '../views/ActualizacionDePrecios.vue')
+    },
+    {
+      path: '/comparativaProductos',
+      name: 'compararProductos',
+      component: () => import(/* webpackChunkName: "about" */ '../views/ComprativaDeProductos.vue')
+    },
 ]
 
 

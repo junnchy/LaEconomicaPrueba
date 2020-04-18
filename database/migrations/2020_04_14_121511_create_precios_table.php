@@ -24,6 +24,8 @@ class CreatePreciosTable extends Migration
             $table->float('descuentoProducto_3');
             $table->float('descuentoProducto_4');
             $table->float('descuentoProducto_5');
+            $table->float('dre');
+            $table->string('tipo');
             $table->float('rentabilidad');
             $table->float('precioVenta');
             $table->float('precioVentaSinIva');

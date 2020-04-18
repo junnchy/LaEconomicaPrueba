@@ -162,7 +162,7 @@ class PresupuestoController extends Controller
 
     public function imprimir($id)
     {
-        $presupuesto = Presupuesto::with('lineas.producto.fichaStock', 'cliente.condicion_iva', 'vendedor')->findOrFail($id);
+        $presupuesto = Presupuesto::with('lineas.producto.fichaStock','lineas.producto.precio', 'cliente.condicion_iva', 'vendedor')->findOrFail($id);
 
         $datosEmpresa = DatosEmpresa::findOrFail(1);
      
