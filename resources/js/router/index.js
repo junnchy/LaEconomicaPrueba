@@ -134,6 +134,11 @@ const routes = [
       name: 'compararProductos',
       component: () => import(/* webpackChunkName: "about" */ '../views/ComprativaDeProductos.vue')
     },
+    {
+      path: '/nuevaVenta',
+      name: 'nuevaVenta',
+      component: () => import(/* webpackChunkName: "about" */ '../views/NuevaVenta.vue')
+    },
 ]
 
 

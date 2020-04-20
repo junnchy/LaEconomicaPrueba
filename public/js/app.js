@@ -66877,6 +66877,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/ComprativaDeProductos.vue */ "./resources/js/views/ComprativaDeProductos.vue"));
   }
+}, {
+  path: '/nuevaVenta',
+  name: 'nuevaVenta',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/NuevaVenta.vue */ "./resources/js/views/NuevaVenta.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
