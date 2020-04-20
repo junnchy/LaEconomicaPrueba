@@ -4,7 +4,7 @@
             <h2>Comparativa de Productos <i class="fas fa-compress-alt text-info"></i></h2>
         </div>
         <div class="row container shadow-sm mt-3 p-3 bg-white rounded border">
-            <div class="col-2 ml-3 alert alert-primary text-center">
+            <div class="col-3 alert alert-primary text-center">
                 <h5>
                     Ingresar Producto <i class="fas fa-hand-point-right"></i> 
                 </h5>
@@ -13,7 +13,7 @@
                 <v-select
                     label="nombre"
                     @input="setProducto"
-                    :options="productos"
+                    :options="filtered_productos"
                     :value="producto"
                     maxHeight="200px"
                     placeholder="Producto"
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 export default {
     created(){
         this.getProductos()
@@ -94,6 +94,7 @@ export default {
             this.fproductos.push(val) 
         },
         deleteLinea(index){
+            /* Arreglar */
             this.fproductos.splice(index, 1);
             Vue.$toast.open({
                 message: 'Producto Borrado',
@@ -103,6 +104,7 @@ export default {
     },
     computed:{
         ...mapState('productos', ['productos']),
+        ...mapGetters('productos', ['filtered_productos']),
         defMR(){
             if(this.fproductos.length >= 2){
                 var mr = this.fproductos[0].precio.rentabilidad

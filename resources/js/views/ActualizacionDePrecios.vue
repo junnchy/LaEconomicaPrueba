@@ -1,10 +1,19 @@
 <template>
     <div>
         {{setProductos}}
-        <div class="row justify-content-center">
-            <h2>Actualizacion de Precios <i class="fas fa-wrench"></i></h2>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <h2 class="font-weight-light">Actualizacion de Precios <i class="fas fa-wrench text-secondary"></i></h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <p class="text-secondary font-italic">*Filtros en menu lateral</p>
+                </div>
+            </div> 
         </div>
-        <div class="container shadow-sm mt-3 p-3 bg-white rounded">
+        <!-- <div class="container shadow-sm mt-3 p-3 bg-white rounded">
             <div class="row">
                 <div class="col-2">
                     <h5>Filtros <i class="fas fa-filter"></i></h5> 
@@ -28,7 +37,7 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="container">
             <div class="row">
                 <div class="col-7 shadow-sm mt-3 mr-5 p-3 bg-white rounded">
