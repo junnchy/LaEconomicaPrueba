@@ -42,6 +42,11 @@
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="subMenuProducto">
+                                        <router-link :to="{name: 'cuentaCliente', params:{id: cliente.id}}">
+                                            <a class="dropdown-item" href="#">
+                                                Cuenta Cliente
+                                            </a>
+                                        </router-link>
                                         <router-link :to="{name: 'listadoPresupuestosCliente', params:{id: cliente.id}}">
                                             <a class="dropdown-item" href="#">
                                                 Presupuestos de Cliente

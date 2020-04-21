@@ -20,7 +20,7 @@ export default {
             var yyyy = venta.fecha_emision.getFullYear();
             venta.fecha_emision = (yyyy+'-'+mm+'-'+dd);
             console.log(venta.fecha_emision)
-            /* axios.post('http://127.0.0.1:8000/ventas', venta).then(function (response) {
+            axios.post('http://127.0.0.1:8000/ventas', venta).then(function (response) {
                 commit('setRespuesta', response.data.message)
                 commit('setStatus',response.status)
                 Vue.$toast.open(response.data.message);
@@ -32,7 +32,7 @@ export default {
                     message: 'Upp! Hay Algun Error',
                     type: 'error',
                 });
-            }); */
+            });
         },
         resetResp({commit}, resp){
             commit('setRespuesta', resp)

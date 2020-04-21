@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\CuentaCliente;
+
 class CuentaClienteController extends Controller
 {
     /**
@@ -11,9 +13,12 @@ class CuentaClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax()){
+            $cc = CuentaCliente::with('ventas')->get();
+            return response()->json($cc);
+        }
     }
 
     /**
@@ -43,9 +48,12 @@ class CuentaClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $cc = CuentaCliente::with('ventas')->findOrFail($id);
+            return response()->json($cc);
+        }
     }
 
     /**

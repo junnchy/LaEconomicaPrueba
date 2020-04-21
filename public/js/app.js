@@ -3759,6 +3759,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -45075,6 +45080,32 @@ var render = function() {
                             {
                               attrs: {
                                 to: {
+                                  name: "cuentaCliente",
+                                  params: { id: cliente.id }
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "dropdown-item",
+                                  attrs: { href: "#" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                            Cuenta Cliente\n                                        "
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              attrs: {
+                                to: {
                                   name: "listadoPresupuestosCliente",
                                   params: { id: cliente.id }
                                 }
@@ -66883,6 +66914,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/NuevaVenta.vue */ "./resources/js/views/NuevaVenta.vue"));
   }
+}, {
+  path: '/cuentaCliente',
+  name: 'cuentaCliente',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/CuentaCliente.vue */ "./resources/js/views/CuentaCliente.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -66921,6 +66958,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_comercial_formasDePago__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/comercial/formasDePago */ "./resources/js/store/modules/comercial/formasDePago.js");
 /* harmony import */ var _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/comercial/precios */ "./resources/js/store/modules/comercial/precios.js");
 /* harmony import */ var _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/comercial/ventas */ "./resources/js/store/modules/comercial/ventas.js");
+/* harmony import */ var _modules_comercial_cuentaCliente__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/comercial/cuentaCliente */ "./resources/js/store/modules/comercial/cuentaCliente.js");
+
 
 
 
@@ -66954,7 +66993,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     formasDePago: _modules_comercial_formasDePago__WEBPACK_IMPORTED_MODULE_14__["default"],
     mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"],
     precios: _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__["default"],
-    ventas: _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__["default"]
+    ventas: _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__["default"],
+    cuentaCliente: _modules_comercial_cuentaCliente__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
   state: {
     actual: 0,
@@ -67491,6 +67531,75 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return pfil;
       }
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/comercial/cuentaCliente.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/store/modules/comercial/cuentaCliente.js ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    cuentaCliente: null
+  },
+  mutations: {
+    setCC: function setCC(state, cc) {
+      state.cuentaCliente = cc;
+    }
+  },
+  actions: {
+    getCuentaCliente: function () {
+      var _getCuentaCliente = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, id) {
+        var commit, cc;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                _context.next = 3;
+                return axios.get("http://127.0.0.1:8000/cuentaClientes/".concat(id)).then(function (response) {
+                  console.log(response.data);
+                  commit('setCC', response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
+                });
+
+              case 3:
+                cc = _context.sent;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function getCuentaCliente(_x, _x2) {
+        return _getCuentaCliente.apply(this, arguments);
+      }
+
+      return getCuentaCliente;
+    }()
   }
 });
 
@@ -68090,19 +68199,18 @@ __webpack_require__.r(__webpack_exports__);
       var yyyy = venta.fecha_emision.getFullYear();
       venta.fecha_emision = yyyy + '-' + mm + '-' + dd;
       console.log(venta.fecha_emision);
-      /* axios.post('http://127.0.0.1:8000/ventas', venta).then(function (response) {
-          commit('setRespuesta', response.data.message)
-          commit('setStatus',response.status)
-          Vue.$toast.open(response.data.message);
-      })
-      .catch(function (error) {
-          console.log('algo va mal')
-          console.log(error.response.data)
-          Vue.$toast.open({
-              message: 'Upp! Hay Algun Error',
-              type: 'error',
-          });
-      }); */
+      axios.post('http://127.0.0.1:8000/ventas', venta).then(function (response) {
+        commit('setRespuesta', response.data.message);
+        commit('setStatus', response.status);
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        console.log('algo va mal');
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
     },
     resetResp: function resetResp(_ref2, resp) {
       var commit = _ref2.commit;
