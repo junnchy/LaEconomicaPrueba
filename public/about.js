@@ -4348,6 +4348,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_Comprobante_Encabezado__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Comprobante-Encabezado */ "./resources/js/components/Comprobante-Encabezado.vue");
+/* harmony import */ var _components_Comprobrante_Productos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Comprobrante-Productos */ "./resources/js/components/Comprobrante-Productos.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4358,7 +4367,119 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    encabezado: _components_Comprobante_Encabezado__WEBPACK_IMPORTED_MODULE_1__["default"],
+    productos: _components_Comprobrante_Productos__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    return {
+      nvta: {
+        cliente: {
+          id: null,
+          nombre: 'Cliente',
+          direccion: '',
+          localidad: '',
+          condicion_iva: {
+            denominacion: ''
+          }
+        },
+        vendedor: {},
+        formaDePago: {
+          id: null
+        },
+        fecha_emision: '',
+        detalles: '',
+        total: 0,
+        vendedor_id: null,
+        lineas: [],
+        id: null,
+        subtotal: 0,
+        iva: 0
+      }
+    };
+  },
+  created: function created() {
+    this.getVendedorActual(this.$userId);
+    this.getSetFechaActual();
+    this.cambiarEstado(0);
+    this.nvta.vendedor_id = this.$userId;
+  },
+  destroyed: function destroyed() {
+    this.resetStatus();
+    this.resetResp(null);
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('usuarios', ['getVendedorActual']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('ventas', ['agregarVenta', 'resetStatus', 'resetResp']), {
+    getSetFechaActual: function getSetFechaActual() {
+      var today = new Date();
+      var dd = String(today.getDate());
+      var mm = String(today.getMonth()); //January is 0!
+
+      var yyyy = today.getFullYear();
+      var aux = new Date(yyyy, mm, dd);
+      console.log(aux);
+      this.nvta.fecha_emision = aux;
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usuarios', ['vendedorActual']), {
+    vendedorC: function vendedorC() {
+      this.nvta.vendedor = this.vendedorActual;
+    },
+    fdp: function fdp() {
+      var _this = this;
+
+      if (this.nvta.cliente.condicion_iva_id === 3) {
+        /* Clientes Finales */
+        this.nvta.lineas.forEach(function (linea) {
+          linea.producto.precio.precioVenta = linea.producto.precio.precioVentaSinIva * (linea.producto.precio.iva / 100 + 1);
+
+          if (_this.nvta.formaDePago.id != 1 || _this.nvta.formaDePago.id != null) {
+            linea.producto.precio.precioVenta = (linea.producto.precio.precioVenta * _this.nvta.formaDePago.coeficiente).toFixed(2);
+          }
+        });
+      } else {
+        /* Responsables Incriptos */
+        this.nvta.lineas.forEach(function (linea) {
+          linea.producto.precio.precioVentaSinIva = linea.producto.precio.precioVenta / (linea.producto.precio.iva / 100 + 1);
+
+          if (_this.nvta.formaDePago.id != 1 || _this.nvta.formaDePago.id != null) {
+            linea.producto.precio.precioVentaSinIva = (linea.producto.precio.precioVentaSinIva * _this.nvta.formaDePago.coeficiente).toFixed(2);
+          }
+        });
+      }
+    }
+  })
+});
 
 /***/ }),
 
@@ -6445,7 +6566,7 @@ var render = function() {
             ],
             staticClass: "form-control",
             attrs: {
-              placeholder: "Detalles del Presupuesto",
+              placeholder: "Detalles ",
               id: "detalle_presupuesto",
               rows: "3"
             },
@@ -12998,30 +13119,102 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "py-3 border border-secondary rounded" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.agregarVenta(_vm.nvta)
+          }
+        }
+      },
+      [
+        _c("encabezado", { attrs: { npresupuesto: _vm.nvta } }),
+        _vm._v(" "),
+        _c("productos", { attrs: { npresupuesto: _vm.nvta } }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "d-flex justify-content-center sticky-button" },
+          [
+            _vm.$store.state.ventas.status != 200
+              ? _c("div", { staticClass: "p-2  w-75" }, [_vm._m(1)])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.$store.state.ventas.status === 200
+              ? _c(
+                  "div",
+                  { staticClass: "p-2" },
+                  [
+                    _c(
+                      "router-link",
+                      { attrs: { to: { name: "listadoPresupuestos" } } },
+                      [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-outline-primary",
+                            attrs: { type: "button" }
+                          },
+                          [
+                            _vm._v("\n                        Finalizar "),
+                            _c("i", { staticClass: "fas fa-check-circle" })
+                          ]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              : _vm._e()
+          ]
+        )
+      ],
+      1
+    ),
+    _vm._v("\n    " + _vm._s(_vm.vendedorC) + "\n    " + _vm._s(_vm.fdp) + "\n")
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "py-3 border border-secondary rounded" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "row shadow-sm p-3 text-center bg-ecogray border border-secondary rounded"
-        },
-        [
-          _c("div", { staticClass: "col-12" }, [
-            _c("h1", [
-              _vm._v("Nueva Venta "),
-              _c("i", { staticClass: "fas fa-file-alt" })
-            ])
+    return _c(
+      "div",
+      {
+        staticClass:
+          "row shadow-sm p-3 text-center bg-ecogray border border-secondary rounded"
+      },
+      [
+        _c("div", { staticClass: "col-12" }, [
+          _c("h1", [
+            _vm._v("Nueva Venta "),
+            _c("i", { staticClass: "fas fa-file-alt" })
           ])
-        ]
-      )
-    ])
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-success btn-block border border-secondary",
+        attrs: { type: "submit" }
+      },
+      [
+        _vm._v("\n                    Grabar Venta "),
+        _c("i", { staticClass: "fas fa-save" })
+      ]
+    )
   }
 ]
 render._withStripped = true

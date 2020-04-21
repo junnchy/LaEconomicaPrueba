@@ -31,6 +31,5 @@ class ClientesTableSeeder extends Seeder
                 "localidad_id"=>$obj->localidad_id,
             ));
         }
-
     }
 }

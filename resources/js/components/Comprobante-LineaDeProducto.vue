@@ -38,7 +38,7 @@
             <div class="col-9">
                 <div class="form-group text-left">
                     <textarea class="form-control" 
-                    placeholder="Detalles del Presupuesto" 
+                    placeholder="Detalles " 
                     id="detalle_presupuesto" v-model="npresupuesto.detalles" 
                     rows="3"></textarea>
                 </div>

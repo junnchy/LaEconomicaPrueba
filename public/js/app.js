@@ -66920,6 +66920,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_comercial_presupuestos__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/comercial/presupuestos */ "./resources/js/store/modules/comercial/presupuestos.js");
 /* harmony import */ var _modules_comercial_formasDePago__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/comercial/formasDePago */ "./resources/js/store/modules/comercial/formasDePago.js");
 /* harmony import */ var _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/comercial/precios */ "./resources/js/store/modules/comercial/precios.js");
+/* harmony import */ var _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/comercial/ventas */ "./resources/js/store/modules/comercial/ventas.js");
+
 
 
 
@@ -66951,7 +66953,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     presupuestos: _modules_comercial_presupuestos__WEBPACK_IMPORTED_MODULE_13__["default"],
     formasDePago: _modules_comercial_formasDePago__WEBPACK_IMPORTED_MODULE_14__["default"],
     mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"],
-    precios: _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__["default"]
+    precios: _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__["default"],
+    ventas: _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__["default"]
   },
   state: {
     actual: 0,
@@ -68048,6 +68051,66 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       } else {
         return pfil;
       }
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/comercial/ventas.js":
+/*!********************************************************!*\
+  !*** ./resources/js/store/modules/comercial/ventas.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    status: 0,
+    respuesta: null
+  },
+  mutations: {
+    setStatus: function setStatus(state, status) {
+      state.status = status;
+    },
+    setRespuesta: function setRespuesta(state, respuesta) {
+      state.respuesta = respuesta;
+    }
+  },
+  actions: {
+    agregarVenta: function agregarVenta(_ref, venta) {
+      var commit = _ref.commit;
+      console.log(venta);
+      var dd = venta.fecha_emision.getDate();
+      var mm = venta.fecha_emision.getMonth() + 1; //January is 0!
+
+      var yyyy = venta.fecha_emision.getFullYear();
+      venta.fecha_emision = yyyy + '-' + mm + '-' + dd;
+      console.log(venta.fecha_emision);
+      /* axios.post('http://127.0.0.1:8000/ventas', venta).then(function (response) {
+          commit('setRespuesta', response.data.message)
+          commit('setStatus',response.status)
+          Vue.$toast.open(response.data.message);
+      })
+      .catch(function (error) {
+          console.log('algo va mal')
+          console.log(error.response.data)
+          Vue.$toast.open({
+              message: 'Upp! Hay Algun Error',
+              type: 'error',
+          });
+      }); */
+    },
+    resetResp: function resetResp(_ref2, resp) {
+      var commit = _ref2.commit;
+      commit('setRespuesta', resp);
+    },
+    resetStatus: function resetStatus(_ref3) {
+      var commit = _ref3.commit;
+      commit('setStatus', 0);
     }
   }
 });

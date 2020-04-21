@@ -61,6 +61,8 @@ Route::resource('/condicionIva', 'CondicionIvaController')->middleware('auth');
 
 Route::resource('/categoriaCliente', 'CategoriaClienteController')->middleware('auth');
 
+Route::resource('/ventas', 'VentaController')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');

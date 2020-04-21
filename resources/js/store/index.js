@@ -14,6 +14,7 @@ import datos from './modules/comercial/empresa'
 import presupuestos from './modules/comercial/presupuestos'
 import formasDePago from './modules/comercial/formasDePago'
 import precios from './modules/comercial/precios'
+import ventas from './modules/comercial/ventas'
 
 
 Vue.use(Vuex)
@@ -32,7 +33,8 @@ export default new Vuex.Store({
     presupuestos,
     formasDePago,
     mapas,
-    precios
+    precios,
+    ventas
   },
   state: {
     actual: 0,
