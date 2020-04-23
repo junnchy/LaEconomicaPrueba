@@ -71,7 +71,7 @@
                         </div>
                     </li>
                     @auth
-                        @if (Auth::user()->hasRole('admin'))
+                        @if (Auth::user()->hasRole('Super Admin'))
                             <a class="nav-link" href="{{ route('homeUsers') }}" class="">Perfiles</a>              
                         @endif
                     @endauth

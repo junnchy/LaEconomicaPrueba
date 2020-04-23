@@ -13,7 +13,8 @@ class UsersController extends Controller
     function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:editar-usuario')->only(['edit', 'update']);
+        //$this->middleware('permission:crear-usuario')->only(['create','store']);
+        //$this->middleware('permission:editar-usuario')->only(['edit','update']);
     }
     
     /**
@@ -24,8 +25,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        $roles = Role::all();
-        return view('usuarios.detalleUsuarios', compact('users', 'roles'));
+        return view('usuarios.detalleUsuarios', compact('users'));
     }
 
     /**
@@ -35,8 +35,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'id');
-        return view('usuarios.crear', compact('roles'))->with('mensaje', 'Usuario Agregado');
+        return view('usuarios.crear');
     }
 
     /**
@@ -49,11 +48,17 @@ class UsersController extends Controller
     {
         $validated = $request->validated();
         $user = new User();
-        $user->name = $request->nombre;
+        $user->nombre = $request->nombre;
         $user->email = $request->email;
+        $user->dni = $request->dni;
+        $user->cuil = $request->cuil;
+        $user->celular = $request->celular;
+        $user->telefono = $request->telefono;
+        $user->fecha_nacimiento = $request->fecha_nacimiento;
+        $user->direccion = $request->direccion;
+        $user->localidad_id = $request->localidad_id;
         $user->password = $request->password;
-        $user->save();
-        $user->assignRole($request->roles);    
+        $user->save();    
 
         return back()->with('mensaje', 'Usuario Agregado');
     }
@@ -78,8 +83,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $roles = Role::pluck('name', 'id');
-        return view('usuarios.editar', compact('user', 'roles'));
+        return view('usuarios.editar', compact('user'));
     }
 
     /**
@@ -91,12 +95,19 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
+        $validated = $request->validated();
         $user = User::findOrFail($id);
-        $user->name = $request->nombre;
+        $user->nombre = $request->nombre;
         $user->email = $request->email;
+        $user->dni = $request->dni;
+        $user->cuil = $request->cuil;
+        $user->celular = $request->celular;
+        $user->telefono = $request->telefono;
+        $user->fecha_nacimiento = $request->fecha_nacimiento;
+        $user->direccion = $request->direccion;
+        $user->localidad_id = $request->localidad_id;
         $user->password = $request->password;
-        $user->save();
-        $user->assignRole($request->roles);        
+        $user->save();       
 
         return back()->with('mensaje', 'Usuario Actualizado');
     }

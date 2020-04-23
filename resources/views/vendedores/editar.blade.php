@@ -13,7 +13,7 @@
         </div>
         <div class="container mt-5">
             <h3>Nombre del Vendedor: <strong>{{$vendedor->nombre}}</strong></h3>
-            <h3>Puesto de Venta: <strong>{{$vendedor->id}}</strong></h3>
+            <h3>Puesto de Venta: <strong>{{$vendedor->nro_puesto}}</strong></h3>
         </div>
         <div class="container">
             <form method="POST" action="{{route('vendedores.update', $vendedor)}}">

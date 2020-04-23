@@ -19,10 +19,14 @@ class UsersTableSeeder extends Seeder
         
 
         $user = new User();
-        $user->name = 'Administrador';
-        $user->email = 'admin@gmail.com';
-        $user->password = '12345678';
+        $user->nombre = 'Nazarena Alesandroni';
+        $user->email = 'nazarenalesandroni@laeconomica.com.ar';
+        $user->password = '123456789';
+        $user->dni = '39105984';
+        $user->cuil = '27-39105984-0';
+        $user->celular = '3416059722';
+        $user->direccion = 'España 1447';
         $user->save();
-        $user->assignRole(Role::where('name', 'admin')->first());
+        //$user->assignRole(Role::where('name', 'admin')->first());
     }
 }

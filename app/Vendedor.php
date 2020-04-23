@@ -10,12 +10,7 @@ class Vendedor extends Model
 
     public function user()
     {
-        return $this->belongsToOne(User::class);
-    }
-
-    public function localidad()
-    {
-        return $this->belongsTo(Localidad::class, 'localidad_id');
+        return $this->belongsTo(User::class);
     }
     
 }

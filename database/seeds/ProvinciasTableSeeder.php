@@ -12,7 +12,10 @@ class ProvinciasTableSeeder extends Seeder
      */
     public function run()
     {
+        Schema::disableForeignKeyConstraints();
         DB::table('provincias')->delete();
+        Schema::enableForeignKeyConstraints();
+        
         $json = File::get('database\seeds\provincias.json');
         $data = json_decode($json);
         foreach ($data as $obj){

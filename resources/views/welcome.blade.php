@@ -22,7 +22,7 @@
                     <a href="/clientes/" class="btn btn-primary btn-block" >Clientes</a>
                 </div>
                 @auth
-                    @if(Auth::user()->hasRole('admin'))
+                    @if(Auth::user()->hasRole('Super Admin'))
                         <div class="col-md-3">
                             <a href="{{ route('homeUsers') }}" class="btn btn-primary btn-block">Perfiles de Usuario</a>                   
                         </div>

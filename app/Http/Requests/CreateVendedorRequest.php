@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class CreateVendedorRequest extends FormRequest
 {
     /**
-     * Determine if the vendedor is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
@@ -24,11 +24,8 @@ class CreateVendedorRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required',
-            'dni' => 'required|unique:vendedores,dni',
-            'cuil' => 'required|unique:vendedores,cuil',
-            'email' => 'email|required|unique:users,email',
-            'password' => 'required|confirmed'
+            'nro_puesto' => 'required|numeric|unique:vendedores,nro_puesto',
+            'user_id' => 'required|unique:vendedores,user_id'
         ];
     }
 }

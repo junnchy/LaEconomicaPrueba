@@ -18,11 +18,12 @@ class PermissionsTableSeeder extends Seeder
         Permission::truncate();
         Schema::enableForeignKeyConstraints();
 
-        Permission::create([
-            'name' => 'crear-vendedor']);
-        Permission::create([
-            'name' => 'editar-vendedor']);
-        Permission::create([
-            'name' => 'editar-usuario']);
+        $json = File::get('database\seeds\permisos.json');
+        $data = json_decode($json);
+        foreach ($data as $obj){
+            Permission::create(array(
+                "name" => ($obj->name)
+            ));
+        }
     }
 }

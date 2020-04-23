@@ -58,6 +58,65 @@
                         />
                     </div>
                     <div class="form-group">
+                        <label>DNI</label>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            name="dni"
+                            placeholder="DNI"
+                            value="{{old('dni')}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>CUIL</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="cuil" 
+                            placeholder="CUIL"
+                            value="{{old('cuil')}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="telefono" 
+                            placeholder="Teléfono"
+                            value="{{old('telefono')}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Celular</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="celular" 
+                            placeholder="Celular"
+                            value="{{old('celular')}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Nacimiento</label>
+                        <input 
+                            type="date"
+                            class="form-control" 
+                            name="fecha_nacimiento"
+                            value="{{old('fecha_nacimiento')}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="direccion" 
+                            placeholder="Dirección"
+                            value="{{old('direccion')}}"
+                        />
+                    </div>
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input 
                             class="form-control" 
@@ -74,18 +133,6 @@
                             name="password_confirmation"
                             placeholder="Password Confirmation"
                         />
-                    </div>
-                    <div class="checkbox">
-                        <label for="checkbox">Roles</label><br>
-                        @foreach ($roles as $id => $name)
-                            <label for="roles">
-                                    <input type="checkbox" 
-                                        name="roles[]"
-                                        value="{{ $id }}"
-                                    >
-                                {{ $name }}
-                            </label>                                                            
-                        @endforeach
                     </div>                
                 </div>
                 

@@ -8,6 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use App\CategoriaPermisos;
+use Illuminate\Support\Arr;
 
 class User extends Authenticatable
 {
@@ -41,6 +44,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function localidad()
+    {
+        return $this->belongsTo(Localidad::class, 'localidad_id');
+    }
+
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
@@ -56,9 +64,32 @@ class User extends Authenticatable
     {
         return json_encode([
                 'roles' => Auth::user()->getRoleNames()->toArray(),
-                'permissions' => Auth::user()->getAllPermissions()->pluck('name')->toArray()
+                'permissions' => User::getPermissions(Auth::user())
             ]);
     }
 
+    public static function getPermissions($user)
+    {
+        $roles = $user->getRoleNames()->toArray();
+        $arr_per = [];
+        foreach ($roles as $r)
+        {
+            $rol = Role::where("name",$r)->first();
+            $categorias = CategoriaPermisos::all()->pluck('id')->toArray();
+            foreach ($categorias as $cat)
+            {
+                $c = CategoriaPermisos::find($cat);
+                if ($c->hasRole($rol))
+                {
+                    $arr_per[] = $c->getDirectPermissions()->pluck('name')->toArray();
+                }
+            }            
+        }
+        $arr_all_per[] = $user->getAllPermissions()->pluck('name')->toArray();
+        $arr_all_per[] = Arr::collapse($arr_per);
+        $coll = collect(Arr::collapse($arr_all_per));
+        $unique_data = collect($coll->unique()->values()->all());
+        return $unique_data;
+    }
  
 }

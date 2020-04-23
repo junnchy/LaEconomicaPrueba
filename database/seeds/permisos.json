@@ -1,0 +1,14 @@
+[
+    {"name": "agregar-cliente"},
+    {"name": "editar-cliente"},
+    {"name": "agregar-producto"},
+    {"name": "editar-producto"},
+    {"name": "agregar-categoria"},
+    {"name": "editar-categoria"},
+    {"name": "agregar-proveedor"},
+    {"name": "editar-proveedor"},
+    {"name": "agregar-localidad"},
+    {"name": "editar-localidad"},
+    {"name": "agregar-categoria-cliente"},
+    {"name": "editar-categoria-cliente"}
+]

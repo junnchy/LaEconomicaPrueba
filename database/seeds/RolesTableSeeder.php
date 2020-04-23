@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class RolesTableSeeder extends Seeder
 {
@@ -21,10 +22,11 @@ class RolesTableSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
         
         $role = Role::create([
-            'name' => 'admin']);
-        $role->givePermissionTo(['crear-vendedor', 'editar-vendedor', 'editar-usuario']);
+            'name' => 'Super Admin']);
+        $per = Permission::all()->pluck('name')->toArray();
+        $role->givePermissionTo($per);
         Role::create([
-            'name' => 'vend']);
+            'name' => 'Vendedor']);
         
     }
 }

@@ -16,17 +16,10 @@ class CreateVendedoresTable extends Migration
         Schema::create('vendedores', function (Blueprint $table) 
         {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('dni');
-            $table->string('cuil')->unique();
-            $table->string('telefono')->nullable();
-            $table->string('celular')->nullable();
-            $table->string('email')->nullable();
-            $table->string('direccion')->nullable();
-            $table->unsignedBigInteger('localidad_id')->nullable();
-            $table->foreign('localidad_id')->references('id')->on('localidades');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->integer('nro_puesto')->unique();
+            $table->unsignedBigInteger('user_id')->nullable()->unique();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('contador_presupuestos');
             $table->timestamps();
         });
     }
@@ -38,15 +31,13 @@ class CreateVendedoresTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::table('vendedores', function (Blueprint $table) 
-        {
-            
+        {            
             $table->dropForeign(['user_id']);
             $table->dropColumn('user_id');
-            $table->dropForeign(['localidad_id']);
-            $table->dropColumn('localidad_id');
         });
-        
+        Schema::enableForeignKeyConstraints();        
         Schema::dropIfExists('vendedores');
 
     }

@@ -9,19 +9,14 @@
             <div class="col-4">
                     <a href="{{route('usuarios.index')}}" class="btn btn-danger"> Volver</a>
             </div>
-        </div>
-
-        <div class="container mt-5">
-            <h3>Nombre del Usuario: <strong>{{$user->name}}</strong></h3>
-        </div>
+        </div> 
         
         <div class="container">
             <form method="POST" action="{{route('usuarios.update', $user->id)}}">
                 @method("PUT")
                 @csrf
                 <div class="form-group mt-5">
-                    <h3>Modificar Datos</h3>
-
+                    <h3>Modificar Datos de: <strong>{{$user->nombre}}</strong></h3>
                     @if (session('mensaje'))
                         <div class="alert alert-success alert-dismissible fade show">
                             {{session('mensaje')}} 
@@ -44,12 +39,12 @@
 
                     <div class="form-group">
                         <label>Nombre</label>
-                        <input 
+                        <input
                             type="text" 
                             class="form-control" 
                             name="nombre" 
                             placeholder="Nombre"
-                            value="{{$user->name}}"
+                            value="{{$user->nombre}}"
                         />
                     </div>
                     <div class="form-group">
@@ -60,6 +55,65 @@
                             name="email" 
                             placeholder="Email"
                             value="{{$user->email}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>DNI</label>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            name="dni"
+                            placeholder="DNI"
+                            value="{{$user->dni}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>CUIL</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="cuil" 
+                            placeholder="CUIL"
+                            value="{{$user->cuil}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="telefono" 
+                            placeholder="Teléfono"
+                            value="{{$user->telefono}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Celular</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="celular" 
+                            placeholder="Celular"
+                            value="{{$user->celular}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Fecha de Nacimiento</label>
+                        <input 
+                            type="date"
+                            class="form-control" 
+                            name="fecha_nacimiento"
+                            value="{{$user->fecha_nacimiento}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            name="direccion" 
+                            placeholder="Dirección"
+                            value="{{$user->direccion}}"
                         />
                     </div>
                     <div class="form-group">
@@ -79,23 +133,11 @@
                             name="password_confirmation"
                             placeholder="Password Confirmation"
                         />
-                    </div>
-                    <div class="checkbox">
-                        <label for="checkbox">Roles</label><br>
-                        @foreach ($roles as $id => $name)
-                            <label for="roles">
-                                    <input type="checkbox" 
-                                        name="roles[]"
-                                        value="{{ $id }}"
-                                	    {{ $user->getPermissionsViaRoles()->pluck('name')->contains($name) ? "checked" : "" }}
-                                    >
-                                {{ $name }}
-                            </label>                                                            
-                        @endforeach
-                    </div>                
+                    </div>    
                 </div>
                 
                 <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+            
             </form>
         </div> 
     </div>
