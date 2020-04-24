@@ -28,6 +28,11 @@
             <li class="list-group-item">
                 <div class="d-flex flex-row">
                     <div>
+                        <router-link :to="{name: 'cuentaCliente', params:{id: cliente.id}}">
+                            <button class="btn btn-outline-primary btn-sm">
+                                Cuenta Cliente <i class="fas fa-file-invoice-dollar"></i>
+                            </button>
+                        </router-link>
                         <router-link :to="{name: 'listadoPresupuestosCliente', params:{id: cliente.id}}">
                             <button class="btn btn-outline-primary btn-sm">
                                 Presupuestos <i class="fas fa-file-alt"></i>

@@ -32,4 +32,16 @@ class FichaDeStock extends Model
         
         return count($li);
     }
+
+    /* public static function procesarStock($cantidad, $nombreVendedor){
+        self::$cantidadActual = self::$cantidadActual - $cantidad;
+        $nlfds = new LineaFichaStock();
+        $nlfds->ficha_id = self::$id;
+        $nlfds->cantidad = $cantidad;
+        #Modificar el tipo por dinamico?
+        $nlfds->tipo = "Venta";
+        $nlfds->usuario = $nombreVendedor;
+        $this->save();
+        $nlfds->save();
+    } */
 }

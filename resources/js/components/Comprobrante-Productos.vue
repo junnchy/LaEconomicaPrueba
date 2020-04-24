@@ -59,12 +59,21 @@ export default {
     methods:{
         ...mapActions('productos', ['getProductos']), 
         setProducto(val){
+            var aux = true
             Vue.$toast.open('Producto Agregado');
-            let li = {
-                producto: val,
-                cantidad: 1
-            }
-            this.npresupuesto.lineas.push(li) 
+            this.npresupuesto.lineas.forEach(element => {
+                if (element.producto.id === val.id){
+                    element.cantidad ++
+                    aux = false
+                }
+            });
+            if(aux){
+                let li = {
+                    producto: val,
+                    cantidad: 1
+                }
+                this.npresupuesto.lineas.push(li) 
+            }   
         }
     },
     computed:{

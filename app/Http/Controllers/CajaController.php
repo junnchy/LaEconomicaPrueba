@@ -4,21 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\CuentaCliente;
-
-class CuentaClienteController extends Controller
+class CajaController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->ajax()){
-            $cc = CuentaCliente::with('ventas')->get();
-            return response()->json($cc);
-        }
+        //
     }
 
     /**
@@ -48,12 +43,9 @@ class CuentaClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        if($request->ajax()){
-            $cc = CuentaCliente::with('ventas.fdp', 'cliente')->findOrFail($id);
-            return response()->json($cc);
-        }
+        //
     }
 
     /**

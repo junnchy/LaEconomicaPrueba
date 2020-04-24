@@ -18,6 +18,7 @@ class CreateVentasTable extends Migration
             $table->date('fecha_emision');
             $table->string('codigo');
             $table->float('total');
+            $table->float('saldo');
             $table->float('subtotal');
             $table->float('iva');
             $table->text('detalles')->nullable();

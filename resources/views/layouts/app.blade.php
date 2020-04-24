@@ -38,30 +38,14 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Empresa 
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <router-link :to="{name: 'datosEmpresa'}">
-                                <a class="dropdown-item" href="#">Datos de la Empresa</a>
-                            </router-link> 
-                            <div class="dropdown-divider"></div>
-                            @auth
-                                @if (Auth::user()->hasRole('admin'))
-                                    <a class="dropdown-item" href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
-                                @endif
-                            @endauth
-                            <div class="dropdown-divider"></div>
-                            <router-link :to="{name: 'tablaDatosCliente'}" >
-                                <a class="dropdown-item" href="#">Tablas de Datos</a>
-                            </router-link>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Comercial 
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/comercial/menu">Menu Comercial</a>
+                            <div class="dropdown-divider"></div>
+                            <router-link :to="{name:'nuevaVenta'}">
+                                <a class="dropdown-item" href="#"> Nueva Venta </a> 
+                            </router-link>
                             <div class="dropdown-divider"></div>
                             <router-link :to="{name:'nuevoPrespuesto'}">
                                 <a class="dropdown-item" href="#"> Nuevo Presupuesto </a> 
@@ -74,9 +58,6 @@
                                 <a class="dropdown-item" href="#">Formas de Pago </a>
                             </router-link>
                         </div>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="/proveedores/" class="">Proveedores</a>
                     </li> 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -107,6 +88,29 @@
                             <a class="dropdown-item" href="/clientes/">Listado Clientes</a>
                             <router-link :to="{name: 'agregarCliente'}" >
                                 <a class="dropdown-item" href="#">Agregar Cliente</a>
+                            </router-link>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/proveedores/" class="">Proveedores</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Empresa 
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <router-link :to="{name: 'datosEmpresa'}">
+                                <a class="dropdown-item" href="#">Datos de la Empresa</a>
+                            </router-link> 
+                            <div class="dropdown-divider"></div>
+                            @auth
+                                @if (Auth::user()->hasRole('admin'))
+                                    <a class="dropdown-item" href="{{ route('homeUsers') }}" class="">Perfiles</a>                   
+                                @endif
+                            @endauth
+                            <div class="dropdown-divider"></div>
+                            <router-link :to="{name: 'tablaDatosCliente'}" >
+                                <a class="dropdown-item" href="#">Tablas de Datos</a>
                             </router-link>
                         </div>
                     </li>

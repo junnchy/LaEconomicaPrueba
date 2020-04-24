@@ -15,7 +15,11 @@
                 <tr v-for="producto in arregloPaginado" :key="producto.id">
                     <th scope="row">{{producto.id}}</th>
                     <th><img :src="producto.imagen" width="50px" class="border border-secondary"></th>
-                    <td>{{producto.nombre}}</td>
+                    <td>
+                        {{producto.nombre}} <br>
+                        <!-- <span class="badge badge-pill badge-secondary">{{producto.proveedor.nombre}}</span> -->
+                        <span class="font-italic">{{producto.proveedor.nombre}}</span>
+                    </td>
                     <td v-if="producto.estado === 1"><p class="text-success"><i class="fas fa-check-circle"></i></p></td>
                     <td v-if="producto.estado === 0"><p class="text-danger"><i class="fas fa-exclamation-circle"></i></p></td>
                     <td>${{producto.precio.precioVenta}}</td>

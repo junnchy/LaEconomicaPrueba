@@ -38,10 +38,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="pro in fproductos" :key="pro.id">
+                    <tr v-for="(pro, index) in fproductos" :key="index">
                         <!-- <th scope="row">{{pro.id}}</th> -->
                         <th><img :src="pro.imagen" width="50px" class="border border-secondary"></th>
-                        <td>{{pro.nombre}}</td>
+                        <td>
+                            {{pro.nombre}}<br/>
+                            <span class="font-italic">prov: {{pro.proveedor.nombre}} </span>
+                        </td>
                         <td>${{pro.precio.precioBase}}</td>
                         <td>[{{pro.precio.descuentoProducto_1}}, {{pro.precio.descuentoProducto_2}},  
                             {{pro.precio.descuentoProducto_3}}, {{pro.precio.descuentoProducto_4}}, 
@@ -92,6 +95,9 @@ export default {
         setProducto(val){
             Vue.$toast.open('Producto Agregado');
             this.fproductos.push(val) 
+            val = {
+                nombre: ''
+            }
         },
         deleteLinea(index){
             /* Arreglar */

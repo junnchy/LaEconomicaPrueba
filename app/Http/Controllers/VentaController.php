@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Venta;
 use App\LineaDeVenta;
+use App\CuentaCliente;
+use App\FichaDeStock;
+use App\LineaFichaStock;
 
 class VentaController extends Controller
 {
@@ -58,12 +61,18 @@ class VentaController extends Controller
                 $lv->precio = $linea['producto']['precio']['precioVentaSinIva'];
             }
             $lv->cantidad = $linea['cantidad'];
+            $fds = FichaDeStock::findOrFail($linea['producto']['fichaStock_id']);
+            $this->procesarStock($fds, $lv->cantidad, $request->vendedor['nombre']);
             $lv->total_linea = $linea['subtotal'];
             $lv->descuento = 0;
             $lv->producto_id = $linea['producto']['id'];
             $lv->venta_id = $venta->id;
             $lv->save();
         }
+
+        $cc = CuentaCliente::findOrFail($venta->ctac_id);
+        $cc->saldo = $cc->saldo +  $venta->total;
+        $cc->save();
 
         return response()->json([
             'venta' => $venta,
@@ -114,5 +123,17 @@ class VentaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function procesarStock($fds, $cantidad, $nombreVendedor){
+        $fds->cantidadActual = $fds->cantidadActual - $cantidad;
+        $nlfds = new LineaFichaStock();
+        $nlfds->ficha_id = $fds->id;
+        $nlfds->cantidad = $cantidad;
+        #Modificar el tipo por dinamico?
+        $nlfds->tipo = "Venta";
+        $nlfds->usuario = $nombreVendedor;
+        $fds->save();
+        $nlfds->save();
     }
 }

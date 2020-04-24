@@ -899,12 +899,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProductos']), {
     setProducto: function setProducto(val) {
+      var aux = true;
       Vue.$toast.open('Producto Agregado');
-      var li = {
-        producto: val,
-        cantidad: 1
-      };
-      this.npresupuesto.lineas.push(li);
+      this.npresupuesto.lineas.forEach(function (element) {
+        if (element.producto.id === val.id) {
+          element.cantidad++;
+          aux = false;
+        }
+      });
+
+      if (aux) {
+        var li = {
+          producto: val,
+          cantidad: 1
+        };
+        this.npresupuesto.lineas.push(li);
+      }
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('productos', ['productos', 'filter']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('productos', ['filtered_productos']), {
@@ -1518,6 +1528,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -2536,6 +2550,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -2553,6 +2570,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setProducto: function setProducto(val) {
       Vue.$toast.open('Producto Agregado');
       this.fproductos.push(val);
+      val = {
+        nombre: ''
+      };
     },
     deleteLinea: function deleteLinea(index) {
       /* Arreglar */
@@ -2621,6 +2641,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_2__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2633,6 +2656,64 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2643,7 +2724,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getCuentaCliente(this.id);
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('cuentaCliente', ['getCuentaCliente']))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('cuentaCliente', ['getCuentaCliente'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('cuentaCliente', ['cuentaCliente']))
 });
 
 /***/ }),
@@ -2726,6 +2808,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8146,7 +8233,16 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(producto.nombre))]),
+              _c("td", [
+                _vm._v(
+                  "\n                    " + _vm._s(producto.nombre) + " "
+                ),
+                _c("br"),
+                _vm._v(" "),
+                _c("span", { staticClass: "font-italic" }, [
+                  _vm._v(_vm._s(producto.proveedor.nombre))
+                ])
+              ]),
               _vm._v(" "),
               producto.estado === 1 ? _c("td", [_vm._m(1, true)]) : _vm._e(),
               _vm._v(" "),
@@ -10023,8 +10119,8 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.fproductos, function(pro) {
-              return _c("tr", { key: pro.id }, [
+            _vm._l(_vm.fproductos, function(pro, index) {
+              return _c("tr", { key: index }, [
                 _c("th", [
                   _c("img", {
                     staticClass: "border border-secondary",
@@ -10032,7 +10128,14 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(pro.nombre))]),
+                _c("td", [
+                  _vm._v("\n                        " + _vm._s(pro.nombre)),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "font-italic" }, [
+                    _vm._v("prov: " + _vm._s(pro.proveedor.nombre) + " ")
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("td", [_vm._v("$" + _vm._s(pro.precio.precioBase))]),
                 _vm._v(" "),
@@ -10103,7 +10206,7 @@ var render = function() {
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
-                          return _vm.deleteLinea(_vm.index)
+                          return _vm.deleteLinea(index)
                         }
                       }
                     },
@@ -10192,14 +10295,119 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-4" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("h5", { staticClass: "mt-4" }, [
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.cuentaCliente.cliente.nombre) +
+              "\n            "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }, [
+        _c(
+          "div",
+          {
+            staticClass:
+              "alert alert-primary p-3 border border-primary text-center",
+            attrs: { role: "alert" }
+          },
+          [
+            _c("p", { staticClass: "font-weight-bolder" }, [
+              _vm._v("\n                    Saldo\n                ")
+            ]),
+            _vm._v(" "),
+            _c("h3", [_vm._v("$" + _vm._s(_vm.cuentaCliente.saldo))])
+          ]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("table", { staticClass: "table table-striped" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.cuentaCliente.ventas, function(mov, index) {
+              return _c("tr", { key: index }, [
+                _c("th", { attrs: { scope: "row" } }, [
+                  _vm._v(_vm._s(mov.created_at.substring(0, 11)))
+                ]),
+                _vm._v(" "),
+                _vm._m(3, true),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-danger" }, [
+                  _vm._v(
+                    "\n                            $" +
+                      _vm._s(mov.total) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-success" })
+              ])
+            }),
+            0
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("Cuenta Cliente")])])
+    return _c("h2", [
+      _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
+      _vm._v(" Cuenta Cliente")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Fecha")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Tipo C.")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Debe")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Haber")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", [
+      _c("span", { staticClass: "badge badge-success" }, [_vm._v("Venta")])
+    ])
   }
 ]
 render._withStripped = true
@@ -10442,6 +10650,28 @@ var render = function() {
           _c(
             "div",
             [
+              _c(
+                "router-link",
+                {
+                  attrs: {
+                    to: {
+                      name: "cuentaCliente",
+                      params: { id: _vm.cliente.id }
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "button",
+                    { staticClass: "btn btn-outline-primary btn-sm" },
+                    [
+                      _vm._v("\n                            Cuenta Cliente "),
+                      _c("i", { staticClass: "fas fa-file-invoice-dollar" })
+                    ]
+                  )
+                ]
+              ),
+              _vm._v(" "),
               _c(
                 "router-link",
                 {
