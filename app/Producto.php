@@ -6,6 +6,7 @@ use App\Categoria;
 use App\Proveedor;
 use App\FichaDeStock;
 use App\Precio;
+use App\LineaDeVenta;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,5 +35,9 @@ class Producto extends Model
         return $this->hasOne(Precio::class, 'id', 'precio_id');
     }
 
+    public function cantidadVendida()
+    {
+        return $this->hasMany(LineaDeVenta::class);
+    }
    
 }

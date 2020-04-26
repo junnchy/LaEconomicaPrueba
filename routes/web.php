@@ -65,6 +65,10 @@ Route::resource('/ventas', 'VentaController')->middleware('auth');
 
 Route::resource('/cuentaClientes', 'CuentaClienteController')->middleware('auth');
 
+Route::resource('/caja', 'CajaController')->middleware('auth');
+
+Route::resource('/pago', 'PagoController')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');

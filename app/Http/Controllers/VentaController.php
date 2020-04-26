@@ -44,6 +44,7 @@ class VentaController extends Controller
         $venta->ctac_id = $request->cliente['cuenta_id'];
         $venta->fecha_emision = $request->fecha_emision;
         $venta->total = $request->total;
+        $venta->saldo = $venta->total;
         $venta->formaDePago_id = $request->formaDePago['id'];
         $venta->subtotal = $request->subtotal;
         $venta->iva = $request->iva;

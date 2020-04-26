@@ -114,8 +114,14 @@ class ProductosController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $producto = Producto::with(['proveedor','categoria', 'fichaStock.lineas', 'precio', 'precios'])
+            $producto = Producto::with(['proveedor','categoria', 'fichaStock.lineas', 'precio', 'precios', 'cantidadVendida'])
             ->findOrFail($id);
+            /* Calculo de cantidad Vendida */
+            $cont = 0;
+            foreach ($producto['cantidadVendida'] as $ldv) {
+                $cont = $cont + $ldv['cantidad'];
+            }
+            $producto->cv = $cont;
             $producto->precio->descuentoProducto = [
                 $producto->precio->descuentoProducto_1, 
                 $producto->precio->descuentoProducto_2, 

@@ -16,6 +16,8 @@ import formasDePago from './modules/comercial/formasDePago'
 import precios from './modules/comercial/precios'
 import ventas from './modules/comercial/ventas'
 import cuentaCliente from './modules/comercial/cuentaCliente'
+import pagos from './modules/comercial/pagos'
+import cajas from './modules/comercial/cajas'
 
 
 Vue.use(Vuex)
@@ -36,7 +38,9 @@ export default new Vuex.Store({
     mapas,
     precios,
     ventas,
-    cuentaCliente
+    cuentaCliente,
+    pagos,
+    cajas
   },
   state: {
     actual: 0,

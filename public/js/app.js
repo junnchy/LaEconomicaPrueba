@@ -66959,6 +66959,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/comercial/precios */ "./resources/js/store/modules/comercial/precios.js");
 /* harmony import */ var _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/comercial/ventas */ "./resources/js/store/modules/comercial/ventas.js");
 /* harmony import */ var _modules_comercial_cuentaCliente__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/comercial/cuentaCliente */ "./resources/js/store/modules/comercial/cuentaCliente.js");
+/* harmony import */ var _modules_comercial_pagos__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/comercial/pagos */ "./resources/js/store/modules/comercial/pagos.js");
+/* harmony import */ var _modules_comercial_cajas__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/comercial/cajas */ "./resources/js/store/modules/comercial/cajas.js");
+
+
 
 
 
@@ -66994,7 +66998,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     mapas: _modules_mapas__WEBPACK_IMPORTED_MODULE_9__["default"],
     precios: _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__["default"],
     ventas: _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__["default"],
-    cuentaCliente: _modules_comercial_cuentaCliente__WEBPACK_IMPORTED_MODULE_17__["default"]
+    cuentaCliente: _modules_comercial_cuentaCliente__WEBPACK_IMPORTED_MODULE_17__["default"],
+    pagos: _modules_comercial_pagos__WEBPACK_IMPORTED_MODULE_18__["default"],
+    cajas: _modules_comercial_cajas__WEBPACK_IMPORTED_MODULE_19__["default"]
   },
   state: {
     actual: 0,
@@ -67536,6 +67542,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/comercial/cajas.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/store/modules/comercial/cajas.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {},
+  mutations: {},
+  actions: {}
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/comercial/cuentaCliente.js":
 /*!***************************************************************!*\
   !*** ./resources/js/store/modules/comercial/cuentaCliente.js ***!
@@ -67868,6 +67892,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return fdpfil;
     }
   }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/comercial/pagos.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/store/modules/comercial/pagos.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {},
+  mutations: {},
+  actions: {}
 });
 
 /***/ }),
@@ -68889,7 +68931,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (state.filter.query.length >= 1) {
         return pfil.filter(function (producto) {
-          return producto.nombre.toLowerCase().includes(state.filter.query);
+          return producto.nombre.toLowerCase().includes(state.filter.query) || producto.id.toString().includes(state.filter.query);
         });
       } else {
         return pfil;

@@ -160,7 +160,7 @@ export default {
               pfil = pfil.filter(producto => producto.proveedor_id === state.filter.proveedor)
             }
             if(state.filter.query.length >= 1){
-              return pfil.filter(producto => producto.nombre.toLowerCase().includes(state.filter.query))
+              return pfil.filter(producto => producto.nombre.toLowerCase().includes(state.filter.query) || producto.id.toString().includes(state.filter.query))
             }else{
               return pfil
             }   
