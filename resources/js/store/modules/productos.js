@@ -63,6 +63,12 @@ export default {
           if (error.categoria_id != undefined) {
               state.errors.categoria_id = error.categoria_id
           }
+        },
+        resetFilters(state){
+          state.filter.query = '',
+          state.filter.categoria = 0,
+          state.filter.proveedor = 0,
+          state.filter.estado = null
         }
     },
     actions:{

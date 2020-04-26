@@ -22,7 +22,7 @@
                     </button>
                 </div> -->
                 <div class="p-2" v-if="$store.state.ventas.status === 200">
-                    <router-link :to="{name:'listadoPresupuestos'}" >
+                    <router-link :to="{name:'nuevaEntrega'}" >
                         <button type="button" 
                         class="btn btn-outline-primary">
                             Finalizar <i class="fas fa-check-circle"></i>
@@ -72,6 +72,7 @@ export default {
         }
     },
     created(){
+        this.$store.commit('productos/resetFilters')
         this.getVendedorActual(this.$userId)
         this.getSetFechaActual()
         this.cambiarEstado(0)

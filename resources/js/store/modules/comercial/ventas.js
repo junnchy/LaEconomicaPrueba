@@ -3,6 +3,7 @@ export default {
     state:{
         status: 0,
         respuesta: null,
+        ventaActual: null,
     },
     mutations: {
         setStatus(state, status){
@@ -11,6 +12,9 @@ export default {
         setRespuesta(state, respuesta){
             state.respuesta = respuesta
         },
+        setVentaActual(state, venta){
+            state.ventaActual = venta
+        }
     },
     actions:{
         agregarVenta({commit}, venta){
@@ -23,6 +27,7 @@ export default {
             axios.post('http://127.0.0.1:8000/ventas', venta).then(function (response) {
                 commit('setRespuesta', response.data.message)
                 commit('setStatus',response.status)
+                commit('setVentaActual', response.data)
                 Vue.$toast.open(response.data.message);
             })
             .catch(function (error) {

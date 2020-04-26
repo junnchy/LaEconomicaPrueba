@@ -83,6 +83,7 @@ export default {
         }
     },
     created(){
+        this.$store.commit('productos/resetFilters')
         this.getVendedorActual(this.$userId)
         this.getSetFechaActual()
         this.cambiarEstado(0)

@@ -144,6 +144,11 @@ const routes = [
       name: 'cuentaCliente',
       component: () => import(/* webpackChunkName: "about" */ '../views/CuentaCliente.vue')
     },
+    {
+      path: '/nuevaEntrega',
+      name: 'nuevaEntrega',
+      component: () => import(/* webpackChunkName: "about" */ '../views/NuevaEntrega.vue')
+    },
 ]
 
 

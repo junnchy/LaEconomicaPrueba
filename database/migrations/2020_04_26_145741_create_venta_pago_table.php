@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCajasTable extends Migration
+class CreateVentaPagoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateCajasTable extends Migration
      */
     public function up()
     {
-        Schema::create('cajas', function (Blueprint $table) {
+        Schema::create('venta_pago', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->float('pesos')->default(0);
-            $table->float('dolares')->default(0);
+            $table->unsignedBigInteger('venta_id');
+            $table->foreign('venta_id')->references('id')->on('ventas');
+            $table->unsignedBigInteger('pago_id');
+            $table->foreign('pago_id')->references('id')->on('pagos');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateCajasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cajas');
+        Schema::dropIfExists('venta_pago');
     }
 }

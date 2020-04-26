@@ -66920,6 +66920,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/CuentaCliente.vue */ "./resources/js/views/CuentaCliente.vue"));
   }
+}, {
+  path: '/nuevaEntrega',
+  name: 'nuevaEntrega',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/NuevaEntrega.vue */ "./resources/js/views/NuevaEntrega.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -68221,7 +68227,8 @@ __webpack_require__.r(__webpack_exports__);
   namespaced: true,
   state: {
     status: 0,
-    respuesta: null
+    respuesta: null,
+    ventaActual: null
   },
   mutations: {
     setStatus: function setStatus(state, status) {
@@ -68229,6 +68236,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     setRespuesta: function setRespuesta(state, respuesta) {
       state.respuesta = respuesta;
+    },
+    setVentaActual: function setVentaActual(state, venta) {
+      state.ventaActual = venta;
     }
   },
   actions: {
@@ -68244,6 +68254,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('http://127.0.0.1:8000/ventas', venta).then(function (response) {
         commit('setRespuesta', response.data.message);
         commit('setStatus', response.status);
+        commit('setVentaActual', response.data);
         Vue.$toast.open(response.data.message);
       })["catch"](function (error) {
         console.log('algo va mal');
@@ -68763,6 +68774,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     if (error.categoria_id != undefined) {
       state.errors.categoria_id = error.categoria_id;
     }
+  }), _defineProperty(_mutations, "resetFilters", function resetFilters(state) {
+    state.filter.query = '', state.filter.categoria = 0, state.filter.proveedor = 0, state.filter.estado = null;
   }), _mutations),
   actions: {
     getProductos: function () {
@@ -69496,8 +69509,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
