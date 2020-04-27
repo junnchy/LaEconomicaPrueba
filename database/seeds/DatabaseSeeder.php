@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DatosEmpresaTableSeeder::class);
         $this->call(FormasDePagoSeeder::class);
         $this->call(ProductosClientesFillSeeder::class);
+        $this->call(BancosSeeder::class);
+        $this->call(TarjetasSeeder::class);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');        
     }
 }

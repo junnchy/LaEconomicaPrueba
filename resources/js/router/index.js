@@ -149,6 +149,21 @@ const routes = [
       name: 'nuevaEntrega',
       component: () => import(/* webpackChunkName: "about" */ '../views/NuevaEntrega.vue')
     },
+    {
+      path: '/cajas/menu',
+      name: 'menuCajas',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuCajas.vue')
+    },
+    {
+      path: '/menuBancos',
+      name: 'menuBancos',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuBancos.vue')
+    },
+    {
+      path: '/menuTarjetas',
+      name: 'menuTarjetas',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuTarjetas.vue')
+    },
 ]
 
 

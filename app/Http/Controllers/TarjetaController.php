@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Caja;
-use App\CarteraCheque;
-use App\CarteraCupone;
+use App\Tarjeta;
 
-class CajaController extends Controller
+class TarjetaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,9 @@ class CajaController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $cajas = Caja::all();
-            return response()->json($cajas);
+        if($request->ajax()){
+            $tarjetas = Tarjeta::all();
+            return response()->json($tarjetas);
         }
     }
 
@@ -41,21 +39,14 @@ class CajaController extends Controller
     public function store(Request $request)
     {
         if($request->ajax()){
-            $caja = new Caja();
-            $caja->pesos = 0;
-            $caja->dolares = 0;
-            $caja->save();
-            
-            $cCheq = new CarteraCheque();
-            $cCheq->caja_id = $caja->id;
-            $cCheq-> save();
-
-            $cCup = new CarteraCupone();
-            $cCup->caja_id = $caja->id;
-            $cCup-> save();
+            $tarjeta = new Tarjeta();
+            $tarjeta->nombre = $request->nombre;
+            $tarjeta->estado = $request->estado;
+            $tarjeta->save();
 
             return response()->json([
-                'message'=> 'Caja Creada'
+            'tarjeta' => $tarjeta,
+            'message' => 'Tarjeta Agregada'
             ], 200);
         }
     }

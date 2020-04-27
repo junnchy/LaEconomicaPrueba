@@ -69,15 +69,21 @@ Route::resource('/caja', 'CajaController')->middleware('auth');
 
 Route::resource('/pago', 'PagoController')->middleware('auth');
 
+Route::resource('/bancos', 'BancoController')->middleware('auth');
+
+Route::resource('/tarjetas', 'TarjetaController')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');
 
 Route::get('/productos/{any}', 'SpaController@productos')->where('any', '.*')->middleware('auth');
 
-Route::get('/clientes/{any}', 'SpaController@clientes')->where('any', '.*')->middleware('auth');\
+Route::get('/clientes/{any}', 'SpaController@clientes')->where('any', '.*')->middleware('auth');
 
 Route::get('/comercial/{any}', 'SpaController@comercial')->where('any', '.*')->middleware('auth');
+
+Route::get('/cajas/{any}', 'SpaController@caja')->where('any', '.*')->middleware('auth');
 
 Route::get('/imprimirPresupuesto/{id}', 'PresupuestoController@imprimir')->where('id', '[0-9]+');
 

@@ -92,6 +92,9 @@
                         </div>
                     </li>
                     <li>
+                        <a class="nav-link" href="/cajas/menu" class="">Caja y Pagos</a>
+                    </li>
+                    <li>
                         <a class="nav-link" href="/proveedores/" class="">Proveedores</a>
                     </li>
                     <li class="nav-item dropdown">

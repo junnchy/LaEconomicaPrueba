@@ -1,0 +1,6 @@
+[
+    {"id": "1", "nombre": "Visa", "icono": "<i class='fab fa-cc-visa'></i>", "estado": "1"},
+    {"id": "2", "nombre": "MasterCard", "icono": "<i class='fab fa-cc-mastercard'></i>", "estado": "1"},
+    {"id": "3", "nombre": "Naranja", "icono": "<i class='fas fa-credit-card'></i>", "estado": "1"},
+    {"id": "4", "nombre": "American Express", "icono": "<i class='fab fa-cc-amex'></i>", "estado": "1"}
+]

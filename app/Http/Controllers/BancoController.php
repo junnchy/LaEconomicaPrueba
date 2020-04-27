@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Caja;
-use App\CarteraCheque;
-use App\CarteraCupone;
 
-class CajaController extends Controller
+use App\Banco;
+
+class BancoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class CajaController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $cajas = Caja::all();
-            return response()->json($cajas);
+        if($request->ajax()){
+            $bancos = Banco::orderBy('denominacion')->get();
+            return response()->json($bancos);
         }
     }
 
@@ -40,24 +39,7 @@ class CajaController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax()){
-            $caja = new Caja();
-            $caja->pesos = 0;
-            $caja->dolares = 0;
-            $caja->save();
-            
-            $cCheq = new CarteraCheque();
-            $cCheq->caja_id = $caja->id;
-            $cCheq-> save();
-
-            $cCup = new CarteraCupone();
-            $cCup->caja_id = $caja->id;
-            $cCup-> save();
-
-            return response()->json([
-                'message'=> 'Caja Creada'
-            ], 200);
-        }
+        //
     }
 
     /**

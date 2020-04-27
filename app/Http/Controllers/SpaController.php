@@ -25,4 +25,9 @@ class SpaController extends Controller
     {
         return view('comercial.home');
     }
+
+    public function caja()
+    {
+        return view('caja.home');
+    }
 }

@@ -78,6 +78,7 @@ Vue.component('componente-filtroproductos', require('./components/ComponenteFilt
 Vue.component('componente-LNBAddCliente', require('./components/LNBAddCliente.vue').default);
 Vue.component('componente-menuboton', require('../js/components/BotonMenu.vue').default);
 Vue.component('componente-notificacionesnavbar', require('../js/components/NavBarNotificaciones.vue').default);
+Vue.component('componente-cajas', require('../js/components/ComponenteCajas.vue').default);
 
 
 const app = new Vue({
