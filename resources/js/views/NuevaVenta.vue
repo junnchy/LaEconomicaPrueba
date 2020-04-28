@@ -81,11 +81,12 @@ export default {
     destroyed(){
         this.resetStatus()
         this.resetResp(null)
+        this.getVenta(this.ventaActual.venta.id)
     },
     methods:{
         ...mapActions(['cambiarEstado']),
         ...mapActions('usuarios', ['getVendedorActual']),
-        ...mapActions('ventas', ['agregarVenta', 'resetStatus', 'resetResp']),
+        ...mapActions('ventas', ['agregarVenta', 'resetStatus', 'resetResp', 'getVenta']),
         getSetFechaActual(){
             var today = new Date();
             var dd = String(today.getDate());
@@ -98,6 +99,7 @@ export default {
     },
     computed:{
         ...mapState('usuarios', ['vendedorActual']),
+        ...mapState('ventas', ['ventaActual']),
         vendedorC(){
             this.nvta.vendedor = this.vendedorActual
         },

@@ -75,6 +75,8 @@ class VentaController extends Controller
         $cc->saldo = $cc->saldo +  $venta->total;
         $cc->save();
 
+       
+
         return response()->json([
             'venta' => $venta,
             'message' => 'Venta Realizada'
@@ -87,9 +89,12 @@ class VentaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $venta = Venta::with('fdp', 'cuenta.cliente')->findOrFail($id);
+            return response()->json($venta);
+        }
     }
 
     /**

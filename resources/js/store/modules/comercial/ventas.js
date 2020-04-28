@@ -39,6 +39,16 @@ export default {
                 });
             });
         },
+        async getVenta({commit}, id){
+            let venta = await axios.get(`http://127.0.0.1:8000/ventas/${id}`).then(response => {    
+            console.log(response.data)
+            commit('setVentaActual', response.data)
+          })
+          .catch(function (error) {
+            console.log('algo va mal')
+            console.log(error.response.data)
+          });
+        },
         resetResp({commit}, resp){
             commit('setRespuesta', resp)
         },

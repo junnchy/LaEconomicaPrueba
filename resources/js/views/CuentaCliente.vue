@@ -37,6 +37,7 @@
                             <th scope="col">Tipo C.</th>
                             <th scope="col">Debe</th>
                             <th scope="col">Haber</th>
+                            <th scope="col">Saldo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +52,9 @@
                             <!-- <td>{{mov.fdp.descripcion}}</td> -->
                             <td class="text-success">
 
+                            </td>
+                            <td>
+                                {{mov.saldo}}
                             </td>
                         </tr>
                     </tbody>

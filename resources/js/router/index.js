@@ -164,6 +164,11 @@ const routes = [
       name: 'menuTarjetas',
       component: () => import(/* webpackChunkName: "about" */ '../views/MenuTarjetas.vue')
     },
+    {
+      path: '/nuevoPago',
+      name: 'nuevoPago',
+      component: () => import(/* webpackChunkName: "about" */ '../views/NuevoPago.vue')
+    },
 ]
 
 

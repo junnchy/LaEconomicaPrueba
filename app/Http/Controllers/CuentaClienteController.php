@@ -51,7 +51,7 @@ class CuentaClienteController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $cc = CuentaCliente::with('ventas.fdp', 'cliente')->findOrFail($id);
+            $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos')->findOrFail($id);
             return response()->json($cc);
         }
     }

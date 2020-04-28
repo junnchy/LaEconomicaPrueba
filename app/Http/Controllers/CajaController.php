@@ -17,7 +17,12 @@ class CajaController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $cajas = Caja::all();
+            $cajas = Caja::with('pagos')->get();
+            foreach ($cajas as $caja) {
+                foreach ($caja->pagos as $pago) {
+                    $caja->pesos = $caja->pesos + $pago->pesos;
+                }
+            }
             return response()->json($cajas);
         }
     }

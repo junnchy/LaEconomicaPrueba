@@ -67064,6 +67064,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/MenuTarjetas.vue */ "./resources/js/views/MenuTarjetas.vue"));
   }
+}, {
+  path: '/nuevoPago',
+  name: 'nuevoPago',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/NuevoPago.vue */ "./resources/js/views/NuevoPago.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -67103,7 +67109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/comercial/precios */ "./resources/js/store/modules/comercial/precios.js");
 /* harmony import */ var _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/comercial/ventas */ "./resources/js/store/modules/comercial/ventas.js");
 /* harmony import */ var _modules_comercial_cuentaCliente__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/comercial/cuentaCliente */ "./resources/js/store/modules/comercial/cuentaCliente.js");
-/* harmony import */ var _modules_comercial_pagos__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/comercial/pagos */ "./resources/js/store/modules/comercial/pagos.js");
+/* harmony import */ var _modules_Caja_pagos__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/Caja/pagos */ "./resources/js/store/modules/Caja/pagos.js");
 /* harmony import */ var _modules_Caja_bancos__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/Caja/bancos */ "./resources/js/store/modules/Caja/bancos.js");
 /* harmony import */ var _modules_Caja_tarjetas__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/Caja/tarjetas */ "./resources/js/store/modules/Caja/tarjetas.js");
 /* harmony import */ var _modules_Caja_caja__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./modules/Caja/caja */ "./resources/js/store/modules/Caja/caja.js");
@@ -67147,7 +67153,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     precios: _modules_comercial_precios__WEBPACK_IMPORTED_MODULE_15__["default"],
     ventas: _modules_comercial_ventas__WEBPACK_IMPORTED_MODULE_16__["default"],
     cuentaCliente: _modules_comercial_cuentaCliente__WEBPACK_IMPORTED_MODULE_17__["default"],
-    pagos: _modules_comercial_pagos__WEBPACK_IMPORTED_MODULE_18__["default"],
+    pagos: _modules_Caja_pagos__WEBPACK_IMPORTED_MODULE_18__["default"],
     bancos: _modules_Caja_bancos__WEBPACK_IMPORTED_MODULE_19__["default"],
     tarjetas: _modules_Caja_tarjetas__WEBPACK_IMPORTED_MODULE_20__["default"],
     cajas: _modules_Caja_caja__WEBPACK_IMPORTED_MODULE_21__["default"]
@@ -67363,6 +67369,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           dispatch = _ref2.dispatch;
       axios.post('http://127.0.0.1:8000/caja', caja).then(function (response) {
         dispatch('getCajas');
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/Caja/pagos.js":
+/*!**************************************************!*\
+  !*** ./resources/js/store/modules/Caja/pagos.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    pagaos: []
+  },
+  mutations: {},
+  actions: {
+    agregarPago: function agregarPago(_ref, pago) {
+      var commit = _ref.commit;
+      axios.post('http://127.0.0.1:8000/pago', pago).then(function (response) {
         Vue.$toast.open(response.data.message);
       })["catch"](function (error) {
         console.log(error.response.data);
@@ -68328,24 +68367,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
-/***/ "./resources/js/store/modules/comercial/pagos.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/store/modules/comercial/pagos.js ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  namespaced: true,
-  state: {},
-  mutations: {},
-  actions: {}
-});
-
-/***/ }),
-
 /***/ "./resources/js/store/modules/comercial/precios.js":
 /*!*********************************************************!*\
   !*** ./resources/js/store/modules/comercial/precios.js ***!
@@ -68649,6 +68670,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
@@ -68691,12 +68720,48 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    resetResp: function resetResp(_ref2, resp) {
-      var commit = _ref2.commit;
+    getVenta: function () {
+      var _getVenta = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref2, id) {
+        var commit, venta;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref2.commit;
+                _context.next = 3;
+                return axios.get("http://127.0.0.1:8000/ventas/".concat(id)).then(function (response) {
+                  console.log(response.data);
+                  commit('setVentaActual', response.data);
+                })["catch"](function (error) {
+                  console.log('algo va mal');
+                  console.log(error.response.data);
+                });
+
+              case 3:
+                venta = _context.sent;
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function getVenta(_x, _x2) {
+        return _getVenta.apply(this, arguments);
+      }
+
+      return getVenta;
+    }(),
+    resetResp: function resetResp(_ref3, resp) {
+      var commit = _ref3.commit;
       commit('setRespuesta', resp);
     },
-    resetStatus: function resetStatus(_ref3) {
-      var commit = _ref3.commit;
+    resetStatus: function resetStatus(_ref4) {
+      var commit = _ref4.commit;
       commit('setStatus', 0);
     }
   }
@@ -69935,8 +70000,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

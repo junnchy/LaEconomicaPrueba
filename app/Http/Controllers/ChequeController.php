@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Pago;
-use App\Venta;
 
-class PagoController extends Controller
+class ChequeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,29 +34,7 @@ class PagoController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->ajax()){
-            $pago = new Pago();
-            $pago->importe = $request->importe;
-            $pago->pesos = $request->pesos;
-            $pago->dolares = $request->dolares;
-            $pago->caja_id = 1;
-            $pago->ctac_id = $request->ctac_id;
-            $pago->save();
-            $venta = Venta::findOrFail($request->vta_id);
-            $pago->ventas()->attach($venta,[]);
-
-            /* Hay que ajustar... que pasa el el pago es para varias ventas -- generalizar */
-            $venta->saldo = $venta->saldo - $pago->importe;
-            $venta->save();
-
-
-            return response()->json([
-                'message' => 'Pago Cargado',
-                'pago'=> $pago
-            ], 200);
-
-
-        }
+        //
     }
 
     /**
