@@ -20,6 +20,6 @@ class Venta extends Model
     }
 
     public function pago(){
-        return $this->hasMany(Pago::class);
+        return $this->belongsToMany(Pago::class);
     }
 }

@@ -16,7 +16,7 @@ class CuentaCliente extends Model
 
     public function pagos()
     {   
-        return $pagos = $this->hasMany(Pago::class, 'ctac_id', 'id');
+        return $pagos = $this->hasMany(Pago::class, 'ctac_id', 'id')->orderBy('created_at', 'desc');
     }
 
     public function cliente()

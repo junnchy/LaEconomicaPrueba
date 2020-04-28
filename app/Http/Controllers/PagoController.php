@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CuentaCliente;
 use Illuminate\Http\Request;
 use App\Pago;
 use App\Venta;
@@ -50,6 +51,13 @@ class PagoController extends Controller
             /* Hay que ajustar... que pasa el el pago es para varias ventas -- generalizar */
             $venta->saldo = $venta->saldo - $pago->importe;
             $venta->save();
+
+            $cta = CuentaCliente::with('ventas')->findOrFail($pago->ctac_id);
+            $cta->saldo = 0;
+            foreach ($cta->ventas as $venta) {
+                $cta->saldo = $cta->saldo + $venta->saldo; 
+            }
+            $cta->save();
 
 
             return response()->json([

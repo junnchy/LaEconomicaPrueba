@@ -41,20 +41,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(mov, index) in cuentaCliente.ventas" :key="index">
-                            <th scope="row">{{mov.created_at.substring(0,11)}}</th>
+                        <tr v-for="(movimiento, index) in cuentaCliente.movimientos" :key="index">
+                            <th scope="row">{{movimiento.created_at}}</th>
                             <td>
-                                <span class="badge badge-success">Venta</span>
+                                <span class="badge badge-primary" v-if="movimiento.tipo === 'Venta'">{{movimiento.tipo}}</span>
+                                <span class="badge badge-success" v-if="movimiento.tipo === 'Pago'">{{movimiento.tipo}}</span>
                             </td>
                             <td class="text-danger">
-                                ${{mov.total}}
+                                <p v-if="movimiento.tipo === 'Venta'">${{movimiento.total}}</p>
                             </td>
                             <!-- <td>{{mov.fdp.descripcion}}</td> -->
                             <td class="text-success">
-
+                                 <p v-if="movimiento.tipo === 'Pago'">${{movimiento.importe}}</p>
                             </td>
                             <td>
-                                {{mov.saldo}}
+                                 <p v-if="movimiento.tipo === 'Venta'">${{movimiento.saldo}}</p>
                             </td>
                         </tr>
                     </tbody>

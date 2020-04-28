@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 use App\CuentaCliente;
 
@@ -51,7 +52,23 @@ class CuentaClienteController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos')->findOrFail($id);
+            $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos', 'ventas.pago' )->findOrFail($id);
+            
+            $cc->m = collect([]);
+            
+            foreach($cc->ventas as $venta){
+                if($venta->pago != null){
+                    foreach($venta->pago as $pago){
+                        $pago->tipo = "Pago";
+                        $cc->m->push($pago);
+                    }
+                }
+                $venta->tipo = "Venta";
+                $cc->m->push($venta);
+            }
+
+            $cc->movimientos = $cc->m->sortBy('created_at');
+
             return response()->json($cc);
         }
     }

@@ -2872,6 +2872,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -11253,30 +11254,42 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.cuentaCliente.ventas, function(mov, index) {
+            _vm._l(_vm.cuentaCliente.movimientos, function(movimiento, index) {
               return _c("tr", { key: index }, [
                 _c("th", { attrs: { scope: "row" } }, [
-                  _vm._v(_vm._s(mov.created_at.substring(0, 11)))
+                  _vm._v(_vm._s(movimiento.created_at))
                 ]),
-                _vm._v(" "),
-                _vm._m(3, true),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-danger" }, [
-                  _vm._v(
-                    "\n                            $" +
-                      _vm._s(mov.total) +
-                      "\n                        "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-success" }),
                 _vm._v(" "),
                 _c("td", [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(mov.saldo) +
-                      "\n                        "
-                  )
+                  movimiento.tipo === "Venta"
+                    ? _c("span", { staticClass: "badge badge-primary" }, [
+                        _vm._v(_vm._s(movimiento.tipo))
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  movimiento.tipo === "Pago"
+                    ? _c("span", { staticClass: "badge badge-success" }, [
+                        _vm._v(_vm._s(movimiento.tipo))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-danger" }, [
+                  movimiento.tipo === "Venta"
+                    ? _c("p", [_vm._v("$" + _vm._s(movimiento.total))])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-success" }, [
+                  movimiento.tipo === "Pago"
+                    ? _c("p", [_vm._v("$" + _vm._s(movimiento.importe))])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  movimiento.tipo === "Venta"
+                    ? _c("p", [_vm._v("$" + _vm._s(movimiento.saldo))])
+                    : _vm._e()
                 ])
               ])
             }),
@@ -11323,14 +11336,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Saldo")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("span", { staticClass: "badge badge-success" }, [_vm._v("Venta")])
     ])
   }
 ]
