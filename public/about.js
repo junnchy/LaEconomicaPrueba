@@ -1105,11 +1105,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  data: function data() {
+    return {
+      tarjeta: null
+    };
   },
   props: {
     ncupon: {
@@ -1120,12 +1129,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getTarjetas();
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('tarjetas', ['tarjetas'])),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('tarjetas', ['getTarjetas']), {
-    setTarjeta: function setTarjeta(val) {
-      ncupon.tarjeta_id = val.id;
+  destroyed: function destroyed() {
+    this.tarjeta = null;
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('tarjetas', ['tarjetas']), {
+    defTarjeta: function defTarjeta() {
+      if (this.tarjeta != null) {
+        this.ncupon.tarjeta_id = this.tarjeta.id;
+      }
     }
-  })
+  }),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('tarjetas', ['getTarjetas']))
 });
 
 /***/ }),
@@ -2077,6 +2091,16 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DatosCuponT__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DatosCuponT */ "./resources/js/components/DatosCuponT.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+var _data$destroyed$props;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2117,9 +2141,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_data$destroyed$props = {
   data: function data() {
     return {
+      carga: false,
+      rta: 'Cupon Cargado',
       ncupon: {
         nro_cupon: null,
         importe: 0,
@@ -2127,6 +2153,9 @@ __webpack_require__.r(__webpack_exports__);
         tarjeta_id: 0
       }
     };
+  },
+  destroyed: function destroyed() {
+    this.carga = false;
   },
   props: {
     cupones: {
@@ -2140,11 +2169,19 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     LNB: function LNB() {
       $('#MenuLateral').collapse('show');
+    },
+    cargarCupon: function cargarCupon() {
+      this.cupones.push(this.ncupon);
+      this.carga = true;
+      this.ncupon = {
+        nro_cupon: null,
+        importe: 0,
+        cuotas: 0,
+        tarjeta_id: 0
+      };
     }
-  },
-  destroyed: function destroyed() {},
-  computed: {}
-});
+  }
+}, _defineProperty(_data$destroyed$props, "destroyed", function destroyed() {}), _defineProperty(_data$destroyed$props, "computed", {}), _data$destroyed$props);
 
 /***/ }),
 
@@ -3027,7 +3064,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
     },
     deleteLinea: function deleteLinea(index) {
-      /* Arreglar */
       this.fproductos.splice(index, 1);
       Vue.$toast.open({
         message: 'Producto Borrado',
@@ -4794,6 +4830,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5435,6 +5496,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5464,11 +5553,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.npago.ctac_id = this.ventaActual.ctac_id;
     this.npago.vta_id = this.ventaActual.id;
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])('ventas', ['getVenta']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])('pagos', ['agregarPago'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])('ventas', ['getVenta']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])('pagos', ['agregarPago']), {
+    deleteCupon: function deleteCupon(index) {
+      this.npago.cupones.splice(index, 1);
+      Vue.$toast.open({
+        message: 'Cupon Borrado',
+        type: 'error'
+      });
+    }
+  }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('ventas', ['ventaActual']), {
     importe: function importe() {
-      if (this.npago.pesos >= 0) {
-        this.npago.importe = this.npago.pesos;
+      var _this = this;
+
+      this.npago.importe = 0;
+
+      if (this.npago.pesos > 0) {
+        this.npago.importe = parseFloat(this.npago.importe) + parseFloat(this.npago.pesos);
+      }
+
+      if (this.npago.cupones.length > 0) {
+        this.npago.cupones.forEach(function (cupon) {
+          _this.npago.importe = parseFloat(_this.npago.importe) + parseFloat(cupon.importe);
+        });
       }
 
       return this.npago.importe;
@@ -8179,7 +8286,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-6" }, [
+      _c("div", { staticClass: "col-12" }, [
         _c(
           "div",
           { staticClass: "form-group" },
@@ -8206,18 +8313,20 @@ var render = function() {
                 }
               ]),
               model: {
-                value: _vm.ncupon.tarjeta,
+                value: _vm.tarjeta,
                 callback: function($$v) {
-                  _vm.$set(_vm.ncupon, "tarjeta", $$v)
+                  _vm.tarjeta = $$v
                 },
-                expression: "ncupon.tarjeta"
+                expression: "tarjeta"
               }
             })
           ],
           1
         )
-      ]),
-      _vm._v(" "),
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row mt-2" }, [
       _c("div", { staticClass: "col-6" }, [
         _c("label", [_vm._v("Cantidad de cuotas")]),
         _vm._v(" "),
@@ -8226,26 +8335,26 @@ var render = function() {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.ncupon.importe,
-              expression: "ncupon.importe"
+              value: _vm.ncupon.cuotas,
+              expression: "ncupon.cuotas"
             }
           ],
           staticClass: "form-control",
           attrs: { type: "number", name: "nr_cupon", placeholder: "Cuotas" },
-          domProps: { value: _vm.ncupon.importe },
+          domProps: { value: _vm.ncupon.cuotas },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.ncupon, "importe", $event.target.value)
+              _vm.$set(_vm.ncupon, "cuotas", $event.target.value)
             }
           }
         })
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "row mt-2" }, [
       _c("div", { staticClass: "col-6" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Numero Cupon")]),
@@ -8287,7 +8396,12 @@ var render = function() {
             }
           ],
           staticClass: "form-control",
-          attrs: { type: "number", name: "nr_cupon", placeholder: "Importe" },
+          attrs: {
+            type: "number",
+            name: "nr_cupon",
+            placeholder: "Importe",
+            step: "0.01"
+          },
           domProps: { value: _vm.ncupon.importe },
           on: {
             input: function($event) {
@@ -8299,7 +8413,8 @@ var render = function() {
           }
         })
       ])
-    ])
+    ]),
+    _vm._v("\n    " + _vm._s(_vm.defTarjeta) + "\n")
   ])
 }
 var staticRenderFns = []
@@ -10213,13 +10328,69 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
+                _vm.carga
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "alert alert-success alert-dismissible fade show"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.rta) +
+                            " \n                        "
+                        ),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "close",
+                            attrs: {
+                              type: "button",
+                              "data-dismiss": "alert",
+                              "aria-label": "Close"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.carga = false
+                              }
+                            }
+                          },
+                          [
+                            _c("span", { attrs: { "aria-hidden": "true" } }, [
+                              _vm._v("×")
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("div", { staticClass: "container" }, [
                   _c(
                     "form",
                     [
                       _c("fdatos", { attrs: { ncupon: _vm.ncupon } }),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-success btn-block sticky-button",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.cargarCupon()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Guardar Cupon "
+                          ),
+                          _c("i", { staticClass: "fas fa-check-circle" })
+                        ]
+                      )
                     ],
                     1
                   )
@@ -10261,22 +10432,6 @@ var staticRenderFns = [
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-success btn-block sticky-button",
-        attrs: { type: "submit" }
-      },
-      [
-        _vm._v("\n                                Guardar Cambios "),
-        _c("i", { staticClass: "fas fa-check-circle" })
-      ]
-    )
   }
 ]
 render._withStripped = true
@@ -14930,21 +15085,42 @@ var render = function() {
       _vm._l(_vm.cajas, function(caja, index) {
         return _c("div", { key: index, staticClass: "card border-primary" }, [
           _c("div", { staticClass: "card-body text-primary" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _c("i", { staticClass: "fas fa-cash-register" }),
-              _vm._v(" Caja N: " + _vm._s(caja.id) + " ")
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-8" }, [
+                _c("h5", { staticClass: "card-title" }, [
+                  _c("i", { staticClass: "fas fa-cash-register" }),
+                  _vm._v(
+                    " Caja N: " +
+                      _vm._s(caja.id) +
+                      " \n                        "
+                  )
+                ])
+              ])
             ]),
             _vm._v(" "),
             _c("hr"),
             _vm._v(" "),
-            _c("p", [
-              _vm._v("Monto en Pesos: "),
-              _c("strong", [_vm._v("$" + _vm._s(caja.pesos))])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _vm._v("Monto en Dolares: "),
-              _c("strong", [_vm._v("$" + _vm._s(caja.dolares))])
+            _c("ul", [
+              _c("li", [
+                _c("p", [
+                  _vm._v("Monto en Pesos: "),
+                  _c("strong", [_vm._v("$" + _vm._s(caja.pesos))])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("p", [
+                  _vm._v("Monto en Dolares: "),
+                  _c("strong", [_vm._v("$" + _vm._s(caja.dolares))])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c("p", [
+                  _vm._v("Monto en Tarjetas: "),
+                  _c("strong", [_vm._v("$" + _vm._s(caja.tarjetaTotal))])
+                ])
+              ])
             ])
           ]),
           _vm._v(" "),
@@ -14974,8 +15150,16 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-footer" }, [
-      _c("small", { staticClass: "text-muted" }, [
-        _vm._v("Last updated 3 mins ago")
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-8" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4" }, [
+          _c("button", { staticClass: "btn btn-outline-primary btn-sm" }, [
+            _vm._v(
+              "\n                            Ver Detalles\n                        "
+            )
+          ])
+        ])
       ])
     ])
   }
@@ -15761,7 +15945,11 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { type: "text", name: "PagoEfectivo" },
+                    attrs: {
+                      type: "number",
+                      step: "0.01",
+                      name: "PagoEfectivo"
+                    },
                     domProps: { value: _vm.npago.pesos },
                     on: {
                       input: function($event) {
@@ -15772,6 +15960,49 @@ var render = function() {
                       }
                     }
                   })
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c("div", { staticClass: "row justify-content-center" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _vm.npago.cupones.length > 0
+                      ? _c("table", { staticClass: "table-sm table-striped" }, [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.npago.cupones, function(cupon, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", [_vm._v(_vm._s(cupon.nro_cupon))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(cupon.cuotas))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v("$" + _vm._s(cupon.importe))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-danger border-0 btn-sm",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteCupon(index)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fas fa-trash" })]
+                                  )
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ])
+                      : _vm._e()
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("hr"),
@@ -15871,6 +16102,20 @@ var staticRenderFns = [
     return _c("h5", { staticClass: "card-header" }, [
       _vm._v("Pago "),
       _c("i", { staticClass: "fas fa-wallet text-success" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-light" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nro Cupon")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Cuotas")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Importe")])
+      ])
     ])
   }
 ]
@@ -17186,7 +17431,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DatosCuponT_vue_vue_type_template_id_8a616e52___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DatosCuponT.vue?vue&type=template&id=8a616e52& */ "./resources/js/components/DatosCuponT.vue?vue&type=template&id=8a616e52&");
 /* harmony import */ var _DatosCuponT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DatosCuponT.vue?vue&type=script&lang=js& */ "./resources/js/components/DatosCuponT.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=0&lang=css& */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -17194,7 +17441,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _DatosCuponT_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _DatosCuponT_vue_vue_type_template_id_8a616e52___WEBPACK_IMPORTED_MODULE_0__["render"],
   _DatosCuponT_vue_vue_type_template_id_8a616e52___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],

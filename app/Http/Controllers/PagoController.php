@@ -6,6 +6,8 @@ use App\CuentaCliente;
 use Illuminate\Http\Request;
 use App\Pago;
 use App\Venta;
+use App\CuponTarjeta;
+use App\Caja;
 
 class PagoController extends Controller
 {
@@ -40,7 +42,11 @@ class PagoController extends Controller
         if($request->ajax()){
             $pago = new Pago();
             $pago->importe = $request->importe;
-            $pago->pesos = $request->pesos;
+            if($request->pesos == null){
+                $pago->pesos = 0;
+            }else{
+                $pago->pesos = $request->pesos;
+            }
             $pago->dolares = $request->dolares;
             $pago->caja_id = 1;
             $pago->ctac_id = $request->ctac_id;
@@ -59,6 +65,20 @@ class PagoController extends Controller
             }
             $cta->save();
 
+            $caja = Caja::with('carteraCupones')->findOrFail(1);
+
+            if(sizeof($request->cupones) > 0){
+                foreach ($request->cupones as $cupon) {
+                    $nuevoCupon = new CuponTarjeta();
+                    $nuevoCupon->importe = $cupon['importe'];
+                    $nuevoCupon->cuotas = $cupon['cuotas'];
+                    $nuevoCupon->nro_cupon = $cupon['nro_cupon'];
+                    $nuevoCupon->tarjeta_id = $cupon['tarjeta_id'];
+                    $nuevoCupon->pago_id = $pago->id;
+                    $nuevoCupon->cartera_id = $caja->carteraCupones['id'];
+                    $nuevoCupon->save();
+                }
+            }
 
             return response()->json([
                 'message' => 'Pago Cargado',

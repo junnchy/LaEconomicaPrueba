@@ -26,12 +26,40 @@
                                 <div class="form-group">
                                     <label>Efectivo en Pesos</label>
                                     <input 
-                                        type="text" 
+                                        type="number"
+                                        step="0.01" 
                                         class="form-control"
                                         name="PagoEfectivo"
                                         v-model="npago.pesos"
                                     />
                                 </div>
+                            <hr>
+                            <div class="row justify-content-center">
+                                <div class="col-12">
+                                    <table class="table-sm table-striped" v-if="npago.cupones.length > 0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Nro Cupon</th>
+                                                <th scope="col">Cuotas</th>
+                                                <th scope="col">Importe</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(cupon, index) in npago.cupones" :key="index">
+                                                <td>{{cupon.nro_cupon}}</td>
+                                                <td>{{cupon.cuotas}}</td>
+                                                <td>${{cupon.importe}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline-danger border-0 btn-sm" 
+                                                    @click="deleteCupon(index)">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <hr>
                             <div class="row">
                                 <div class="col-6">
@@ -94,13 +122,26 @@ export default {
     },
     methods:{
         ...mapActions('ventas', ['getVenta']),
-        ...mapActions('pagos', ['agregarPago'])
+        ...mapActions('pagos', ['agregarPago']),
+        deleteCupon(index){
+            this.npago.cupones.splice(index, 1);
+            Vue.$toast.open({
+                message: 'Cupon Borrado',
+                type: 'error',
+            });
+        },
     },
     computed:{
         ...mapState('ventas',['ventaActual']),
         importe(){
-            if(this.npago.pesos >= 0){
-                this.npago.importe = this.npago.pesos
+            this.npago.importe = 0  
+            if(this.npago.pesos > 0){
+                this.npago.importe = parseFloat(this.npago.importe) + parseFloat(this.npago.pesos)
+            }
+            if(this.npago.cupones.length > 0){
+                this.npago.cupones.forEach(cupon => {
+                    this.npago.importe = parseFloat(this.npago.importe) + parseFloat(cupon.importe)
+                });
             }
             return this.npago.importe
         },
@@ -116,3 +157,5 @@ export default {
     background-color: #E9ECEF !important;
     }
 </style>
+
+ 

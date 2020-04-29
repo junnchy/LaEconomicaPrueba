@@ -17,12 +17,16 @@ class CajaController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $cajas = Caja::with('pagos')->get();
+            $cajas = Caja::with('pagos', 'carteraCupones.cupones')->get();
             foreach ($cajas as $caja) {
                 foreach ($caja->pagos as $pago) {
                     $caja->pesos = $caja->pesos + $pago->pesos;
                 }
-            }
+                foreach ($caja->carteraCupones->cupones as $cupon) {
+                    $caja->tarjetaTotal = 0;
+                    $caja->tarjetaTotal = $caja->tarjetaTotal + $cupon->importe;
+                }
+            }   
             return response()->json($cajas);
         }
     }

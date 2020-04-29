@@ -21,11 +21,17 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-success alert-dismissible fade show" v-if="carga">
+                            {{rta}} 
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="carga = false">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                         <div class="container">
                             <form>
                                 <fdatos v-bind:ncupon="ncupon"/>
-                                <button type="submit" class="btn btn-success btn-block sticky-button">
-                                    Guardar Cambios <i class="fas fa-check-circle"></i>
+                                <button type="button" class="btn btn-success btn-block sticky-button" @click="cargarCupon()">
+                                    Guardar Cupon <i class="fas fa-check-circle"></i>
                                 </button>
                             </form>
                         </div>
@@ -42,6 +48,8 @@ import {mapActions, mapState} from 'vuex'
     export default {
         data() {
             return{
+                carga: false,
+                rta: 'Cupon Cargado',
                 ncupon:{
                     nro_cupon: null,
                     importe: 0,
@@ -49,6 +57,9 @@ import {mapActions, mapState} from 'vuex'
                     tarjeta_id: 0
                 },
             }
+        },
+        destroyed(){
+            this.carga = false
         },
         props:{
             cupones:{
@@ -62,6 +73,16 @@ import {mapActions, mapState} from 'vuex'
         methods: {
             LNB(){
                 $('#MenuLateral').collapse('show')
+            },
+            cargarCupon(){
+                this.cupones.push(this.ncupon)
+                this.carga = true
+                this.ncupon = {
+                    nro_cupon: null,
+                    importe: 0,
+                    cuotas:0,
+                    tarjeta_id: 0 
+                }
             }
         },
         destroyed(){

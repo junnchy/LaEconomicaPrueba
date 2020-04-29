@@ -27,13 +27,38 @@
         <div class="card-deck mt-4">
             <div class="card border-primary" v-for="(caja, index) in cajas" :key="index">
                 <div class="card-body text-primary">
-                    <h5 class="card-title"><i class="fas fa-cash-register"></i> Caja N: {{caja.id}} </h5>
+                    <div class="row">
+                        <div class="col-8">
+                            <h5 class="card-title">
+                                <i class="fas fa-cash-register"></i> Caja N: {{caja.id}} 
+                            </h5>
+                        </div>
+                    </div>
                     <hr>
-                    <p>Monto en Pesos: <strong>${{caja.pesos}}</strong></p>
-                    <p>Monto en Dolares: <strong>${{caja.dolares}}</strong></p>
+                    <ul>
+                        <li>
+                            <p>Monto en Pesos: <strong>${{caja.pesos}}</strong></p>
+                        </li>
+                        <li>
+                            <p>Monto en Dolares: <strong>${{caja.dolares}}</strong></p>
+                        </li>
+                        <li>
+                             <p>Monto en Tarjetas: <strong>${{caja.tarjetaTotal}}</strong></p> 
+                        </li>
+                    </ul>
+                    
                 </div>
                  <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
+                    <div class="row">
+                        <div class="col-8">
+                            
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-outline-primary btn-sm">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>  

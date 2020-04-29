@@ -64,11 +64,11 @@
                             <span class="badge badge-success" v-if="defMV === pro.id">Mejor</span>
                         </td>
                         <td>
-                        <button type="button" class="btn btn-outline-danger border-0" 
-                        @click="deleteLinea(index)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
+                            <button type="button" class="btn btn-outline-danger border-0" 
+                            @click="deleteLinea(index)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -100,7 +100,6 @@ export default {
             }
         },
         deleteLinea(index){
-            /* Arreglar */
             this.fproductos.splice(index, 1);
             Vue.$toast.open({
                 message: 'Producto Borrado',
@@ -150,3 +149,4 @@ export default {
     }
 }
 </script>
+
