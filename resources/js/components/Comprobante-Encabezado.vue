@@ -4,7 +4,7 @@
             <datosvendedor v-bind:npresupuesto="npresupuesto"/>    
             <div class="row my-3">
                 <div class="col-5">
-                    <v-select
+                    <!-- <v-select
                         label="nombre"
                         @input="setCliente"
                         :options="clientes"
@@ -12,7 +12,10 @@
                         maxHeight="200px"
                         placeholder="Cliente"
                         :disabled="ingresoCliente"
-                    ></v-select>
+                    ></v-select> -->
+                    <multiselect v-model="npresupuesto.cliente" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="clientes" :searchable="true" :allow-empty="false">
+                        <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.nombre }}</strong></template>
+                    </multiselect>
                 </div>
                 <div class="col-1 mt-1">
                     <modaladdcliente/>
@@ -101,10 +104,12 @@
 import { mapActions, mapState, mapGetters } from 'vuex'
 import datosvendedor from './Comprobante-Vendedor'
 import modaladdcliente from '../components/ModalAgregarCliente'
+import Multiselect from 'vue-multiselect';
 export default {
     components: {
         datosvendedor,
-        modaladdcliente
+        modaladdcliente,
+        Multiselect
     },
     data() {
         return {
@@ -145,3 +150,5 @@ export default {
     }
 }
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

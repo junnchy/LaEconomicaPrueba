@@ -5,6 +5,12 @@
                 <h2>Recibo de Pago <i class="fas fa-receipt text-secondary"></i></h2>
             </div>
         </div>
+        <div class="alert alert-success alert-dismissible fade show my-3" v-if="$store.state.pagos.status == 200">
+            "Pago Cargado"
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="row mt-3">
             <div class="col-12">
                 <div class="card-deck">
@@ -18,7 +24,7 @@
                             <h5 class="card-title">Total a Pagar: <strong>${{ventaActual.saldo}}</strong></h5>
                         </div>
                     </div>
-                    <div class="card border-success">
+                    <div :class="cardPago">
                         <h5 class="card-header">Pago <i class="fas fa-wallet text-success"></i></h5>
                         <div class="card-body">
                             <h5 class="card-title">Importe del Pago: <strong>${{importe}}</strong></h5>
@@ -36,12 +42,13 @@
                             <hr>
                             <div class="row justify-content-center">
                                 <div class="col-12">
-                                    <table class="table-sm table-striped" v-if="npago.cupones.length > 0">
-                                        <thead class="thead-light">
+                                    <table class="table table-striped" v-if="npago.cupones.length > 0">
+                                        <thead>
                                             <tr>
                                                 <th scope="col">Nro Cupon</th>
                                                 <th scope="col">Cuotas</th>
                                                 <th scope="col">Importe</th>
+                                                <th scope="col"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -102,6 +109,7 @@ export default {
     },
     data() {
         return {
+            cardPago: "card border-success",
             npago:{
                 importe: 0,
                 pesos: null,
@@ -129,10 +137,11 @@ export default {
                 message: 'Cupon Borrado',
                 type: 'error',
             });
-        },
+        }
     },
     computed:{
         ...mapState('ventas',['ventaActual']),
+        ...mapState('pagos', ['status']),
         importe(){
             this.npago.importe = 0  
             if(this.npago.pesos > 0){

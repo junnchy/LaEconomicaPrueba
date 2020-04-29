@@ -67395,13 +67395,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    pagaos: []
+    pagos: [],
+    status: null
   },
-  mutations: {},
+  mutations: {
+    setStatus: function setStatus(state, status) {
+      state.status = status;
+    }
+  },
   actions: {
     agregarPago: function agregarPago(_ref, pago) {
       var commit = _ref.commit;
       axios.post('http://127.0.0.1:8000/pago', pago).then(function (response) {
+        commit('setStatus', response.status);
         Vue.$toast.open(response.data.message);
       })["catch"](function (error) {
         console.log(error.response.data);
