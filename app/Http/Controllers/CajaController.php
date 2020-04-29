@@ -23,7 +23,6 @@ class CajaController extends Controller
                     $caja->pesos = $caja->pesos + $pago->pesos;
                 }
                 foreach ($caja->carteraCupones->cupones as $cupon) {
-                    $caja->tarjetaTotal = 0;
                     $caja->tarjetaTotal = $caja->tarjetaTotal + $cupon->importe;
                 }
             }   

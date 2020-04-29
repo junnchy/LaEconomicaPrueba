@@ -55,7 +55,7 @@ class CuentaClienteController extends Controller
             $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos', 'ventas.pago' )->findOrFail($id);
             
             $cc->m = collect([]);
-            
+            #Solucion temporal... Modificar para mas comprobantes. 
             foreach($cc->ventas as $venta){
                 if($venta->pago != null){
                     foreach($venta->pago as $pago){
