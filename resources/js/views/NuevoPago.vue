@@ -33,8 +33,14 @@
                                     />
                                 </div>
                             <hr>
-                            <button href="#" class="btn btn-primary btn-sm">Ingresar Cupon</button>
-                            <button href="#" class="btn btn-primary btn-sm">Ingresar Cheque</button>
+                            <div class="row">
+                                <div class="col-6">
+                                    <ingresaCupon v-bind:cupones="npago.cupones"/>
+                                </div>
+                                <div class="col-6">
+                                    <ingresaCheque v-bind:cheques="npago.cheques"/>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <button class="btn btn-success btn-block" @click="agregarPago(npago)">
@@ -58,8 +64,14 @@
 </template>
 
 <script>
+import ingresaCupon from '../components/ModalCargaCuponT'
+import ingresaCheque from '../components/ModalCargaCheque'
 import { mapActions, mapState} from 'vuex'
 export default {
+    components:{
+        ingresaCupon,
+        ingresaCheque
+    },
     data() {
         return {
             npago:{
@@ -67,7 +79,9 @@ export default {
                 pesos: null,
                 dolares: 0,
                 ctac_id: null,
-                vta_id: null
+                vta_id: null,
+                cupones:[],
+                cheques: []
             }
         }
     },

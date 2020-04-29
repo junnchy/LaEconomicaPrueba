@@ -1,15 +1,13 @@
 <template>
-    <div class="container">
+    <div class="container p-3">
         <div class="row">
-            <h2>Menu Cajas</h2>
+            <div class="col-12 text-center ">
+                <h2>Menu Cajas <i class="fas fa-cash-register"></i></h2>
+            </div>
         </div>
-        
         <div class="container shadow-sm mt-3 p-3 bg-white rounded border border-secondary">
             <div class="row">
                 <div class="col-12">
-                    <button class="btn btn-outline-success" @click="agregarCaja(ncaja)">
-                        Nueva Caja <i class="fas fa-wallet"></i>
-                    </button> 
                     <router-link :to="{name:'menuBancos'}">
                         <button class="btn btn-outline-primary">
                             Bancos <i class="fas fa-university"></i>
@@ -19,7 +17,10 @@
                         <button class="btn btn-outline-primary">
                             Tarjetas <i class="far fa-credit-card"></i>
                         </button> 
-                    </router-link> 
+                    </router-link>
+                     <button class="btn btn-outline-success" @click="agregarCaja(ncaja)">
+                        Nueva Caja <i class="fas fa-plus-circle"></i>
+                    </button>  
                 </div>
             </div>
         </div>
