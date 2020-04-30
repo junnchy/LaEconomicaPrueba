@@ -31,7 +31,7 @@
                             <div class="d-flex flex-row">
                                 <div class="mr-3">
                                     <router-link :to="{name: 'detalleCliente', params:{id: cliente.id}}">
-                                        <button  class="btn btn-warning btn-sm">
+                                        <button  class="btn btn-outline-primary btn-sm">
                                             Ver Mas <i class="fas fa-eye"></i>
                                         </button>
                                     </router-link>

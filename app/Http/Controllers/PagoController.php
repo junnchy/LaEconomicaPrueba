@@ -41,6 +41,7 @@ class PagoController extends Controller
     {
         if($request->ajax()){
             $pago = new Pago();
+            $venta = Venta::findOrFail($request->vta_id);
             $pago->importe = $request->importe;
             if($request->pesos == null){
                 $pago->pesos = 0;
@@ -50,8 +51,8 @@ class PagoController extends Controller
             $pago->dolares = $request->dolares;
             $pago->caja_id = 1;
             $pago->ctac_id = $request->ctac_id;
+            $pago->formaDePago_id = $venta->formaDePago_id;
             $pago->save();
-            $venta = Venta::findOrFail($request->vta_id);
             $pago->ventas()->attach($venta,[]);
 
             /* Hay que ajustar... que pasa el el pago es para varias ventas -- generalizar */
@@ -66,6 +67,8 @@ class PagoController extends Controller
             $cta->save();
 
             $caja = Caja::with('carteraCupones')->findOrFail(1);
+            $caja->pesos = $caja->pesos + $pago->pesos;
+
 
             if(sizeof($request->cupones) > 0){
                 foreach ($request->cupones as $cupon) {
@@ -79,6 +82,8 @@ class PagoController extends Controller
                     $nuevoCupon->save();
                 }
             }
+
+            $caja->save();
 
             return response()->json([
                 'message' => 'Pago Cargado',

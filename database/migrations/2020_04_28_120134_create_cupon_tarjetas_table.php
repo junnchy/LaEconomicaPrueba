@@ -16,7 +16,7 @@ class CreateCuponTarjetasTable extends Migration
         Schema::create('cupon_tarjetas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('nro_cupon');
-            $table->float('importe');
+            $table->double('importe');
             $table->integer('cuotas');
             $table->unsignedBigInteger('cartera_id')->nullable();
             $table->foreign('cartera_id')->references('id')->on('cartera_cupones');

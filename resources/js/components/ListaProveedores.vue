@@ -19,7 +19,7 @@
                         <td>{{proveedor.telefono}}</td>
                         <td>
                             <router-link :to="{name: 'detalleProv', params:{id: proveedor.id}}">
-                                <button  class="btn btn-warning btn-sm">
+                                <button  class="btn btn-outline-primary btn-sm">
                                     Ver Mas <i class="fas fa-eye"></i>
                                 </button>
                             </router-link>

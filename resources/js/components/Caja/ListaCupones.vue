@@ -19,7 +19,7 @@
                     <td>${{cupon.importe}}</td>
                     <td>{{cupon.cuotas}}</td>
                     <td data-toggle="tooltip" :title="cupon.tarjeta.nombre">
-                        <h4 class="text-primary" v-html="cupon.tarjeta.icono"></h4>
+                        <h3 class="text-primary" v-html="cupon.tarjeta.icono"></h3>
                     </td>
                 </tr>
             </tbody>

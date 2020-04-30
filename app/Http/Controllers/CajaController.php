@@ -57,6 +57,19 @@ class CajaController extends Controller
     {
         if($request->ajax()){
 
+            $caja = new Caja();
+            $caja->pesos = 0;
+            $caja->dolares = 0;
+            $caja->save();
+
+            $cCheq = new CarteraCheque();
+            $cCheq->caja_id = $caja->id;
+            $cCheq-> save();
+
+
+            $cCup = new CarteraCupone();
+            $cCup->caja_id = $caja->id;
+            $cCup-> save();
 
             return response()->json([
                 'message'=> 'Caja Creada'
@@ -76,32 +89,28 @@ class CajaController extends Controller
 
             /* Hay que arreglar eso */
 
-            $caja = Caja::with('pagos.cuenta.cliente', 'carteraCupones.cupones.pago.cuenta.cliente', 'carteraCupones.cupones.tarjeta')->findOrFail($id);
+            $caja = Caja::with(
+                'pagos.cuenta.cliente',
+                'carteraCupones.cupones.pago.cuenta.cliente', 
+                'carteraCupones.cupones.tarjeta',
+                'pagos.fdp'
+                )
+                ->findOrFail($id);
             
-            $caja->fecha = $request->fechas;
 
-             if($request->fechas != null){
+            if($request->fechas != null){
 
-                $f1 = new Carbon();
-                $f1 = Carbon::today();
-                $f2 = new Carbon();
-                $f2 = Carbon::today();
-                $f2->addDays(1);
-                $f2->startOfDay();
 
-                $dd = substr($request->fechas ,8,10);
-                $mm = substr($request->fechas,-5,-3);
-                $yyyy = substr($request->fechas,0,4);
-                $f3 = Carbon::create($yyyy, $mm, $dd);
-                $caja->ver = $f3;
-                /* $dd1 = substr($request->fechas[1],8,10);
+                $dd = substr($request->fechas[0] ,8,10);
+                $mm = substr($request->fechas[0],-5,-3);
+                $yyyy = substr($request->fechas[0],0,4);
+                $f1 = Carbon::create($yyyy, $mm, $dd);
+
+                $dd1 = substr($request->fechas[1],8,10);
                 $mm1 = substr($request->fechas[1],-5,-3);
                 $yyyy1 = substr($request->fechas[1],0,4);
                 $f2 =Carbon::create($yyyy1, $mm1, $dd1);
-
-                $caja->ver = $f1;
-                $caja->ver2 = $f2;
-                */
+               
             }else { 
                 $f1 = new Carbon();
                 $f1 = Carbon::today();
@@ -154,14 +163,16 @@ class CajaController extends Controller
 
 
     private function calcularTotales($caja){
+        $caja->vEfectivo = 0;
+        $caja->vTarjeta = 0;
         foreach ($caja->fpagos as $pago) {
-            $caja->pesos = $caja->pesos + $pago->pesos;
+            $caja->vEfectivo = $caja->vEfectivo + $pago->pesos;
         }
         foreach ($caja->fcupones as $cupon) {
-            $caja->tarjetaTotal = $caja->tarjetaTotal + $cupon->importe;
+            $caja->vTarjeta = $caja->vTarjeta + $cupon->importe;
         }
         
-        $caja->totales = $caja->pesos + $caja->tarjetaTotal;
+        $caja->vTotales = $caja->vEfectivo + $caja->vTarjeta;
     }
 
     private function filtarFecha($caja, $f1, $f2){

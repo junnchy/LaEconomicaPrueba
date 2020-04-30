@@ -45101,7 +45101,7 @@ var render = function() {
                           [
                             _c(
                               "button",
-                              { staticClass: "btn btn-warning btn-sm" },
+                              { staticClass: "btn btn-outline-primary btn-sm" },
                               [
                                 _vm._v(
                                   "\n                                        Ver Mas "
@@ -67403,39 +67403,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 commit = _ref3.commit;
                 _context2.prev = 1;
-                console.log(param);
                 id = param[0];
                 fecha = param[1];
                 console.log(fecha);
-                _context2.next = 8;
+                _context2.next = 7;
                 return axios.get("http://127.0.0.1:8000/caja/".concat(id), {
                   params: {
                     fechas: fecha
                   }
                 });
 
-              case 8:
+              case 7:
                 caja = _context2.sent;
-                _context2.next = 14;
+                _context2.next = 13;
                 break;
 
-              case 11:
-                _context2.prev = 11;
+              case 10:
+                _context2.prev = 10;
                 _context2.t0 = _context2["catch"](1);
                 console.log(_context2.t0.response.data);
 
-              case 14:
-                _context2.prev = 14;
+              case 13:
+                _context2.prev = 13;
                 console.log(caja);
                 commit('setCaja', caja.data);
-                return _context2.finish(14);
+                return _context2.finish(13);
 
-              case 18:
+              case 17:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 11, 14, 18]]);
+        }, _callee2, null, [[1, 10, 13, 17]]);
       }));
 
       function getCaja(_x3, _x4) {
@@ -70072,8 +70071,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

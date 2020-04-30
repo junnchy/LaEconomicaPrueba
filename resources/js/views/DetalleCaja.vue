@@ -6,30 +6,49 @@
             </div>
         </div>
         <div class="row mt-2 p-3">
-            <div class="col-4">
-                <div class="alert alert-primary border border-primary" role="alert">
-                    Efectivo <strong>${{caja.pesos}}</strong> 
+            <div class="col-3">
+                <div class="alert alert-primary border border-primary text-center" role="alert">
+                    Ventas en Efectivo <br> 
+                    <strong>${{caja.vEfectivo}}</strong> 
                 </div>
             </div>
-            <div class="col-4">
-                <div class="alert alert-primary border border-primary" role="alert">
-                    Tarjetas <strong>${{caja.tarjetaTotal}}</strong> 
+            <div class="col-3">
+                <div class="alert alert-primary border border-primary text-center" role="alert">
+                    Ventas con Tarjeta <br> 
+                    <strong>${{caja.vTarjeta}}</strong> 
                 </div>
             </div>
-            <div class="col-4">
-                <div class="alert alert-success border border-success" role="alert">
-                    Totales <strong>${{caja.totales}}</strong> 
+            <div class="col-3">
+                <div class="alert alert-primary border border-primary text-center" role="alert">
+                    Ventas Totales <br> 
+                    <strong>${{caja.vTotales}}</strong> 
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="alert alert-success border border-success text-center" role="alert">
+                    Efectivo en caja <br> 
+                    <strong>${{caja.pesos}}</strong> 
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-
+        <hr>
+        <div class="row p-2">
+            <div class="col-8">
+                <button class="btn btn-outline-primary mr-2">
+                    Transferir <i class="fas fa-exchange-alt"></i>
+                </button>
+                <button class="btn btn-outline-primary mr-2">
+                    Igreso <i class="fas fa-arrow-up"></i>
+                </button>
+                <button class="btn btn-outline-danger mr-2">
+                    Egreso <i class="fas fa-arrow-down"></i>
+                </button>
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <date-picker v-model="fechas" type="date" range placeholder="Filtrar por Fecha"></date-picker>
             </div>
         </div>
+        <hr>
         <div class="row mt-2" v-if="caja">
             <div class="col-12">
                 <nav>
@@ -56,10 +75,14 @@
                         <cupones v-bind:cupones="caja.fcupones"/>
                     </div>
                     <div class="tab-pane fade" id="nav-cheque" role="tabpanel" aria-labelledby="nav-cheque-tab">
-
+                        
                     </div>
                     <div class="tab-pane fade" id="nav-informe" role="tabpanel" aria-labelledby="nav-informe-tab">
-
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                <informe/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,6 +100,7 @@
 import { mapState, mapActions } from 'vuex'
 import listaPagos from '../components/Caja/ListaPagos'
 import cupones from '../components/Caja/Cupones'
+import informe from '../components/Caja/InformeCaja'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
 import 'vue2-datepicker/locale/Es'
@@ -90,6 +114,7 @@ export default {
     components:{
         listaPagos,
         cupones,
+        informe,
         DatePicker
     },
     created(){
@@ -103,7 +128,24 @@ export default {
         ...mapState('cajas', ['caja']),
         tomar(){
             if (this.fechas != null) {
-                var param = [this.id, this.fecha[0]]
+                var aux = []
+                this.fechas.forEach(date => {
+                    let mm = date.getMonth() + 1
+                    if(parseInt(mm) < 10){
+                        mm = '0' + mm
+                    }
+                    let dd = date.getDate()
+                    if(parseInt(dd) < 10){
+                        dd = '0' + dd
+                    }
+                    let yyyy = date.getFullYear()
+                    let d = (yyyy+','+mm+','+dd);
+                    
+                    aux.push(d)
+                })
+        
+                console.log(aux)
+                var param = [this.id, aux]
                 this.getCaja(param)
             }
         }

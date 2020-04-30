@@ -4,6 +4,7 @@
             <thead>
                 <tr>
                     <th scope="col">Fecha</th>
+                    <th scope="col">Forma</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Importe</th>
                     <th scope="col">Handle</th>
@@ -12,9 +13,14 @@
             <tbody>
                 <tr v-for="(pago, index) in pagos" :key="index">
                     <th scope="row">{{pago.created_at}}</th>
+                    <td class="font-italic">{{pago.fdp.descripcion}}</td>
                     <td>{{pago.cuenta.cliente.nombre}}</td>
                     <td>${{pago.importe}}</td>
-                    <td></td>
+                    <td>
+                        <button class="btn btn-outline-primary btn-sm">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>

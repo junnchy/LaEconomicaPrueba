@@ -22,6 +22,8 @@ class CreatePagosTable extends Migration
             $table->foreign('caja_id')->references('id')->on('cajas');
             $table->unsignedBigInteger('ctac_id')->nullable();
             $table->foreign('ctac_id')->references('id')->on('cuenta_clientes');
+            $table->unsignedBigInteger('formaDePago_id')->nullable();
+            $table->foreign('formaDePago_id')->references('id')->on('forma_de_pagos');
             $table->timestamps();
         });
     }

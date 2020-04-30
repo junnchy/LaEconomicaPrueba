@@ -41,7 +41,6 @@ export default {
         },
         async getCaja({commit}, param){
             try {
-                console.log (param)
                 var id = param[0]
                 var fecha = param[1]    
                 console.log(fecha)

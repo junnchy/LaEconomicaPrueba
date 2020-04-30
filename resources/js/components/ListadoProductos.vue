@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <router-link :to="{name:'detalleProducto',params:{id: producto.id}}">
-                                    <button class="btn btn-warning btn-sm">
+                                    <button class="btn btn-outline-primary btn-sm">
                                         Ver <i class="fas fa-eye"></i>
                                     </button>
                                 </router-link>
