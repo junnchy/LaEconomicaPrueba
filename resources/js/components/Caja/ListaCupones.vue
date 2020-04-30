@@ -3,18 +3,24 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                <th scope="col">Id</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Numero Cupon</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Importe</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Cuotas</th>
+                <th scope="col">Tajeta</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(cupon, index) in cupones" :key="index">
-                    <th scope="row">{{cupon.id}}</th>
-                    <td></td>
+                    <th scope="row">{{cupon.created_at}}</th>
+                    <td>{{cupon.nro_cupon}}</td>
+                    <td>{{cupon.pago.cuenta.cliente.nombre}}</td>
                     <td>${{cupon.importe}}</td>
-                    <td></td>
+                    <td>{{cupon.cuotas}}</td>
+                    <td data-toggle="tooltip" :title="cupon.tarjeta.nombre">
+                        <h4 class="text-primary" v-html="cupon.tarjeta.icono"></h4>
+                    </td>
                 </tr>
             </tbody>
         </table>

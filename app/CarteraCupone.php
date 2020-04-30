@@ -10,6 +10,6 @@ class CarteraCupone extends Model
 {
     public function cupones(){
 
-        return $this->hasMany(CuponTarjeta::class, 'cartera_id');
+        return $this->hasMany(CuponTarjeta::class, 'cartera_id')->orderBy('created_at', 'desc');
     }
 }

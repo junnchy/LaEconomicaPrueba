@@ -3,6 +3,7 @@
 namespace App;
 use App\Venta;
 use App\CuentaCliente;
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Model;
 

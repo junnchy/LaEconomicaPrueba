@@ -31,7 +31,6 @@ class PresupuestoController extends Controller
                 $today->subMonth();
             }
             
-
             $presupuestos = Presupuesto::with('vendedor', 'cliente', 'estado')
             ->where('created_at', '>', $today)
             ->orderBy('created_at', 'desc')

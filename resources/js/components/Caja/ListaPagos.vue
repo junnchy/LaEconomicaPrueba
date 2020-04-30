@@ -24,7 +24,7 @@
 export default {
     props:{
         pagos:{
-            type: Array,
+            type: Object,
             required: true
         }
     }

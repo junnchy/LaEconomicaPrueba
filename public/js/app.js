@@ -67333,7 +67333,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getCajas: function () {
       var _getCajas = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, date) {
         var commit, cajas;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
@@ -67342,7 +67342,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 commit = _ref.commit;
                 _context.prev = 1;
                 _context.next = 4;
-                return axios.get('http://127.0.0.1:8000/caja');
+                return axios.get('http://127.0.0.1:8000/caja', {
+                  params: {
+                    fecha: date
+                  }
+                });
 
               case 4:
                 cajas = _context.sent;
@@ -67352,7 +67356,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 7:
                 _context.prev = 7;
                 _context.t0 = _context["catch"](1);
-                console.log(_context.t0);
+                console.log(_context.t0.response.data);
 
               case 10:
                 _context.prev = 10;
@@ -67368,7 +67372,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, null, [[1, 7, 10, 14]]);
       }));
 
-      function getCajas(_x) {
+      function getCajas(_x, _x2) {
         return _getCajas.apply(this, arguments);
       }
 
@@ -67391,42 +67395,50 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     getCaja: function () {
       var _getCaja = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, id) {
-        var commit, caja;
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, param) {
+        var commit, id, fecha, caja;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 commit = _ref3.commit;
                 _context2.prev = 1;
-                _context2.next = 4;
-                return axios.get("http://127.0.0.1:8000/caja/".concat(id));
+                console.log(param);
+                id = param[0];
+                fecha = param[1];
+                console.log(fecha);
+                _context2.next = 8;
+                return axios.get("http://127.0.0.1:8000/caja/".concat(id), {
+                  params: {
+                    fechas: fecha
+                  }
+                });
 
-              case 4:
+              case 8:
                 caja = _context2.sent;
-                _context2.next = 10;
+                _context2.next = 14;
                 break;
 
-              case 7:
-                _context2.prev = 7;
+              case 11:
+                _context2.prev = 11;
                 _context2.t0 = _context2["catch"](1);
-                console.log(_context2.t0);
-
-              case 10:
-                _context2.prev = 10;
-                console.log(caja);
-                commit('setCaja', caja.data);
-                return _context2.finish(10);
+                console.log(_context2.t0.response.data);
 
               case 14:
+                _context2.prev = 14;
+                console.log(caja);
+                commit('setCaja', caja.data);
+                return _context2.finish(14);
+
+              case 18:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 7, 10, 14]]);
+        }, _callee2, null, [[1, 11, 14, 18]]);
       }));
 
-      function getCaja(_x2, _x3) {
+      function getCaja(_x3, _x4) {
         return _getCaja.apply(this, arguments);
       }
 
@@ -70060,8 +70072,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

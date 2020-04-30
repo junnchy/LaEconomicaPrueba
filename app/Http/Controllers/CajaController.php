@@ -7,6 +7,8 @@ use App\Caja;
 use App\CarteraCheque;
 use App\CarteraCupone;
 
+use Carbon\Carbon;
+
 class CajaController extends Controller
 {
     /**
@@ -17,14 +19,19 @@ class CajaController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
+
+            $f1 = new Carbon();
+            $f1 = Carbon::today();
+            $f2 = new Carbon();
+            $f2 = Carbon::today();
+            $f2->addDays(1);
+            $f2->startOfDay();
+
             $cajas = Caja::with('pagos', 'carteraCupones.cupones')->get();
+            
             foreach ($cajas as $caja) {
-                foreach ($caja->pagos as $pago) {
-                    $caja->pesos = $caja->pesos + $pago->pesos;
-                }
-                foreach ($caja->carteraCupones->cupones as $cupon) {
-                    $caja->tarjetaTotal = $caja->tarjetaTotal + $cupon->importe;
-                }
+                $this->filtarFecha($caja, $f1, $f2);
+                $this->calcularTotales($caja);
             }   
             return response()->json($cajas);
         }
@@ -49,18 +56,7 @@ class CajaController extends Controller
     public function store(Request $request)
     {
         if($request->ajax()){
-            $caja = new Caja();
-            $caja->pesos = 0;
-            $caja->dolares = 0;
-            $caja->save();
-            
-            $cCheq = new CarteraCheque();
-            $cCheq->caja_id = $caja->id;
-            $cCheq-> save();
 
-            $cCup = new CarteraCupone();
-            $cCup->caja_id = $caja->id;
-            $cCup-> save();
 
             return response()->json([
                 'message'=> 'Caja Creada'
@@ -77,13 +73,47 @@ class CajaController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $caja = Caja::with('pagos.cuenta.cliente', 'carteraCupones.cupones')->findOrFail($id);
-            foreach ($caja->pagos as $pago) {
-                $caja->pesos = $caja->pesos + $pago->pesos;
+
+            /* Hay que arreglar eso */
+
+            $caja = Caja::with('pagos.cuenta.cliente', 'carteraCupones.cupones.pago.cuenta.cliente', 'carteraCupones.cupones.tarjeta')->findOrFail($id);
+            
+            $caja->fecha = $request->fechas;
+
+             if($request->fechas != null){
+
+                $f1 = new Carbon();
+                $f1 = Carbon::today();
+                $f2 = new Carbon();
+                $f2 = Carbon::today();
+                $f2->addDays(1);
+                $f2->startOfDay();
+
+                $dd = substr($request->fechas ,8,10);
+                $mm = substr($request->fechas,-5,-3);
+                $yyyy = substr($request->fechas,0,4);
+                $f3 = Carbon::create($yyyy, $mm, $dd);
+                $caja->ver = $f3;
+                /* $dd1 = substr($request->fechas[1],8,10);
+                $mm1 = substr($request->fechas[1],-5,-3);
+                $yyyy1 = substr($request->fechas[1],0,4);
+                $f2 =Carbon::create($yyyy1, $mm1, $dd1);
+
+                $caja->ver = $f1;
+                $caja->ver2 = $f2;
+                */
+            }else { 
+                $f1 = new Carbon();
+                $f1 = Carbon::today();
+                $f2 = new Carbon();
+                $f2 = Carbon::today();
+                $f2->addDays(1);
+                $f2->startOfDay();
             }
-            foreach ($caja->carteraCupones->cupones as $cupon) {
-                $caja->tarjetaTotal = $caja->tarjetaTotal + $cupon->importe;
-            }
+
+            $this->filtarFecha($caja, $f1, $f2);
+            $this->calcularTotales($caja);
+
             return response()->json($caja);
         }
     }
@@ -120,5 +150,22 @@ class CajaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    private function calcularTotales($caja){
+        foreach ($caja->fpagos as $pago) {
+            $caja->pesos = $caja->pesos + $pago->pesos;
+        }
+        foreach ($caja->fcupones as $cupon) {
+            $caja->tarjetaTotal = $caja->tarjetaTotal + $cupon->importe;
+        }
+        
+        $caja->totales = $caja->pesos + $caja->tarjetaTotal;
+    }
+
+    private function filtarFecha($caja, $f1, $f2){
+        $caja->fpagos = $caja->pagos->whereBetween('created_at', [$f1, $f2]);
+        $caja->fcupones = $caja->carteraCupones->cupones->whereBetween('created_at', [$f1, $f2]);
     }
 }

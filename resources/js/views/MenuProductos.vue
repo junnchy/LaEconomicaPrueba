@@ -6,7 +6,7 @@
         <div class="container"> 
             <div class="row">
                 <div class="col-9">
-                        <input class="form-control my-3" type="search" placeholder="Buscar " aria-label="Search" v-model="search">
+                    <input class="form-control my-3" type="search" placeholder="Buscar " aria-label="Search" v-model="search">
                 </div>
                 <div class="col-3">
                     <router-link :to="{name:'agregarProducto'}">

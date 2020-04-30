@@ -37,13 +37,19 @@
                     <hr>
                     <ul>
                         <li>
-                            <p>Monto en Pesos: <strong>${{caja.pesos}}</strong></p>
+                            <p>Efectivo en pesos: <strong>${{caja.pesos}}</strong></p>
                         </li>
                         <li>
-                            <p>Monto en Dolares: <strong>${{caja.dolares}}</strong></p>
+                            <p>Cobros en Pesos: <strong>${{caja.pesos}}</strong></p>
                         </li>
                         <li>
-                             <p>Monto en Tarjetas: <strong>${{caja.tarjetaTotal}}</strong></p> 
+                            <p>Cobros en Dolares: <strong>${{caja.dolares}}</strong></p>
+                        </li>
+                        <li>
+                             <p>Cobros en Tarjetas: <strong>${{caja.tarjetaTotal}}</strong></p> 
+                        </li>
+                        <li>
+                            <p>Transferecias: <strong>$0</strong></p>
                         </li>
                     </ul>
                     
@@ -51,12 +57,14 @@
                  <div class="card-footer">
                     <div class="row">
                         <div class="col-8">
-                            
+                            <div class="alert alert-success border border-success" role="alert">
+                                Cobros Totales <strong>${{caja.totales}}</strong> 
+                            </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-4 mt-2">
                             <router-link :to="{name: 'detalleCaja', params:{id:caja.id}}">
                                 <button class="btn btn-outline-primary btn-sm">
-                                    Ver Detalles
+                                    Ver Detalles <i class="far fa-eye"></i>
                                 </button>
                             </router-link>
                         </div>
@@ -80,7 +88,7 @@ export default {
         }
     },
     created(){
-        this.getCajas()
+        this.getCajas(null)
     },
     methods: {
         ...mapActions('cajas', ['getCajas', 'agregarCaja'])

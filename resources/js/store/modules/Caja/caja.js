@@ -15,11 +15,11 @@ export default {
         }        
     },
     actions:{
-        async getCajas({commit}){
+        async getCajas({commit}, date){
             try {
-                var cajas = await axios.get('http://127.0.0.1:8000/caja')
+                var cajas = await axios.get('http://127.0.0.1:8000/caja',{ params: {fecha: date}})
             } catch (error) {
-                console.log(error)
+                console.log(error.response.data)
             }
             finally{
                 console.log(cajas)
@@ -39,11 +39,15 @@ export default {
                 });
             });
         },
-        async getCaja({commit}, id){
+        async getCaja({commit}, param){
             try {
-                var caja = await axios.get(`http://127.0.0.1:8000/caja/${id}`)
+                console.log (param)
+                var id = param[0]
+                var fecha = param[1]    
+                console.log(fecha)
+                var caja = await axios.get(`http://127.0.0.1:8000/caja/${id}`, { params: {fechas: fecha}})
             } catch (error) {
-                console.log(error)
+                console.log(error.response.data)
             }
             finally{
                 console.log(caja)
