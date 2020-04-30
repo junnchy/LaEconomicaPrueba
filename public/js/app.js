@@ -67070,6 +67070,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/NuevoPago.vue */ "./resources/js/views/NuevoPago.vue"));
   }
+}, {
+  path: '/detalleCaja/:id',
+  name: 'detalleCaja',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/DetalleCaja.vue */ "./resources/js/views/DetalleCaja.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -67312,11 +67318,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
-    cajas: []
+    cajas: [],
+    caja: null
   },
   mutations: {
     setCajas: function setCajas(state, cajas) {
       state.cajas = cajas;
+    },
+    setCaja: function setCaja(state, caja) {
+      state.caja = caja;
     }
   },
   actions: {
@@ -67377,7 +67387,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           type: 'error'
         });
       });
-    }
+    },
+    getCaja: function () {
+      var _getCaja = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref3, id) {
+        var commit, caja;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                commit = _ref3.commit;
+                _context2.prev = 1;
+                _context2.next = 4;
+                return axios.get("http://127.0.0.1:8000/caja/".concat(id));
+
+              case 4:
+                caja = _context2.sent;
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](1);
+                console.log(_context2.t0);
+
+              case 10:
+                _context2.prev = 10;
+                console.log(caja);
+                commit('setCaja', caja.data);
+                return _context2.finish(10);
+
+              case 14:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[1, 7, 10, 14]]);
+      }));
+
+      function getCaja(_x2, _x3) {
+        return _getCaja.apply(this, arguments);
+      }
+
+      return getCaja;
+    }()
   }
 });
 
@@ -70006,8 +70060,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

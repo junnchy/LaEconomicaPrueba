@@ -169,6 +169,11 @@ const routes = [
       name: 'nuevoPago',
       component: () => import(/* webpackChunkName: "about" */ '../views/NuevoPago.vue')
     },
+    {
+      path: '/detalleCaja/:id',
+      name: 'detalleCaja',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DetalleCaja.vue')
+    },
 ]
 
 

@@ -74,9 +74,18 @@ class CajaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $caja = Caja::with('pagos.cuenta.cliente', 'carteraCupones.cupones')->findOrFail($id);
+            foreach ($caja->pagos as $pago) {
+                $caja->pesos = $caja->pesos + $pago->pesos;
+            }
+            foreach ($caja->carteraCupones->cupones as $cupon) {
+                $caja->tarjetaTotal = $caja->tarjetaTotal + $cupon->importe;
+            }
+            return response()->json($caja);
+        }
     }
 
     /**

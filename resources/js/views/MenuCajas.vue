@@ -54,9 +54,11 @@
                             
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-outline-primary btn-sm">
-                                Ver Detalles
-                            </button>
+                            <router-link :to="{name: 'detalleCaja', params:{id:caja.id}}">
+                                <button class="btn btn-outline-primary btn-sm">
+                                    Ver Detalles
+                                </button>
+                            </router-link>
                         </div>
                     </div>
                 </div>

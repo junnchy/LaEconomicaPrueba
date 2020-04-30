@@ -4,12 +4,15 @@ export default {
     namespaced: true,
     state:{
         cajas: [],
+        caja: null
     },
     mutations: {
         setCajas(state, cajas){
             state.cajas = cajas
-        }
-        
+        },
+        setCaja(state, caja){
+            state.caja = caja
+        }        
     },
     actions:{
         async getCajas({commit}){
@@ -35,9 +38,17 @@ export default {
                     type: 'error',
                 });
             });
+        },
+        async getCaja({commit}, id){
+            try {
+                var caja = await axios.get(`http://127.0.0.1:8000/caja/${id}`)
+            } catch (error) {
+                console.log(error)
+            }
+            finally{
+                console.log(caja)
+                commit('setCaja', caja.data)
+            }
         }
-
-
-        
     }, 
 }
