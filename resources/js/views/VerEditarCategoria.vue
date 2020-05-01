@@ -7,11 +7,11 @@
                 </div>
                 <div class="col-4">
                     <router-link :to="{name:'listadoCategorias'}">
-                        <button class="btn btn-warning" v-if="respuesta != null" @click="resetResp(null)">
+                        <button class="btn btn-outline-warning" v-if="respuesta != null" @click="resetResp(null)">
                             Finalizar
                         </button>
                     </router-link>
-                    <button class="btn btn-danger" v-if="respuesta === null" @click="$router.go(-1)">
+                    <button class="btn btn-outline-danger" v-if="respuesta === null" @click="$router.go(-1)">
                         Cancelar
                     </button>
                 </div>

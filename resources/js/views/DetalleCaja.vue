@@ -59,6 +59,9 @@
                         <a class="nav-item nav-link" id="nav-cupones-tab" data-toggle="tab" href="#nav-cupones" role="tab" aria-controls="nav-cupones" aria-selected="false">
                             Cupones
                         </a>
+                        <a class="nav-item nav-link" id="nav-transferencias-tab" data-toggle="tab" href="#nav-transferencias" role="tab" aria-controls="nav-transferencias" aria-selected="false">
+                            Transferencias
+                        </a>
                         <a class="nav-item nav-link" id="nav-cheque-tab" data-toggle="tab" href="#nav-cheque" role="tab" aria-controls="nav-cheque" aria-selected="false">
                             Cheques
                         </a>
@@ -73,6 +76,9 @@
                     </div>
                     <div class="tab-pane fade" id="nav-cupones" role="tabpanel" aria-labelledby="nav-cupones-tab">
                         <cupones v-bind:cupones="caja.fcupones"/>
+                    </div>
+                    <div class="tab-pane fade" id="nav-transferencias" role="tabpanel" aria-labelledby="nav-transferencias-tab">
+                        
                     </div>
                     <div class="tab-pane fade" id="nav-cheque" role="tabpanel" aria-labelledby="nav-cheque-tab">
                         

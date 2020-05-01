@@ -11,7 +11,7 @@ class Caja extends Model
 {
     public function pagos()
     {       
-        return $this->hasMany(Pago::class);
+        return $this->hasMany(Pago::class)->orderBy('created_at', 'desc');
     }
 
     public function carteraCupones()
