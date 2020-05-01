@@ -9,9 +9,9 @@
         >
             Ingresar Cheque <i class="fas fa-money-check"></i>
         </button>
-        <div class="modal fade" id="cargarCheque" tabindex="-1" role="dialog" aria-labelledby="cargarChequeLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+        <div class="modal fade " id="cargarCheque" tabindex="-1" role="dialog" aria-labelledby="cargarChequeLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg " role="document">
+                <div class="modal-content ">
                     <div class="modal-header">
                         <h5 class="modal-title" id="cargarChequeLabel">
                             Ingresar Cheque
@@ -24,8 +24,8 @@
                         <div class="container">
                             <form>
                                 <fdatos v-bind:ncheque="ncheque"/>
-                                <button type="submit" class="btn btn-success btn-block sticky-button">
-                                    Guardar Cambios <i class="fas fa-check-circle"></i>
+                                <button type="submit" class="btn btn-outline-success btn-block sticky-button mt-4">
+                                    Cargar Cheque <i class="fas fa-check-circle"></i>
                                 </button>
                             </form>
                         </div>
@@ -72,3 +72,14 @@ import {mapActions, mapState} from 'vuex'
         }
     }
 </script>
+
+<style>
+    .modal-lg {
+        max-width: 80% !important;
+        margin: 30px auto;
+    }
+    .modal-card { overflow: visible; .modal-card-body { overflow: visible; } }
+
+
+    
+</style>

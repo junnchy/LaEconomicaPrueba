@@ -43,6 +43,7 @@
                 <button class="btn btn-outline-danger mr-2">
                     Egreso <i class="fas fa-arrow-down"></i>
                 </button>
+                <ingresaCheque/>
             </div>
             <div class="col-4">
                 <date-picker v-model="fechas" type="date" range placeholder="Filtrar por Fecha"></date-picker>
@@ -107,6 +108,7 @@ import { mapState, mapActions } from 'vuex'
 import listaPagos from '../components/Caja/ListaPagos'
 import cupones from '../components/Caja/Cupones'
 import informe from '../components/Caja/InformeCaja'
+import ingresaCheque from '../components/ModalCargaCheque'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
 import 'vue2-datepicker/locale/Es'
@@ -121,7 +123,8 @@ export default {
         listaPagos,
         cupones,
         informe,
-        DatePicker
+        DatePicker,
+        ingresaCheque
     },
     created(){
         var param = [this.id, null]
