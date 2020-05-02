@@ -164,20 +164,27 @@ class CajaController extends Controller
 
 
     private function calcularTotales($caja){
+        
         $caja->vEfectivo = 0;
         $caja->vTarjeta = 0;
+        $caja->vCheque = 0;
+
         foreach ($caja->fpagos as $pago) {
             $caja->vEfectivo = $caja->vEfectivo + $pago->pesos;
         }
         foreach ($caja->fcupones as $cupon) {
             $caja->vTarjeta = $caja->vTarjeta + $cupon->importe;
         }
+        foreach ($caja->fcheques as $cheque) {
+            $caja->vCheque = $caja->vCheque + $cheque->importe;
+        }
         
-        $caja->vTotales = $caja->vEfectivo + $caja->vTarjeta;
+        $caja->vTotales = $caja->vEfectivo + $caja->vTarjeta + $caja->vCheque;
     }
 
     private function filtarFecha($caja, $f1, $f2){
         $caja->fpagos = $caja->pagos->whereBetween('created_at', [$f1, $f2]);
         $caja->fcupones = $caja->carteraCupones->cupones->whereBetween('created_at', [$f1, $f2]);
+        $caja->fcheques = $caja->carteraCheques->cheques->whereBetween('created_at', [$f1, $f2]);
     }
 }

@@ -31,6 +31,8 @@ class CreateChequesTable extends Migration
             $table->foreign('banco_id')->references('id')->on('bancos');
             $table->unsignedBigInteger('pago_id')->nullable();
             $table->foreign('pago_id')->references('id')->on('pagos');
+            $table->unsignedBigInteger('ctac_id')->nullable();
+            $table->foreign('ctac_id')->references('id')->on('cuenta_clientes');
             $table->timestamps();
         });
     }

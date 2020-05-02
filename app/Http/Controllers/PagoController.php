@@ -70,8 +70,8 @@ class PagoController extends Controller
             $caja = Caja::with('carteraCupones')->findOrFail(1);
             $caja->pesos = $caja->pesos + $pago->pesos;
 
-            $this->cargarCupones($request, $caja, $pago);
-            $this->cargaCheques($request, $caja, $pago);
+            $this->cargarCupones($request, $caja, $pago, $cta);
+            $this->cargaCheques($request, $caja, $pago, $cta);
 
             $caja->save();
 
@@ -129,7 +129,7 @@ class PagoController extends Controller
         //
     }
 
-    private function cargarCupones($request, $caja, $pago){
+    private function cargarCupones($request, $caja, $pago, $cta){
         if(sizeof($request->cupones) > 0){
             foreach ($request->cupones as $cupon) {
                 $nuevoCupon = new CuponTarjeta();
@@ -138,6 +138,7 @@ class PagoController extends Controller
                 $nuevoCupon->nro_cupon = $cupon['nro_cupon'];
                 $nuevoCupon->tarjeta_id = $cupon['tarjeta_id'];
                 $nuevoCupon->pago_id = $pago->id;
+                $nuevoCupon->ctac_id = $cta->id;
                 $nuevoCupon->cartera_id = $caja->carteraCupones['id'];
                 $nuevoCupon->save();
             }
@@ -162,6 +163,7 @@ class PagoController extends Controller
                 $nuevoCheque->banco_id = $cheque['banco']['id'];
                 $nuevoCheque->pago_id = $pago->id;
                 $nuevoCheque->cartera_id = $caja->carteraCupones['id'];
+                $nuevoCheque->ctac_id = $cta->id;
 
                 $nuevoCheque->save();
             }

@@ -24,6 +24,8 @@ class CreateCuponTarjetasTable extends Migration
             $table->foreign('tarjeta_id')->references('id')->on('tarjetas');
             $table->unsignedBigInteger('pago_id')->nullable();
             $table->foreign('pago_id')->references('id')->on('pagos');
+            $table->unsignedBigInteger('ctac_id')->nullable();
+            $table->foreign('ctac_id')->references('id')->on('cuenta_clientes');
             $table->timestamps();
         });
     }

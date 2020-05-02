@@ -52,7 +52,7 @@ class CuentaClienteController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos', 'ventas.pago' )->findOrFail($id);
+            $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos.cupones', 'ventas.pago', 'cupones.pago.cuenta.cliente', 'cupones.tarjeta')->findOrFail($id);
             
             $cc->m = collect([]);
             #Solucion temporal... Modificar para mas comprobantes. 

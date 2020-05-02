@@ -26,40 +26,43 @@
             <div class="col-2">
 
             </div>
-            
         </div>
-        <div class="row">
+          <div class="row mt-2">
             <div class="col-12">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Tipo C.</th>
-                            <th scope="col">Debe</th>
-                            <th scope="col">Haber</th>
-                            <th scope="col">Saldo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(movimiento, index) in cuentaCliente.movimientos" :key="index">
-                            <th scope="row">{{movimiento.created_at}}</th>
-                            <td>
-                                <span class="badge badge-primary" v-if="movimiento.tipo === 'Venta'">{{movimiento.tipo}}</span>
-                                <span class="badge badge-success" v-if="movimiento.tipo === 'Pago'">{{movimiento.tipo}}</span>
-                            </td>
-                            <td class="text-danger">
-                                <p v-if="movimiento.tipo === 'Venta'">${{movimiento.total}}</p>
-                            </td>
-                            <!-- <td>{{mov.fdp.descripcion}}</td> -->
-                            <td class="text-success">
-                                 <p v-if="movimiento.tipo === 'Pago'">${{movimiento.importe}}</p>
-                            </td>
-                            <td>
-                                 <p v-if="movimiento.tipo === 'Venta'">${{movimiento.saldo}}</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-movimientos-tab" data-toggle="tab" href="#nav-movimientos" role="tab" aria-controls="nav-movimientos" aria-selected="true">
+                            Movimientos
+                        </a>
+                        <a class="nav-item nav-link" id="nav-cupones-tab" data-toggle="tab" href="#nav-cupones" role="tab" aria-controls="nav-cupones" aria-selected="false">
+                            Cupones
+                        </a>
+                        <a class="nav-item nav-link" id="nav-cheque-tab" data-toggle="tab" href="#nav-cheque" role="tab" aria-controls="nav-cheque" aria-selected="false">
+                            Cheques
+                        </a>
+                        <a class="nav-item nav-link" id="nav-informe-tab" data-toggle="tab" href="#nav-informe" role="tab" aria-controls="nav-informe" aria-selected="false">
+                            Informe
+                        </a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-movimientos" role="tabpanel" aria-labelledby="nav-movimientos-tab">
+                        <movimientos v-bind:movimientos="cuentaCliente.movimientos"/>
+                    </div>
+                    <div class="tab-pane fade" id="nav-cupones" role="tabpanel" aria-labelledby="nav-cupones-tab">
+                        <cupones v-bind:cupones="cuentaCliente.cupones"/>
+                    </div>
+                    <div class="tab-pane fade" id="nav-cheque" role="tabpanel" aria-labelledby="nav-cheque-tab">
+                        
+                    </div>
+                    <div class="tab-pane fade" id="nav-informe" role="tabpanel" aria-labelledby="nav-informe-tab">
+                        <div class="row justify-content-center">
+                            <div class="col-12">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -67,6 +70,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import movimientos from '../components/Clientes/Movimientos'
+import cupones from '../components/Caja/Cupones'
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
 export default {
@@ -74,6 +79,11 @@ export default {
         return {
             id: this.$route.params.id,
         }
+    },
+    components:{
+        movimientos,
+        DatePicker,
+        cupones
     },
     created(){
         this.getCuentaCliente(this.id)

@@ -5,34 +5,21 @@
                 <h2 v-if="caja"><i class="fas fa-cash-register"></i> Detalle de Caja: {{caja.id}}</h2>
             </div>
         </div>
-        <div class="row mt-2 p-3">
-            <div class="col-3">
+        <div class="row mt-3">
+            <div class="col-6">
                 <div class="alert alert-primary border border-primary text-center" role="alert">
-                    Ventas en Efectivo <br> 
-                    <strong>${{caja.vEfectivo}}</strong> 
+                    Cobros Totales <br> 
+                    <strong>${{caja.vTotales.toFixed(2)}}</strong> 
                 </div>
             </div>
-            <div class="col-3">
-                <div class="alert alert-primary border border-primary text-center" role="alert">
-                    Ventas con Tarjeta <br> 
-                    <strong>${{caja.vTarjeta}}</strong> 
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="alert alert-primary border border-primary text-center" role="alert">
-                    Ventas Totales <br> 
-                    <strong>${{caja.vTotales}}</strong> 
-                </div>
-            </div>
-            <div class="col-3">
+            <div class="col-6">
                 <div class="alert alert-success border border-success text-center" role="alert">
                     Efectivo en caja <br> 
-                    <strong>${{caja.pesos}}</strong> 
+                    <strong>${{caja.pesos.toFixed(2)}}</strong> 
                 </div>
             </div>
         </div>
-        <hr>
-        <div class="row p-2">
+        <div class="row m-1 p-2">
             <div class="col-8">
                 <button class="btn btn-outline-primary mr-2">
                     Transferir <i class="fas fa-exchange-alt"></i>
@@ -43,7 +30,6 @@
                 <button class="btn btn-outline-danger mr-2">
                     Egreso <i class="fas fa-arrow-down"></i>
                 </button>
-                <ingresaCheque/>
             </div>
             <div class="col-4">
                 <date-picker v-model="fechas" type="date" range placeholder="Filtrar por Fecha"></date-picker>
@@ -60,11 +46,11 @@
                         <a class="nav-item nav-link" id="nav-cupones-tab" data-toggle="tab" href="#nav-cupones" role="tab" aria-controls="nav-cupones" aria-selected="false">
                             Cupones
                         </a>
-                        <a class="nav-item nav-link" id="nav-transferencias-tab" data-toggle="tab" href="#nav-transferencias" role="tab" aria-controls="nav-transferencias" aria-selected="false">
-                            Transferencias
-                        </a>
                         <a class="nav-item nav-link" id="nav-cheque-tab" data-toggle="tab" href="#nav-cheque" role="tab" aria-controls="nav-cheque" aria-selected="false">
                             Cheques
+                        </a>
+                        <a class="nav-item nav-link" id="nav-transferencias-tab" data-toggle="tab" href="#nav-transferencias" role="tab" aria-controls="nav-transferencias" aria-selected="false">
+                            Transferencias
                         </a>
                         <a class="nav-item nav-link" id="nav-informe-tab" data-toggle="tab" href="#nav-informe" role="tab" aria-controls="nav-informe" aria-selected="false">
                             Informe
@@ -78,11 +64,10 @@
                     <div class="tab-pane fade" id="nav-cupones" role="tabpanel" aria-labelledby="nav-cupones-tab">
                         <cupones v-bind:cupones="caja.fcupones"/>
                     </div>
-                    <div class="tab-pane fade" id="nav-transferencias" role="tabpanel" aria-labelledby="nav-transferencias-tab">
-                        
-                    </div>
                     <div class="tab-pane fade" id="nav-cheque" role="tabpanel" aria-labelledby="nav-cheque-tab">
-                        
+                        <cheques v-bind:cheques="caja.fcheques"/>
+                    </div>
+                    <div class="tab-pane fade" id="nav-transferencias" role="tabpanel" aria-labelledby="nav-transferencias-tab">
                     </div>
                     <div class="tab-pane fade" id="nav-informe" role="tabpanel" aria-labelledby="nav-informe-tab">
                         <div class="row justify-content-center">
@@ -108,7 +93,7 @@ import { mapState, mapActions } from 'vuex'
 import listaPagos from '../components/Caja/ListaPagos'
 import cupones from '../components/Caja/Cupones'
 import informe from '../components/Caja/InformeCaja'
-import ingresaCheque from '../components/ModalCargaCheque'
+import cheques from '../components/Caja/Cheques'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
 import 'vue2-datepicker/locale/Es'
@@ -122,9 +107,9 @@ export default {
     components:{
         listaPagos,
         cupones,
+        cheques,
         informe,
-        DatePicker,
-        ingresaCheque
+        DatePicker
     },
     created(){
         var param = [this.id, null]

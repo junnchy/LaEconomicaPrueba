@@ -37,16 +37,16 @@
                     <hr>
                     <ul>
                         <li>
-                            <p>Efectivo en Pesos: <strong>${{caja.pesos}}</strong></p>
+                            <p>Efectivo en Pesos: <strong>${{caja.pesos.toFixed(2)}}</strong></p>
                         </li>
                         <li>
-                            <p>Cobros en Pesos: <strong>${{caja.vEfectivo}}</strong></p>
+                            <p>Cobros en Pesos: <strong>${{caja.vEfectivo.toFixed(2)}}</strong></p>
                         </li>
                         <li>
-                            <p>Cobros en Dolares: <strong>${{caja.dolares}}</strong></p>
+                            <p>Cobros en Dolares: <strong>${{caja.dolares.toFixed(2)}}</strong></p>
                         </li>
                         <li>
-                             <p>Cobros en Tarjetas: <strong>${{caja.vTarjeta}}</strong></p> 
+                             <p>Cobros en Tarjetas: <strong>${{caja.vTarjeta.toFixed(2)}}</strong></p> 
                         </li>
                         <li>
                             <p>Transferecias: <strong>$0</strong></p>
@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="alert alert-success border border-success" role="alert">
-                                Cobros Totales <strong>${{caja.vTotales}}</strong> 
+                                Cobros Totales <strong>${{caja.vTotales.toFixed(2)}}</strong> 
                             </div>
                         </div>
                         <div class="col-4 mt-2">

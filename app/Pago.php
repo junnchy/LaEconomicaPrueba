@@ -4,6 +4,7 @@ namespace App;
 use App\Venta;
 use App\CuentaCliente;
 use App\FormaDePago;
+use App\CuponTarjeta;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +12,10 @@ class Pago extends Model
 {
     public function ventas(){
         return $this->belongsToMany(Venta::class);
+    }
+
+    public function cupones(){
+        return $this->hasMany(CuponTarjeta::class);
     }
 
     public function cuenta(){

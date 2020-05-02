@@ -20,17 +20,22 @@ import { mapState } from 'vuex'
           datasets: [
             { 
               label: 'Efectivo',
-              backgroundColor: '#6BC8A3',
+              backgroundColor: '#C0ECCB',
               data: [this.$store.state.cajas.caja.vEfectivo]
             },
             { 
               label: 'Tarjeta',
-              backgroundColor: '#FF8B60',
+              backgroundColor: '#B4DAE3',
               data: [this.$store.state.cajas.caja.vTarjeta]
             },
             { 
               label: 'Cheques',
               backgroundColor: '#FFD84C',
+              data: [this.$store.state.cajas.caja.vCheque]
+            },
+            { 
+              label: 'Ref',
+              backgroundColor: '#F6A8A6',
               data: [0]
             },
           ]
@@ -74,5 +79,4 @@ import { mapState } from 'vuex'
   }
 </style>
 
-/* https://www.w3schools.com/colors/colors_trends.asp de aca se sacaron los colores */
-/* https://www.schemecolor.com/pastel-color-tones.php */
+/* https://www.schemecolor.com/pastel-calm.php de aca se sacaron los colores */
