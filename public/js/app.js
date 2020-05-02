@@ -67471,6 +67471,22 @@ __webpack_require__.r(__webpack_exports__);
   actions: {
     agregarPago: function agregarPago(_ref, pago) {
       var commit = _ref.commit;
+
+      if (pago.cheques != []) {
+        pago.cheques.forEach(function (cheque) {
+          var dd = cheque.fecha_emision.getDate();
+          var mm = cheque.fecha_emision.getMonth() + 1; //January is 0!
+
+          var yyyy = cheque.fecha_emision.getFullYear();
+          cheque.fecha_emision = yyyy + '-' + mm + '-' + dd;
+          var dd2 = cheque.fecha_pago.getDate();
+          var mm2 = cheque.fecha_pago.getMonth() + 1; //January is 0!
+
+          var yyyy2 = cheque.fecha_pago.getFullYear();
+          cheque.fecha_pago = yyyy2 + '-' + mm2 + '-' + dd2;
+        });
+      }
+
       axios.post('http://127.0.0.1:8000/pago', pago).then(function (response) {
         commit('setStatus', response.status);
         Vue.$toast.open(response.data.message);
@@ -70071,8 +70087,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -4,15 +4,6 @@
             <datosvendedor v-bind:npresupuesto="npresupuesto"/>    
             <div class="row my-3">
                 <div class="col-5">
-                    <!-- <v-select
-                        label="nombre"
-                        @input="setCliente"
-                        :options="clientes"
-                        :value="npresupuesto.cliente"
-                        maxHeight="200px"
-                        placeholder="Cliente"
-                        :disabled="ingresoCliente"
-                    ></v-select> -->
                     <multiselect v-model="npresupuesto.cliente" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="clientes" :searchable="true" :allow-empty="false">
                         <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.nombre }}</strong></template>
                     </multiselect>

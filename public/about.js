@@ -852,15 +852,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1349,6 +1340,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1366,9 +1389,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   created: function created() {
     this.getBancos();
+    this.getClientes();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])('bancos', ['getBancos'])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('bancos', ['bancos']))
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])('bancos', ['getBancos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])('clientes', ['getClientes'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('bancos', ['bancos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapState"])('clientes', ['clientes']), {
+    numeroEstado: function numeroEstado() {
+      if (this.nfdp.estado === true) {
+        this.nfdp.estado = 1;
+      }
+
+      if (this.nfdp.estado === false) {
+        this.nfdp.estado = 0;
+      }
+    }
+  })
 });
 
 /***/ }),
@@ -2381,17 +2415,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      carga: false,
+      rta: 'Cheque Ingresado',
       ncheque: {
         nro_cheque: null,
         importe: 0,
         fecha_emision: null,
         fecha_pago: null,
-        banco_id: 0
+        banco_id: 0,
+        cliente: {},
+        cuit_emisor: '',
+        propio: 1
       }
     };
   },
@@ -2407,6 +2452,20 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     LNB: function LNB() {
       $('#MenuLateral').collapse('show');
+    },
+    cargarCheque: function cargarCheque() {
+      this.cheques.push(this.ncheque);
+      this.carga = true;
+      this.ncheque = {
+        nro_cheque: null,
+        importe: 0,
+        fecha_emision: null,
+        fecha_pago: null,
+        banco_id: 0,
+        cliente: {},
+        cuit_emisor: '',
+        propio: 1
+      };
     }
   },
   destroyed: function destroyed() {},
@@ -6064,6 +6123,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6101,6 +6183,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         message: 'Cupon Borrado',
         type: 'error'
       });
+    },
+    deleteCheque: function deleteCheque(index) {
+      this.npago.cheques.splice(index, 1);
+      Vue.$toast.open({
+        message: 'Cheque Borrado',
+        type: 'error'
+      });
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('ventas', ['ventaActual']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('pagos', ['status']), {
@@ -6116,6 +6205,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.npago.cupones.length > 0) {
         this.npago.cupones.forEach(function (cupon) {
           _this.npago.importe = parseFloat(_this.npago.importe) + parseFloat(cupon.importe);
+        });
+      }
+
+      if (this.npago.cheques.length > 0) {
+        this.npago.cheques.forEach(function (cheque) {
+          _this.npago.importe = parseFloat(_this.npago.importe) + parseFloat(cheque.importe);
         });
       }
 
@@ -6579,7 +6674,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-lg {\n    max-width: 80% !important;\n    margin: 30px auto;\n}\n.modal-card { overflow: visible;\n.modal-card-body { overflow: visible;\n}\n}\n\n\n\n", ""]);
+exports.push([module.i, "\n.modal-lg {\n    max-width: 80% !important;\n    margin: 30px auto;\n}    \n", ""]);
 
 // exports
 
@@ -9599,6 +9694,146 @@ var render = function() {
       _c("div", { staticClass: "row mt-3" }, [
         _c(
           "div",
+          { staticClass: "col-10" },
+          [
+            _c("label", { attrs: { for: "cliente" } }, [_vm._v("Cliente")]),
+            _vm._v(" "),
+            _c("multiselect", {
+              attrs: {
+                "deselect-label": "Can't remove this value",
+                "track-by": "nombre",
+                label: "nombre",
+                placeholder: "Select one",
+                options: _vm.clientes,
+                searchable: true,
+                "allow-empty": false
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "singleLabel",
+                  fn: function(ref) {
+                    var option = ref.option
+                    return [_c("strong", [_vm._v(_vm._s(option.nombre))])]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.ncheque.cliente,
+                callback: function($$v) {
+                  _vm.$set(_vm.ncheque, "cliente", $$v)
+                },
+                expression: "ncheque.cliente"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-2" }, [
+          _c("div", { staticClass: "form-check content-center mt-4" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.ncheque.propio,
+                  expression: "ncheque.propio"
+                }
+              ],
+              staticClass: "form-check-input",
+              attrs: { type: "checkbox", id: "chequePropiedad" },
+              domProps: {
+                checked: Array.isArray(_vm.ncheque.propio)
+                  ? _vm._i(_vm.ncheque.propio, null) > -1
+                  : _vm.ncheque.propio
+              },
+              on: {
+                change: function($event) {
+                  var $$a = _vm.ncheque.propio,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = null,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 &&
+                        _vm.$set(_vm.ncheque, "propio", $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        _vm.$set(
+                          _vm.ncheque,
+                          "propio",
+                          $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                        )
+                    }
+                  } else {
+                    _vm.$set(_vm.ncheque, "propio", $$c)
+                  }
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "form-check-label",
+                attrs: { for: "chequePropiedad" }
+              },
+              [_vm._v("Cheque:")]
+            ),
+            _vm._v(" "),
+            _vm.ncheque.propio === true || _vm.ncheque.propio === 1
+              ? _c("p", { staticClass: "text-success" }, [
+                  _vm._v("\n                    Propio \n                ")
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.ncheque.propio === false || _vm.ncheque.propio === 0
+              ? _c("p", { staticClass: "text-primary" }, [
+                  _vm._v("\n                    Tercero \n                ")
+                ])
+              : _vm._e()
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm.ncheque.propio === false || _vm.ncheque.propio === 0
+        ? _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-6" }, [
+              _c("label", [_vm._v("Cuit Emisor:")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.ncheque.cuit_emisor,
+                    expression: "ncheque.cuit_emisor"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "cuitEmisor",
+                  placeholder: "Cuit Emisor"
+                },
+                domProps: { value: _vm.ncheque.cuit_emisor },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.ncheque, "cuit_emisor", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mt-3" }, [
+        _c(
+          "div",
           { staticClass: "col-8" },
           [
             _c("label", { attrs: { for: "banco" } }, [_vm._v("Banco")]),
@@ -11613,16 +11848,83 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content " }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "cargarChequeLabel" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Ingresar Cheque\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.carga = false
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
+                _vm.carga
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "alert alert-success alert-dismissible fade show"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.rta) +
+                            " \n                        "
+                        ),
+                        _vm._m(0)
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
                 _c("div", { staticClass: "container" }, [
                   _c(
                     "form",
                     [
                       _c("fdatos", { attrs: { ncheque: _vm.ncheque } }),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-outline-success btn-block sticky-button mt-4",
+                          attrs: { type: "button" },
+                          on: { click: _vm.cargarCheque }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Cargar Cheque "
+                          ),
+                          _c("i", { staticClass: "fas fa-check-circle" })
+                        ]
+                      )
                     ],
                     1
                   )
@@ -11640,45 +11942,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "cargarChequeLabel" } },
-        [
-          _vm._v(
-            "\n                        Ingresar Cheque\n                    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "button",
       {
-        staticClass: "btn btn-outline-success btn-block sticky-button mt-4",
-        attrs: { type: "submit" }
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
       },
-      [
-        _vm._v("\n                                Cargar Cheque "),
-        _c("i", { staticClass: "fas fa-check-circle" })
-      ]
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
   }
 ]
@@ -11744,7 +12018,42 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "cargarCuponLabel" }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Ingresar Cupon de Tarjeta\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.carga = false
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _vm.carga
@@ -11760,27 +12069,7 @@ var render = function() {
                             _vm._s(_vm.rta) +
                             " \n                        "
                         ),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "close",
-                            attrs: {
-                              type: "button",
-                              "data-dismiss": "alert",
-                              "aria-label": "Close"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.carga = false
-                              }
-                            }
-                          },
-                          [
-                            _c("span", { attrs: { "aria-hidden": "true" } }, [
-                              _vm._v("×")
-                            ])
-                          ]
-                        )
+                        _vm._m(0)
                       ]
                     )
                   : _vm._e(),
@@ -11827,30 +12116,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "cargarCuponLabel" } },
-        [
-          _vm._v(
-            "\n                        Ingresar Cupon de Tarjeta\n                    "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true
@@ -17854,6 +18131,45 @@ var render = function() {
                             0
                           )
                         ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.npago.cheques.length > 0
+                      ? _c("table", { staticClass: "table table-striped" }, [
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.npago.cheques, function(cheque, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", [_vm._v(_vm._s(cheque.nro_cheque))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(cheque.cuotas))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v("$" + _vm._s(cheque.importe))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "btn btn-outline-danger border-0 btn-sm",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteCheque(index)
+                                        }
+                                      }
+                                    },
+                                    [_c("i", { staticClass: "fas fa-trash" })]
+                                  )
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ])
                       : _vm._e()
                   ])
                 ]),
@@ -17983,6 +18299,22 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Nro Cupon")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Cuotas")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Importe")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nro cheque")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Banco")]),
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v("Importe")]),
         _vm._v(" "),
@@ -18713,11 +19045,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
 
-var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["mixins"].reactiveProp;
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_1__["mixins"].reactiveProp;
 /* harmony default export */ __webpack_exports__["default"] = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__["Bar"],
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_1__["Bar"],
   mixins: [reactiveProp],
   props: ['options'],
   mounted: function mounted() {

@@ -8,6 +8,7 @@ use App\Pago;
 use App\Venta;
 use App\CuponTarjeta;
 use App\Caja;
+use App\Cheque;
 
 class PagoController extends Controller
 {
@@ -69,19 +70,8 @@ class PagoController extends Controller
             $caja = Caja::with('carteraCupones')->findOrFail(1);
             $caja->pesos = $caja->pesos + $pago->pesos;
 
-
-            if(sizeof($request->cupones) > 0){
-                foreach ($request->cupones as $cupon) {
-                    $nuevoCupon = new CuponTarjeta();
-                    $nuevoCupon->importe = $cupon['importe'];
-                    $nuevoCupon->cuotas = $cupon['cuotas'];
-                    $nuevoCupon->nro_cupon = $cupon['nro_cupon'];
-                    $nuevoCupon->tarjeta_id = $cupon['tarjeta_id'];
-                    $nuevoCupon->pago_id = $pago->id;
-                    $nuevoCupon->cartera_id = $caja->carteraCupones['id'];
-                    $nuevoCupon->save();
-                }
-            }
+            $this->cargarCupones($request, $caja, $pago);
+            $this->cargaCheques($request, $caja, $pago);
 
             $caja->save();
 
@@ -137,5 +127,44 @@ class PagoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function cargarCupones($request, $caja, $pago){
+        if(sizeof($request->cupones) > 0){
+            foreach ($request->cupones as $cupon) {
+                $nuevoCupon = new CuponTarjeta();
+                $nuevoCupon->importe = $cupon['importe'];
+                $nuevoCupon->cuotas = $cupon['cuotas'];
+                $nuevoCupon->nro_cupon = $cupon['nro_cupon'];
+                $nuevoCupon->tarjeta_id = $cupon['tarjeta_id'];
+                $nuevoCupon->pago_id = $pago->id;
+                $nuevoCupon->cartera_id = $caja->carteraCupones['id'];
+                $nuevoCupon->save();
+            }
+        }
+    }
+
+    private function cargaCheques($request, $caja, $pago){
+        if(sizeof($request->cheques) > 0){
+            foreach ($request->cheques as $cheque) {
+                $nuevoCheque = new Cheque();
+                $nuevoCheque->fecha_emision = $cheque['fecha_emision'];
+                $nuevoCheque->fecha_pago = $cheque['fecha_pago'];
+                $nuevoCheque->nro_cheque = $cheque['nro_cheque'];
+                $nuevoCheque->importe = $cheque['importe'];
+                $nuevoCheque->propio = $cheque['propio'];  
+                if($cheque['propio'] == 1){
+                    $nuevoCheque->cuit_emisor = $cheque['cliente']['cuit'];
+                }else{
+                    $nuevoCheque->cuit_emisor = $cheque['cuit_emisor'];
+                }
+                $nuevoCheque->librador_id = $cheque['cliente']['id'];
+                $nuevoCheque->banco_id = $cheque['banco']['id'];
+                $nuevoCheque->pago_id = $pago->id;
+                $nuevoCheque->cartera_id = $caja->carteraCupones['id'];
+
+                $nuevoCheque->save();
+            }
+        }
     }
 }

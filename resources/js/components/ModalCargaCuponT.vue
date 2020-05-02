@@ -16,14 +16,14 @@
                         <h5 class="modal-title" id="cargarCuponLabel">
                             Ingresar Cupon de Tarjeta
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="carga = false">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-success alert-dismissible fade show" v-if="carga">
                             {{rta}} 
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="carga = false">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>

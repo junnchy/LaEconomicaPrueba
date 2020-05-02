@@ -93,7 +93,8 @@ class CajaController extends Controller
                 'pagos.cuenta.cliente',
                 'carteraCupones.cupones.pago.cuenta.cliente', 
                 'carteraCupones.cupones.tarjeta',
-                'pagos.fdp'
+                'pagos.fdp',
+                'carteraCheques.cheques'
                 )
                 ->findOrFail($id);
             

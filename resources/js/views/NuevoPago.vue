@@ -65,6 +65,29 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <table class="table table-striped" v-if="npago.cheques.length > 0">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nro cheque</th>
+                                                <th scope="col">Banco</th>
+                                                <th scope="col">Importe</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(cheque, index) in npago.cheques" :key="index">
+                                                <td>{{cheque.nro_cheque}}</td>
+                                                <td>{{cheque.cuotas}}</td>
+                                                <td>${{cheque.importe}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline-danger border-0 btn-sm" 
+                                                    @click="deleteCheque(index)">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <hr>
@@ -137,6 +160,13 @@ export default {
                 message: 'Cupon Borrado',
                 type: 'error',
             });
+        },
+        deleteCheque(index){
+            this.npago.cheques.splice(index, 1);
+            Vue.$toast.open({
+                message: 'Cheque Borrado',
+                type: 'error',
+            });
         }
     },
     computed:{
@@ -150,6 +180,11 @@ export default {
             if(this.npago.cupones.length > 0){
                 this.npago.cupones.forEach(cupon => {
                     this.npago.importe = parseFloat(this.npago.importe) + parseFloat(cupon.importe)
+                });
+            }
+            if(this.npago.cheques.length > 0){
+                this.npago.cheques.forEach(cheque => {
+                    this.npago.importe = parseFloat(this.npago.importe) + parseFloat(cheque.importe)
                 });
             }
             return this.npago.importe
