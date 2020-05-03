@@ -41,7 +41,6 @@
 <script>
   import estadisticaTipoPago from './Informes/EstadisticaTipoPago'
   import { mapState } from 'vuex'
-
   export default {
     components: {
       estadisticaTipoPago

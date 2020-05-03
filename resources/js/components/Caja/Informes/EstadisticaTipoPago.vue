@@ -1,7 +1,12 @@
 <template>
   <div class="small">
     <line-chart :chart-data="datacollection"></line-chart>
-   
+    <div class="row mt-2">
+      <!-- <button class="btn-outline-primary" @click="fillData()">
+        Actualizar
+      </button> -->
+    </div>
+   {{charts}}
   </div>
 </template>
 
@@ -15,7 +20,21 @@ import { mapState } from 'vuex'
     },
     data () {
       return {
-        datacollection: {
+        datacollection: {}
+      }
+    },
+    computed:{
+      ...mapState('cajas', ['caja']),
+      charts(){
+        this.fillData()
+      }
+    },
+    mounted () {
+      this.fillData()
+    },
+    methods: {
+      fillData () {
+        this.datacollection = {
           labels: ['Ventas'],
           datasets: [
             { 
@@ -31,7 +50,7 @@ import { mapState } from 'vuex'
             { 
               label: 'Cheques',
               backgroundColor: '#FFD84C',
-              data: [this.$store.state.cajas.caja.vCheque]
+              data: [this.getCheque()]
             },
             { 
               label: 'Ref',
@@ -40,35 +59,11 @@ import { mapState } from 'vuex'
             },
           ]
         }
-      }
-    },
-    computed:{
-      ...mapState('cajas', ['caja'])
-    }
-    /* mounted () {
-      this.fillData()
-    },
-    methods: {
-      fillData () {
-        this.datacollection = {
-          labels: [this.getRandomInt(), this.getRandomInt()],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }, {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }
-          ]
-        }
       },
-      getRandomInt () {
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+      getCheque() {
+        return this.$store.state.cajas.caja.vCheque
       }
-    } */
+    }
   }
 </script>
 

@@ -145,7 +145,7 @@ class PagoController extends Controller
         }
     }
 
-    private function cargaCheques($request, $caja, $pago){
+    private function cargaCheques($request, $caja, $pago, $cta){
         if(sizeof($request->cheques) > 0){
             foreach ($request->cheques as $cheque) {
                 $nuevoCheque = new Cheque();

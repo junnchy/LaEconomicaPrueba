@@ -8,6 +8,7 @@
                     <th scope="col">Debe</th>
                     <th scope="col">Haber</th>
                     <th scope="col">Saldo</th>
+                    <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,10 +23,19 @@
                     </td>
                     <!-- <td>{{mov.fdp.descripcion}}</td> -->
                     <td class="text-success">
-                            <p v-if="movimiento.tipo === 'Pago'">${{movimiento.importe}}</p>
+                        <p v-if="movimiento.tipo === 'Pago'">${{movimiento.importe}}</p>
                     </td>
                     <td>
-                            <p v-if="movimiento.tipo === 'Venta'">${{movimiento.saldo}}</p>
+                        <p v-if="movimiento.tipo === 'Venta'">${{movimiento.saldo}}</p>
+                    </td>
+                    <td v-if="movimiento.tipo === 'Venta'">
+                        <router-link :to="{name:'detalleVenta', params:{id: movimiento.id}}">
+                            <button class="btn btn-outline-primary btn-sm" >
+                                Ver 
+                            </button>
+                        </router-link>
+                    </td>
+                    <td v-if="movimiento.tipo === 'Pago'">
                     </td>
                 </tr>
             </tbody>
@@ -37,7 +47,7 @@
 export default {
     props:{
         movimientos:{
-            type: Array,
+            type: Object,
             required: true
         }
     },

@@ -174,6 +174,11 @@ const routes = [
       name: 'detalleCaja',
       component: () => import(/* webpackChunkName: "about" */ '../views/DetalleCaja.vue')
     },
+    {
+      path: '/detalleVenta/:id',
+      name: 'detalleVenta',
+      component: () => import(/* webpackChunkName: "about" */ '../views/Comercial/Ventas/DetalleDeVenta.vue')
+    },
 ]
 
 
