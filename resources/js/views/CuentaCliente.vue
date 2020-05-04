@@ -53,7 +53,7 @@
                         <cupones v-bind:cupones="cuentaCliente.cupones"/>
                     </div>
                     <div class="tab-pane fade" id="nav-cheque" role="tabpanel" aria-labelledby="nav-cheque-tab">
-                        
+                        <cheques v-bind:cupones="cuentaCliente.cheques"/>
                     </div>
                     <div class="tab-pane fade" id="nav-informe" role="tabpanel" aria-labelledby="nav-informe-tab">
                         <div class="row justify-content-center">
@@ -72,6 +72,7 @@
 import { mapActions, mapState } from 'vuex'
 import movimientos from '../components/Clientes/Movimientos'
 import cupones from '../components/Caja/Cupones'
+import cheques from '../components/Caja/Cheques'
 import DatePicker from 'vue2-datepicker';
 import 'vue2-datepicker/index.css';
 export default {
@@ -83,7 +84,8 @@ export default {
     components:{
         movimientos,
         DatePicker,
-        cupones
+        cupones,
+        cheques
     },
     created(){
         this.getCuentaCliente(this.id)

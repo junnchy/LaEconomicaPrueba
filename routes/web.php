@@ -43,6 +43,8 @@ Route::resource('/vendedores', 'VendedoresController')->middleware('auth');
 
 Route::resource('/depositos', 'DepositoController')->middleware('auth');
 
+Route::resource('/cheques', 'ChequeController')->middleware('auth');
+
 Route::resource('/fichaStock', 'FichaDeStockController')->middleware('auth');
 
 Route::resource('/presupuestos', 'PresupuestoController')->middleware('auth');

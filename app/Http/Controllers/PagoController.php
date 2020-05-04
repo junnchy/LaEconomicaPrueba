@@ -90,9 +90,13 @@ class PagoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            $pago = Pago::with('cupones.pago.cuenta.cliente', 'cheques', 'fdp', 'cuenta.cliente', 'cupones.tarjeta')->findOrFail($id);
+
+            return response()->json($pago);
+        }
     }
 
     /**

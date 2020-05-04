@@ -94,7 +94,7 @@ class CajaController extends Controller
                 'carteraCupones.cupones.pago.cuenta.cliente', 
                 'carteraCupones.cupones.tarjeta',
                 'pagos.fdp',
-                'carteraCheques.cheques'
+                'carteraCheques.cheques.cuenta.cliente'
                 )
                 ->findOrFail($id);
             
@@ -118,6 +118,7 @@ class CajaController extends Controller
                 $f2 = new Carbon();
                 $f2 = Carbon::today();
                 $f2->addDays(1);
+                $f1->startOfDay();
                 $f2->startOfDay();
             }
 

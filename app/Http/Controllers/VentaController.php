@@ -92,7 +92,7 @@ class VentaController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $venta = Venta::with('fdp', 'cuenta.cliente')->findOrFail($id);
+            $venta = Venta::with('fdp', 'cuenta.cliente.localidad', 'vendedor', 'lineas.producto', 'pago.cupones', 'pago.cheques')->findOrFail($id);
             return response()->json($venta);
         }
     }

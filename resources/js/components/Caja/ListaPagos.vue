@@ -17,9 +17,11 @@
                     <td>{{pago.cuenta.cliente.nombre}}</td>
                     <td>${{pago.importe}}</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm">
-                            <i class="far fa-eye"></i>
-                        </button>
+                       <router-link :to="{name:'detallePago', params:{id: pago.id}}">
+                            <button class="btn btn-outline-primary btn-sm">
+                                Ver <i class="fas fa-eye"></i>
+                            </button>
+                        </router-link>
                     </td>
                 </tr>
             </tbody>

@@ -31,11 +31,16 @@
                     <td v-if="movimiento.tipo === 'Venta'">
                         <router-link :to="{name:'detalleVenta', params:{id: movimiento.id}}">
                             <button class="btn btn-outline-primary btn-sm" >
-                                Ver 
+                                Ver <i class="fas fa-eye"></i>
                             </button>
                         </router-link>
                     </td>
                     <td v-if="movimiento.tipo === 'Pago'">
+                        <router-link :to="{name:'detallePago', params:{id: movimiento.id}}">
+                            <button class="btn btn-outline-primary btn-sm">
+                                Ver <i class="fas fa-eye"></i>
+                            </button>
+                        </router-link>
                     </td>
                 </tr>
             </tbody>

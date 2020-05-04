@@ -32,7 +32,7 @@
                 </button>
             </div>
             <div class="col-4">
-                <date-picker v-model="fechas" type="date" range placeholder="Filtrar por Fecha"></date-picker>
+                <date-picker v-model="fechas" @clear='(clear)=>{fechas=null}' type="date" range placeholder="Filtrar por Fecha"></date-picker>
             </div>
         </div>
         <hr>
@@ -137,9 +137,11 @@ export default {
                     
                     aux.push(d)
                 })
-        
                 console.log(aux)
                 var param = [this.id, aux]
+                this.getCaja(param)
+            }else{
+                var param = [this.id, null]
                 this.getCaja(param)
             }
         }

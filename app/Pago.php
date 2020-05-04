@@ -5,6 +5,7 @@ use App\Venta;
 use App\CuentaCliente;
 use App\FormaDePago;
 use App\CuponTarjeta;
+use App\Cheque;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,10 @@ class Pago extends Model
 
     public function cupones(){
         return $this->hasMany(CuponTarjeta::class);
+    }
+
+    public function cheques(){
+        return $this->hasMany(Cheque::class);
     }
 
     public function cuenta(){

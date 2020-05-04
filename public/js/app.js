@@ -67082,6 +67082,18 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Comercial/Ventas/DetalleDeVenta.vue */ "./resources/js/views/Comercial/Ventas/DetalleDeVenta.vue"));
   }
+}, {
+  path: '/detallePago/:id',
+  name: 'detallePago',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Comercial/Ventas/DetallePago.vue */ "./resources/js/views/Comercial/Ventas/DetallePago.vue"));
+  }
+}, {
+  path: '/menuCheques',
+  name: 'menuCheques',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Caja/Cheques/MenuCheques.vue */ "./resources/js/views/Caja/Cheques/MenuCheques.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -67125,6 +67137,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Caja_bancos__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/Caja/bancos */ "./resources/js/store/modules/Caja/bancos.js");
 /* harmony import */ var _modules_Caja_tarjetas__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/Caja/tarjetas */ "./resources/js/store/modules/Caja/tarjetas.js");
 /* harmony import */ var _modules_Caja_caja__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./modules/Caja/caja */ "./resources/js/store/modules/Caja/caja.js");
+/* harmony import */ var _modules_Caja_cheques__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/Caja/cheques */ "./resources/js/store/modules/Caja/cheques.js");
+
 
 
 
@@ -67168,7 +67182,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     pagos: _modules_Caja_pagos__WEBPACK_IMPORTED_MODULE_18__["default"],
     bancos: _modules_Caja_bancos__WEBPACK_IMPORTED_MODULE_19__["default"],
     tarjetas: _modules_Caja_tarjetas__WEBPACK_IMPORTED_MODULE_20__["default"],
-    cajas: _modules_Caja_caja__WEBPACK_IMPORTED_MODULE_21__["default"]
+    cajas: _modules_Caja_caja__WEBPACK_IMPORTED_MODULE_21__["default"],
+    cheques: _modules_Caja_cheques__WEBPACK_IMPORTED_MODULE_22__["default"]
   },
   state: {
     actual: 0,
@@ -67454,6 +67469,100 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./resources/js/store/modules/Caja/cheques.js":
+/*!****************************************************!*\
+  !*** ./resources/js/store/modules/Caja/cheques.js ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    cheques: [],
+    cheque: {}
+  },
+  mutations: {
+    setCheques: function setCheques(state, cheques) {
+      state.cheques = cheques;
+    },
+    setCheque: function setCheque(state, cheque) {
+      state.cheque = cheque;
+    }
+  },
+  actions: {
+    getCheques: function () {
+      var _getCheques = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref, param) {
+        var commit, cheques, c;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref.commit;
+                console.log(param);
+                cheques = [];
+                _context.prev = 3;
+                _context.next = 6;
+                return axios.get('http://127.0.0.1:8000/cheques', {
+                  params: {
+                    fechas: param.fechas,
+                    tipof: param.tipof
+                  }
+                });
+
+              case 6:
+                c = _context.sent;
+                c.data.forEach(function (cheque) {
+                  cheques.push(cheque);
+                });
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](3);
+                console.log(_context.t0.response.data);
+
+              case 13:
+                _context.prev = 13;
+                console.log(cheques);
+                commit('setCheques', cheques);
+                return _context.finish(13);
+
+              case 17:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[3, 10, 13, 17]]);
+      }));
+
+      function getCheques(_x, _x2) {
+        return _getCheques.apply(this, arguments);
+      }
+
+      return getCheques;
+    }()
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/store/modules/Caja/pagos.js":
 /*!**************************************************!*\
   !*** ./resources/js/store/modules/Caja/pagos.js ***!
@@ -67463,15 +67572,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
   state: {
     pagos: [],
-    status: null
+    status: null,
+    pago: {}
   },
   mutations: {
     setStatus: function setStatus(state, status) {
       state.status = status;
+    },
+    setPago: function setPago(state, pago) {
+      state.pago = pago;
     }
   },
   actions: {
@@ -67503,7 +67624,50 @@ __webpack_require__.r(__webpack_exports__);
           type: 'error'
         });
       });
-    }
+    },
+    getPago: function () {
+      var _getPago = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref2, id) {
+        var commit, pago;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                commit = _ref2.commit;
+                _context.prev = 1;
+                _context.next = 4;
+                return axios.get("http://127.0.0.1:8000/pago/".concat(id));
+
+              case 4:
+                pago = _context.sent;
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](1);
+                console.log(_context.t0.response.data);
+
+              case 10:
+                _context.prev = 10;
+                commit('setPago', pago.data);
+                return _context.finish(10);
+
+              case 13:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[1, 7, 10, 13]]);
+      }));
+
+      function getPago(_x, _x2) {
+        return _getPago.apply(this, arguments);
+      }
+
+      return getPago;
+    }()
   }
 });
 

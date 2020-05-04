@@ -18,6 +18,11 @@
                             Tarjetas <i class="far fa-credit-card"></i>
                         </button> 
                     </router-link>
+                    <router-link :to="{name:'menuCheques'}">
+                        <button class="btn btn-outline-primary">
+                            Cheques 
+                        </button> 
+                    </router-link>
                      <button class="btn btn-outline-success" @click="agregarCaja(ncaja)">
                         Nueva Caja <i class="fas fa-plus-circle"></i>
                     </button>  

@@ -20,6 +20,7 @@ import pagos from './modules/Caja/pagos'
 import bancos from './modules/Caja/bancos'
 import tarjetas from './modules/Caja/tarjetas'
 import cajas from './modules/Caja/caja'
+import cheques from './modules/Caja/cheques'
 
 Vue.use(Vuex)
 
@@ -43,7 +44,8 @@ export default new Vuex.Store({
     pagos,
     bancos,
     tarjetas,
-    cajas
+    cajas,
+    cheques
   },
   state: {
     actual: 0,

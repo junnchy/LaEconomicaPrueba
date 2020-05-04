@@ -179,6 +179,16 @@ const routes = [
       name: 'detalleVenta',
       component: () => import(/* webpackChunkName: "about" */ '../views/Comercial/Ventas/DetalleDeVenta.vue')
     },
+    {
+      path: '/detallePago/:id',
+      name: 'detallePago',
+      component: () => import(/* webpackChunkName: "about" */ '../views/Comercial/Ventas/DetallePago.vue')
+    },
+    {
+      path: '/menuCheques',
+      name: 'menuCheques',
+      component: () => import(/* webpackChunkName: "about" */ '../views/Caja/Cheques/MenuCheques.vue')
+    },
 ]
 
 

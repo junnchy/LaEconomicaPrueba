@@ -23,6 +23,7 @@ class CreateChequesTable extends Migration
             $table->boolean('propio');
             $table->unsignedBigInteger('cartera_id')->nullable();
             $table->foreign('cartera_id')->references('id')->on('cartera_cheques');
+            /* Ver de Sacar */
             $table->unsignedBigInteger('librador_id')->nullable();
             $table->foreign('librador_id')->references('id')->on('clientes');
             $table->unsignedBigInteger('destinatario_id')->nullable();

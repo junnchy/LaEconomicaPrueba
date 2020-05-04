@@ -2,11 +2,15 @@ export default {
     namespaced: true,
     state:{
         pagos: [],
-        status: null
+        status: null,
+        pago: {}
     },
     mutations: {
         setStatus(state, status){
             state.status = status
+        },
+        setPago(state, pago){
+            state.pago = pago
         }
     },
     actions:{
@@ -36,6 +40,18 @@ export default {
                     type: 'error',
                 });
             }); 
+        },
+        async getPago({commit}, id){
+            try 
+            {
+               var pago = await axios.get(`http://127.0.0.1:8000/pago/${id}`)
+            } 
+            catch (error) {
+                console.log(error.response.data)
+            }
+            finally{
+                commit('setPago', pago.data)
+            }
         }
         
     }, 
