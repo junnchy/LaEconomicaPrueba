@@ -10,7 +10,7 @@ class Provincia extends Model
 {
     public function localidades()
     {
-        return $this->hasMany(Localidad::class)->orderBy('nombre');;
+        return $this->hasMany(Localidad::class)->orderBy('nombre');
     }
 
     public function clientes()

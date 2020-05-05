@@ -79,6 +79,26 @@ const routes = [
       name: 'tablaDatosCliente',
       component: () => import(/* webpackChunkName: "about" */ '../views/TablasDatosClientes.vue')
     },
+    {
+      path: '/usuarios/',
+      name: 'menuUsuarios',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuUsuarios.vue')
+    },
+    {
+      path: '/agregarUsuario',
+      name: 'agregarUsuario',
+      component: () => import(/* webpackChunkName: "about" */ '../views/AgregarUsuario.vue')
+    },
+    {
+      path: '/detalleUsuario/:id',
+      name: 'detalleUsuario',
+      component: () => import(/* webpackChunkName: "about" */ '../views/DetalleUsuario.vue')
+    },
+    {
+      path: '/editarUsuario/:id',
+      name: 'editarUsuario',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EditarUsuario.vue')
+    },
 ]
 
 

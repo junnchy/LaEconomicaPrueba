@@ -45,6 +45,8 @@ Route::get('/productos/{any}', 'SpaController@productos')->where('any', '.*')->m
 
 Route::get('/clientes/{any}', 'SpaController@clientes')->where('any', '.*')->middleware('auth');
 
+Route::get('/usuarios/{any}', 'SpaController@usuarios')->where('any', '.*')->middleware('auth');
+
 Route::resource('/localidades', 'LocalidadController')->middleware('auth');
 Route::resource('/condicionIva', 'CondicionIvaController')->middleware('auth');
 Route::resource('/categoriaCliente', 'CategoriaClienteController')->middleware('auth');

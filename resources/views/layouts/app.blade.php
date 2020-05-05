@@ -19,7 +19,7 @@
    
 
     @if(Auth::check())
-        <meta name="user-name" content="{{Auth::user()->name}}">
+        <meta name="user-name" content="{{Auth::user()->nombre}}">
     @endif
 
 </head>
@@ -72,7 +72,16 @@
                     </li>
                     @auth
                         @if (Auth::user()->hasRole('Super Admin'))
-                            <a class="nav-link" href="{{ route('homeUsers') }}" class="">Perfiles</a>              
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Perfiles de Usuarios
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <router-link :to="{name: 'menuUsuarios'}" >
+                                        <a class="dropdown-item" href="#">Menu Usuarios</a>
+                                    </router-link>
+                                </div>
+                            </li>             
                         @endif
                     @endauth
                 </ul>
@@ -93,7 +102,7 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->nombre }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

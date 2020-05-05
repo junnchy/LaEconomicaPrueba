@@ -22,10 +22,18 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('usuarios.detalleUsuarios', compact('users'));
+        if($request->ajax())
+        {
+            $usuarios = User::all();
+            return response()->json($usuarios);  
+        }
+        else
+        {
+            $users = User::all();
+            return view('usuarios.detalleUsuarios', compact('users'));
+        }  
     }
 
     /**
@@ -46,21 +54,45 @@ class UsersController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $validated = $request->validated();
-        $user = new User();
-        $user->nombre = $request->nombre;
-        $user->email = $request->email;
-        $user->dni = $request->dni;
-        $user->cuil = $request->cuil;
-        $user->celular = $request->celular;
-        $user->telefono = $request->telefono;
-        $user->fecha_nacimiento = $request->fecha_nacimiento;
-        $user->direccion = $request->direccion;
-        $user->localidad_id = $request->localidad_id;
-        $user->password = $request->password;
-        $user->save();    
-
-        return back()->with('mensaje', 'Usuario Agregado');
+        if($request->ajax())
+        {
+            $validated = $request->validated();
+            $user = new User();
+            $user->nombre = $request->nombre;
+            $user->email = $request->email;
+            $user->dni = $request->dni;
+            $user->cuil = $request->cuil;
+            $user->celular = $request->celular;
+            $user->telefono = $request->telefono;
+            $user->fecha_nacimiento = $request->fecha_nacimiento;
+            $user->direccion = $request->direccion;
+            $user->localidad_id = $request->localidad_id;
+            $user->password = $request->password;
+            $user->save();
+            
+            return response()->json([
+                'usuario' => $usuario,
+                'message' => 'Usuario Agregado'
+            ], 200);
+        }
+        else
+        {
+            $validated = $request->validated();
+            $user = new User();
+            $user->nombre = $request->nombre;
+            $user->email = $request->email;
+            $user->dni = $request->dni;
+            $user->cuil = $request->cuil;
+            $user->celular = $request->celular;
+            $user->telefono = $request->telefono;
+            $user->fecha_nacimiento = $request->fecha_nacimiento;
+            $user->direccion = $request->direccion;
+            $user->localidad_id = $request->localidad_id;
+            $user->password = $request->password;
+            $user->save(); 
+            
+            return back()->with('mensaje', 'Usuario Agregado');   
+        }
     }
 
     /**
@@ -69,9 +101,18 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        if($request->ajax())
+        {
+            $usuario = User::with(['localidad.provincia'])->findOrFail($id);
+            return response()->json($usuario);
+        }
+        else
+        {
+            $user = User::findOrFail($id);
+            return view('usuarios.editar', compact('user'));
+        } 
     }
 
     /**
@@ -95,21 +136,45 @@ class UsersController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $validated = $request->validated();
-        $user = User::findOrFail($id);
-        $user->nombre = $request->nombre;
-        $user->email = $request->email;
-        $user->dni = $request->dni;
-        $user->cuil = $request->cuil;
-        $user->celular = $request->celular;
-        $user->telefono = $request->telefono;
-        $user->fecha_nacimiento = $request->fecha_nacimiento;
-        $user->direccion = $request->direccion;
-        $user->localidad_id = $request->localidad_id;
-        $user->password = $request->password;
-        $user->save();       
-
-        return back()->with('mensaje', 'Usuario Actualizado');
+        if ($request->ajax())
+        {
+            $validated = $request->validated();
+            $user = User::findOrFail($id);
+            $user->nombre = $request->nombre;
+            $user->email = $request->email;
+            $user->dni = $request->dni;
+            $user->cuil = $request->cuil;
+            $user->celular = $request->celular;
+            $user->telefono = $request->telefono;
+            $user->fecha_nacimiento = $request->fecha_nacimiento;
+            $user->direccion = $request->direccion;
+            $user->localidad_id = $request->localidad_id;
+            $user->password = $request->password;
+            $user->save();
+            
+            return response()->json([
+                'usuario' => $usuario,
+                'message' => 'Usuario Actualizado'
+            ], 200);
+        }
+        else
+        {
+            $validated = $request->validated();
+            $user = User::findOrFail($id);
+            $user->nombre = $request->nombre;
+            $user->email = $request->email;
+            $user->dni = $request->dni;
+            $user->cuil = $request->cuil;
+            $user->celular = $request->celular;
+            $user->telefono = $request->telefono;
+            $user->fecha_nacimiento = $request->fecha_nacimiento;
+            $user->direccion = $request->direccion;
+            $user->localidad_id = $request->localidad_id;
+            $user->password = $request->password;
+            $user->save();
+            
+            return back()->with('mensaje', 'Usuario Actualizado');
+        }        
     }
 
     /**
