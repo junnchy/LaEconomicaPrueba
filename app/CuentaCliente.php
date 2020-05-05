@@ -5,6 +5,7 @@ use App\Venta;
 use App\Cliente;
 use App\Pago;
 use App\CuponTarjeta;
+use App\Cheque;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,11 @@ class CuentaCliente extends Model
     public function cupones()
     {   
         return $cupones = $this->hasMany(CuponTarjeta::class, 'ctac_id', 'id')->orderBy('created_at', 'desc');
+    }
+
+    public function cheques()
+    {   
+        return $cupones = $this->hasMany(Cheque::class, 'ctac_id', 'id')->orderBy('created_at', 'desc');
     }
 
     public function cliente()

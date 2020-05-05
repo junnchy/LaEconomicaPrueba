@@ -28,7 +28,7 @@ export default {
     },
     props:{
         cheques:{
-            type: Object,
+            type: Array,
             required: true
         }
     },

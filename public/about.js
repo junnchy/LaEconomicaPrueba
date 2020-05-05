@@ -180,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     cheques: {
-      type: Object,
+      type: Array,
       required: true
     }
   },
@@ -427,7 +427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     cheques: {
-      type: Object,
+      type: Array,
       required: true
     }
   }
