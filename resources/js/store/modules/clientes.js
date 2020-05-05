@@ -134,6 +134,18 @@ export default {
                 direccion:''
             }
             commit('setError', error)
+        },
+        exportarExcel(){
+            axios.get('http://127.0.0.1:8000/ExcelClientes')
+
+            axios.get('http://127.0.0.1:8000/ExcelClientes', {responseType: 'blob'}).then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', 'clientes.xlsx');
+                document.body.appendChild(link);
+                link.click();
+            })
         }
     }, 
     getters:{

@@ -1,11 +1,17 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-3">
                     <h1> <i class="fas fa-users"></i> Clientes</h1>
             </div>
+            <div class="col-1"></div>
+            <div class="col-3">
+                <button class="btn btn-outline-primary btn-sm" @click="exportarExcel()">
+                    Exportar Excel
+                </button>
+            </div>
         </div>
-         <div class="row">
+        <div class="row mt-2">
             <div class="col-9">
                     <input class="form-control mt-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
             </div>
@@ -30,7 +36,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('clientes',['getClientes']),
+        ...mapActions('clientes',['getClientes', 'exportarExcel']),
         ...mapActions(['cambiarEstado'])
     },
     created() {

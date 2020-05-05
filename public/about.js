@@ -6210,13 +6210,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MenuClientes',
   data: function data() {
     return {};
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getClientes']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('clientes', ['getClientes', 'exportarExcel']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado'])),
   created: function created() {
     this.getClientes();
     this.cambiarEstado(4);
@@ -19236,9 +19242,28 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm._m(0),
-      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-1" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-primary btn-sm",
+              on: {
+                click: function($event) {
+                  return _vm.exportarExcel()
+                }
+              }
+            },
+            [_vm._v("\n                Exportar Excel\n            ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mt-2" }, [
         _c("div", { staticClass: "col-9" }, [
           _c("input", {
             directives: [
@@ -19296,13 +19321,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("h1", [
-          _c("i", { staticClass: "fas fa-users" }),
-          _vm._v(" Clientes")
-        ])
-      ])
+    return _c("div", { staticClass: "col-3" }, [
+      _c("h1", [_c("i", { staticClass: "fas fa-users" }), _vm._v(" Clientes")])
     ])
   }
 ]

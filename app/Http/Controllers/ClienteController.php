@@ -12,6 +12,8 @@ use App\CategoriaClientes;
 use App\CondicionIva;
 use App\Localidad;
 use Illuminate\Support\Facades\DB;
+use App\Exports\ClientesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClienteController extends Controller
 {
@@ -193,6 +195,11 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function excel(){
+       
+        return Excel::download(new ClientesExport, 'clientes.xlsx');
     }
 
 }

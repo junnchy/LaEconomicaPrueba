@@ -15,9 +15,22 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        return $next($request)
-            ->header('Access-Control-Allow-Origin', "*")
-            ->header('Access-Control-Allow-Methods','PUT, POST, DELETE, GET, OPTIONS')
-            ->header('Access-Control-Allow-Headers','Accept, Autorization, Content-Type');
+        $handle = $next($request);
+
+    if(method_exists($handle, 'header'))
+    {
+        // Standard HTTP request.
+
+        $handle->header('Access-Control-Allow-Origin' , '*');
+    }
+    else
+    {
+        // Download Request?
+
+        $handle->headers->set('Some-Other-Header' , 'value');
+    }
+
+    return $handle;
+
     }
 }

@@ -68259,6 +68259,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         direccion: ''
       };
       commit('setError', error);
+    },
+    exportarExcel: function exportarExcel() {
+      axios.get('http://127.0.0.1:8000/ExcelClientes');
+      axios.get('http://127.0.0.1:8000/ExcelClientes', {
+        responseType: 'blob'
+      }).then(function (response) {
+        var url = window.URL.createObjectURL(new Blob([response.data]));
+        var link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'clientes.xlsx');
+        document.body.appendChild(link);
+        link.click();
+      });
     }
   },
   getters: {
