@@ -1938,6 +1938,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
+  components: {
+    ListadoUsuarios: _components_ListadoUsuarios__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('usuarios', ['getUsuarios']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['cambiarEstado'])),
   created: function created() {
     this.getUsuarios();

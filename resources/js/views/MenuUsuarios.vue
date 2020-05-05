@@ -30,6 +30,9 @@ export default {
         return {
         }
     },
+    components:{
+        ListadoUsuarios
+    },
     methods: {
         ...mapActions('usuarios',['getUsuarios']),
         ...mapActions(['cambiarEstado'])

@@ -32,7 +32,7 @@ class UsersController extends Controller
         else
         {
             $users = User::all();
-            return view('usuarios.detalleUsuarios', compact('users'));
+            return view('usuarios.home', compact('users'));
         }  
     }
 

@@ -73,6 +73,9 @@
                     @auth
                         @if (Auth::user()->hasRole('Super Admin'))
                             <li class="nav-item dropdown">
+                                <li>
+                                    <a class="nav-link" href="/usuarios/" class="">Usuarios</a>
+                                </li> 
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Perfiles de Usuarios
                                 </a>
