@@ -68261,7 +68261,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       commit('setError', error);
     },
     exportarExcel: function exportarExcel() {
-      axios.get('http://127.0.0.1:8000/ExcelClientes');
       axios.get('http://127.0.0.1:8000/ExcelClientes', {
         responseType: 'blob'
       }).then(function (response) {
@@ -70270,8 +70269,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

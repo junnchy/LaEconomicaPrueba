@@ -15797,7 +15797,7 @@ var render = function() {
                 }
               },
               [
-                _c("cheques", { attrs: { cupones: _vm.cuentaCliente.cheques } })
+                _c("cheques", { attrs: { cheques: _vm.cuentaCliente.cheques } })
               ],
               1
             ),

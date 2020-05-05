@@ -53,7 +53,7 @@
                         <cupones v-bind:cupones="cuentaCliente.cupones"/>
                     </div>
                     <div class="tab-pane fade" id="nav-cheque" role="tabpanel" aria-labelledby="nav-cheque-tab">
-                        <cheques v-bind:cupones="cuentaCliente.cheques"/>
+                        <cheques v-bind:cheques="cuentaCliente.cheques"/>
                     </div>
                     <div class="tab-pane fade" id="nav-informe" role="tabpanel" aria-labelledby="nav-informe-tab">
                         <div class="row justify-content-center">
