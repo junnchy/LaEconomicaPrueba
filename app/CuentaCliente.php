@@ -35,4 +35,25 @@ class CuentaCliente extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    public function ventasConSaldo(){
+        return $this->hasMany(Venta::class, 'ctac_id', 'id')->where('saldo', '>', 0)->orderBy('created_at', 'desc');
+    }
+
+    public function actualizarSaldo(){
+        $this->saldo = 0;
+        $ventas = 0;
+        $pagos = 0;
+        $this->ventas();
+        $this->pagos();
+        foreach ($this->ventas as $venta) {
+           $ventas = $ventas + $venta->saldo; 
+        }
+        foreach ($this->pagos as $pago) {
+            $pagos = $pagos - $pago->saldo; 
+        }
+        $this->saldo = $ventas + $pagos;
+
+        $this->save();
+    }
 }

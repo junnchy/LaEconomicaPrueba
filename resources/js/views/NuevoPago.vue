@@ -15,13 +15,38 @@
             <div class="col-12">
                 <div class="card-deck">
                     <div class="card border-primary">
-                        <h5 class="card-header">Venta <i class="fas fa-shopping-cart text-primary"></i></h5>
+                        <h5 class="card-header">Ventas <i class="fas fa-shopping-cart text-primary"></i></h5>
                         <div class="card-body">
-                            <p class="card-text">Forma de Pago: <strong>{{ventaActual.fdp.descripcion}}</strong></p>
-                            <p class="card-text">Cliente: <strong>{{ventaActual.cuenta.cliente.nombre}}</strong></p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="cliente">Cliente</label>
+                                    <multiselect v-model="npago.cliente" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="clientes" :searchable="true" :allow-empty="false">
+                                        <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.nombre }}</strong></template>
+                                    </multiselect>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <label for="cliente">Cuenta</label>
+                                    <multiselect v-model="cta" deselect-label="Can't remove this value" track-by="id" label="id" placeholder="Select one" :options="c.cuentas" :searchable="false" :allow-empty="false">
+                                        <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.id }}</strong></template>
+                                    </multiselect>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Ventas a Apagar</label>
+                                        <select multiple class="form-control" id="exampleFormControlSelect1" v-model="vtas">
+                                            <option v-for="(venta, index) in cta.ventas_con_saldo" :key="index" :value="{id: venta.id, saldo:venta.saldo}">{{venta.id}} - {{venta.saldo}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="card-footer text-center">
-                            <h5 class="card-title">Total a Pagar: <strong>${{ventaActual.saldo}}</strong></h5>
+                            <h5 class="card-title">Total a Pagar: <strong>${{a_pagar}}</strong></h5>
                         </div>
                     </div>
                     <div :class="cardPago">
@@ -118,42 +143,69 @@
                 </router-link>
             </div>
         </div>
+        {{cli}}
     </div>
 </template>
 
 <script>
 import ingresaCupon from '../components/ModalCargaCuponT'
 import ingresaCheque from '../components/ModalCargaCheque'
+import Multiselect from 'vue-multiselect';
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import { mapActions, mapState} from 'vuex'
 export default {
     components:{
         ingresaCupon,
-        ingresaCheque
+        ingresaCheque,
+        Multiselect
     },
     data() {
         return {
+            c: {
+                id: null, 
+                cuentas: []
+            },
             cardPago: "card border-success",
+            value: null,
+            cta:{
+                ventas_con_saldo:[]
+            },
+            vtas:[],
             npago:{
                 importe: 0,
                 pesos: null,
                 dolares: 0,
                 ctac_id: null,
-                vta_id: null,
+                vtas_id: [],
                 cupones:[],
-                cheques: []
+                cheques: [],
+                cliente:{
+                    id: null,
+                    nombre: '',
+                    cuentas:{
+                        ventas_con_saldo:[]
+                    }
+                }
             }
         }
     },
     created(){
-        if (this.ventaActual.fdp.id === 1) {
-            this.npago.pesos = this.ventaActual.saldo
-        }
-        this.npago.ctac_id = this.ventaActual.ctac_id
-        this.npago.vta_id = this.ventaActual.id
+        /* if (ventaActual != null) {
+             if (this.ventaActual.fdp.id === 1) {
+                this.npago.pesos = this.ventaActual.saldo
+            }
+            this.npago.ctac_id = this.ventaActual.ctac_id
+            this.npago.vtas_id.push(this.ventaActual.id)
+        }else{ */
+            this.getClientes()
+        /* } */
+       
     },
     methods:{
         ...mapActions('ventas', ['getVenta']),
         ...mapActions('pagos', ['agregarPago']),
+        ...mapActions('clientes', ['getClientes', 'getCliente']),
         deleteCupon(index){
             this.npago.cupones.splice(index, 1);
             Vue.$toast.open({
@@ -172,6 +224,7 @@ export default {
     computed:{
         ...mapState('ventas',['ventaActual']),
         ...mapState('pagos', ['status']),
+        ...mapState('clientes', ['clientes', 'cliente']),
         importe(){
             this.npago.importe = 0  
             if(this.npago.pesos > 0){
@@ -190,7 +243,20 @@ export default {
             return this.npago.importe
         },
         a_pagar(){
-            return (this.ventaActual.saldo - this.npago.importe)
+            this.npago.ctac_id = this.cta.id
+            var saldo = 0
+            this.npago.vtas_id = []
+            this.vtas.forEach(venta => {
+                saldo += venta.saldo
+                this.npago.vtas_id.push(venta.id)
+            });
+            return saldo
+        },
+        cli(){
+            if(this.npago.cliente.id === null || this.npago.cliente.id != this.c.id){
+                this.getCliente(this.npago.cliente.id)
+                this.c = this.cliente
+            }
         }
     }
 }
@@ -202,4 +268,4 @@ export default {
     }
 </style>
 
- 
+ <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

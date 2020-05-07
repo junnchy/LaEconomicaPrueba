@@ -26,7 +26,7 @@
                         <p v-if="movimiento.tipo === 'Pago'">${{movimiento.importe}}</p>
                     </td>
                     <td>
-                        <p v-if="movimiento.tipo === 'Venta'">${{movimiento.saldo}}</p>
+                        <p>${{movimiento.saldo}}</p>
                     </td>
                     <td v-if="movimiento.tipo === 'Venta'">
                         <router-link :to="{name:'detalleVenta', params:{id: movimiento.id}}">

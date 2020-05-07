@@ -42,30 +42,17 @@ class PagoController extends Controller
     {
         if($request->ajax()){
             $pago = new Pago();
-            $venta = Venta::findOrFail($request->vta_id);
-            $pago->importe = $request->importe;
-            if($request->pesos == null){
-                $pago->pesos = 0;
-            }else{
-                $pago->pesos = $request->pesos;
-            }
-            $pago->dolares = $request->dolares;
-            $pago->caja_id = 1;
-            $pago->ctac_id = $request->ctac_id;
-            $pago->formaDePago_id = $venta->formaDePago_id;
+            $pago->cargarDatos($request, $request->vtas_id);
             $pago->save();
-            $pago->ventas()->attach($venta,[]);
 
-            /* Hay que ajustar... que pasa el el pago es para varias ventas -- generalizar */
-            $venta->saldo = $venta->saldo - $pago->importe;
-            $venta->save();
-
-            $cta = CuentaCliente::with('ventas')->findOrFail($pago->ctac_id);
-            $cta->saldo = 0;
-            foreach ($cta->ventas as $venta) {
-                $cta->saldo = $cta->saldo + $venta->saldo; 
+            foreach ($request->vtas_id as $id_venta) {
+                $venta = Venta::findOrFail($id_venta);
+                $venta->actualizarSaldo($pago->importe);
+                $pago->ventas()->attach($venta,[]);
             }
-            $cta->save();
+            
+            $cta = CuentaCliente::with('ventas')->findOrFail($pago->ctac_id);
+            $cta->actualizarSaldo();
 
             $caja = Caja::with('carteraCupones')->findOrFail(1);
             $caja->pesos = $caja->pesos + $pago->pesos;

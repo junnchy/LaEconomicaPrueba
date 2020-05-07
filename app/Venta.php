@@ -32,4 +32,14 @@ class Venta extends Model
     public function lineas(){
         return $this->hasMany(LineaDeVenta::class);
     }
+
+    public function actualizarSaldo($pago){
+        
+        if($pago > $this->saldo){
+            $this->saldo = 0;
+        }else{
+            $this->saldo = $this->saldo - $pago;
+        }
+        $this->save();
+    }
 }

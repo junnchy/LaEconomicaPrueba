@@ -30,4 +30,23 @@ class Pago extends Model
     public function fdp(){
         return $this->belongsTo(FormaDePago::class, 'formaDePago_id');
     }
+
+    public function cargarDatos($pago, $ventas_id){
+        $this->importe = $pago->importe;
+        if($pago->pesos == null){
+            $this->pesos = 0;
+        }else{
+            $this->pesos = $pago->pesos;
+        }
+        $acum = 0;
+        foreach ($ventas_id as $venta_id) {
+            $venta = Venta::findOrFail($venta_id);
+            $acum = $acum + $venta->saldo;
+        }
+        $this->saldo = $this->importe - $acum;
+        $this->dolares = $pago->dolares;
+        $this->caja_id = 1;
+        $this->ctac_id = $pago->ctac_id;
+        $this->formaDePago_id = $venta->formaDePago_id;
+    }
 }

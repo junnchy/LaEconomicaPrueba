@@ -34,6 +34,11 @@ class Cliente extends Model
         return $this->belongsTo(Provincia::class);
     }
 
+    public function cuentas()
+    {
+        return $this->hasMany(CuentaCliente::class);
+    }
+
     public function presupuestos()
     {
         $presupuestos = $this->hasMany('App\Presupuesto', 'cliente_id', 'id')->orderBy('created_at', 'desc');

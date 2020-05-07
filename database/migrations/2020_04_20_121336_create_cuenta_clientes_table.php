@@ -15,7 +15,7 @@ class CreateCuentaClientesTable extends Migration
     {
         Schema::create('cuenta_clientes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->float('saldo');
+            $table->decimal('saldo');
             $table->unsignedBigInteger('cliente_id')->nullable();
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->timestamps();

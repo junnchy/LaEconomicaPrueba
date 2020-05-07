@@ -13,7 +13,8 @@ use App\CondicionIva;
 use App\Localidad;
 use Illuminate\Support\Facades\DB;
 use App\Exports\ClientesExport;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ClientesFechaExport;
+use App\Exports\ClientesTablaExport;
 
 class ClienteController extends Controller
 {
@@ -110,7 +111,8 @@ class ClienteController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $cliente = App\Cliente::with(['localidad.provincia','categoria','condicion_iva', 'presupuestos.vendedor', 'presupuestos.estado'])->findOrFail($id);
+            $cliente = App\Cliente::with(['localidad.provincia','categoria','condicion_iva', 
+            'presupuestos.vendedor', 'presupuestos.estado', 'cuentas.ventasConSaldo'])->findOrFail($id);
             return response()->json($cliente);
         }else {
             $cliente = Cliente::findOrFail($id);
@@ -197,9 +199,23 @@ class ClienteController extends Controller
         //
     }
 
-    public function excel(){
-       
-        return Excel::download(new ClientesExport, 'clientes.xlsx');
+    public function excel(ClientesExport $clientesExport){
+
+        return new ClientesExport;
+
+        /* return Excel::download(new ClientesExport, 'clientes.xlsx'); */
+    }
+
+    public function excelFecha(){
+
+        return (new ClientesFechaExport('2020-05-06'))->download('clientesFiltro.xlsx');
+
+    }
+
+    public function excelTabla(){
+
+        return (new ClientesTablaExport)->download('clientes.xlsx');
+
     }
 
 }

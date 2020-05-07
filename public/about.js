@@ -1799,7 +1799,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -4507,6 +4506,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -6728,7 +6732,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ModalCargaCuponT__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ModalCargaCuponT */ "./resources/js/components/ModalCargaCuponT.vue");
 /* harmony import */ var _components_ModalCargaCheque__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ModalCargaCheque */ "./resources/js/components/ModalCargaCheque.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @riophae/vue-treeselect */ "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.cjs.js");
+/* harmony import */ var _riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_riophae_vue_treeselect__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @riophae/vue-treeselect/dist/vue-treeselect.css */ "./node_modules/@riophae/vue-treeselect/dist/vue-treeselect.css");
+/* harmony import */ var _riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_riophae_vue_treeselect_dist_vue_treeselect_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -6858,37 +6868,86 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     ingresaCupon: _components_ModalCargaCuponT__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ingresaCheque: _components_ModalCargaCheque__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ingresaCheque: _components_ModalCargaCheque__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   data: function data() {
     return {
+      c: {
+        id: null,
+        cuentas: []
+      },
       cardPago: "card border-success",
+      value: null,
+      cta: {
+        ventas_con_saldo: []
+      },
+      vtas: [],
       npago: {
         importe: 0,
         pesos: null,
         dolares: 0,
         ctac_id: null,
-        vta_id: null,
+        vtas_id: [],
         cupones: [],
-        cheques: []
+        cheques: [],
+        cliente: {
+          id: null,
+          nombre: '',
+          cuentas: {
+            ventas_con_saldo: []
+          }
+        }
       }
     };
   },
   created: function created() {
-    if (this.ventaActual.fdp.id === 1) {
-      this.npago.pesos = this.ventaActual.saldo;
-    }
-
-    this.npago.ctac_id = this.ventaActual.ctac_id;
-    this.npago.vta_id = this.ventaActual.id;
+    /* if (ventaActual != null) {
+         if (this.ventaActual.fdp.id === 1) {
+            this.npago.pesos = this.ventaActual.saldo
+        }
+        this.npago.ctac_id = this.ventaActual.ctac_id
+        this.npago.vtas_id.push(this.ventaActual.id)
+    }else{ */
+    this.getClientes();
+    /* } */
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])('ventas', ['getVenta']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])('pagos', ['agregarPago']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapActions"])('ventas', ['getVenta']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapActions"])('pagos', ['agregarPago']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapActions"])('clientes', ['getClientes', 'getCliente']), {
     deleteCupon: function deleteCupon(index) {
       this.npago.cupones.splice(index, 1);
       Vue.$toast.open({
@@ -6904,7 +6963,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('ventas', ['ventaActual']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapState"])('pagos', ['status']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapState"])('ventas', ['ventaActual']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapState"])('pagos', ['status']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapState"])('clientes', ['clientes', 'cliente']), {
     importe: function importe() {
       var _this = this;
 
@@ -6929,7 +6988,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.npago.importe;
     },
     a_pagar: function a_pagar() {
-      return this.ventaActual.saldo - this.npago.importe;
+      var _this2 = this;
+
+      this.npago.ctac_id = this.cta.id;
+      var saldo = 0;
+      this.npago.vtas_id = [];
+      this.vtas.forEach(function (venta) {
+        saldo += venta.saldo;
+
+        _this2.npago.vtas_id.push(venta.id);
+      });
+      return saldo;
+    },
+    cli: function cli() {
+      if (this.npago.cliente.id === null || this.npago.cliente.id != this.c.id) {
+        this.getCliente(this.npago.cliente.id);
+        this.c = this.cliente;
+      }
     }
   })
 });
@@ -9537,11 +9612,7 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _c("td", [
-              movimiento.tipo === "Venta"
-                ? _c("p", [_vm._v("$" + _vm._s(movimiento.saldo))])
-                : _vm._e()
-            ]),
+            _c("td", [_c("p", [_vm._v("$" + _vm._s(movimiento.saldo))])]),
             _vm._v(" "),
             movimiento.tipo === "Venta"
               ? _c(
@@ -11119,11 +11190,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("date-picker", {
-                attrs: {
-                  format: "DD-MM-YYYY",
-                  type: "date",
-                  disabled: _vm.datepick
-                },
+                attrs: { format: "DD-MM-YYYY", type: "date" },
                 model: {
                   value: _vm.ncheque.fecha_emision,
                   callback: function($$v) {
@@ -16120,7 +16187,24 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row m-1 p-2" }, [
-          _vm._m(0),
+          _c(
+            "div",
+            { staticClass: "col-8" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c("router-link", { attrs: { to: { name: "nuevoPago" } } }, [
+                _c("button", { staticClass: "btn btn-outline-success mr-2" }, [
+                  _vm._v("\n                    Nuevo Pago \n                ")
+                ])
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -16155,7 +16239,7 @@ var render = function() {
         _vm.caja
           ? _c("div", { staticClass: "row mt-2" }, [
               _c("div", { staticClass: "col-12" }, [
-                _vm._m(1),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -16250,7 +16334,7 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm._m(2),
+        _vm._m(4),
         _vm._v("\n    " + _vm._s(_vm.tomar) + "\n")
       ])
     : _vm._e()
@@ -16260,21 +16344,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c("button", { staticClass: "btn btn-outline-primary mr-2" }, [
-        _vm._v("\n                Transferir "),
-        _c("i", { staticClass: "fas fa-exchange-alt" })
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-outline-primary mr-2" }, [
-        _vm._v("\n                Igreso "),
-        _c("i", { staticClass: "fas fa-arrow-up" })
-      ]),
-      _vm._v(" "),
-      _c("button", { staticClass: "btn btn-outline-danger mr-2" }, [
-        _vm._v("\n                Egreso "),
-        _c("i", { staticClass: "fas fa-arrow-down" })
-      ])
+    return _c("button", { staticClass: "btn btn-outline-primary mr-2" }, [
+      _vm._v("\n                Transferir "),
+      _c("i", { staticClass: "fas fa-exchange-alt" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-outline-primary mr-2" }, [
+      _vm._v("\n                Igreso "),
+      _c("i", { staticClass: "fas fa-arrow-up" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("button", { staticClass: "btn btn-outline-danger mr-2" }, [
+      _vm._v("\n                Egreso "),
+      _c("i", { staticClass: "fas fa-arrow-down" })
     ])
   },
   function() {
@@ -19977,17 +20067,153 @@ var render = function() {
               _vm._m(2),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v("Forma de Pago: "),
-                  _c("strong", [
-                    _vm._v(_vm._s(_vm.ventaActual.fdp.descripcion))
-                  ])
+                _c("div", { staticClass: "row" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12" },
+                    [
+                      _c("label", { attrs: { for: "cliente" } }, [
+                        _vm._v("Cliente")
+                      ]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          "deselect-label": "Can't remove this value",
+                          "track-by": "nombre",
+                          label: "nombre",
+                          placeholder: "Select one",
+                          options: _vm.clientes,
+                          searchable: true,
+                          "allow-empty": false
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "singleLabel",
+                            fn: function(ref) {
+                              var option = ref.option
+                              return [
+                                _c("strong", [_vm._v(_vm._s(option.nombre))])
+                              ]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.npago.cliente,
+                          callback: function($$v) {
+                            _vm.$set(_vm.npago, "cliente", $$v)
+                          },
+                          expression: "npago.cliente"
+                        }
+                      })
+                    ],
+                    1
+                  )
                 ]),
                 _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v("Cliente: "),
-                  _c("strong", [
-                    _vm._v(_vm._s(_vm.ventaActual.cuenta.cliente.nombre))
+                _c("div", { staticClass: "row mt-3" }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-12" },
+                    [
+                      _c("label", { attrs: { for: "cliente" } }, [
+                        _vm._v("Cuenta")
+                      ]),
+                      _vm._v(" "),
+                      _c("multiselect", {
+                        attrs: {
+                          "deselect-label": "Can't remove this value",
+                          "track-by": "id",
+                          label: "id",
+                          placeholder: "Select one",
+                          options: _vm.c.cuentas,
+                          searchable: false,
+                          "allow-empty": false
+                        },
+                        scopedSlots: _vm._u([
+                          {
+                            key: "singleLabel",
+                            fn: function(ref) {
+                              var option = ref.option
+                              return [_c("strong", [_vm._v(_vm._s(option.id))])]
+                            }
+                          }
+                        ]),
+                        model: {
+                          value: _vm.cta,
+                          callback: function($$v) {
+                            _vm.cta = $$v
+                          },
+                          expression: "cta"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row mt-3" }, [
+                  _c("div", { staticClass: "col-12" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        { attrs: { for: "exampleFormControlSelect1" } },
+                        [_vm._v("Ventas a Apagar")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.vtas,
+                              expression: "vtas"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            multiple: "",
+                            id: "exampleFormControlSelect1"
+                          },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.vtas = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        _vm._l(_vm.cta.ventas_con_saldo, function(
+                          venta,
+                          index
+                        ) {
+                          return _c(
+                            "option",
+                            {
+                              key: index,
+                              domProps: {
+                                value: { id: venta.id, saldo: venta.saldo }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(venta.id) + " - " + _vm._s(venta.saldo)
+                              )
+                            ]
+                          )
+                        }),
+                        0
+                      )
+                    ])
                   ])
                 ])
               ]),
@@ -19995,7 +20221,7 @@ var render = function() {
               _c("div", { staticClass: "card-footer text-center" }, [
                 _c("h5", { staticClass: "card-title" }, [
                   _vm._v("Total a Pagar: "),
-                  _c("strong", [_vm._v("$" + _vm._s(_vm.ventaActual.saldo))])
+                  _c("strong", [_vm._v("$" + _vm._s(_vm.a_pagar))])
                 ])
               ])
             ]),
@@ -20186,7 +20412,8 @@ var render = function() {
           ],
           1
         )
-      ])
+      ]),
+      _vm._v("\n    " + _vm._s(_vm.cli) + "\n")
     ]
   )
 }
@@ -20226,7 +20453,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("h5", { staticClass: "card-header" }, [
-      _vm._v("Venta "),
+      _vm._v("Ventas "),
       _c("i", { staticClass: "fas fa-shopping-cart text-primary" })
     ])
   },
@@ -26059,7 +26286,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NuevoPago_vue_vue_type_template_id_1860e03e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NuevoPago.vue?vue&type=template&id=1860e03e& */ "./resources/js/views/NuevoPago.vue?vue&type=template&id=1860e03e&");
 /* harmony import */ var _NuevoPago_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NuevoPago.vue?vue&type=script&lang=js& */ "./resources/js/views/NuevoPago.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _NuevoPago_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NuevoPago.vue?vue&type=style&index=0&lang=css& */ "./resources/js/views/NuevoPago.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=1&lang=css& */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -26068,7 +26297,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _NuevoPago_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _NuevoPago_vue_vue_type_template_id_1860e03e___WEBPACK_IMPORTED_MODULE_0__["render"],
   _NuevoPago_vue_vue_type_template_id_1860e03e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],

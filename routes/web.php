@@ -89,7 +89,7 @@ Route::get('/cajas/{any}', 'SpaController@caja')->where('any', '.*')->middleware
 
 Route::get('/imprimirPresupuesto/{id}', 'PresupuestoController@imprimir')->where('id', '[0-9]+');
 
-Route::get('/ExcelClientes', 'ClienteController@excel');
+Route::get('/ExcelClientes', 'ClienteController@excelTabla');
 
 Route::get('/recuentoPresupuestos/{id}', 'VendedoresController@recuentoPresupuestos')->where('id', '[0-9]+');
 

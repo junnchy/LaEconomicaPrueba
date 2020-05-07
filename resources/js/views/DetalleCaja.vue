@@ -30,6 +30,11 @@
                 <button class="btn btn-outline-danger mr-2">
                     Egreso <i class="fas fa-arrow-down"></i>
                 </button>
+                <router-link :to="{name:'nuevoPago'}">
+                    <button class="btn btn-outline-success mr-2">
+                        Nuevo Pago 
+                    </button>
+                </router-link>
             </div>
             <div class="col-4">
                 <date-picker v-model="fechas" @clear='(clear)=>{fechas=null}' type="date" range placeholder="Filtrar por Fecha"></date-picker>

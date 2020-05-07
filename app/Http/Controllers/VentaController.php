@@ -72,8 +72,7 @@ class VentaController extends Controller
         }
 
         $cc = CuentaCliente::findOrFail($venta->ctac_id);
-        $cc->saldo = $cc->saldo +  $venta->total;
-        $cc->save();
+        $cc->actualizarSaldo();
 
        
 

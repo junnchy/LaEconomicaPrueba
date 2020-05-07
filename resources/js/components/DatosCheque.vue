@@ -20,8 +20,7 @@
                     <date-picker 
                     v-model="ncheque.fecha_emision"
                     format="DD-MM-YYYY"
-                    type="date"
-                    :disabled="datepick">
+                    type="date">
                     </date-picker>
                 </div>
             </div> 
@@ -40,7 +39,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-10">
-                 <label for="cliente">Cliente</label>
+                <label for="cliente">Cliente</label>
                 <multiselect v-model="ncheque.cliente" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="clientes" :searchable="true" :allow-empty="false">
                     <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.nombre }}</strong></template>
                 </multiselect>

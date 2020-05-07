@@ -22,24 +22,43 @@ class ChequeController extends Controller
                     $cheque->estado = 'Sin filtrado';
                 }
             }else{ 
+
                 $dd = substr($request->fechas[0] ,8,10);
                 $mm = substr($request->fechas[0],-5,-3);
                 $yyyy = substr($request->fechas[0],0,4);
                 $f1 = Carbon::create($yyyy, $mm, $dd);
-    
+
                 $dd1 = substr($request->fechas[1],8,10);
                 $mm1 = substr($request->fechas[1],-5,-3);
                 $yyyy1 = substr($request->fechas[1],0,4);
                 $f2 =Carbon::create($yyyy1, $mm1, $dd1);
 
+                if ($f1 == $f2) {
+                    $iguales = True;
+                }else{
+                    $iguales = False;
+                }  
+
                 if ($request->tipof == 'i') {
-                    $cheques = Cheque::with('cuenta.cliente')->whereBetween('created_at', [$f1, $f2])->get();
+                    if($iguales){
+                        $cheques = Cheque::with('cuenta.cliente')->whereDate('created_at', $f1)->get();
+                    }else{
+                        $cheques = Cheque::with('cuenta.cliente')->whereBetween('created_at', [$f1, $f2])->get();
+                    }
                 }
                 if ($request->tipof == 'e') {
+                    if($iguales){
+                        $cheques = Cheque::with('cuenta.cliente')->whereDate('fecha_emision', $f1)->get();
+                    }else{
                     $cheques = Cheque::with('cuenta.cliente')->whereBetween('fecha_emision', [$f1, $f2])->get();
+                    }
                 }
                 if ($request->tipof == 'p') {
-                    $cheques = Cheque::with('cuenta.cliente')->whereBetween('fecha_pago', [$f1, $f2])->get();
+                    if($iguales){
+                        $cheques = Cheque::with('cuenta.cliente')->whereDate('fecha_pago', $f1)->get();
+                    }else{
+                        $cheques = Cheque::with('cuenta.cliente')->whereBetween('fecha_pago', [$f1, $f2])->get();
+                    }
                 }
             }
             return response()->json($cheques);
