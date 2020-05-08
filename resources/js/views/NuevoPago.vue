@@ -1,8 +1,16 @@
 <template>
     <div class="container border border-secondary bg-ecogray rounded p-4">
         <div class="row">
-            <div class="col-12 text-center">
+            <div class="col-2"></div>
+            <div class="col-8 text-center">
                 <h2>Recibo de Pago <i class="fas fa-receipt text-secondary"></i></h2>
+            </div>
+            <div class="col-2">
+                 <router-link :to="{name:'menuComercial'}" >
+                    <button class="btn btn-outline-danger p-2 px-3 btn-sm">
+                        Salir
+                    </button>
+                </router-link>
             </div>
         </div>
         <div class="alert alert-success alert-dismissible fade show my-3" v-if="$store.state.pagos.status == 200">
@@ -38,7 +46,9 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Ventas a Apagar</label>
                                         <select multiple class="form-control" id="exampleFormControlSelect1" v-model="vtas">
-                                            <option v-for="(venta, index) in cta.ventas_con_saldo" :key="index" :value="{id: venta.id, saldo:venta.saldo}">{{venta.id}} - {{venta.saldo}}</option>
+                                            <option v-for="(venta, index) in cta.ventas_con_saldo" :key="index" :value="{id: venta.id, saldo:venta.saldo}">
+                                                <strong>{{venta.created_at.slice(0,11)}}</strong> - ${{venta.saldo}} - [{{venta.fdp.descripcion}}]
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -52,20 +62,30 @@
                     <div :class="cardPago">
                         <h5 class="card-header">Pago <i class="fas fa-wallet text-success"></i></h5>
                         <div class="card-body">
-                            <h5 class="card-title">Importe del Pago: <strong>${{importe}}</strong></h5>
-                            <hr>
-                                <div class="form-group">
-                                    <label>Efectivo en Pesos</label>
-                                    <input 
-                                        type="number"
-                                        step="0.01" 
-                                        class="form-control"
-                                        name="PagoEfectivo"
-                                        v-model="npago.pesos"
-                                    />
+                            <div class="form-group">
+                                <label>Efectivo en Pesos</label>
+                                <input 
+                                    type="number"
+                                    step="0.01" 
+                                    class="form-control"
+                                    name="PagoEfectivo"
+                                    v-model="npago.pesos"
+                                />
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Pagos disponibles</label>
+                                        <select multiple class="form-control" id="exampleFormControlSelect1" v-model="npago.pagos_a_imputar">
+                                            <option v-for="(pago, index) in cta.pagos_con_saldo" :key="index" :value="{id: pago.id, saldo:pago.saldo}">
+                                                <strong>{{pago.created_at.slice(0,11)}}</strong> - ${{pago.saldo}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
-                            <hr>
-                            <div class="row justify-content-center">
+                            </div>
+                            <div class="row justify-content-center" v-if="npago.cheques.len > 0 || npago.cupones.len > 0">
+                                <hr>
                                 <div class="col-12">
                                     <table class="table table-striped" v-if="npago.cupones.length > 0">
                                         <thead>
@@ -114,33 +134,33 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <hr>
                             </div>
-                            <hr>
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-1"></div>
+                                <div class="col-5">
                                     <ingresaCupon v-bind:cupones="npago.cupones"/>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-5">
                                     <ingresaCheque v-bind:cheques="npago.cheques"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success btn-block" @click="agregarPago(npago)">
-                                Cargar Pago
-                            </button>
+                        <div class="card-footer text-center">
+                            <h5 class="card-title">Importe del Pago: <strong>${{importe}}</strong></h5>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-12 text-center">
-                <router-link :to="{name:'menuComercial'}" >
-                    <button class="btn btn-success p-2 px-3">
-                        Finalizar
-                    </button>
-                </router-link>
+            <div class="col-6 text-center">
+                
+            </div>    
+            <div class="col-6 text-center">
+                <button class="btn btn-success btn-block" @click="agregarPago(npago)">
+                    Cargar Pago
+                </button>
             </div>
         </div>
         {{cli}}
@@ -180,11 +200,13 @@ export default {
                 vtas_id: [],
                 cupones:[],
                 cheques: [],
+                pagos_a_imputar: [],
                 cliente:{
                     id: null,
                     nombre: '',
                     cuentas:{
-                        ventas_con_saldo:[]
+                        ventas_con_saldo:[],
+                        pagos_con_saldo:[]
                     }
                 }
             }
@@ -250,7 +272,11 @@ export default {
                 saldo += venta.saldo
                 this.npago.vtas_id.push(venta.id)
             });
-            return saldo
+            this.npago.pagos_a_imputar.forEach(pago=>{
+                saldo -= pago.saldo
+            });
+            
+            return saldo 
         },
         cli(){
             if(this.npago.cliente.id === null || this.npago.cliente.id != this.c.id){
@@ -268,4 +294,4 @@ export default {
     }
 </style>
 
- <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

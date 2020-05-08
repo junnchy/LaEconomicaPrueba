@@ -8,18 +8,36 @@ use App\CuponTarjeta;
 use App\Cheque;
 
 use Illuminate\Database\Eloquent\Model;
+Use Illuminate\Support\Collection;
 
 class CuentaCliente extends Model
 {
     public function ventas()
     {   
-        return $ventas = $this->hasMany(Venta::class, 'ctac_id', 'id')->orderBy('created_at', 'desc');
+        return $this->hasMany(Venta::class, 'ctac_id', 'id')->orderBy('created_at', 'desc');
     }
 
     public function pagos()
     {   
-        return $pagos = $this->hasMany(Pago::class, 'ctac_id', 'id')->orderBy('created_at', 'desc');
+        return $this->hasMany(Pago::class, 'ctac_id', 'id')->orderBy('created_at', 'desc');
     }
+
+    /* public function movimientos()
+    {
+        $mergedCollection = new Collection();
+        $pagos = $this->hasMany(Venta::class, 'ctac_id', 'id');
+        foreach ($pagos as $pago) {
+            $pago->tipo = 'Pago';
+        }
+        $ventas = $this->hasMany(Pago::class, 'ctac_id', 'id');
+        foreach ($ventas as $venta) {
+            $venta->tipo = 'Venta';
+        }
+        $mergedCollection = $ventas->toBase()->merge($pagos);
+        
+
+        return $mergedCollection;
+    } */
 
     public function cupones()
     {   
@@ -38,6 +56,10 @@ class CuentaCliente extends Model
 
     public function ventasConSaldo(){
         return $this->hasMany(Venta::class, 'ctac_id', 'id')->where('saldo', '>', 0)->orderBy('created_at', 'desc');
+    }
+
+    public function pagosConSaldo(){
+        return $this->hasMany(Pago::class, 'ctac_id', 'id')->where('saldo', '>', 0)->orderBy('created_at', 'desc');
     }
 
     public function actualizarSaldo(){

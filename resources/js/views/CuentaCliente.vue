@@ -1,21 +1,21 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-4">
-                <h2><i class="fas fa-file-invoice-dollar"></i> Cuenta Cliente</h2>
-                <h5 class="mt-4">
-                    {{cuentaCliente.cliente.nombre}}
-                </h5>
-            </div>
-            <div class="col-4">
-                
+            <div class="col-8">
+                <div class="row">
+                    <div class="col-12">
+                        <h3><i class="fas fa-file-invoice-dollar"></i> Cuenta Cliente: {{cuentaCliente.cliente.nombre}}</h3>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <mimputar v-bind:cliente="cliente"/>
+                    </div>
+                </div>
             </div>
             <div class="col-4">
                 <div class="alert alert-primary p-3 border border-primary text-center" role="alert">
-                    <p class="font-weight-bolder">
-                        Saldo
-                    </p>
-                   <h3>${{cuentaCliente.saldo}}</h3>
+                    Saldo <h3>${{cuentaCliente.saldo}}</h3>
                 </div>
             </div>
         </div>
@@ -70,6 +70,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import mimputar from '../components/Caja/ModalImputarC'
 import movimientos from '../components/Clientes/Movimientos'
 import cupones from '../components/Caja/Cupones'
 import cheques from '../components/Caja/Cheques'
@@ -85,16 +86,20 @@ export default {
         movimientos,
         DatePicker,
         cupones,
-        cheques
+        cheques,
+        mimputar
     },
     created(){
         this.getCuentaCliente(this.id)
+        this.getCliente(this.id) // El id es del cliente 
     },
     methods:{
-        ...mapActions('cuentaCliente', ['getCuentaCliente'])
+        ...mapActions('cuentaCliente', ['getCuentaCliente']),
+        ...mapActions('clientes', ['getCliente']),
     },
     computed:{
-        ...mapState('cuentaCliente', ['cuentaCliente'])
+        ...mapState('cuentaCliente', ['cuentaCliente']),
+        ...mapState('clientes', ['cliente'])
     }
 }
 </script>

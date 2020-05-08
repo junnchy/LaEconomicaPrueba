@@ -9,6 +9,7 @@ use App\Venta;
 use App\CuponTarjeta;
 use App\Caja;
 use App\Cheque;
+use Illuminate\Mail\Message;
 
 class PagoController extends Controller
 {
@@ -43,13 +44,11 @@ class PagoController extends Controller
         if($request->ajax()){
             $pago = new Pago();
             $pago->cargarDatos($request, $request->vtas_id);
-            $pago->save();
-
-            foreach ($request->vtas_id as $id_venta) {
-                $venta = Venta::findOrFail($id_venta);
-                $venta->actualizarSaldo($pago->importe);
-                $pago->ventas()->attach($venta,[]);
+            foreach ($request->pagos_a_imputar as $pai) {
+                $p = Pago::findOrFail($pai['id']);
+                $p->imputarPago($request->vtas_id);
             }
+            $pago->imputarPago($request->vtas_id);
             
             $cta = CuentaCliente::with('ventas')->findOrFail($pago->ctac_id);
             $cta->actualizarSaldo();
@@ -106,7 +105,15 @@ class PagoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax()){
+            foreach ($request->pagos_a_imputar as $pai) {
+                $p = Pago::findOrFail($pai['id']);
+                $p->imputarPago($request->vtas_id);
+            }
+            return response()->json([
+                'message' => 'Imputaciones realizadas'  
+            ],200);
+        }
     }
 
     /**

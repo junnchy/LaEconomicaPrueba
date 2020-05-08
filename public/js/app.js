@@ -67585,11 +67585,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   state: {
     pagos: [],
     status: null,
+    message: '',
     pago: {}
   },
   mutations: {
     setStatus: function setStatus(state, status) {
       state.status = status;
+    },
+    setMessage: function setMessage(state, message) {
+      state.message = message;
     },
     setPago: function setPago(state, pago) {
       state.pago = pago;
@@ -67667,7 +67671,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getPago;
-    }()
+    }(),
+    imputarComprobantes: function imputarComprobantes(_ref3, comprobantes, id) {
+      var commit = _ref3.commit;
+      axios.put("http://127.0.0.1:8000/pago/".concat(1), comprobantes).then(function (response) {
+        commit('setStatus', response.status);
+        commit('setMessage', response.data.message);
+        this.$store.cuentaCliente.dispatch('getcuentaCliente', id);
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    }
   }
 });
 

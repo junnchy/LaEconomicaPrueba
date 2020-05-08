@@ -3,11 +3,15 @@ export default {
     state:{
         pagos: [],
         status: null,
+        message:'',
         pago: {}
     },
     mutations: {
         setStatus(state, status){
             state.status = status
+        },
+        setMessage(state, message){
+            state.message = message
         },
         setPago(state, pago){
             state.pago = pago
@@ -52,7 +56,23 @@ export default {
             finally{
                 commit('setPago', pago.data)
             }
+        },
+        imputarComprobantes({commit}, comprobantes, id){
+            axios.put(`http://127.0.0.1:8000/pago/${1}`, comprobantes).then(function (response) {
+                commit('setStatus', response.status)
+                commit('setMessage', response.data.message)
+                this.$store.cuentaCliente.dispatch('getcuentaCliente',id)
+                Vue.$toast.open(response.data.message);
+            })
+            .catch(function (error) {
+                console.log(error.response.data)
+                Vue.$toast.open({
+                    message: 'Upp! Hay Algun Error',
+                    type: 'error',
+                });
+            }); 
         }
+
         
     }, 
 }

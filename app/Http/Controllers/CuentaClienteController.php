@@ -52,9 +52,25 @@ class CuentaClienteController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos.cupones', 'ventas.pago', 'cupones.pago.cuenta.cliente', 'cupones.tarjeta', 'cheques.cuenta.cliente')->findOrFail($id);
+            $cc = CuentaCliente::with('ventas.fdp', 'cliente', 'pagos.cupones', 'ventas.pago', 'cupones.pago.cuenta.cliente',
+             'cupones.tarjeta', 'cheques.cuenta.cliente')->findOrFail($id);
+
+
+             $coleccion = new Collection();
+             $pagos = $cc->pagos;
+             foreach ($pagos as $pago) {
+                 $pago->tipo = 'Pago';
+                 $coleccion->push($pago);
+             }
+             $ventas = $cc->ventas;
+             foreach ($ventas as $venta) {
+                 $venta->tipo = 'Venta';
+                 $coleccion->push($venta);
+             }
+             /* $mergedCollection = $ventas->toBase()->merge($pagos);  */ 
             
-            $cc->m = collect([]);
+            
+            /* $cc->m = collect([]);
             #Solucion temporal... Modificar para mas comprobantes. 
             foreach($cc->ventas as $venta){
                 if($venta->pago != null){
@@ -66,8 +82,24 @@ class CuentaClienteController extends Controller
                 $venta->tipo = "Venta";
                 $cc->m->push($venta);
             }
+            */
 
-            $cc->movimientos = $cc->m->sortBy('created_at');
+            $c = $coleccion->toArray();
+            for ($i=0; $i < count($c)-1; $i++) { 
+                for ($j=1; $j< count($c); $j++) { 
+                    if($c[$i]['created_at']<$c[$j]['created_at']){
+                        $aux = $c[$i];
+                        $c[$i] = $c[$j];
+                        $c[$j] = $aux;
+                    }
+                }
+            }
+
+
+
+
+
+            $cc->movimientos = $c; 
 
             return response()->json($cc);
         }
