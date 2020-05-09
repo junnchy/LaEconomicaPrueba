@@ -84,6 +84,8 @@ class CuentaClienteController extends Controller
             }
             */
 
+            /* Reveer, no anda del todo bien */
+
             $c = $coleccion->toArray();
             for ($i=0; $i < count($c)-1; $i++) { 
                 for ($j=1; $j< count($c); $j++) { 
@@ -94,10 +96,6 @@ class CuentaClienteController extends Controller
                     }
                 }
             }
-
-
-
-
 
             $cc->movimientos = $c; 
 
