@@ -21,9 +21,11 @@
         </div>
         <div class="row m-1 p-2">
             <div class="col-8">
-                <button class="btn btn-outline-primary mr-2">
-                    Transferir <i class="fas fa-exchange-alt"></i>
-                </button>
+                <router-link :to="{name:'nuevaTranferenciaDeCaja', params:{id: caja.id}}">
+                    <button class="btn btn-outline-primary mr-2">
+                        Transferir <i class="fas fa-exchange-alt"></i>
+                    </button>
+                </router-link>
                 <button class="btn btn-outline-primary mr-2">
                     Igreso <i class="fas fa-arrow-up"></i>
                 </button>
@@ -73,6 +75,7 @@
                         <cheques v-bind:cheques="caja.fcheques"/>
                     </div>
                     <div class="tab-pane fade" id="nav-transferencias" role="tabpanel" aria-labelledby="nav-transferencias-tab">
+                        <transferencias v-bind:transferencias_e="caja.transferencias_e" v-bind:transferencias_r="caja.transferencias_r" />
                     </div>
                     <div class="tab-pane fade" id="nav-informe" role="tabpanel" aria-labelledby="nav-informe-tab">
                         <div class="row justify-content-center">
@@ -99,6 +102,7 @@ import listaPagos from '../components/Caja/ListaPagos'
 import cupones from '../components/Caja/Cupones'
 import informe from '../components/Caja/InformeCaja'
 import cheques from '../components/Caja/Cheques'
+import transferencias from '../components/Caja/Transferencias/Transferencias'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
 import 'vue2-datepicker/locale/Es'
@@ -114,6 +118,7 @@ export default {
         cupones,
         cheques,
         informe,
+        transferencias,
         DatePicker
     },
     created(){

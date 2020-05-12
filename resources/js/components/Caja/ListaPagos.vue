@@ -32,7 +32,7 @@
 export default {
     props:{
         pagos:{
-            type: Object,
+            type: Array,
             required: true
         }
     }

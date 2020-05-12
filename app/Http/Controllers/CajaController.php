@@ -94,7 +94,9 @@ class CajaController extends Controller
                 'carteraCupones.cupones.pago.cuenta.cliente', 
                 'carteraCupones.cupones.tarjeta',
                 'pagos.fdp',
-                'carteraCheques.cheques.cuenta.cliente'
+                'carteraCheques.cheques.cuenta.cliente',
+                'transferenciasE',
+                'transferenciasR'
                 )
                 ->findOrFail($id);
             
@@ -124,6 +126,8 @@ class CajaController extends Controller
 
             $this->filtarFecha($caja, $f1, $f2);
             $this->calcularTotales($caja);
+
+            /* $caja->pagos->toArray(); */
 
             return response()->json($caja);
         }
@@ -187,5 +191,7 @@ class CajaController extends Controller
         $caja->fpagos = $caja->pagos->whereBetween('created_at', [$f1, $f2]);
         $caja->fcupones = $caja->carteraCupones->cupones->whereBetween('created_at', [$f1, $f2]);
         $caja->fcheques = $caja->carteraCheques->cheques->whereBetween('created_at', [$f1, $f2]);
+        $caja->trasnferenciasE = $caja->transferenciasE->whereBetween('created_at', [$f1, $f2]);
+        $caja->trasnferenciasR = $caja->transferenciasR->whereBetween('created_at', [$f1, $f2]);
     }
 }

@@ -26,6 +26,7 @@ class ProductosController extends Controller
         if($request->ajax()){
             $productos = Producto::with(['proveedor','categoria', 'fichaStock', 'precio'])
             ->orderBy('nombre')
+            /* ->paginate(10); Implementar con vue pagination */ 
             ->get();
             return response()->json($productos);
         } else {
@@ -134,7 +135,7 @@ class ProductosController extends Controller
             return response()->json($producto);
         }
         else {
-            $producto = App\Producto::findOrFail($id);
+            $producto = Producto::findOrFail($id);
             return view('productos.detalleProducto', compact('producto'));
         }
     }

@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center" v-if="npago.cheques.len > 0 || npago.cupones.len > 0">
+                            <div class="row justify-content-center" v-if="npago.cheques.length > 0 || npago.cupones.length > 0">
                                 <hr>
                                 <div class="col-12">
                                     <table class="table table-striped" v-if="npago.cupones.length > 0">
@@ -110,7 +110,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table class="table table-striped" v-if="npago.cheques.length > 0">
+                                    <table class="table table-striped"  v-if="npago.cheques.length > 0">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Nro cheque</th>

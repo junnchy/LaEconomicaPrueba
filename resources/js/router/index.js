@@ -189,6 +189,11 @@ const routes = [
       name: 'menuCheques',
       component: () => import(/* webpackChunkName: "about" */ '../views/Caja/Cheques/MenuCheques.vue')
     },
+    {
+      path: '/nuevaTransferenciaDeCaja/:id',
+      name: 'nuevaTranferenciaDeCaja',
+      component: () => import(/* webpackChunkName: "about" */ '../views/Caja/NuevaTransferenciaDeCaja.vue')
+    },
 ]
 
 

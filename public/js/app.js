@@ -67094,6 +67094,12 @@ var routes = [{
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Caja/Cheques/MenuCheques.vue */ "./resources/js/views/Caja/Cheques/MenuCheques.vue"));
   }
+}, {
+  path: '/nuevaTransferenciaDeCaja/:id',
+  name: 'nuevaTranferenciaDeCaja',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/Caja/NuevaTransferenciaDeCaja.vue */ "./resources/js/views/Caja/NuevaTransferenciaDeCaja.vue"));
+  }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
@@ -67138,6 +67144,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Caja_tarjetas__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/Caja/tarjetas */ "./resources/js/store/modules/Caja/tarjetas.js");
 /* harmony import */ var _modules_Caja_caja__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./modules/Caja/caja */ "./resources/js/store/modules/Caja/caja.js");
 /* harmony import */ var _modules_Caja_cheques__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/Caja/cheques */ "./resources/js/store/modules/Caja/cheques.js");
+/* harmony import */ var _modules_Caja_TrasferenciasCaja__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./modules/Caja/TrasferenciasCaja */ "./resources/js/store/modules/Caja/TrasferenciasCaja.js");
+
 
 
 
@@ -67183,7 +67191,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     bancos: _modules_Caja_bancos__WEBPACK_IMPORTED_MODULE_19__["default"],
     tarjetas: _modules_Caja_tarjetas__WEBPACK_IMPORTED_MODULE_20__["default"],
     cajas: _modules_Caja_caja__WEBPACK_IMPORTED_MODULE_21__["default"],
-    cheques: _modules_Caja_cheques__WEBPACK_IMPORTED_MODULE_22__["default"]
+    cheques: _modules_Caja_cheques__WEBPACK_IMPORTED_MODULE_22__["default"],
+    transferenciasCaja: _modules_Caja_TrasferenciasCaja__WEBPACK_IMPORTED_MODULE_23__["default"]
   },
   state: {
     actual: 0,
@@ -67213,6 +67222,51 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   getters: {}
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/Caja/TrasferenciasCaja.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/store/modules/Caja/TrasferenciasCaja.js ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: {
+    status: null,
+    message: '',
+    transferencias: [],
+    transferencia: {}
+  },
+  mutations: {
+    setStatus: function setStatus(state, status) {
+      state.status = status;
+    },
+    setMessage: function setMessage(state, message) {
+      state.message = message;
+    }
+  },
+  actions: {
+    cargarTranferencia: function cargarTranferencia(_ref, transferencia) {
+      var commit = _ref.commit;
+      axios.post('http://127.0.0.1:8000/transferenciaCaja', transferencia).then(function (response) {
+        commit('setStatus', response.status);
+        commit('setMessage', response.data.message);
+        Vue.$toast.open(response.data.message);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    }
+  }
+});
 
 /***/ }),
 

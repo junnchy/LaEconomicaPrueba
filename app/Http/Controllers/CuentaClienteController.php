@@ -83,22 +83,16 @@ class CuentaClienteController extends Controller
                 $cc->m->push($venta);
             }
             */
-
             $c = $coleccion->toArray();
-            for ($i=0; $i < count($c)-1; $i++) { 
-                for ($j=1; $j< count($c); $j++) { 
-                    if($c[$i]['created_at']<$c[$j]['created_at']){
-                        $aux = $c[$i];
-                        $c[$i] = $c[$j];
-                        $c[$j] = $aux;
+            for ($i=1; $i < count($c); $i++) { 
+                for ($j=0; $j< count($c)- $i ; $j++) { 
+                    if($c[$j]['created_at'] < $c[$j+1]['created_at']){
+                        $aux = $c[$j];
+                        $c[$j] = $c[$j+1];
+                        $c[$j+1] = $aux;
                     }
                 }
             }
-
-
-
-
-
             $cc->movimientos = $c; 
 
             return response()->json($cc);

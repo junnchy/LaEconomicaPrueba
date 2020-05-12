@@ -52,7 +52,7 @@
 export default {
     props:{
         movimientos:{
-            type: Object,
+            type: Array,
             required: true
         }
     },

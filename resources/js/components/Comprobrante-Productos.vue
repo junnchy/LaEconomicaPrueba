@@ -11,6 +11,7 @@
                     label="nombre"
                     @input="setProducto"
                     :options="filtered_productos"
+                    :filter="filtro"
                     :value="producto"
                     maxHeight="200px"
                     placeholder="Producto"
@@ -74,7 +75,10 @@ export default {
                 }
                 this.npresupuesto.lineas.push(li) 
             }   
-        }
+        },
+        filtro(options, search){
+            return options.filter(producto => producto.nombre.toLowerCase().includes(search) || producto.id.toString().includes(search))
+        },
     },
     computed:{
         ...mapState('productos', ['productos', 'filter']),
