@@ -20,7 +20,7 @@
                     </router-link>
                     <router-link :to="{name:'menuCheques'}">
                         <button class="btn btn-outline-primary">
-                            Cheques 
+                            Cheques <i class="fas fa-money-check-alt"></i>
                         </button> 
                     </router-link>
                      <button class="btn btn-outline-success" @click="agregarCaja(ncaja)">

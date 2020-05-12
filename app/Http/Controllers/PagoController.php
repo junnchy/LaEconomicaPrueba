@@ -147,22 +147,10 @@ class PagoController extends Controller
         if(sizeof($request->cheques) > 0){
             foreach ($request->cheques as $cheque) {
                 $nuevoCheque = new Cheque();
-                $nuevoCheque->fecha_emision = $cheque['fecha_emision'];
-                $nuevoCheque->fecha_pago = $cheque['fecha_pago'];
-                $nuevoCheque->nro_cheque = $cheque['nro_cheque'];
-                $nuevoCheque->importe = $cheque['importe'];
-                $nuevoCheque->propio = $cheque['propio'];  
-                if($cheque['propio'] == 1){
-                    $nuevoCheque->cuit_emisor = $cheque['cliente']['cuit'];
-                }else{
-                    $nuevoCheque->cuit_emisor = $cheque['cuit_emisor'];
-                }
-                $nuevoCheque->librador_id = $cheque['cliente']['id'];
-                $nuevoCheque->banco_id = $cheque['banco']['id'];
+                $nuevoCheque->cargarDatos($cheque);
                 $nuevoCheque->pago_id = $pago->id;
                 $nuevoCheque->cartera_id = $caja->carteraCupones['id'];
                 $nuevoCheque->ctac_id = $cta->id;
-
                 $nuevoCheque->save();
             }
         }

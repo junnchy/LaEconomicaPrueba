@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="cuentaCliente">
         <div class="row">
             <div class="col-8">
                 <div class="row">

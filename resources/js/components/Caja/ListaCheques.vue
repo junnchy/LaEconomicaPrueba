@@ -17,7 +17,8 @@
                 <tr v-for="(cheque, index) in cheques" :key="index">
                     <th scope="row">{{cheque.created_at}}</th>
                     <td>{{cheque.nro_cheque}}</td>
-                    <td>{{cheque.cuenta.cliente.nombre}}</td>
+                    <td v-if="cheque.librador_id != null">{{cheque.cuenta.cliente.nombre}}</td>
+                    <td v-if="cheque.librador_id === null">{{datos.razon_social}}</td>
                     <td>
                         <span class="badge badge-success" v-if="cheque.destinatario_id == null">En cartera</span>
                         <span class="badge badge-primary" v-if="cheque.destinatario_id != null">Entregado</span>
@@ -37,12 +38,19 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
     props:{
         cheques:{
             type: Array,
             required: true
         }
+    },
+    computed:{
+        ...mapState('datos', ['datos'])
+    },
+    methods:{
+        ...mapActions('datos', ['getDatos'])
     }  
 }
 </script>

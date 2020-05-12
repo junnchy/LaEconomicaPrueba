@@ -13,25 +13,43 @@
                 <date-picker v-model="fechas" type="date" range @clear='(clear)=>{fechas=null}' placeholder="Filtrar por Fecha"></date-picker>
 
             </div>
-            <div class="col-4">    
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="i" v-model="filter.tipof">
-                    <label class="form-check-label" for="inlineRadio1">F Ingreso</label>
+            <div class="col-4 border-right">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="i" v-model="filter.tipof">
+                            <label class="form-check-label" for="inlineRadio1">F Ingreso</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="e" v-model="filter.tipof">
+                            <label class="form-check-label" for="inlineRadio2">F Emsison</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="p" v-model="filter.tipof">
+                            <label class="form-check-label" for="inlineRadio3">F Pago</label>
+                        </div> 
+                    </div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="e" v-model="filter.tipof">
-                    <label class="form-check-label" for="inlineRadio2">F Emsison</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="p" v-model="filter.tipof">
-                    <label class="form-check-label" for="inlineRadio3">F Pago</label>
-                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <nuevoCheque/>
+                    </div>
+                </div>    
             </div>
-
+            <div class="col-2">
+                <label>
+                    Estado
+                </label> 
+                <select class="form-control" v-model="echeq">
+                    <option selected :value="null">Todos</option>
+                    <option :value="0">En cartera </option>
+                    <option :value="1">Entregados </option>
+                </select>
+            </div>
         </div>
         <div class="row mt-4">
             <div class="col-12">
-                <cheques v-bind:cheques="cheques"/>
+                <cheques v-bind:cheques="filtered_cheques"/>
             </div>
         </div>
         {{tomar}}
@@ -39,8 +57,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import cheques from '../../../components/Caja/ListaCheques'
+import nuevoCheque from '../../../components/Caja/Cheques/ModalCargaChequePropio'
 import DatePicker from 'vue2-datepicker'
 import 'vue2-datepicker/index.css'
 import 'vue2-datepicker/locale/Es'
@@ -56,6 +75,7 @@ export default {
     },
     components:{
         cheques,
+        nuevoCheque,
         DatePicker
     },
     created(){
@@ -66,6 +86,7 @@ export default {
     },
     computed:{
         ...mapState('cheques', ['cheques']),
+        ...mapGetters('cheques', ['filtered_cheques']),
         tomar(){
             if (this.fechas != null) {
                 var aux = []
@@ -89,6 +110,14 @@ export default {
                 this.filter.fechas = null,
                 this.getCheques(this.filter)
             )
+        },
+        echeq:{
+            get(){
+                return this.$store.state.cheques.filter.estado;
+            },
+            set(val){
+                this.$store.commit('cheques/SET_ESTADO', val)
+            }
         }
     }
 }

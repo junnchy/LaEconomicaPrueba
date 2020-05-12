@@ -15,6 +15,7 @@ class TarjetaController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()){
+            
             $tarjetas = Tarjeta::all();
             return response()->json($tarjetas);
         }

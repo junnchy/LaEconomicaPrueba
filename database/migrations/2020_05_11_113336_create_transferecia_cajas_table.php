@@ -17,7 +17,7 @@ class CreateTransfereciaCajasTable extends Migration
             $table->bigIncrements('id');
             $table->decimal('pesos');
             $table->decimal('dolares');
-            $table->text('concepto');
+            $table->text('concepto')->nullable();
             $table->integer('codigo')->nullable();
             $table->unsignedBigInteger('vendedor_id')->nullable();
             $table->foreign('vendedor_id')->references('id')->on('vendedores');

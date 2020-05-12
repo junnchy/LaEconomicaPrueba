@@ -189,6 +189,163 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  data: function data() {
+    return {
+      carga: false,
+      ncheque: {
+        nro_cheque: null,
+        importe: 0,
+        fecha_emision: null,
+        fecha_pago: null,
+        banco_id: 0,
+        cuit_emisor: null,
+        propio: 0
+      }
+    };
+  },
+  created: function created() {
+    this.getDatos(), this.getBancos();
+  },
+  methods: _objectSpread({
+    LNB: function LNB() {
+      $('#MenuLateral').collapse('show');
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('cheques', ['cargaCheque']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('datos', ['getDatos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])('bancos', ['getBancos'])),
+  destroyed: function destroyed() {},
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('cheques', ['status', 'message']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('datos', ['datos']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('bancos', ['bancos']), {
+    setCuit: function setCuit() {
+      this.ncheque.cuit_emisor = this.datos.cuit;
+    }
+  })
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cupones.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Caja/Cupones.vue?vue&type=script&lang=js& ***!
@@ -386,6 +543,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -424,13 +588,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     cheques: {
       type: Array,
       required: true
     }
-  }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('datos', ['datos'])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('datos', ['getDatos']))
 });
 
 /***/ }),
@@ -648,8 +816,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -668,11 +834,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: Object,
       required: true
     }
-    /* ctac_id:{
-        type: Number,
-        required: true
-    } */
-
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('pagos', ['imputarComprobantes']), {
     LNB: function LNB() {
@@ -4139,11 +4300,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_Caja_ListaCheques__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../components/Caja/ListaCheques */ "./resources/js/components/Caja/ListaCheques.vue");
-/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
-/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
-/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue2-datepicker/locale/Es */ "./node_modules/vue2-datepicker/locale/Es.js");
-/* harmony import */ var vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_Caja_Cheques_ModalCargaChequePropio__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../components/Caja/Cheques/ModalCargaChequePropio */ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue");
+/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/index.esm.js");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue2-datepicker/index.css */ "./node_modules/vue2-datepicker/index.css");
+/* harmony import */ var vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_index_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue2-datepicker/locale/Es */ "./node_modules/vue2-datepicker/locale/Es.js");
+/* harmony import */ var vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker_locale_Es__WEBPACK_IMPORTED_MODULE_5__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4190,6 +4352,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4207,13 +4388,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   components: {
     cheques: _components_Caja_ListaCheques__WEBPACK_IMPORTED_MODULE_1__["default"],
-    DatePicker: vue2_datepicker__WEBPACK_IMPORTED_MODULE_2__["default"]
+    nuevoCheque: _components_Caja_Cheques_ModalCargaChequePropio__WEBPACK_IMPORTED_MODULE_2__["default"],
+    DatePicker: vue2_datepicker__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   created: function created() {
     this.getCheques(this.filter);
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('cheques', ['getCheques'])),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('cheques', ['cheques']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('cheques', ['cheques']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])('cheques', ['filtered_cheques']), {
     tomar: function tomar() {
       if (this.fechas != null) {
         var aux = [];
@@ -4237,6 +4419,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.filter.fechas = aux;
         this.getCheques(this.filter);
       } else this.filter.fechas = null, this.getCheques(this.filter);
+    },
+    echeq: {
+      get: function get() {
+        return this.$store.state.cheques.filter.estado;
+      },
+      set: function set(val) {
+        this.$store.commit('cheques/SET_ESTADO', val);
+      }
     }
   })
 });
@@ -7357,6 +7547,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -7838,6 +8031,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('categorias', ['categoria', 'categorias', 'respuesta']))
 });
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.modal-lg {\n    max-width: 80% !important;\n    margin: 30px auto;\n}\n.bg-cheque {\n    background-color: #DDF0F7;\n}\n.mx-datepicker-popup{ z-index: 2000 !important}\n\n", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -8466,6 +8678,36 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
 
 /***/ }),
 
@@ -9288,6 +9530,384 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=template&id=01609387&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=template&id=01609387& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-outline-primary btn-sm",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#cargarCheque",
+          "data-whatever": "@mdo"
+        },
+        on: {
+          click: function($event) {
+            return _vm.LNB()
+          }
+        }
+      },
+      [
+        _vm._v("\n        Nuevo Cheque "),
+        _c("i", { staticClass: "fas fa-money-check" })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade ",
+        attrs: {
+          id: "cargarCheque",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "cargarChequeLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-lg ",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content " }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm.status === 200
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "alert alert-success alert-dismissible fade show"
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.message) +
+                            " \n                        "
+                        ),
+                        _vm._m(1)
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "container bg-cheque p-3 border border-secondary rounded modal-card"
+                  },
+                  [
+                    _c("form", [
+                      _c("div", { staticClass: "row" }, [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("div", { staticClass: "input-group-prepend" }, [
+                            _c(
+                              "span",
+                              {
+                                staticClass: "input-group-text",
+                                attrs: { id: "importe" }
+                              },
+                              [_vm._v("Importe")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.ncheque.importe,
+                                  expression: "ncheque.importe"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Importe",
+                                "aria-label": "importe",
+                                "aria-describedby": "importe"
+                              },
+                              domProps: { value: _vm.ncheque.importe },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.ncheque,
+                                    "importe",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row mt-3" }, [
+                        _c("div", { staticClass: "col-1" }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-5" }, [
+                          _c(
+                            "div",
+                            { staticClass: "input-group-prepend" },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "input-group-text",
+                                  attrs: { id: "inicioAct" }
+                                },
+                                [_vm._v("Fecha Emision")]
+                              ),
+                              _vm._v(" "),
+                              _c("date-picker", {
+                                attrs: { format: "DD-MM-YYYY", type: "date" },
+                                model: {
+                                  value: _vm.ncheque.fecha_emision,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.ncheque, "fecha_emision", $$v)
+                                  },
+                                  expression: "ncheque.fecha_emision"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-5" }, [
+                          _c(
+                            "div",
+                            { staticClass: "input-group-prepend" },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "input-group-text",
+                                  attrs: { id: "inicioAct" }
+                                },
+                                [_vm._v("Fecha de Pago")]
+                              ),
+                              _vm._v(" "),
+                              _c("date-picker", {
+                                attrs: {
+                                  format: "DD-MM-YYYY",
+                                  type: "date",
+                                  disabled: _vm.datepick
+                                },
+                                model: {
+                                  value: _vm.ncheque.fecha_pago,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.ncheque, "fecha_pago", $$v)
+                                  },
+                                  expression: "ncheque.fecha_pago"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-2" })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row mt-3" }, [
+                        _c(
+                          "div",
+                          { staticClass: "col-8" },
+                          [
+                            _c("label", { attrs: { for: "banco" } }, [
+                              _vm._v("Banco")
+                            ]),
+                            _vm._v(" "),
+                            _c("multiselect", {
+                              attrs: {
+                                "deselect-label": "Can't remove this value",
+                                "track-by": "denominacion",
+                                label: "denominacion",
+                                placeholder: "Select one",
+                                options: _vm.bancos,
+                                searchable: true,
+                                "allow-empty": false
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "singleLabel",
+                                  fn: function(ref) {
+                                    var option = ref.option
+                                    return [
+                                      _c("strong", [
+                                        _vm._v(_vm._s(option.denominacion))
+                                      ])
+                                    ]
+                                  }
+                                }
+                              ]),
+                              model: {
+                                value: _vm.ncheque.banco,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.ncheque, "banco", $$v)
+                                },
+                                expression: "ncheque.banco"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-4" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Numero de Cheque")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.ncheque.nro_cheque,
+                                  expression: "ncheque.nro_cheque"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "NumeroCheque",
+                                placeholder: "Numero de Cheque"
+                              },
+                              domProps: { value: _vm.ncheque.nro_cheque },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.ncheque,
+                                    "nro_cheque",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "btn btn-outline-success btn-block sticky-button mt-4",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.cargaCheque(_vm.ncheque)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                Cargar Cheque "
+                          ),
+                          _c("i", { staticClass: "fas fa-check-circle" })
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v("\n    " + _vm._s(_vm.setCuit) + "\n")
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "cargarChequeLabel" } },
+        [
+          _vm._v(
+            "\n                        Ingresar Cheque\n                    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "alert",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-8" }, [
+      _c("h1", [_c("strong", [_vm._v("Cheque")])])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cupones.vue?vue&type=template&id=159c6148&":
 /*!***************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Caja/Cupones.vue?vue&type=template&id=159c6148& ***!
@@ -9513,7 +10133,13 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(cheque.nro_cheque))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(cheque.cuenta.cliente.nombre))]),
+            cheque.librador_id != null
+              ? _c("td", [_vm._v(_vm._s(cheque.cuenta.cliente.nombre))])
+              : _vm._e(),
+            _vm._v(" "),
+            cheque.librador_id === null
+              ? _c("td", [_vm._v(_vm._s(_vm.datos.razon_social))])
+              : _vm._e(),
             _vm._v(" "),
             _c("td", [
               cheque.destinatario_id == null
@@ -9854,7 +10480,6 @@ var render = function() {
                                       attrs: {
                                         label: "id",
                                         options: _vm.cliente.cuentas,
-                                        value: _vm.cuenta,
                                         maxHeight: "200px",
                                         placeholder: "Cuenta"
                                       },
@@ -16556,102 +17181,164 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-4" }, [
-        _c("div", { staticClass: "form-check form-check-inline" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.filter.tipof,
-                expression: "filter.tipof"
-              }
-            ],
-            staticClass: "form-check-input",
-            attrs: {
-              type: "radio",
-              name: "inlineRadioOptions",
-              id: "inlineRadio1",
-              value: "i"
-            },
-            domProps: { checked: _vm._q(_vm.filter.tipof, "i") },
-            on: {
-              change: function($event) {
-                return _vm.$set(_vm.filter, "tipof", "i")
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "form-check-label", attrs: { for: "inlineRadio1" } },
-            [_vm._v("F Ingreso")]
-          )
+      _c("div", { staticClass: "col-4 border-right" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.tipof,
+                    expression: "filter.tipof"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  name: "inlineRadioOptions",
+                  id: "inlineRadio1",
+                  value: "i"
+                },
+                domProps: { checked: _vm._q(_vm.filter.tipof, "i") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.filter, "tipof", "i")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio1" }
+                },
+                [_vm._v("F Ingreso")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.tipof,
+                    expression: "filter.tipof"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  name: "inlineRadioOptions",
+                  id: "inlineRadio2",
+                  value: "e"
+                },
+                domProps: { checked: _vm._q(_vm.filter.tipof, "e") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.filter, "tipof", "e")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio2" }
+                },
+                [_vm._v("F Emsison")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-check form-check-inline" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.filter.tipof,
+                    expression: "filter.tipof"
+                  }
+                ],
+                staticClass: "form-check-input",
+                attrs: {
+                  type: "radio",
+                  name: "inlineRadioOptions",
+                  id: "inlineRadio3",
+                  value: "p"
+                },
+                domProps: { checked: _vm._q(_vm.filter.tipof, "p") },
+                on: {
+                  change: function($event) {
+                    return _vm.$set(_vm.filter, "tipof", "p")
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "form-check-label",
+                  attrs: { for: "inlineRadio3" }
+                },
+                [_vm._v("F Pago")]
+              )
+            ])
+          ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-check form-check-inline" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.filter.tipof,
-                expression: "filter.tipof"
-              }
-            ],
-            staticClass: "form-check-input",
-            attrs: {
-              type: "radio",
-              name: "inlineRadioOptions",
-              id: "inlineRadio2",
-              value: "e"
-            },
-            domProps: { checked: _vm._q(_vm.filter.tipof, "e") },
-            on: {
-              change: function($event) {
-                return _vm.$set(_vm.filter, "tipof", "e")
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "form-check-label", attrs: { for: "inlineRadio2" } },
-            [_vm._v("F Emsison")]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-check form-check-inline" }, [
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.filter.tipof,
-                expression: "filter.tipof"
-              }
-            ],
-            staticClass: "form-check-input",
-            attrs: {
-              type: "radio",
-              name: "inlineRadioOptions",
-              id: "inlineRadio3",
-              value: "p"
-            },
-            domProps: { checked: _vm._q(_vm.filter.tipof, "p") },
-            on: {
-              change: function($event) {
-                return _vm.$set(_vm.filter, "tipof", "p")
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "label",
-            { staticClass: "form-check-label", attrs: { for: "inlineRadio3" } },
-            [_vm._v("F Pago")]
-          )
+        _c("div", { staticClass: "row mt-2" }, [
+          _c("div", { staticClass: "col-12" }, [_c("nuevoCheque")], 1)
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-2" }, [
+        _c("label", [_vm._v("\n                Estado\n            ")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.echeq,
+                expression: "echeq"
+              }
+            ],
+            staticClass: "form-control",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.echeq = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c(
+              "option",
+              { attrs: { selected: "" }, domProps: { value: null } },
+              [_vm._v("Todos")]
+            ),
+            _vm._v(" "),
+            _c("option", { domProps: { value: 0 } }, [_vm._v("En cartera ")]),
+            _vm._v(" "),
+            _c("option", { domProps: { value: 1 } }, [_vm._v("Entregados ")])
+          ]
+        )
       ])
     ]),
     _vm._v(" "),
@@ -16659,7 +17346,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-12" },
-        [_c("cheques", { attrs: { cheques: _vm.cheques } })],
+        [_c("cheques", { attrs: { cheques: _vm.filtered_cheques } })],
         1
       )
     ]),
@@ -17218,112 +17905,119 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-8" }, [
+  return _vm.cuentaCliente
+    ? _c("div", [
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("h3", [
-              _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
-              _vm._v(
-                " Cuenta Cliente: " + _vm._s(_vm.cuentaCliente.cliente.nombre)
+          _c("div", { staticClass: "col-8" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-12" }, [
+                _c("h3", [
+                  _c("i", { staticClass: "fas fa-file-invoice-dollar" }),
+                  _vm._v(
+                    " Cuenta Cliente: " +
+                      _vm._s(_vm.cuentaCliente.cliente.nombre)
+                  )
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row mt-3" }, [
+              _c(
+                "div",
+                { staticClass: "col-12" },
+                [_c("mimputar", { attrs: { cliente: _vm.cliente } })],
+                1
               )
             ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-4" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "alert alert-primary p-3 border border-primary text-center",
+                attrs: { role: "alert" }
+              },
+              [
+                _vm._v("\n                Saldo "),
+                _c("h3", [_vm._v("$" + _vm._s(_vm.cuentaCliente.saldo))])
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "row mt-3" }, [
-          _c(
-            "div",
-            { staticClass: "col-12" },
-            [_c("mimputar", { attrs: { cliente: _vm.cliente } })],
-            1
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-4" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "alert alert-primary p-3 border border-primary text-center",
-            attrs: { role: "alert" }
-          },
-          [
-            _vm._v("\n                Saldo "),
-            _c("h3", [_vm._v("$" + _vm._s(_vm.cuentaCliente.saldo))])
-          ]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "row mt-2" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tab-content", attrs: { id: "nav-tabContent" } },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "tab-pane fade show active",
-                attrs: {
-                  id: "nav-movimientos",
-                  role: "tabpanel",
-                  "aria-labelledby": "nav-movimientos-tab"
-                }
-              },
-              [
-                _c("movimientos", {
-                  attrs: { movimientos: _vm.cuentaCliente.movimientos }
-                })
-              ],
-              1
-            ),
+        _c("div", { staticClass: "row mt-2" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _vm._m(1),
             _vm._v(" "),
             _c(
               "div",
-              {
-                staticClass: "tab-pane fade",
-                attrs: {
-                  id: "nav-cupones",
-                  role: "tabpanel",
-                  "aria-labelledby": "nav-cupones-tab"
-                }
-              },
+              { staticClass: "tab-content", attrs: { id: "nav-tabContent" } },
               [
-                _c("cupones", { attrs: { cupones: _vm.cuentaCliente.cupones } })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "tab-pane fade",
-                attrs: {
-                  id: "nav-cheque",
-                  role: "tabpanel",
-                  "aria-labelledby": "nav-cheque-tab"
-                }
-              },
-              [
-                _c("cheques", { attrs: { cheques: _vm.cuentaCliente.cheques } })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(2)
-          ]
-        )
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade show active",
+                    attrs: {
+                      id: "nav-movimientos",
+                      role: "tabpanel",
+                      "aria-labelledby": "nav-movimientos-tab"
+                    }
+                  },
+                  [
+                    _c("movimientos", {
+                      attrs: { movimientos: _vm.cuentaCliente.movimientos }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade",
+                    attrs: {
+                      id: "nav-cupones",
+                      role: "tabpanel",
+                      "aria-labelledby": "nav-cupones-tab"
+                    }
+                  },
+                  [
+                    _c("cupones", {
+                      attrs: { cupones: _vm.cuentaCliente.cupones }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "tab-pane fade",
+                    attrs: {
+                      id: "nav-cheque",
+                      role: "tabpanel",
+                      "aria-labelledby": "nav-cheque-tab"
+                    }
+                  },
+                  [
+                    _c("cheques", {
+                      attrs: { cheques: _vm.cuentaCliente.cheques }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm._m(2)
+              ]
+            )
+          ])
+        ])
       ])
-    ])
-  ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function() {
@@ -17631,6 +18325,13 @@ var render = function() {
             "div",
             { staticClass: "col-8" },
             [
+              _c("router-link", { attrs: { to: { name: "nuevoPago" } } }, [
+                _c("button", { staticClass: "btn btn-outline-success mr-2" }, [
+                  _vm._v("\n                    Nuevo Pago "),
+                  _c("i", { staticClass: "fas fa-receipt" })
+                ])
+              ]),
+              _vm._v(" "),
               _c(
                 "router-link",
                 {
@@ -17655,13 +18356,7 @@ var render = function() {
               _vm._v(" "),
               _vm._m(0),
               _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: { name: "nuevoPago" } } }, [
-                _c("button", { staticClass: "btn btn-outline-success mr-2" }, [
-                  _vm._v("\n                    Nuevo Pago \n                ")
-                ])
-              ])
+              _vm._m(1)
             ],
             1
           ),
@@ -20611,9 +21306,8 @@ var render = function() {
               _vm._v(" "),
               _c("router-link", { attrs: { to: { name: "menuCheques" } } }, [
                 _c("button", { staticClass: "btn btn-outline-primary" }, [
-                  _vm._v(
-                    "\n                        Cheques \n                    "
-                  )
+                  _vm._v("\n                        Cheques "),
+                  _c("i", { staticClass: "fas fa-money-check-alt" })
                 ])
               ]),
               _vm._v(" "),
@@ -21719,8 +22413,10 @@ var render = function() {
               _vm._m(3),
               _vm._v(" "),
               _c("div", { staticClass: "card-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Efectivo en Pesos")]),
+                _c("label", [_vm._v("Efectivo en Pesos")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "input-group" }, [
+                  _vm._m(4),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -21831,7 +22527,7 @@ var render = function() {
                               "table",
                               { staticClass: "table table-striped" },
                               [
-                                _vm._m(4),
+                                _vm._m(5),
                                 _vm._v(" "),
                                 _c(
                                   "tbody",
@@ -21883,7 +22579,7 @@ var render = function() {
                               "table",
                               { staticClass: "table table-striped" },
                               [
-                                _vm._m(5),
+                                _vm._m(6),
                                 _vm._v(" "),
                                 _c(
                                   "tbody",
@@ -22040,6 +22736,14 @@ var staticRenderFns = [
     return _c("h5", { staticClass: "card-header" }, [
       _vm._v("Pago "),
       _c("i", { staticClass: "fas fa-wallet text-success" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v("$")])
     ])
   },
   function() {
@@ -22852,6 +23556,95 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Cheques_vue_vue_type_template_id_70944443___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Cheques_vue_vue_type_template_id_70944443___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ModalCargaChequePropio_vue_vue_type_template_id_01609387___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalCargaChequePropio.vue?vue&type=template&id=01609387& */ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=template&id=01609387&");
+/* harmony import */ var _ModalCargaChequePropio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModalCargaChequePropio.vue?vue&type=script&lang=js& */ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ModalCargaChequePropio_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var vue_multiselect_dist_vue_multiselect_min_css_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=1&lang=css& */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.css?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
+  _ModalCargaChequePropio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ModalCargaChequePropio_vue_vue_type_template_id_01609387___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ModalCargaChequePropio_vue_vue_type_template_id_01609387___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalCargaChequePropio.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=template&id=01609387&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=template&id=01609387& ***!
+  \********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_template_id_01609387___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ModalCargaChequePropio.vue?vue&type=template&id=01609387& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Caja/Cheques/ModalCargaChequePropio.vue?vue&type=template&id=01609387&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_template_id_01609387___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ModalCargaChequePropio_vue_vue_type_template_id_01609387___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

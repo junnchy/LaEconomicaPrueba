@@ -62,8 +62,11 @@
                     <div :class="cardPago">
                         <h5 class="card-header">Pago <i class="fas fa-wallet text-success"></i></h5>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label>Efectivo en Pesos</label>
+                            <label>Efectivo en Pesos</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">$</span>
+                                </div>
                                 <input 
                                     type="number"
                                     step="0.01" 

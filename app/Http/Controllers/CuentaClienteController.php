@@ -83,12 +83,7 @@ class CuentaClienteController extends Controller
                 $cc->m->push($venta);
             }
             */
-<<<<<<< HEAD
-=======
 
-            /* Reveer, no anda del todo bien */
-
->>>>>>> 717bbc9c4125ebc8ceae0f7c5016bf67841d31c9
             $c = $coleccion->toArray();
             for ($i=1; $i < count($c); $i++) { 
                 for ($j=0; $j< count($c)- $i ; $j++) { 
@@ -99,10 +94,6 @@ class CuentaClienteController extends Controller
                     }
                 }
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> 717bbc9c4125ebc8ceae0f7c5016bf67841d31c9
             $cc->movimientos = $c; 
 
             return response()->json($cc);

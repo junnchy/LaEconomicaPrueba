@@ -67547,14 +67547,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   namespaced: true,
   state: {
     cheques: [],
-    cheque: {}
+    cheque: {},
+    status: null,
+    message: null,
+    filter: {
+      estado: null
+    }
   },
   mutations: {
     setCheques: function setCheques(state, cheques) {
       state.cheques = cheques;
     },
+    setStatus: function setStatus(state, status) {
+      state.status = status;
+    },
+    setMessage: function setMessage(state, message) {
+      state.message = message;
+    },
     setCheque: function setCheque(state, cheque) {
       state.cheque = cheque;
+    },
+    SET_ESTADO: function SET_ESTADO(state, estado) {
+      state.filter.estado = estado;
     }
   },
   actions: {
@@ -67611,7 +67625,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getCheques;
-    }()
+    }(),
+    cargaCheque: function cargaCheque(_ref2, cheque) {
+      var commit = _ref2.commit,
+          dispatch = _ref2.dispatch;
+      var dd = cheque.fecha_emision.getDate();
+      var mm = cheque.fecha_emision.getMonth() + 1; //January is 0!
+
+      var yyyy = cheque.fecha_emision.getFullYear();
+      cheque.fecha_emision = yyyy + '-' + mm + '-' + dd;
+      var dd2 = cheque.fecha_pago.getDate();
+      var mm2 = cheque.fecha_pago.getMonth() + 1; //January is 0!
+
+      var yyyy2 = cheque.fecha_pago.getFullYear();
+      cheque.fecha_pago = yyyy2 + '-' + mm2 + '-' + dd2;
+      console.log(cheque);
+      axios.post('http://127.0.0.1:8000/cheques', cheque).then(function (response) {
+        commit('setStatus', response.status);
+        commit('setMessage', response.data.message);
+        Vue.$toast.open(response.data.message);
+        var filter = {
+          tipof: null,
+          fechas: null
+        };
+        dispatch('getCheques', filter);
+      })["catch"](function (error) {
+        console.log(error.response.data);
+        Vue.$toast.open({
+          message: 'Upp! Hay Algun Error',
+          type: 'error'
+        });
+      });
+    }
+  },
+  getters: {
+    filtered_cheques: function filtered_cheques(state) {
+      var chfill = state.cheques;
+
+      if (state.filter.estado != null) {
+        if (state.filter.estado == 1) {
+          chfill = chfill.filter(function (cheque) {
+            return cheque.destinatario_id != null;
+          });
+        }
+
+        if (state.filter.estado == 0) {
+          chfill = chfill.filter(function (cheque) {
+            return cheque.destinatario_id === null;
+          });
+        }
+      }
+
+      return chfill;
+    }
   }
 });
 

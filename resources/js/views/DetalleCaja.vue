@@ -21,6 +21,11 @@
         </div>
         <div class="row m-1 p-2">
             <div class="col-8">
+                 <router-link :to="{name:'nuevoPago'}">
+                    <button class="btn btn-outline-success mr-2">
+                        Nuevo Pago <i class="fas fa-receipt"></i>
+                    </button>
+                </router-link>
                 <router-link :to="{name:'nuevaTranferenciaDeCaja', params:{id: caja.id}}">
                     <button class="btn btn-outline-primary mr-2">
                         Transferir <i class="fas fa-exchange-alt"></i>
@@ -32,11 +37,6 @@
                 <button class="btn btn-outline-danger mr-2">
                     Egreso <i class="fas fa-arrow-down"></i>
                 </button>
-                <router-link :to="{name:'nuevoPago'}">
-                    <button class="btn btn-outline-success mr-2">
-                        Nuevo Pago 
-                    </button>
-                </router-link>
             </div>
             <div class="col-4">
                 <date-picker v-model="fechas" @clear='(clear)=>{fechas=null}' type="date" range placeholder="Filtrar por Fecha"></date-picker>

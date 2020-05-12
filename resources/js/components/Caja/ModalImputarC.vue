@@ -41,7 +41,6 @@
                                                                 label="id"
                                                                 @input="setCuenta"
                                                                 :options="cliente.cuentas"
-                                                                :value="cuenta"
                                                                 maxHeight="200px"
                                                                 placeholder="Cuenta"
                                                             ></v-select>
@@ -58,8 +57,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    
+                                                    </div> 
                                                 </div>
                                                 <div class="card-footer text-center">
                                                     <h5 class="card-title">Total a Imputar: <strong>$</strong></h5>
@@ -118,10 +116,6 @@ import {mapActions, mapState} from 'vuex'
                 type: Object,
                 required: true
             },
-            /* ctac_id:{
-                type: Number,
-                required: true
-            } */
         },
         methods: {
             ...mapActions('pagos', ['imputarComprobantes']),

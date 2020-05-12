@@ -83,7 +83,16 @@ class ChequeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax()){
+            $nc = new Cheque();
+            $nc->cargarDatos($request);
+            $nc->cartera_id = 2;
+            $nc->save();
+
+            return response()->json([
+                'message'=>'Cheque Cargado',
+            ],200);
+        }
     }
 
     /**

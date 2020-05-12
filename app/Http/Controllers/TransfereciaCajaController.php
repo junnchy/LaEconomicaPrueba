@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+
+use App\Http\Requests\CreateTransferenciaCajaRequest;
 use App\Caja;
 use App\TransfereciaCaja;
 
@@ -31,12 +32,14 @@ class TransfereciaCajaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CreateTransferenciaCajaRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTransferenciaCajaRequest $request)
     {
         if($request->ajax()){
+
+            $validated = $request->validated();
             $nt = new TransfereciaCaja();
             $cajaE = Caja::findOrFail($request->caja_emisora);
             $cajaR = Caja::findOrFail($request->caja_receptora);
