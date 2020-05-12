@@ -68284,6 +68284,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context3.next = 3;
                 return axios.get("http://127.0.0.1:8000/clientes/".concat(id)).then(function (response) {
                   commit('setCliente', response.data);
+                })["catch"](function (error) {
+                  console.log(error.response.data);
                 });
 
               case 3:

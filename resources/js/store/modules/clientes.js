@@ -102,10 +102,14 @@ export default {
         resetResp({commit}, resp){
             commit('setRespuestaServidor', resp)
         },
+        
         async getCliente({commit}, id){
             let cliente = await axios.get(`http://127.0.0.1:8000/clientes/${id}`).then(response => {
                 commit('setCliente', response.data)
-            }) 
+            })
+            .catch(function(error){
+                console.log(error.response.data)
+            }); 
         },
         editarCliente({commit},cliente){
             let id = cliente.id
