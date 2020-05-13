@@ -4756,6 +4756,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
@@ -4772,10 +4773,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])('productos', ['getProductos']), {
     setProducto: function setProducto(val) {
       Vue.$toast.open('Producto Agregado');
-      this.fproductos.push(val);
-      val = {
-        nombre: ''
-      };
+      this.fproductos = val;
+      /* val = {
+          nombre: ''
+      } */
     },
     deleteLinea: function deleteLinea(index) {
       this.fproductos.splice(index, 1);
@@ -17707,6 +17708,7 @@ var render = function() {
                 label: "nombre",
                 options: _vm.filtered_productos,
                 value: _vm.producto,
+                multiple: true,
                 maxHeight: "200px",
                 placeholder: "Producto"
               },

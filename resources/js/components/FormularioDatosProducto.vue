@@ -1,7 +1,16 @@
 <template>
     <div class="mt-3">
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
+                <div class="form-group">
+                    <label>Codigo Interno</label>
+                    <input 
+                    type="text" 
+                    v-model="producto.codigo_interno" 
+                    class="form-control disabled">
+                </div> 
+            </div>
+            <div class="col-4">
                 <div class="form-group">
                     <label>Codigo de Producto</label>
                     <input 
@@ -11,7 +20,7 @@
                     class="form-control disabled">
                 </div> 
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <div class="custom-control custom-checkbox content-center mt-4">
                     <input type="checkbox" v-model="producto.estado" class="custom-control-input" id="estadoProducto">
                     <label class="custom-control-label" for="estadoProducto">Estado de Producto:</label>

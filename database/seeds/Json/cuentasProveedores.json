@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "saldo": "0.00",
+        "proveedor_id": "1"
+    },
+    {
+        "id": "2",
+        "saldo": "0.00",
+        "proveedor_id": "2"
+    },
+    {
+        "id": "3",
+        "saldo": "0.00",
+        "proveedor_id": "3"
+    },
+    {
+        "id": "4",
+        "saldo": "0.00",
+        "proveedor_id": "4"
+    },
+    {
+        "id": "5",
+        "saldo": "0.00",
+        "proveedor_id": "5"
+    },
+    {
+        "id": "6",
+        "saldo": "0.00",
+        "proveedor_id": "6"
+    }
+]

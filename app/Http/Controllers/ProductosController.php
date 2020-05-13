@@ -65,6 +65,7 @@ class ProductosController extends Controller
             if ($request->id != null) {
                 $producto->id = $request->id;
             }
+            $producto->codigo_interno = $request->codigo_interno;
             $producto->nombre = $request->nombre;
             if($request->descripcion != ""){
                 $producto->descripcion = $request->descripcion;
@@ -166,6 +167,7 @@ class ProductosController extends Controller
 
             $producto = Producto::with('precio')->findOrFail($id);
             $producto->nombre = $request->nombre;
+            $producto->codigo_interno = $request->codigo_interno;
             $producto->proveedor_id = $request->proveedor['id'];
             $producto->categoria_id = $request->categoria['id'];
             $producto->estado = $request->estado;

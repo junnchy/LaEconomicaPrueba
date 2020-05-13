@@ -1,6 +1,7 @@
 [
     {
         "id": "1",
+        "codigo_interno": "1",
         "precioBase": "500.00",
         "precioCosto": "532.46",
         "nombre": "Cemento Holcim x 50Kg",
@@ -25,6 +26,7 @@
     },
     {
         "id": "2",
+        "codigo_interno": "2",
         "precioBase": "500.00",
         "precioCosto": "532.40",
         "nombre": "Parquet Alamo 50*50",
@@ -49,6 +51,7 @@
     },
     {
         "id": "3",
+        "codigo_interno": "3",
         "precioBase": "475.00",
         "precioCosto": "546.01",
         "nombre": "Cemento Avellaneda x 50Kg",
@@ -73,6 +76,7 @@
     },
     {
         "id": "4",
+        "codigo_interno": "4",
         "precioBase": "337.00",
         "precioCosto": "387.38",
         "nombre": "Hidralit x 40 Kg",
@@ -97,6 +101,7 @@
     },
     {
         "id": "5",
+        "codigo_interno": "5",
         "precioBase": "589.00",
         "precioCosto": "707.06",
         "nombre": "Cemento Loma Negra x 50Kg",
@@ -121,6 +126,7 @@
     },
     {
         "id": "6",
+        "codigo_interno": "6",
         "precioBase": "465.98",
         "precioCosto": "535.64",
         "nombre": "Parquet Castaño 50*50",
@@ -145,6 +151,7 @@
     },
     {
         "id": "7",
+        "codigo_interno": "7",
         "precioBase": "465.67",
         "precioCosto": "524.02",
         "nombre": "Trentino Terrax 50*50",

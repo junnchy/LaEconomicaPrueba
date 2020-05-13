@@ -3184,6 +3184,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -43923,7 +43932,35 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "mt-3" }, [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-6" }, [
+      _c("div", { staticClass: "col-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("Codigo Interno")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.producto.codigo_interno,
+                expression: "producto.codigo_interno"
+              }
+            ],
+            staticClass: "form-control disabled",
+            attrs: { type: "text" },
+            domProps: { value: _vm.producto.codigo_interno },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.producto, "codigo_interno", $event.target.value)
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-4" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", [_vm._v("Codigo de Producto")]),
           _vm._v(" "),
@@ -43951,7 +43988,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-6" }, [
+      _c("div", { staticClass: "col-4" }, [
         _c(
           "div",
           { staticClass: "custom-control custom-checkbox content-center mt-4" },
@@ -70410,8 +70447,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

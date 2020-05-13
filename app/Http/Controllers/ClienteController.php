@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateClienteRequest;
 use App;
 use App\Cliente;
 use App\CategoriaClientes;
+use App\CuentaCliente;
 use App\CondicionIva;
 use App\Localidad;
 use Illuminate\Support\Facades\DB;
@@ -74,7 +75,15 @@ class ClienteController extends Controller
             $cliente->cat_clientes_id = $request->cat_clientes_id;
             $cliente->condicion_iva_id = $request->condicion_iva_id;
             $cliente->save();
+
+            $cc = new CuentaCliente();
+            $cc->saldo = 0;
+            $cc->cliente_id = $cliente->id;
+            $cc->save();
             
+            $cliente->cuenta_id = $cc->id;
+            $cliente->save();
+
             return response()->json([
                 'cliente' => $cliente,
                 'message' => 'Cliente Agregado'

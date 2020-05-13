@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App;
 
 use App\Proveedor;
-
+use App\CuentaProveedor;
 use App\Categoria;
 
 use App\Http\Requests\CreateProveedorRequest;
@@ -66,6 +66,15 @@ class ProveedorControler extends Controller
             $proveedor->email = $request->email;
             $proveedor->condicion_iva_id = $request->condicion_iva_id;
             $proveedor->localidad_id = $request->localidad_id;
+            $proveedor->save();
+
+            
+            $cp = new CuentaProveedor();
+            $cp->saldo = 0;
+            $cp->proveedor_id = $proveedor->id;
+            $cp->save();
+            
+            $proveedor->cuenta_id = $cp->id;
             $proveedor->save();
           
             return response()->json([

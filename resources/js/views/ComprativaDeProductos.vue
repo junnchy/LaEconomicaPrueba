@@ -15,6 +15,7 @@
                     @input="setProducto"
                     :options="filtered_productos"
                     :value="producto"
+                    :multiple=true
                     maxHeight="200px"
                     placeholder="Producto"
                 ></v-select>
@@ -94,10 +95,10 @@ export default {
         ...mapActions('productos', ['getProductos']),
         setProducto(val){
             Vue.$toast.open('Producto Agregado');
-            this.fproductos.push(val) 
-            val = {
+            this.fproductos = val
+            /* val = {
                 nombre: ''
-            }
+            } */
         },
         deleteLinea(index){
             this.fproductos.splice(index, 1);

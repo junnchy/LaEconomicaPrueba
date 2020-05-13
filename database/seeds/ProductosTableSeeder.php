@@ -20,6 +20,7 @@ class ProductosTableSeeder extends Seeder
         foreach ($data as $obj){
             Producto::create(array(
                 "id" => $obj->id,
+                "codigo_interno" => $obj->codigo_interno,
                 "nombre" => Str::title($obj->nombre),
                 "descripcion"=>$obj->descripcion,
                 "proveedor_id"=>$obj->proveedor_id,

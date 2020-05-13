@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PreciosTableSeeder::class);
         $this->call(DatosEmpresaTableSeeder::class);
         $this->call(FormasDePagoSeeder::class);
+        $this->call(CuentaProveedorSeeder::class);
         $this->call(ProductosClientesFillSeeder::class);
         $this->call(BancosSeeder::class);
         $this->call(TarjetasSeeder::class);
