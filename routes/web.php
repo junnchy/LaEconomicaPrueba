@@ -77,6 +77,10 @@ Route::resource('/tarjetas', 'TarjetaController')->middleware('auth');
 
 Route::resource('/transferenciaCaja', 'TransfereciaCajaController')->middleware('auth');
 
+Route::resource('/gastos', 'GastoController')->middleware('auth');
+
+Route::resource('/categoriaGastos', 'CategoriaGastoController')->middleware('auth');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proveedores/{any}', 'SpaController@proveedores')->where('any', '.*')->middleware('auth');

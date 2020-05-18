@@ -4,7 +4,9 @@
             <datosvendedor v-bind:npresupuesto="npresupuesto"/>    
             <div class="row my-3">
                 <div class="col-5">
-                    <multiselect v-model="npresupuesto.cliente" deselect-label="Can't remove this value" track-by="nombre" label="nombre" placeholder="Select one" :options="clientes" :searchable="true" :allow-empty="false">
+                    <multiselect v-model="npresupuesto.cliente" deselect-label="Can't remove this value" 
+                    track-by="nombre" label="nombre" placeholder="Cliente" :options="clientes" 
+                    :searchable="true" :allow-empty="false">
                         <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.nombre }}</strong></template>
                     </multiselect>
                 </div>
@@ -47,7 +49,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="telefono">Telefono</span>
                         </div>
-                        <input type="text" v-model="npresupuesto.cliente.telefono"
+                        <input type="text" v-model="npresupuesto.cliente.telefono"  v-shortkey.focus="['alt', 't']"
                         class="form-control" placeholder="telefono" aria-label="telefono" aria-describedby="telefono">   
                     </div>
                 </div>
@@ -56,7 +58,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="celular">Celular</span>
                         </div>
-                        <input type="text" v-model="npresupuesto.cliente.celular"
+                        <input type="text" v-model="npresupuesto.cliente.celular"  v-shortkey.focus="['alt', 'c']"
                         class="form-control" placeholder="celular" aria-label="celular" aria-describedby="celular">   
                     </div>
                 </div>

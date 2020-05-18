@@ -70,7 +70,11 @@ class PrecioController extends Controller
                         $precioN->descuentoProducto_3 = $request->descuentoProducto[2];
                         $precioN->descuentoProducto_4 = $request->descuentoProducto[3];
                         $precioN->descuentoProducto_5 = $request->descuentoProducto[4];
-                        $precioN->dre = $request->dre;
+                        if($request->dre == 1 ){
+                            $precioN->dre = 0;
+                        }else{
+                            $precioN->dre = $request->dre;
+                        }
                         
                     }else{
                         $precioN->descuentoProducto_1 = $precioV->descuentoProducto_1;

@@ -194,6 +194,16 @@ const routes = [
       name: 'nuevaTranferenciaDeCaja',
       component: () => import(/* webpackChunkName: "about" */ '../views/Caja/NuevaTransferenciaDeCaja.vue')
     },
+    {
+      path: '/menuGastos',
+      name: 'menuGastos',
+      component: () => import(/* webpackChunkName: "about" */ '../views/MenuGastos.vue')
+    },
+    {
+      path: '/categoriasDeGastos',
+      name: 'categoriasDeGastos',
+      component: () => import(/* webpackChunkName: "about" */ '../views/CategoriaDeGatos.vue')
+    },
 ]
 
 

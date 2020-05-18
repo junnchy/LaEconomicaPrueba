@@ -15,7 +15,7 @@ Vue.use(VueToast);
 Vue.use( CKEditor );
 Vue.use(VueGoogleCharts);
 
-// import vuetify from './plugins/vuetify'
+Vue.use(require('vue-shortkey'))
 
 // MAPS >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 

@@ -23,6 +23,11 @@
                             Cheques <i class="fas fa-money-check-alt"></i>
                         </button> 
                     </router-link>
+                    <router-link :to="{name:'menuGastos'}">
+                        <button class="btn btn-outline-danger">
+                            Gastos <i class="fas fa-dollar-sign"></i>
+                        </button>
+                    </router-link>
                      <button class="btn btn-outline-success" @click="agregarCaja(ncaja)">
                         Nueva Caja <i class="fas fa-plus-circle"></i>
                     </button>  

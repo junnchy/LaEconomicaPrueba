@@ -22,6 +22,8 @@ import tarjetas from './modules/Caja/tarjetas'
 import cajas from './modules/Caja/caja'
 import cheques from './modules/Caja/cheques'
 import transferenciasCaja from './modules/Caja/TrasferenciasCaja'
+import gastos from './modules/Caja/gastos'
+import categoriaGastos from './modules/Caja/categoriaGastos'
 
 Vue.use(Vuex)
 
@@ -47,7 +49,9 @@ export default new Vuex.Store({
     tarjetas,
     cajas,
     cheques,
-    transferenciasCaja
+    transferenciasCaja,
+    gastos,
+    categoriaGastos
   },
   state: {
     actual: 0,

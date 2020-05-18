@@ -7,7 +7,7 @@
                 </h5>
             </div>
             <div class="col-7 mt-2">
-                <v-select
+                <!-- <v-select
                     label="nombre"
                     @input="setProducto"
                     :options="filtered_productos"
@@ -15,7 +15,13 @@
                     :value="producto"
                     maxHeight="200px"
                     placeholder="Producto"
-                ></v-select>
+                ></v-select> -->
+                <multiselect  @input="setProducto" deselect-label="Can't remove this value" 
+                    v-shortkey.focus="['f1']"
+                    track-by="nombre" label="nombre" placeholder="Agregar producto" :options="filtered_productos" 
+                    :searchable="true" :allow-empty="false">
+                        <template slot="singleLabel" slot-scope="{ option }"><strong>{{ option.nombre }}</strong></template>
+                </multiselect>
             </div>
             <div class="col-2 mt-3">
                 <div class="form-check">
@@ -36,6 +42,7 @@
 </template>
 
 <script>
+import Multiselect from 'vue-multiselect';
 import { mapState, mapActions, mapGetters} from 'vuex'
 import listalineas from './Comprobante-LineaDeProducto'
 export default {
@@ -45,7 +52,8 @@ export default {
         }
     },
     components:{
-        listalineas
+        listalineas,
+        Multiselect
     },
     props:{
         npresupuesto:{
@@ -94,3 +102,5 @@ export default {
     }
 }
 </script>
+
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
