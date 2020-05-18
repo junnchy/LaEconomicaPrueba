@@ -84,8 +84,8 @@ class PrecioController extends Controller
                         $precioN->descuentoProducto_5 = $precioV->descuentoProducto_5;
                         $precioN->dre = $precioV->dre;
                     }
-                    $precioN->precioCosto = ($precioN->precioBase / (1+$precioN->dre));
-                    $precioN->precioCosto = ($precioN->precioCosto * (($request->iva/100)+1));
+                    $precioN->precioCosto = ($precioN->precioBase - ($precioN->precioBase * ($precioN->dre)));
+                    $precioN->precioCosto = ($precioN->precioCosto * (1+($request->iva/100)));
                     $precioN->precioCosto =  $precioN->precioCosto +  $precioN->flete;
                     $precioN->precioVenta = ($precioN->precioCosto *(($precioN->rentabilidad/100)+1));
                     $precioN->precioVentaSinIva =  $precioN->precioVenta / (($request->iva/100)+1);

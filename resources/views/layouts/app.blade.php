@@ -74,9 +74,9 @@
                                 <a class="dropdown-item" href="#">Categorias</a>
                             </router-link>
                             <div class="dropdown-divider"></div>
-                            <router-link :to="{name: 'actualizarPrecios'}">
+                            <!-- <router-link :to="{name: 'actualizarPrecios'}">
                                 <a class="dropdown-item" href="#">Actualizar Precios</a>
-                            </router-link>
+                            </router-link> -->
                         </div>
                     </li>
                     <li class="nav-item dropdown">
