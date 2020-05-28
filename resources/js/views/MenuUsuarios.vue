@@ -7,7 +7,7 @@
         </div>
          <div class="row">
             <div class="col-9">
-                    <input class="form-control mt-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
+                <input class="form-control mt-3" type="search" placeholder="Buscar" aria-label="Search" v-model="search">
             </div>
             <div class="col-3">
                 <router-link :to="{name:'agregarUsuario'}">
@@ -39,10 +39,7 @@ export default {
     },
     created() {
         this.getUsuarios()
-        this.cambiarEstado(4)
-    },
-    mounted(){
-        console.log(this.$userName)
+        //this.cambiarEstado(5)
     },
     computed: {
         ...mapState('usuarios', ['usuarios']),
@@ -51,7 +48,7 @@ export default {
                 return this.$store.state.usuarios.filter.query;
             },
             set(val){
-                this.$store.commit('usarios/SET_QUERY', val)
+                this.$store.commit('usuarios/SET_QUERY', val)
             }
         },
     },

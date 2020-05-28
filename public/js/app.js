@@ -44781,8 +44781,8 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.1.3
-  * (c) 2019 Evan You
+  * vue-router v3.1.5
+  * (c) 2020 Evan You
   * @license MIT
   */
 /*  */
@@ -44848,14 +44848,12 @@ var View = {
     var depth = 0;
     var inactive = false;
     while (parent && parent._routerRoot !== parent) {
-      var vnodeData = parent.$vnode && parent.$vnode.data;
-      if (vnodeData) {
-        if (vnodeData.routerView) {
-          depth++;
-        }
-        if (vnodeData.keepAlive && parent._inactive) {
-          inactive = true;
-        }
+      var vnodeData = parent.$vnode ? parent.$vnode.data : {};
+      if (vnodeData.routerView) {
+        depth++;
+      }
+      if (vnodeData.keepAlive && parent._directInactive && parent._inactive) {
+        inactive = true;
       }
       parent = parent.$parent;
     }
@@ -44863,17 +44861,32 @@ var View = {
 
     // render previous view if the tree is inactive and kept-alive
     if (inactive) {
-      return h(cache[name], data, children)
+      var cachedData = cache[name];
+      var cachedComponent = cachedData && cachedData.component;
+      if (cachedComponent) {
+        // #2301
+        // pass props
+        if (cachedData.configProps) {
+          fillPropsinData(cachedComponent, data, cachedData.route, cachedData.configProps);
+        }
+        return h(cachedComponent, data, children)
+      } else {
+        // render previous empty view
+        return h()
+      }
     }
 
     var matched = route.matched[depth];
-    // render empty node if no matched route
-    if (!matched) {
+    var component = matched && matched.components[name];
+
+    // render empty node if no matched route or no config component
+    if (!matched || !component) {
       cache[name] = null;
       return h()
     }
 
-    var component = cache[name] = matched.components[name];
+    // cache component
+    cache[name] = { component: component };
 
     // attach instance registration hook
     // this will be called in the instance's injected lifecycle hooks
@@ -44905,24 +44918,36 @@ var View = {
       }
     };
 
-    // resolve props
-    var propsToPass = data.props = resolveProps(route, matched.props && matched.props[name]);
-    if (propsToPass) {
-      // clone to prevent mutation
-      propsToPass = data.props = extend({}, propsToPass);
-      // pass non-declared props as attrs
-      var attrs = data.attrs = data.attrs || {};
-      for (var key in propsToPass) {
-        if (!component.props || !(key in component.props)) {
-          attrs[key] = propsToPass[key];
-          delete propsToPass[key];
-        }
-      }
+    var configProps = matched.props && matched.props[name];
+    // save route and configProps in cachce
+    if (configProps) {
+      extend(cache[name], {
+        route: route,
+        configProps: configProps
+      });
+      fillPropsinData(component, data, route, configProps);
     }
 
     return h(component, data, children)
   }
 };
+
+function fillPropsinData (component, data, route, configProps) {
+  // resolve props
+  var propsToPass = data.props = resolveProps(route, configProps);
+  if (propsToPass) {
+    // clone to prevent mutation
+    propsToPass = data.props = extend({}, propsToPass);
+    // pass non-declared props as attrs
+    var attrs = data.attrs = data.attrs || {};
+    for (var key in propsToPass) {
+      if (!component.props || !(key in component.props)) {
+        attrs[key] = propsToPass[key];
+        delete propsToPass[key];
+      }
+    }
+  }
+}
 
 function resolveProps (route, config) {
   switch (typeof config) {
@@ -45704,7 +45729,8 @@ function fillParams (
     return filler(params, { pretty: true })
   } catch (e) {
     if (true) {
-      warn(false, ("missing param for " + routeMsg + ": " + (e.message)));
+      // Fix #3072 no warn if `pathMatch` is string
+      warn(typeof params.pathMatch === 'string', ("missing param for " + routeMsg + ": " + (e.message)));
     }
     return ''
   } finally {
@@ -45726,20 +45752,25 @@ function normalizeLocation (
   if (next._normalized) {
     return next
   } else if (next.name) {
-    return extend({}, raw)
+    next = extend({}, raw);
+    var params = next.params;
+    if (params && typeof params === 'object') {
+      next.params = extend({}, params);
+    }
+    return next
   }
 
   // relative params
   if (!next.path && next.params && current) {
     next = extend({}, next);
     next._normalized = true;
-    var params = extend(extend({}, current.params), next.params);
+    var params$1 = extend(extend({}, current.params), next.params);
     if (current.name) {
       next.name = current.name;
-      next.params = params;
+      next.params = params$1;
     } else if (current.matched.length) {
       var rawPath = current.matched[current.matched.length - 1].path;
-      next.path = fillParams(rawPath, params, ("path " + (current.path)));
+      next.path = fillParams(rawPath, params$1, ("path " + (current.path)));
     } else if (true) {
       warn(false, "relative params navigation requires a current route.");
     }
@@ -45879,7 +45910,7 @@ var Link = {
         if (true) {
           warn(
             false,
-            ("RouterLink with to=\"" + (this.props.to) + "\" is trying to use a scoped slot but it didn't provide exactly one child.")
+            ("RouterLink with to=\"" + (this.to) + "\" is trying to use a scoped slot but it didn't provide exactly one child. Wrapping the content with a span element.")
           );
         }
         return scopedSlot.length === 0 ? h() : h('span', {}, scopedSlot)
@@ -46604,7 +46635,10 @@ function pushState (url, replace) {
   var history = window.history;
   try {
     if (replace) {
-      history.replaceState({ key: getStateKey() }, '', url);
+      // preserve existing history state as it could be overriden by the user
+      var stateCopy = extend({}, history.state);
+      stateCopy.key = getStateKey();
+      history.replaceState(stateCopy, '', url);
     } else {
       history.pushState({ key: setStateKey(genStateKey()) }, '', url);
     }
@@ -47319,9 +47353,7 @@ function getHash () {
       href = decodeURI(href.slice(0, hashIndex)) + href.slice(hashIndex);
     } else { href = decodeURI(href); }
   } else {
-    if (searchIndex > -1) {
-      href = decodeURI(href.slice(0, searchIndex)) + href.slice(searchIndex);
-    }
+    href = decodeURI(href.slice(0, searchIndex)) + href.slice(searchIndex);
   }
 
   return href
@@ -47655,7 +47687,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.1.3';
+VueRouter.version = '3.1.5';
 
 if (inBrowser && window.Vue) {
   window.Vue.use(VueRouter);
@@ -63348,6 +63380,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue2_google_maps__WEBPACK_IMPORTE
 }); // MAPS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$userName = document.querySelector("meta[name='user-name']").getAttribute('content');
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$userAuthId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -63374,7 +63407,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-leftbar', __web
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-filtroproductos', __webpack_require__(/*! ./components/ComponenteFiltrosDeProductos.vue */ "./resources/js/components/ComponenteFiltrosDeProductos.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-LNBAddCliente', __webpack_require__(/*! ./components/LNBAddCliente.vue */ "./resources/js/components/LNBAddCliente.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-menuboton', __webpack_require__(/*! ../js/components/BotonMenu.vue */ "./resources/js/components/BotonMenu.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-usuarios', __webpack_require__(/*! ./components/ComponenteUsuarios */ "./resources/js/components/ComponenteUsuarios.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('componente-usuarios', __webpack_require__(/*! ./components/ComponenteUsuarios.vue */ "./resources/js/components/ComponenteUsuarios.vue")["default"]);
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.can = function (value) {
   return window.Laravel.jsPermissions.permissions.includes(value);
@@ -65375,22 +65408,28 @@ var routes = [{
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/MenuUsuarios.vue */ "./resources/js/views/MenuUsuarios.vue"));
   }
 }, {
-  path: '/agregarUsuario',
+  path: '/usuarios/agregarUsuario',
   name: 'agregarUsuario',
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/AgregarUsuario.vue */ "./resources/js/views/AgregarUsuario.vue"));
   }
 }, {
-  path: '/detalleUsuario/:id',
+  path: '/usuarios/detalleUsuario/:id',
   name: 'detalleUsuario',
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/DetalleUsuario.vue */ "./resources/js/views/DetalleUsuario.vue"));
   }
 }, {
-  path: '/editarUsuario/:id',
+  path: '/usuarios/editarUsuario/:id',
   name: 'editarUsuario',
   component: function component() {
     return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/EditarUsuario.vue */ "./resources/js/views/EditarUsuario.vue"));
+  }
+}, {
+  path: '/usuarios/editarPerfil/:id',
+  name: 'editarPerfil',
+  component: function component() {
+    return Promise.all(/*! import() | about */[__webpack_require__.e("vendors~about"), __webpack_require__.e("about")]).then(__webpack_require__.bind(null, /*! ../views/EditarPerfil.vue */ "./resources/js/views/EditarPerfil.vue"));
   }
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -66849,7 +66888,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   state: {
     usuarios: [],
     usuario: {},
-    respuestaS: null,
+    message: null,
+    status: null,
     filter: {
       query: ''
     },
@@ -66865,11 +66905,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     setUsuarios: function setUsuarios(state, usuarios) {
       state.usuarios = usuarios;
     },
-    setRespuestaServidor: function setRespuestaServidor(state, respuesta) {
-      state.respuestaS = respuesta;
+    setMessage: function setMessage(state, message) {
+      state.message = message;
     },
-    setUsuario: function setUsuario(state, cliente) {
-      state.cliente = cliente;
+    setStatus: function setStatus(state, status) {
+      state.status = status;
+    },
+    setUsuario: function setUsuario(state, usuario) {
+      state.usuario = usuario;
     },
     SET_QUERY: function SET_QUERY(state, query) {
       state.filter.query = query;
@@ -66947,15 +66990,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     agregarUsuario: function agregarUsuario(_ref2, usuario) {
       var commit = _ref2.commit;
       axios.post('http://127.0.0.1:8000/usuarios', usuario).then(function (response) {
-        commit('setRespuestaServidor', response.data.message);
+        commit('setMessage', response.data.message);
+        commit('setStatus', response.status);
       })["catch"](function (error) {
         commit('setError', error.response.data.errors);
-        console.log(error.response.data);
       });
     },
     resetResp: function resetResp(_ref3, resp) {
       var commit = _ref3.commit;
-      commit('setRespuestaServidor', resp);
+      commit('setStatus', resp);
+      commit('setMessage', resp);
     },
     getUsuario: function () {
       var _getUsuario = _asyncToGenerator(
@@ -66993,7 +67037,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var commit = _ref5.commit;
       var id = usuario.id;
       axios.put("http://127.0.0.1:8000/usuarios/".concat(id), usuario).then(function (response) {
-        commit('setRespuestaServidor', response.data.message);
+        commit('setMessage', response.data.message);
+        commit('setStatus', response.status);
       })["catch"](function (error) {
         commit('setError', error.response.data.errors);
       });
@@ -67043,8 +67088,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\proyectos\laravel\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\projects\laravel\LaEconomica\LaEconomicaPrueba\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\projects\laravel\LaEconomica\LaEconomicaPrueba\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

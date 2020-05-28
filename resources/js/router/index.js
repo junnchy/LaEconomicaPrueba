@@ -85,20 +85,26 @@ const routes = [
       component: () => import(/* webpackChunkName: "about" */ '../views/MenuUsuarios.vue')
     },
     {
-      path: '/agregarUsuario',
+      path: '/usuarios/agregarUsuario',
       name: 'agregarUsuario',
       component: () => import(/* webpackChunkName: "about" */ '../views/AgregarUsuario.vue')
     },
     {
-      path: '/detalleUsuario/:id',
+      path: '/usuarios/detalleUsuario/:id',
       name: 'detalleUsuario',
       component: () => import(/* webpackChunkName: "about" */ '../views/DetalleUsuario.vue')
     },
     {
-      path: '/editarUsuario/:id',
+      path: '/usuarios/editarUsuario/:id',
       name: 'editarUsuario',
       component: () => import(/* webpackChunkName: "about" */ '../views/EditarUsuario.vue')
     },
+    {
+      path: '/usuarios/editarPerfil/:id',
+      name: 'editarPerfil',
+      component: () => import(/* webpackChunkName: "about" */ '../views/EditarPerfil.vue')
+    }
+    
 ]
 
 

@@ -3,7 +3,8 @@ export default {
     state:{
         usuarios: [],
         usuario: {},
-        respuestaS: null,
+        message: null,
+        status: null,
         filter: {
             query: '',
         },
@@ -19,11 +20,14 @@ export default {
         setUsuarios(state, usuarios){
             state.usuarios = usuarios
         },
-        setRespuestaServidor(state, respuesta){
-            state.respuestaS = respuesta
+        setMessage(state, message){
+            state.message = message
         },
-        setUsuario(state, cliente){
-            state.cliente = cliente
+        setStatus(state, status){
+            state.status = status
+        },
+        setUsuario(state, usuario){
+            state.usuario = usuario
         },
         SET_QUERY(state, query){
             state.filter.query = query;
@@ -64,15 +68,16 @@ export default {
         },
         agregarUsuario({commit}, usuario){
             axios.post('http://127.0.0.1:8000/usuarios', usuario).then(function (response) {
-                commit('setRespuestaServidor', response.data.message)
+                commit('setMessage', response.data.message)
+                commit('setStatus', response.status)
             })
             .catch(function (error) {
                 commit('setError', error.response.data.errors)
-                console.log(error.response.data)
             });
         },
         resetResp({commit}, resp){
-            commit('setRespuestaServidor', resp)
+            commit('setStatus', resp)
+            commit('setMessage', resp)
         },
         async getUsuario({commit}, id){
             let usuario = await axios.get(`http://127.0.0.1:8000/usuarios/${id}`).then(response => {
@@ -82,7 +87,8 @@ export default {
         editarUsuario({commit}, usuario){
             let id = usuario.id
             axios.put(`http://127.0.0.1:8000/usuarios/${id}`, usuario).then(function (response) {
-                commit('setRespuestaServidor', response.data.message)
+                commit('setMessage', response.data.message)
+                commit('setStatus', response.status)
             })
             .catch(function (error) {
                 commit('setError', error.response.data.errors)

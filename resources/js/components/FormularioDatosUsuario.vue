@@ -145,12 +145,12 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" v-if="formpassword === true">
             <div class="col-6">
                 <div class="form-group">
                     <label>Contraseña</label>
                     <input 
-                        type="text" 
+                        type="password" 
                         :class="fPassword" 
                         name="password" 
                         placeholder="Contraseña"
@@ -164,7 +164,7 @@
                 <div class="form-group">
                     <label>Confirmación de Contraseña</label>
                     <input 
-                        type="text" 
+                        type="password" 
                         class="form-control" 
                         name="password_confirmation" 
                         placeholder="Confirmación de Contraseña"/>
@@ -177,76 +177,80 @@
 
 <script>
 import {mapActions, mapState} from 'vuex'
-    export default {
-        data() {
-            return {
-                locAc: 0,
-                proAc: 0,
-                fNombre: "form-control",
-                fDni: "form-control",
-                fCuil: "form-control",
-                fEmail: "form-control",
-                fPassword: "form-control",
-                formClass: "form-control",
-                iFormClass: "form-control is-invalid",
-                provincia:{iso_nombre: '', id: null},
-
+export default {
+    data() {
+        return {
+            locAc: 0,
+            proAc: 0,
+            fNombre: "form-control",
+            fDni: "form-control",
+            fCuil: "form-control",
+            fEmail: "form-control",
+            fPassword: "form-control",
+            formClass: "form-control",
+            iFormClass: "form-control is-invalid",
+            provincia:{iso_nombre: '', id: null},
+        }
+    },
+    props:{
+        usuario:{
+            type: Object,
+            required: true
+        },
+        formpassword:{
+            type: Boolean
+        }
+    },
+    methods: {
+        ...mapActions('localidades',['getLocalidades', 'getLocalidad', 'getProvincias'])
+    },
+    created() {
+        this.getProvincias()
+        this.getLocalidades()  
+        if (this.usuario.id != null) {
+            this.provincia = this.usuario.localidad.provincia
+        }         
+    },
+    computed: {
+        ...mapState('usuarios',['errors']),
+        ...mapState('localidades', ['localidades','localidad', 'provincias']),
+        localidadUs(){
+            if(this.usuario.localidad_id > 0 && this.usuario.localidad_id != this.locAc){
+                this.getLocalidad(this.usuario.localidad_id)
+                this.usuario.localidad = this.localidad
+                this.locAc = this.usuario.localidad.id
+                return this.localidad
+            } else{
+                return this.localidad
             }
         },
-        props:{
-            usuario:{
-                type: Object,
-                required: true
+        validar(){
+            if(this.errors.nombre != ''){
+                this.fNombre = this.iFormClass
+            }else{
+                this.fNombre = this.formClass
             }
-        },
-        methods: {
-            ...mapActions('usuarios'),
-            ...mapActions('localidades',['getLocalidades', 'getLocalidad', 'getProvincias'])
-        },
-        created() {
-            this.getProvincias()
-            this.getLocalidades()           
-        },
-        computed: {
-            ...mapState('usuarios',['errors']),
-            ...mapState('localidades', ['localidades','localidad', 'provincias']),
-            localidadUs(){
-                if(this.usuario.localidad_id > 0 && this.usuario.localidad_id != this.locAc){
-                    this.getLocalidad(this.usuario.localidad_id)
-                    this.usuario.localidad = this.localidad
-                    this.locAc = this.usuario.localidad.id
-                    return this.localidad
-                } else{
-                    return this.localidad
-                }
-            },
-            validar(){
-                if(this.errors.nombre != ''){
-                    this.fNombre = this.iFormClass
-                }else{
-                    this.fNombre = this.formClass
-                }
-                if(this.errors.dni!= ''){
-                    this.fDni = this.iFormClass
-                }else{
-                    this.fDni = this.formClass
-                }
-                if(this.errors.cuil != ''){
-                    this.fCuil = this.iFormClass
-                }else{
-                    this.fCuil = this.formClass
-                }
-                if(this.errors.email != ''){
-                    this.fEmail = this.iFormClass
-                }else{
-                    this.fEmail = this.formClass
-                }
-                if(this.error.password != ''){
-                    this.fPassword = this.iFormClass
-                } else{
-                    this.fPassword = this.formClass
-                }
+            if(this.errors.dni!= ''){
+                this.fDni = this.iFormClass
+            }else{
+                this.fDni = this.formClass
             }
-        },
+            if(this.errors.cuil != ''){
+                this.fCuil = this.iFormClass
+            }else{
+                this.fCuil = this.formClass
+            }
+            if(this.errors.email != ''){
+                this.fEmail = this.iFormClass
+            }else{
+                this.fEmail = this.formClass
+            }
+            if(this.errors.password != ''){
+                this.fPassword = this.iFormClass
+            } else{
+                this.fPassword = this.formClass
+            }
+        }
     }
+}
 </script>

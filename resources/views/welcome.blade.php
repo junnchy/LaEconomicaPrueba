@@ -24,7 +24,7 @@
                 @auth
                     @if(Auth::user()->hasRole('Super Admin'))
                         <div class="col-md-3">
-                            <a href="{{ route('homeUsers') }}" class="btn btn-primary btn-block">Perfiles de Usuario</a>                   
+                            <a href="/usuarios/" class="btn btn-primary btn-block">Perfiles de Usuario</a>                   
                         </div>
                     @endif
                 @endauth

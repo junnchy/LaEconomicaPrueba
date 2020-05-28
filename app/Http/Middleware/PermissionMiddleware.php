@@ -15,7 +15,7 @@ class PermissionMiddleware
      */
     public function handle($request, Closure $next, $permission)
     {
-        if (! $request->user()->getAllPermissions()->pluck('name')->contains($permission))
+        if (! $request->user()->getPermissions()->contains($permission))
         {
             abort(403);
         }

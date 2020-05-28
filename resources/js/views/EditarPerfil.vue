@@ -2,19 +2,15 @@
     <div>
         <div class="row">
             <div class="col-8">
-                <h3>Editar Usuario</h3>
+                <h3>Editar Contraseña</h3>
             </div>
             <div class="col-4">
-                <router-link :to="{name:'menuUsuarios'}">
-                    <button class="btn btn-warning" v-if="status === 200" @click="finalizar()">
+                <button href="/" class="btn btn-warning" v-if="status === 200" @click="finalizar()">
                         Finalizar
-                    </button>
-                </router-link>
-                <router-link :to="{name:'menuUsuarios'}" v-if="status != 200">
-                    <button class="btn btn-danger" @click="resetError()">
+                </button>
+                <button href="/" class="btn btn-danger" v-if="status != 200" @click="resetError()">
                         Cancelar
-                    </button>
-                </router-link>
+                </button>
             </div>
         </div>
         <div class="alert alert-success alert-dismissible fade show mt-4" v-if="status === 200">
@@ -25,7 +21,7 @@
         </div>
         <div class="container mt-5">
             <form @submit.prevent="editarUsuario(usuario)">
-                <FormularioDatosUsuario v-bind:usuario="usuario" v-bind:formpassword="false"/>
+                <FormularioPasswordUsuario v-bind:usuario="usuario"/>
                 <button type="submit" class="btn btn-warning btn-block sticky-button" v-if="message === null">
                     Guardar Cambios <i class="fas fa-save"></i>
                 </button>
@@ -36,16 +32,16 @@
 
 <script>
 import {mapActions, mapState} from 'vuex'
-import FormularioDatosUsuario from '../components/FormularioDatosUsuario'
+import FormularioPasswordUsuario from '../components/FormularioPasswordUsuario.vue'
 export default {
-    name: 'EditarUsuario',
+    name: 'EditarPerfil',
     data() {
         return {
-            id: this.$route.params.id,
+            id: this.$route.params.id
         }
     },
     components: {
-        FormularioDatosUsuario
+        FormularioPasswordUsuario
     },
     methods: {
         ...mapActions('usuarios',['resetResp','getUsuario','editarUsuario','resetError']),
@@ -59,7 +55,7 @@ export default {
     },
     computed: {
         ...mapState('usuarios',['message','status','usuario']),   
-    }   
+    } 
 }
 </script>
 

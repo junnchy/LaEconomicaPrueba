@@ -71,27 +71,9 @@ class UsersController extends Controller
             $user->save();
             
             return response()->json([
-                'usuario' => $usuario,
+                'usuario' => $user,
                 'message' => 'Usuario Agregado'
             ], 200);
-        }
-        else
-        {
-            $validated = $request->validated();
-            $user = new User();
-            $user->nombre = $request->nombre;
-            $user->email = $request->email;
-            $user->dni = $request->dni;
-            $user->cuil = $request->cuil;
-            $user->celular = $request->celular;
-            $user->telefono = $request->telefono;
-            $user->fecha_nacimiento = $request->fecha_nacimiento;
-            $user->direccion = $request->direccion;
-            $user->localidad_id = $request->localidad_id;
-            $user->password = $request->password;
-            $user->save(); 
-            
-            return back()->with('mensaje', 'Usuario Agregado');   
         }
     }
 
@@ -138,43 +120,39 @@ class UsersController extends Controller
     {
         if ($request->ajax())
         {
-            $validated = $request->validated();
-            $user = User::findOrFail($id);
-            $user->nombre = $request->nombre;
-            $user->email = $request->email;
-            $user->dni = $request->dni;
-            $user->cuil = $request->cuil;
-            $user->celular = $request->celular;
-            $user->telefono = $request->telefono;
-            $user->fecha_nacimiento = $request->fecha_nacimiento;
-            $user->direccion = $request->direccion;
-            $user->localidad_id = $request->localidad_id;
-            $user->password = $request->password;
-            $user->save();
-            
-            return response()->json([
-                'usuario' => $usuario,
-                'message' => 'Usuario Actualizado'
-            ], 200);
+            if ($request->has('password'))
+            {
+                $validatedData = $request->validate([
+                    'password' => 'required|confirmed'
+                ]);                
+                $user = User::findOrFail($id);
+                $user->password = $request->password;
+                $user->save();
+                return response()->json([
+                    'usuario' => $user,
+                    'message' => 'Contraseña Actualizada'
+                ], 200);
+            }
+            else
+            {
+                $validated = $request->validated();
+                $user = User::findOrFail($id);
+                $user->nombre = $request->nombre;
+                $user->email = $request->email;
+                $user->dni = $request->dni;
+                $user->cuil = $request->cuil;
+                $user->celular = $request->celular;
+                $user->telefono = $request->telefono;
+                $user->fecha_nacimiento = $request->fecha_nacimiento;
+                $user->direccion = $request->direccion;
+                $user->localidad_id = $request->localidad_id;
+                $user->save(); 
+                return response()->json([
+                    'usuario' => $user,
+                    'message' => 'Usuario Actualizado'
+                ], 200);   
+            }                   
         }
-        else
-        {
-            $validated = $request->validated();
-            $user = User::findOrFail($id);
-            $user->nombre = $request->nombre;
-            $user->email = $request->email;
-            $user->dni = $request->dni;
-            $user->cuil = $request->cuil;
-            $user->celular = $request->celular;
-            $user->telefono = $request->telefono;
-            $user->fecha_nacimiento = $request->fecha_nacimiento;
-            $user->direccion = $request->direccion;
-            $user->localidad_id = $request->localidad_id;
-            $user->password = $request->password;
-            $user->save();
-            
-            return back()->with('mensaje', 'Usuario Actualizado');
-        }        
     }
 
     /**

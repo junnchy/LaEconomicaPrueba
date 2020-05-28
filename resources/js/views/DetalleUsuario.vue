@@ -27,17 +27,12 @@
             <li class="list-group-item" v-if="usuario.localidad"><strong>Direccion: </strong> {{usuario.direccion}} - {{usuario.localidad.nombre}}, {{usuario.localidad.provincia.iso_nombre}}</li>
             <li class="list-group-item"><strong>Ultima Actualizacion: </strong> {{usuario.updated_at}}</li>
         </ul>
-        <div class="container mt-5">
-            <h3><i class="fas fa-map-marker-alt"></i> Ubicacion en Mapa: </h3>
-            <componente-gmap v-bind:usuario="usuario"/>
-        </div>
     </div>
 </template>
 
 <script>
 
 import {mapActions, mapState} from 'vuex'
-
 export default {
     name:'DetalleUsuario',
     data() {

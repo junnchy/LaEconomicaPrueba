@@ -6,33 +6,27 @@
             </div>
             <div class="col-4">
                 <router-link :to="{name:'menuUsuarios'}">
-                    <button class="btn btn-warning" v-if="respuestaS != null" @click="cancelar()">
+                    <button class="btn btn-warning" v-if="status === 200" @click="finalizar()">
                         Finalizar
                     </button>
                 </router-link>
-                <router-link :to="{name:'menuUsuarios'}" v-if="respuestaS === null">
+                <router-link :to="{name:'menuUsuarios'}" v-if="status != 200">
                     <button class="btn btn-danger" @click="resetError()">
                         Cancelar
                     </button>
                 </router-link>
             </div>
         </div>
-        <div class="alert alert-success alert-dismissible fade show mt-4" v-if="respuestaS != null">
-            {{respuestaS}} 
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="alert alert-danger alert-dismissible fade show mt-4" v-if="errors.length > 0">
-            {{errors}}
+        <div class="alert alert-success alert-dismissible fade show mt-4" v-if="status === 200">
+            {{message}} 
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="container mt-5">
             <form @submit.prevent="agregarUsuario(usuario)">
-                <FormularioDatosUsuario v-bind:usuario="usuario"/>
-                <button type="submit" class="btn btn-success btn-block sticky-button" v-if="respuestaS === null">
+                <FormularioDatosUsuario v-bind:usuario="usuario" v-bind:formpassword="true"/>
+                <button type="submit" class="btn btn-success btn-block sticky-button" v-if="message === null">
                     Agregar Usuario <i class="fas fa-check-circle"></i>
                 </button>
             </form>
@@ -51,14 +45,17 @@ export default {
                 id: null,
                 nombre: '', email: '', dni: '', cuil:'', telefono:'', celular:'',
                 fecha_nacimiento: '', password: '', direccion: '', localidad_id: 0, 
-                localidad:{nombre: '', cod_postal: ''}, password: ''
+                password: '', localidad:{nombre: '', cod_postal: ''}
             }
         }
+    },
+    components: {
+        FormularioDatosUsuario
     },
     methods: {
         ...mapActions('usuarios,'['resetResp','agregarUsuario','resetError']),
         ...mapActions(['cambiarEstado']),
-        cancelar(){
+        finalizar(){
             this.resetError()
             this.resetResp(null)
         }
@@ -67,7 +64,7 @@ export default {
         this.cambiarEstado(3)
     },
     computed: {
-        ...mapState('usuarios', ['respuestaS', 'errors']),            
+        ...mapState('usuarios', ['message','status', 'errors']),            
     }
 }
 </script>

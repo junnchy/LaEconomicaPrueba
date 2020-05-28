@@ -27,8 +27,7 @@ class UpdateUserRequest extends FormRequest
             'nombre' => 'required',
             'email' => 'email|required|unique:users,email,'.$this->route('usuario'),            
             'dni' => 'required|unique:users,dni,'.$this->route('usuario'),
-            'cuil' => 'required|unique:users,cuil,'.$this->route('usuario'),
-            'password' => 'nullable|confirmed',            
+            'cuil' => 'required|unique:users,cuil,'.$this->route('usuario')
         ];
     }
 }

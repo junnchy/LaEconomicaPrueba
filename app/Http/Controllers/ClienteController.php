@@ -105,7 +105,7 @@ class ClienteController extends Controller
     public function show(Request $request, $id)
     {
         if($request->ajax()){
-            $cliente = App\Cliente::with(['localidad.provincia','categoria','condicion_iva'])->findOrFail($id);
+            $cliente = Cliente::with(['localidad.provincia','categoria','condicion_iva'])->findOrFail($id);
             return response()->json($cliente);
         }else {
             $cliente = Cliente::findOrFail($id);

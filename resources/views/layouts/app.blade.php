@@ -20,6 +20,7 @@
 
     @if(Auth::check())
         <meta name="user-name" content="{{Auth::user()->nombre}}">
+        <meta name="user-id" content="{{Auth::user()->id}}">
     @endif
 
 </head>
@@ -73,17 +74,15 @@
                     @auth
                         @if (Auth::user()->hasRole('Super Admin'))
                             <li class="nav-item dropdown">
-                                <li>
-                                    <a class="nav-link" href="/usuarios/" class="">Usuarios</a>
-                                </li> 
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Perfiles de Usuarios
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <router-link :to="{name: 'menuUsuarios'}" >
-                                        <a class="dropdown-item" href="#">Menu Usuarios</a>
+                                    <a class="dropdown-item" href="/usuarios/">Listado de Usuarios</a>
+                                    <router-link :to="{name: 'agregarUsuario'}" >
+                                        <a class="dropdown-item" href="#">Agregar Usuario</a>
                                     </router-link>
-                                </div>
+                                </div>                               
                             </li>             
                         @endif
                     @endauth
@@ -95,13 +94,8 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">Iniciar Sesión</a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
-                    @endif
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -109,12 +103,14 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <router-link :to="{name: 'editarPerfil', params:{id:{{Auth::User()->id}}}}" >
+                                <a class="dropdown-item" href="#">Editar Mi Perfil</a>
+                            </router-link>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                               Cerrar Sesión
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
                             </form>
